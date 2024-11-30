@@ -1,0 +1,19 @@
+lfs-pkmg
+lfs package manager
+
+Simple package management solution for LFS / BLFS https://www.linuxfromscratch.org/
+
+
+lfs-pkmg (pronounced 'pacmag')(lpm for short) does the following:
+
+Build
+Automated build of lfs and blfs packages. Generates a portable package archive that can be installed, removed, and upgraded on any compatible system.
+
+Install
+Install package archive generated during the build phase.
+
+Remove
+Remove package files associated with an installed package archive.
+
+Upgrade
+Upgrade package files associated with in installed package archive.
