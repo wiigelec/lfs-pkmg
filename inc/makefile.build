@@ -15,31 +15,31 @@ clean-build-blfs :
 .PHONY: build-blfs clean-build-blfs
 
 
-
 ####################################################################
-# JHALFS MNT
+# GIT JHALFS
 ####################################################################
 
-$(JHALFS_MNT) : $(JHALFS_CONFIGIN) buildlfs-jhalfs-menuconfig
-buildlfs-jhalfs-menuconfig :
+$(LFS_JHALFS_DIR):
+buildlfs-get-jhalfs $(LFS_JHALFS_DIR) : 
 	@echo
-	@$(call bold_message, Running jhalfs menuconfig...)
-	@$(BUILDLFS_JHALFS_MENUCONFIG_SH)
-clean-buildlfs-jhalfs-menuconfig :
-	@-sudo rm -rf $(JHALFS_MNT)
+	@$(call bold_message, Downloading LFS jhalfs...)
+	@$(BUILDLFS_GET_JHALFS_SH)
 
-.PHONY: buildlfs-jhalfs-menuconfig clean-buildlfs-jhalfs-menuconfig
+clean-buildlfs-get-jhalfs :
+	-rm -rf $(LFS_JHALFS_DIR)
+.PHONY: buildlfs-get-jhalfs clean-buildlfs-get-jhalfs
 
 
 ####################################################################
-# PRE JHALFS
+# CONFIG IN
 ####################################################################
 
-$(JHALFS_CONFIGIN) : $(LFS_JHALFS_DIR) buildlfs-pre-jhalfs
-buildlfs-pre-jhalfs:
+$(JHALFS_CONFIGIN): $(SETUP_CONFIG_XML) $(LFS_JHALFS_DIR)
+buildlfs-pre-jhalfs $(JHALFS_CONFIGIN) :
 	@echo
 	@$(call bold_message, Preconfiguring jhalfs...)
 	@$(BUILDLFS_PRE_JHALFS_SH)
+
 clean-buildlfs-pre-jhalfs :
 	-mv $(JHALFS_CONFIGIN).org $(JHALFS_CONFIGIN)
 	-rm $(LFS_JHALFS_DIR)/packInstall.sh
@@ -48,17 +48,20 @@ clean-buildlfs-pre-jhalfs :
 
 
 ####################################################################
-# LFS JHALFS
+# JHALFS MNT
 ####################################################################
 
-$(LFS_JHALFS_DIR) : $(SETUP_CONFIG_XML) buildlfs-get-jhalfs
-buildlfs-get-jhalfs : $(LFS_JHALFS_DIR)
+$(JHALFS_MNT): $(JHALFS_CONFIGIN)
+buildlfs-jhalfs-menuconfig $(JHALFS_MNT) :
 	@echo
-	@$(call bold_message, Downloading LFS jhalfs...)
-	@$(BUILDLFS_GET_JHALFS_SH)
-clean-buildlfs-get-jhalfs :
-	-rm -rf $(LFS_JHALFS_DIR)
-.PHONY: buildlfs-get-jhalfs clean-buildlfs-get-jhalfs
+	@$(call bold_message, Running jhalfs menuconfig...)
+	@$(BUILDLFS_JHALFS_MENUCONFIG_SH)
+
+clean-buildlfs-jhalfs-menuconfig :
+	@-sudo rm -rf $(JHALFS_MNT)
+
+.PHONY: buildlfs-jhalfs-menuconfig clean-buildlfs-jhalfs-menuconfig
+
 
 
 ####################################################################

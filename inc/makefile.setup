@@ -13,13 +13,14 @@ clean-setup : clean-setup-lfs-book clean-setup-config-in \
 
 
 ####################################################################
-# LFS BOOK
+# GIT LFS BOOK
 ####################################################################
 
 setup-lfs-book $(LFS_BOOK_DIR) :
 	@echo
 	@$(call bold_message, Downloading LFS book...)
 	@$(SETUP_LFS_BOOK_SH)
+
 clean-setup-lfs-book : 
 	-rm -rf $(LFS_BOOK_DIR)
 .PHONY: setup-lfs-book clean-setup-lfs-book
@@ -34,6 +35,7 @@ setup-config-in $(SETUP_CONFIG_IN) :
 	@echo
 	@$(call bold_message, Generating setup-config.in...)
 	@$(SETUP_CONFIG_IN_SH)
+
 clean-setup-config-in : 
 	-rm $(SETUP_CONFIG_IN)	
 	
@@ -49,6 +51,7 @@ setup-config-out $(SETUP_CONFIG_OUT) :
 	@echo
 	@$(call bold_message, Generating setup-config.out...)
 	@$(SETUP_CONFIG_OUT_SH)
+
 clean-setup-config-out : 
 	-rm $(SETUP_CONFIG_OUT)	
 	-rm $(SETUP_CONFIG_OUT).old
@@ -65,6 +68,7 @@ setup-config-xml $(SETUP_CONFIG_XML) :
 	@echo
 	@$(call bold_message, Generating setup-config.xml...)
 	@$(SETUP_CONFIG_XML_SH)
+
 clean-setup-config-xml : 
 	-rm $(SETUP_CONFIG_XML)	
 	

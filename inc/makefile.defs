@@ -79,7 +79,7 @@ JHALFS_GIT = https://git.linuxfromscratch.org/jhalfs
 ####################################################################
 
 #------------------------------------------------------------------#
-### BUILD FILES ###
+### BUILDLFS FILES ###
 
 JHALFS_CONFIGIN = $(LFS_JHALFS_DIR)/Config.in
 JHALFS_PACKINSTALL = $(MISC_DIR)/packInstall.sh
