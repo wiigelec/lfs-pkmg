@@ -39,3 +39,6 @@ include ./inc/makefile.setup
 
 include ./inc/makefile.upgrade
 
+nuke : clean-setup clean-build-lfs
+	-rm -rf $(BUILD_DIR)
+.PHONY: nuke

@@ -35,6 +35,40 @@ WORKFLOW
 
 </pre>
 
+<pre>
+ BUILD (LFS):
+
+  1) LFS JHALFS
+     *** make build-lfs ***
+
+      a) git clone (git pull) jhalfs
+         *** make buildlfs-get-jhalfs ***
+	 *** buildlfs-get-jhalfs.sh ***
+     
+      b) pre jhalfs setup
+         *** make buildlfs-pre-jhalfs ***
+	 *** buildlfs-prejhalfs.sh ***
+
+	  -- package management
+	     *** util_buildlfs-pkgmgt.sh ***
+
+	  -- jhalfs config.in
+	     *** util_buildlfs-jhalfs-configin.sh ***
+
+      c) jhalfs menuconfig
+         *** make buildlfs-jhalfs-menuconfig ***
+         *** buildlfs-jhalfs-menuconfig.sh ***
+
+      d) post jhalfs setup
+         *** make buildlfs-post-jhalfs ***
+         *** buildlfs-post-jhalfs.sh ***
+
+          -- difflog convert
+
+      -- launch /mnt/lfs jhalfs
+
+</pre>
+
 
 
 

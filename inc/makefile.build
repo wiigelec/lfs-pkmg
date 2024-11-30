@@ -1,5 +1,72 @@
 ####################################################################
 #
-# MAKEFILE BUILD TARGETS
+# MAKEFILE BUILD
 #
 ####################################################################
+
+
+build-lfs : $(JHALFS_MNT)
+clean-build-lfs : clean-buildlfs-get-jhalfs clean-buildlfs-pre-jhalfs \
+	clean-buildlfs-jhalfs-menuconfig
+.PHONY: build-lfs clean-build-lfs
+
+build-blfs :
+clean-build-blfs :
+.PHONY: build-blfs clean-build-blfs
+
+
+
+####################################################################
+# JHALFS MNT
+####################################################################
+
+$(JHALFS_MNT) : $(JHALFS_CONFIGIN) buildlfs-jhalfs-menuconfig
+buildlfs-jhalfs-menuconfig :
+	@echo
+	@$(call bold_message, Running jhalfs menuconfig...)
+	@$(BUILDLFS_JHALFS_MENUCONFIG_SH)
+clean-buildlfs-jhalfs-menuconfig :
+	@-sudo rm -rf $(JHALFS_MNT)
+
+.PHONY: buildlfs-jhalfs-menuconfig clean-buildlfs-jhalfs-menuconfig
+
+
+####################################################################
+# PRE JHALFS
+####################################################################
+
+$(JHALFS_CONFIGIN) : $(LFS_JHALFS_DIR) buildlfs-pre-jhalfs
+buildlfs-pre-jhalfs:
+	@echo
+	@$(call bold_message, Preconfiguring jhalfs...)
+	@$(BUILDLFS_PRE_JHALFS_SH)
+clean-buildlfs-pre-jhalfs :
+	-mv $(JHALFS_CONFIGIN).org $(JHALFS_CONFIGIN)
+	-rm $(LFS_JHALFS_DIR)/packInstall.sh
+	-rm $(LFS_JHALFS_DIR)/packageManager.xml
+.PHONY: buildlfs-pre-jhalfs clean-buildlfs-pre-jhalfs
+
+
+####################################################################
+# LFS JHALFS
+####################################################################
+
+$(LFS_JHALFS_DIR) : $(SETUP_CONFIG_XML) buildlfs-get-jhalfs
+buildlfs-get-jhalfs : $(LFS_JHALFS_DIR)
+	@echo
+	@$(call bold_message, Downloading LFS jhalfs...)
+	@$(BUILDLFS_GET_JHALFS_SH)
+clean-buildlfs-get-jhalfs :
+	-rm -rf $(LFS_JHALFS_DIR)
+.PHONY: buildlfs-get-jhalfs clean-buildlfs-get-jhalfs
+
+
+####################################################################
+# BUILDLFS UTILS
+####################################################################
+
+util_buildlfs-pkgmgt :
+	$(UTIL_BUILDLFS_PKGMGT_SH)
+
+util_buildlfs-jhalfs-configin : 
+	$(UTIL_BUILDLFS_JHALFS_CONFIGIN_SH)

@@ -26,6 +26,7 @@ endef
 # DIRECTORY DEFINITIONS
 ####################################################################
 
+#------------------------------------------------------------------#
 ### TOP LEVEL DIRS ###
 
 TOPDIR = $(shell pwd)
@@ -36,19 +37,30 @@ SCRIPTS_DIR = $(TOPDIR)/scripts
 XSL_DIR = $(TOPDIR)/xsl
 
 
+#------------------------------------------------------------------#
 ### DOC DIRS ###
 
 HTML_DIR = $(DOC_DIR)/html
 
 
+#------------------------------------------------------------------#
 ### BUILD DIRS ###
 
 BUILD_XML_DIR = $(BUILD_DIR)/xml
 
-BLFS_BOOK_DIR = $(BUILD_XML_DIR)/blfs-xml
-JHALFS_DIR = $(BUILD_DIR)/jhalfs
-LFS_BOOK_DIR = $(BUILD_XML_DIR)/lfs-xml
 
+#------------------------------------------------------------------#
+### BUILDLFS DIRS ###
+
+JHALFS_MNT = $(LFS_MNT)/jhalfs
+LFS_JHALFS_DIR = $(BUILD_DIR)/jhalfs
+LFS_MNT ?= /mnt/lfs
+
+
+#------------------------------------------------------------------#
+### SETUP DIRS ###
+
+LFS_BOOK_DIR = $(BUILD_XML_DIR)/lfs-xml
 
 
 
@@ -66,10 +78,19 @@ JHALFS_GIT = https://git.linuxfromscratch.org/jhalfs
 # FILE DEFINITIONS
 ####################################################################
 
+#------------------------------------------------------------------#
+### BUILD FILES ###
+
+JHALFS_CONFIGIN = $(LFS_JHALFS_DIR)/Config.in
+JHALFS_PACKINSTALL = $(MISC_DIR)/packInstall.sh
+JHALFS_PACKXML = $(MISC_DIR)/packageManager.xml
+
+#------------------------------------------------------------------#
 ### HTML FILES ###
 INDEX_HTML=$(HTML_DIR)/index.html
 
 
+#------------------------------------------------------------------#
 ### SETUP FILES ###
 SETUP_CONFIG_IN = $(BUILD_DIR)/setup-config.in
 SETUP_CONFIG_OUT = $(BUILD_DIR)/setup-config.out
@@ -92,6 +113,20 @@ MENU_CONFIG = python3 $(TOPDIR)/kconfiglib/menuconfig.py
 # SCRIPT DEFINITIONS
 ####################################################################
 
+#------------------------------------------------------------------#
+### BUILDLFS SCRIPTS ###
+
+BUILDLFS_GET_JHALFS_SH = $(SCRIPTS_DIR)/build/buildlfs-get-jhalfs.sh
+BUILDLFS_JHALFS_MENUCONFIG_SH = $(SCRIPTS_DIR)/build/buildlfs-jhalfs-menuconfig.sh
+BUILDLFS_PRE_JHALFS_SH = $(SCRIPTS_DIR)/build/buildlfs-pre-jhalfs.sh
+
+### BUILDLFS UTIL SCRIPTS ###
+
+UTIL_BUILDLFS_PKGMGT_SH = $(SCRIPTS_DIR)/build/util_buildlfs-pkgmgt.sh
+UTIL_BUILDLFS_JHALFS_CONFIGIN_SH = $(SCRIPTS_DIR)/build/util_buildlfs-jhalfs-configin.sh
+
+
+#------------------------------------------------------------------#
 ### SETUP SCRIPTS ###
 
 SETUP_CONFIG_IN_SH = $(SCRIPTS_DIR)/setup/setup-config-in.sh
@@ -99,8 +134,7 @@ SETUP_CONFIG_OUT_SH = $(SCRIPTS_DIR)/setup/setup-config-out.sh
 SETUP_CONFIG_XML_SH = $(SCRIPTS_DIR)/setup/setup-config-xml.sh
 SETUP_LFS_BOOK_SH = $(SCRIPTS_DIR)/setup/setup-lfs-book.sh
 
-
-### UTIL SCRIPTS ###
+### SETUP UTIL SCRIPTS ###
 
 UTIL_SETUP_CONFIG_IN_SH = $(SCRIPTS_DIR)/setup/util_setup-config-in.sh
 UTIL_SETUP_CONFIG_OUT_SH = $(SCRIPTS_DIR)/setup/util_setup-config-out.sh
