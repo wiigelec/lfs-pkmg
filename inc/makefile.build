@@ -10,6 +10,12 @@
 # LFS TARGETS
 ####################################################################
 
-lfs-book : 
+
+### LFS BOOK ###
+lfs-book : $(LFS_BOOK_DIR)
+$(LFS_BOOK_DIR) : 
 	@mkdir -p $(BUILD_XML_DIR)
 	@git clone $(LFS_GIT) $(LFS_BOOK_DIR)
+clean-lfs-book : 
+	-rm -rf $(LFS_BOOK_DIR)
+.PHONY: lfs-book clean-lfs-book
