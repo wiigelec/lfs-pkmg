@@ -4,6 +4,23 @@
 #
 ####################################################################
 
+####################################################################
+# DISPLAY OUTPUT
+####################################################################
+
+BOLD= "[0;1m"
+NORMAL= "[0;0m"
+BLUE= "[1;34m"
+
+define bold_message
+  @echo $(BOLD)"===================================================================="
+  @echo $(BLUE)"--------------------------------------------------------------------"
+  @echo  $(BOLD)$(1)
+  @echo $(BLUE)"--------------------------------------------------------------------"$(NORMAL)
+  @echo
+endef
+
+
 
 ####################################################################
 # DIRECTORY DEFINITIONS
@@ -12,15 +29,26 @@
 ### TOP LEVEL DIRS ###
 
 TOPDIR = $(shell pwd)
-
+BUILD_DIR = $(TOPDIR)/build
 DOC_DIR = $(TOPDIR)/doc
+MISC_DIR = $(TOPDIR)/misc
+SCRIPTS_DIR = $(TOPDIR)/scripts
+XSL_DIR = $(TOPDIR)/xsl
+
+
+### DOC DIRS ###
+
 HTML_DIR = $(DOC_DIR)/html
 
-BUILD_DIR = $(TOPDIR)/build
+
+### BUILD DIRS ###
+
 BUILD_XML_DIR = $(BUILD_DIR)/xml
 
-
+BLFS_BOOK_DIR = $(BUILD_XML_DIR)/blfs-xml
+JHALFS_DIR = $(BUILD_DIR)/jhalfs
 LFS_BOOK_DIR = $(BUILD_XML_DIR)/lfs-xml
+
 
 
 
@@ -29,10 +57,16 @@ LFS_BOOK_DIR = $(BUILD_XML_DIR)/lfs-xml
 ####################################################################
 
 LFS_GIT = https://git.linuxfromscratch.org/lfs
+BLFS_GIT = https://git.linuxfromscratch.org/blfs
+JHALFS_GIT = https://git.linuxfromscratch.org/jhalfs
+
+
 
 ####################################################################
 # FILE DEFINITIONS
 ####################################################################
+
+BUILD_CONFIG = $(BUILD_DIR)/build-config.xml
 
 INDEX_HTML=$(HTML_DIR)/index.html
 
@@ -43,6 +77,16 @@ INDEX_HTML=$(HTML_DIR)/index.html
 ####################################################################
 
 BROWSER ?= lynx
+
+
+
+####################################################################
+# SCRIPT DEFINITIONS
+####################################################################
+
+BLFS_BOOK_SH = $(SCRIPTS_DIR)/build/blfs-book.sh
+BUILD_CONFIG_SH = $(SCRIPTS_DIR)/build/build-config.sh
+LFS_BOOK_SH = $(SCRIPTS_DIR)/build/lfs-book.sh
 
 
 export

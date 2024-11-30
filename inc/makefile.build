@@ -7,15 +7,50 @@
 
 
 ####################################################################
-# LFS TARGETS
+# BLFS TARGETS
 ####################################################################
 
+### BLFS BOOK ###
+blfs-book : $(BLFS_BOOK_DIR)
+$(BLFS_BOOK_DIR) : 
+	@echo
+	@$(call bold_message, Downloading BLFS book...)
+	@$(BLFS_BOOK_SH)
+clean-blfs-book : 
+	-rm -rf $(BLFS_BOOK_DIR)
+.PHONY: blfs-book clean-blfs-book
+
+
+####################################################################
+# BUILD TARGETS
+####################################################################
+
+### BUILD CONFIG ###
+build-config : $(BUILD_CONFIG)
+$(BUILD_CONFIG) : 
+	@echo
+	@$(call bold_message, Initializing build configuration...)
+	@$(BUILD_CONFIG_SH)
+clean-build-config : 
+	-rm  $(BUILD_CONFIG)
+.PHONY: build-config clean-build-config
+
+
+
+
+
+####################################################################
+# LFS TARGETS
+####################################################################
 
 ### LFS BOOK ###
 lfs-book : $(LFS_BOOK_DIR)
 $(LFS_BOOK_DIR) : 
-	@mkdir -p $(BUILD_XML_DIR)
-	@git clone $(LFS_GIT) $(LFS_BOOK_DIR)
+	@echo
+	@$(call bold_message, Downloading LFS book...)
+	@$(LFS_BOOK_SH)
 clean-lfs-book : 
 	-rm -rf $(LFS_BOOK_DIR)
 .PHONY: lfs-book clean-lfs-book
+
+
