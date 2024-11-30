@@ -30,8 +30,12 @@ include ./inc/makefile.install
 include ./inc/makefile.remove
 
 
+### SETUP ###
+
+include ./inc/makefile.setup
+
+
 ### UPGRADE ###
 
 include ./inc/makefile.upgrade
-
 

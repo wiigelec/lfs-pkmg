@@ -1,16 +1,39 @@
 <html>
 
 	LFS-PKMG DOCUMENTATION
-	<pre/>
-	<pre/>
-	<pre> WORKFLOW:</pre>
-	<pre> 1) make build-config</pre>
-	<pre>    BRANCH AND REVISION (RE)CONFIGURATION</pre>
-	<pre>		a) download LFS book</pre>
-	<pre>		b) generate build-config.in</pre>
-	<pre>			i) get lfs book branches</pre>
-	<pre>		c) run menuconfig</pre>
-	<pre>		d) write build-config.out to build-config.xml</pre>
+<pre>
+<hr/>
+</pre>
+<pre>
+WORKFLOW
+</pre>
+
+<pre>
+ SETUP:
+
+  1) BRANCH AND REVISION (RE)CONFIGURATION
+     *** make setup ***
+
+      a) git clone (git pull) LFS book
+         *** make setup-lfs-book ***
+	 *** setup-lfs-book.sh ***
+
+      b) generate setup-config.in
+         *** make setup-config-in ***
+	 *** setup-config-in.sh ***
+	 *** util_setup-config-in.sh ***
+
+          i) get lfs book branches
+	     *** util_setup-get-branches.sh ***
+
+      c) run menuconfig
+         *** make setup-config-out *** 
+
+      d) write build-config.out to setup-config.xml
+         *** make setup-config-xml ***
+	 *** util_setup-config-xml ***
+
+</pre>
 
 
 

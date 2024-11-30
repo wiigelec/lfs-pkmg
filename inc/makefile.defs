@@ -66,9 +66,14 @@ JHALFS_GIT = https://git.linuxfromscratch.org/jhalfs
 # FILE DEFINITIONS
 ####################################################################
 
-BUILD_CONFIG = $(BUILD_DIR)/build-config.xml
-
+### HTML FILES ###
 INDEX_HTML=$(HTML_DIR)/index.html
+
+
+### SETUP FILES ###
+SETUP_CONFIG_IN = $(BUILD_DIR)/setup-config.in
+SETUP_CONFIG_OUT = $(BUILD_DIR)/setup-config.out
+SETUP_CONFIG_XML = $(BUILD_DIR)/setup-config.xml
 
 
 
@@ -76,17 +81,30 @@ INDEX_HTML=$(HTML_DIR)/index.html
 # MISC DEFINITIONS
 ####################################################################
 
+### BROWSER ###
 BROWSER ?= lynx
 
+### MENU_CONFIG ###
+MENU_CONFIG = python3 $(TOPDIR)/kconfiglib/menuconfig.py
 
 
 ####################################################################
 # SCRIPT DEFINITIONS
 ####################################################################
 
-BLFS_BOOK_SH = $(SCRIPTS_DIR)/build/blfs-book.sh
-BUILD_CONFIG_SH = $(SCRIPTS_DIR)/build/build-config.sh
-LFS_BOOK_SH = $(SCRIPTS_DIR)/build/lfs-book.sh
+### SETUP SCRIPTS ###
 
+SETUP_CONFIG_IN_SH = $(SCRIPTS_DIR)/setup/setup-config-in.sh
+SETUP_CONFIG_OUT_SH = $(SCRIPTS_DIR)/setup/setup-config-out.sh
+SETUP_CONFIG_XML_SH = $(SCRIPTS_DIR)/setup/setup-config-xml.sh
+SETUP_LFS_BOOK_SH = $(SCRIPTS_DIR)/setup/setup-lfs-book.sh
+
+
+### UTIL SCRIPTS ###
+
+UTIL_SETUP_CONFIG_IN_SH = $(SCRIPTS_DIR)/setup/util_setup-config-in.sh
+UTIL_SETUP_CONFIG_OUT_SH = $(SCRIPTS_DIR)/setup/util_setup-config-out.sh
+UTIL_SETUP_CONFIG_XML_SH = $(SCRIPTS_DIR)/setup/util_setup-config-xml.sh
+UTIL_SETUP_GET_BRANCHES_SH = $(SCRIPTS_DIR)/setup/util_setup-get-branches.sh
 
 export

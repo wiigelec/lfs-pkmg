@@ -1,0 +1,86 @@
+####################################################################
+#
+# MAKEFILE.SETUP
+#
+####################################################################
+
+
+setup : setup-lfs-book setup-config-in setup-config-out setup-config-xml
+clean-setup : clean-setup-lfs-book clean-setup-config-in \
+	clean-setup-config-out clean-setup-config-xml 
+
+.PHONY: setup
+
+
+####################################################################
+# LFS BOOK
+####################################################################
+
+setup-lfs-book : $(LFS_BOOK_DIR)
+$(LFS_BOOK_DIR) : 
+	@echo
+	@$(call bold_message, Downloading LFS book...)
+	@$(SETUP_LFS_BOOK_SH)
+clean-setup-lfs-book : 
+	-rm -rf $(LFS_BOOK_DIR)
+.PHONY: setup-lfs-book clean-setup-lfs-book
+
+
+###################################################################
+# CONFIG IN
+####################################################################
+
+setup-config-in : $(SETUP_CONFIG_IN)
+$(SETUP_CONFIG_IN) : 
+	@echo
+	@$(call bold_message, Generating setup-config.in...)
+	@$(SETUP_CONFIG_IN_SH)
+clean-setup-config-in : 
+	-rm $(SETUP_CONFIG_IN)	
+	
+.PHONY: setup-config-in clean-setup-config-in
+
+
+###################################################################
+# CONFIG OUT
+####################################################################
+
+setup-config-out : $(SETUP_CONFIG_OUT)
+$(SETUP_CONFIG_OUT) : 
+	@echo
+	@$(call bold_message, Generating setup-config.out...)
+	@$(SETUP_CONFIG_OUT_SH)
+clean-setup-config-out : 
+	-rm $(SETUP_CONFIG_OUT)	
+	-rm $(SETUP_CONFIG_OUT).old
+	
+.PHONY: setup-config-out clean-setup-config-out $(SETUP_CONFIG_OUT)
+
+
+###################################################################
+# CONFIG XML
+####################################################################
+
+setup-config-xml : $(SETUP_CONFIG_XML)
+$(SETUP_CONFIG_XML) : 
+	@echo
+	@$(call bold_message, Generating setup-config.xml...)
+	@$(SETUP_CONFIG_XML_SH)
+clean-setup-config-xml : 
+	-rm $(SETUP_CONFIG_XML)	
+	
+.PHONY: setup-config-xml clean-setup-config-xml
+
+
+####################################################################
+# SETUP UTILS
+####################################################################
+
+util_setup-config-in :
+	$(UTIL_SETUP_CONFIG_IN_SH)
+
+util_setup-config-xml :
+	$(UTIL_SETUP_CONFIG_XML_SH)
+
+util_setup-get-branches :
+	$(UTIL_SETUP_GET_BRANCHES_SH)
