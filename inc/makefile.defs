@@ -52,9 +52,9 @@ BUILD_XML_DIR = $(BUILD_DIR)/xml
 #------------------------------------------------------------------#
 ### BUILDLFS DIRS ###
 
-JHALFS_MNT = $(LFS_MNT)/jhalfs
+LFS ?= /mnt/lfs
+JHALFS_MNT = $(LFS)/jhalfs
 LFS_JHALFS_DIR = $(BUILD_DIR)/jhalfs
-LFS_MNT ?= /mnt/lfs
 
 
 #------------------------------------------------------------------#
@@ -84,6 +84,8 @@ JHALFS_GIT = https://git.linuxfromscratch.org/jhalfs
 JHALFS_CONFIGIN = $(LFS_JHALFS_DIR)/Config.in
 JHALFS_PACKINSTALL = $(MISC_DIR)/packInstall.sh
 JHALFS_PACKXML = $(MISC_DIR)/packageManager.xml
+JHALFS_DIFFCONVERT = $(BUILD_DIR)/difflog-convert
+RUN_JHALFS = $(JHALFS_MNT)/done
 
 #------------------------------------------------------------------#
 ### HTML FILES ###
@@ -119,6 +121,8 @@ MENU_CONFIG = python3 $(TOPDIR)/kconfiglib/menuconfig.py
 BUILDLFS_GET_JHALFS_SH = $(SCRIPTS_DIR)/build/buildlfs-get-jhalfs.sh
 BUILDLFS_JHALFS_MENUCONFIG_SH = $(SCRIPTS_DIR)/build/buildlfs-jhalfs-menuconfig.sh
 BUILDLFS_PRE_JHALFS_SH = $(SCRIPTS_DIR)/build/buildlfs-pre-jhalfs.sh
+BUILDLFS_JHALFS_DIFFCONVERT_SH = $(SCRIPTS_DIR)/build/buildlfs-jhalfs-diffconvert.sh
+BUILDLFS_RUN_JHALFS_SH = $(SCRIPTS_DIR)/build/buildlfs-run-jhalfs.sh
 
 ### BUILDLFS UTIL SCRIPTS ###
 

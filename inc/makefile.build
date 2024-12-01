@@ -5,9 +5,11 @@
 ####################################################################
 
 
-build-lfs : $(JHALFS_MNT)
+build-lfs : $(LFS_JHALFS_DIR) $(JHALFS_MNT) $(RUN_JHALFS)
 clean-build-lfs : clean-buildlfs-get-jhalfs clean-buildlfs-pre-jhalfs \
-	clean-buildlfs-jhalfs-menuconfig
+	clean-buildlfs-jhalfs-menuconfig clean-buildlfs-jhalfs-diffconvert \
+	clean-buildlfs-run-jhalfs
+
 .PHONY: build-lfs clean-build-lfs
 
 build-blfs :
@@ -34,7 +36,7 @@ clean-buildlfs-get-jhalfs :
 # CONFIG IN
 ####################################################################
 
-$(JHALFS_CONFIGIN): $(SETUP_CONFIG_XML) $(LFS_JHALFS_DIR)
+$(JHALFS_CONFIGIN): $(SETUP_CONFIG_XML)
 buildlfs-pre-jhalfs $(JHALFS_CONFIGIN) :
 	@echo
 	@$(call bold_message, Preconfiguring jhalfs...)
@@ -62,6 +64,36 @@ clean-buildlfs-jhalfs-menuconfig :
 
 .PHONY: buildlfs-jhalfs-menuconfig clean-buildlfs-jhalfs-menuconfig
 
+
+####################################################################
+# DIFFLOG CONVERT
+####################################################################
+
+$(JHALFS_DIFFCONVERT):
+buildlfs-jhalfs-diffconvert $(JHALFS_DIFFCONVERT) :
+	@echo
+	@$(call bold_message, Converting jhalfs scripts for difflog...)
+	@$(BUILDLFS_JHALFS_DIFFCONVERT_SH)
+
+clean-buildlfs-jhalfs-diffconvert :
+
+.PHONY: buildlfs-jhalfs-diffconvert clean-buildlfs-jhalfs-diffconvert
+
+
+####################################################################
+# RUN JHALFS
+####################################################################
+
+$(RUN_JHALFS): $(JHALFS_DIFFCONVERT)
+buildlfs-run-jhalfs $(RUN_JHALFS) :
+	@echo
+	@$(call bold_message, Running jhalfs lfs build...)
+	@$(BUILDLFS_RUN_JHALFS_SH)
+
+clean-buildlfs-jhalfs-diffconvert :
+	@-sudo rm -rf $(LFS)/*
+
+.PHONY: buildlfs-run-jhalfs clean-buildlfs-run-jhalfs
 
 
 ####################################################################
