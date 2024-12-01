@@ -31,11 +31,11 @@ line1=$(grep -n "config[ ]*BUILDDIR" $modfile | sed 's/:.*//')
 sed -i "$((line1+2))s/^.*$/default \"$sub\"/" $modfile
 
 # build kernel
-sub=${BUILD_DIR//\//\\\/}
-line1=$(grep -n "config[ ]*CONFIG_BUILD_KERNEL" $modfile | sed 's/:.*//')
-sed -i "$((line1+2))s/^\(.*default \).*$/\1y/" $modfile
-line1=$(grep -n "string[ ]*\"Kernel config file\"" $modfile | sed 's/:.*//')
-sed -i "$((line1+1))s/^\(.*default.*[\"]\)\(.\).*$/\1$sub\/kernel-config\"/" $modfile
+#sub=${BUILD_DIR//\//\\\/}
+#line1=$(grep -n "config[ ]*CONFIG_BUILD_KERNEL" $modfile | sed 's/:.*//')
+#sed -i "$((line1+2))s/^\(.*default \).*$/\1y/" $modfile
+#line1=$(grep -n "string[ ]*\"Kernel config file\"" $modfile | sed 's/:.*//')
+#sed -i "$((line1+1))s/^\(.*default.*[\"]\)\(.\).*$/\1$sub\/kernel-config\"/" $modfile
 
 # enable package management
 line1=$(grep -n "config[ ]*PKGMNGT" $modfile | sed 's/:.*//')

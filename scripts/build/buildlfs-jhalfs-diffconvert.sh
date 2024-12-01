@@ -12,7 +12,7 @@ echo
 
 diffdir=${DIFFLOG_DIR##$LFS}
 
-for FILE in $JHALFS_MNT/lfs-commands/chapter{08,10}/*;
+for FILE in $JHALFS_MNT/lfs-commands/chapter08/*;
 do
 	### GET PACKAGE NAME AND VERSION ##
 	echo "Converting $FILE..."

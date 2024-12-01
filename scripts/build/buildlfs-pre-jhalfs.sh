@@ -17,13 +17,13 @@ $UTIL_BUILDLFS_PKGMGT_SH
 
 ### DOWNLOAD KERNEL CONFIG ###
 
-echo
-echo "Downloading kernel config..."
-echo
-pushd $BUILD_DIR
-wget https://mirrors.slackware.com/slackware/slackware64-15.0/kernels/huge.s/config
-mv config kernel-config
-popd
+#echo
+#echo "Downloading kernel config..."
+#echo
+#pushd $BUILD_DIR
+#wget https://mirrors.slackware.com/slackware/slackware64-15.0/kernels/huge.s/config
+#mv config kernel-config
+#popd
 
 
 ### JHALFS CONFIG IN ###

@@ -25,6 +25,8 @@ esac
 pushd $PKG_DEST
 
 ### CREATE TAR ARCHIVE ###
+ARCHIVE_NAME=${ARCHIVE_NAME##*/}
+ARCHIVE_NAME=/tmp/$ARCHIVE_NAME
 tar -cf $ARCHIVE_NAME
 
 ### INSTALL TAR ARCHIVE ###
@@ -34,5 +36,7 @@ popd
 
 
 popd
+
+rm $ARCHIVE_NAME
 
 }
