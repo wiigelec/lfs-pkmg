@@ -52,6 +52,7 @@ BUILD_XML_DIR = $(BUILD_DIR)/xml
 #------------------------------------------------------------------#
 ### BUILDLFS DIRS ###
 
+DIFFLOG_DIR = $(LFS)/var/lib/jhalfs/BLFS/difflog
 LFS ?= /mnt/lfs
 JHALFS_MNT = $(LFS)/jhalfs
 LFS_JHALFS_DIR = $(BUILD_DIR)/jhalfs
@@ -84,7 +85,7 @@ JHALFS_GIT = https://git.linuxfromscratch.org/jhalfs
 JHALFS_CONFIGIN = $(LFS_JHALFS_DIR)/Config.in
 JHALFS_PACKINSTALL = $(MISC_DIR)/packInstall.sh
 JHALFS_PACKXML = $(MISC_DIR)/packageManager.xml
-JHALFS_DIFFCONVERT = $(BUILD_DIR)/difflog-convert
+JHALFS_DIFFCONVERT = $(JHALFS_MNT)/difflog-convert
 RUN_JHALFS = $(JHALFS_MNT)/done
 
 #------------------------------------------------------------------#
