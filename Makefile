@@ -7,38 +7,35 @@
 
 ### DEFINITIONS ###
 
-include ./inc/makefile.defs
+include ./src/make/makefile.defs
 
 
 ### DEFAULT TARGET DOCS ###
 
-include ./inc/makefile.docs
+include ./src/make/makefile.docs
 
 
 ### BUILD ###
 
-include ./inc/makefile.build
+include ./src/make/makefile.build
 
 
 ### INSTALL ###
 
-include ./inc/makefile.install
+#include ./src/make/makefile.install
 
 
 ### REMOVE  ###
 
-include ./inc/makefile.remove
+#include ./src/make/makefile.remove
 
 
 ### SETUP ###
 
-include ./inc/makefile.setup
+#include ./src/make/makefile.setup
 
 
 ### UPGRADE ###
 
-include ./inc/makefile.upgrade
+#include ./src/make/makefile.upgrade
 
-nuke : clean-setup clean-build-lfs
-	-rm -rf $(BUILD_DIR)
-.PHONY: nuke

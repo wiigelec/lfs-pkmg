@@ -1,0 +1,83 @@
+####################################################################
+#
+# makefile.build
+#
+####################################################################
+
+
+
+####################################################################
+# LFS
+####################################################################
+
+#------------------------------------------------------------------#
+build-lfs : build-lfs-menuconfig build-lfs-jhalfs
+
+clean-build-lfs : clean-build-lfs-menuconfig clean-build-lfs-jhalfs
+
+
+#------------------------------------------------------------------#
+build-lfs-menuconfig : $(BL_CONFIG_OUT)
+
+clean-build-lfs-menuconfig : 
+	@-rm -rf $(LFS_XML)
+	@-rm $(BL_CONFIG_IN)
+	@-rm $(BL_CONFIG_OUT)
+	
+$(LFS_XML) :
+	@echo
+	@$(call bold_message, Downloading LFS book...)
+	$(UTIL_GET_LFSBOOK_SH)
+
+$(BL_CONFIG_IN) : $(LFS_XML)
+	@echo
+	@$(call bold_message, Generating config in...)
+	$(BL_CONFIG_IN_SH)
+
+$(BL_CONFIG_OUT) : $(BL_CONFIG_IN)
+	@echo
+	@$(call bold_message, Running menuconfig...)
+	$(BL_CONFIG_OUT_SH)
+
+
+#------------------------------------------------------------------#
+build-lfs-jhalfs : jhalfs-build
+
+clean-build-lfs-jhalfs : 
+	@-rm -rf $(JHALFS_GIT_DIR)
+	@-rm $(JHALFS_CONFIG)
+	@-rm -rf $(LFS)/*
+
+$(JHALFS_GIT_DIR) : 
+	@echo
+	@$(call bold_message, Downloading jhalfs...)
+	$(UTIL_GET_JHALFS_SH)
+
+$(JHALFS_CONFIG) : $(JHALFS_GIT_DIR)
+	@echo
+	@$(call bold_message, Configuring jhalfs...)
+	$(BL_JHALFS_CONFIG_SH)
+
+$(JHALFS_MNT) : $(JHALFS_CONFIG)
+	@echo
+	@$(call bold_message, Installing jhalfs to $(LFS)...)
+	$(BL_JHALFS_MNT_SH)
+
+$(DIFFLOG_CONVERT) : $(JHALFS_MNT)
+	@echo
+	@$(call bold_message, Converting scripts for difflog...)
+	$(BL_DIFFLOG_CONVERT_SH)
+
+jhalfs-build : $(DIFFLOG_CONVERT)
+	@echo
+	@$(call bold_message, Building LFS...)
+	$(BL_JHALFS_BUILD_SH)
+
+
+#------------------------------------------------------------------#
+build-lfs-archives :
+	@echo
+	@$(call bold_message, Generating LFS package archives...)
+
+
+

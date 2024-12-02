@@ -1,75 +1,12 @@
 <html>
 
 	LFS-PKMG DOCUMENTATION
-<pre>
-<hr/>
-</pre>
-<pre>
-WORKFLOW
-</pre>
+	<body>
 
-<pre>
- SETUP:
+	<pre>
+	<a href="build-lfs.html">make build-lfs</a>
+	</pre>
 
-  1) BRANCH AND REVISION (RE)CONFIGURATION
-     *** make setup ***
-
-      a) git clone (git pull) LFS book
-         *** make setup-lfs-book ***
-	 *** setup-lfs-book.sh ***
-
-      b) generate setup-config.in
-         *** make setup-config-in ***
-	 *** setup-config-in.sh ***
-	 *** util_setup-config-in.sh ***
-
-          i) get lfs book branches
-	     *** util_setup-get-branches.sh ***
-
-      c) run menuconfig
-         *** make setup-config-out *** 
-
-      d) write build-config.out to setup-config.xml
-         *** make setup-config-xml ***
-	 *** util_setup-config-xml ***
-
-</pre>
-
-<pre>
- BUILD (LFS):
-
-  1) LFS JHALFS
-     *** make build-lfs ***
-
-      a) git clone (git pull) jhalfs
-         *** make buildlfs-get-jhalfs ***
-	 *** buildlfs-get-jhalfs.sh ***
-     
-      b) pre jhalfs setup
-         *** make buildlfs-pre-jhalfs ***
-	 *** buildlfs-prejhalfs.sh ***
-
-	  -- package management
-	     *** util_buildlfs-pkgmgt.sh ***
-
-	  -- jhalfs config.in
-	     *** util_buildlfs-jhalfs-configin.sh ***
-
-      c) jhalfs menuconfig
-         *** make buildlfs-jhalfs-menuconfig ***
-         *** buildlfs-jhalfs-menuconfig.sh ***
-
-      d) difflog convert
-         *** make buildlfs-jhalfs-diffconvert ***
-         *** buildlfs-jhalfs-diffconvert.sh ***
-
-      e) run /mnt/lfs jhalfs
-         *** make buildlfs-run-jhalfs ***
-         *** buildlfs-run-jhalfs.sh ***
-
-</pre>
-
-
-
+	</body>
 
 </html>

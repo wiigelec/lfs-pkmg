@@ -1,0 +1,105 @@
+####################################################################
+#
+# makefile.defs
+#
+####################################################################
+
+
+####################################################################
+# DISPLAY OUTPUT
+####################################################################
+
+BOLD= "[0;1m"
+NORMAL= "[0;0m"
+BLUE= "[1;34m"
+
+define bold_message
+  @echo $(BOLD)"===================================================================="
+  @echo $(BLUE)"--------------------------------------------------------------------"
+  @echo  $(BOLD)$(1)
+  @echo $(BLUE)"--------------------------------------------------------------------"$(NORMAL)
+  @echo
+endef
+
+
+####################################################################
+# DIRECTORY DEFINITIONS
+####################################################################
+
+#------------------------------------------------------------------#
+### TOP LEVEL DIRS ###
+
+TOPDIR = $(shell pwd)
+
+HTML_DIR = $(TOPDIR)/doc/html
+BUILD_DIR = $(TOPDIR)/build
+SRC_DIR = $(TOPDIR)/src
+SCRIPT_DIR = $(SRC_DIR)/scripts
+MISC_DIR = $(SRC_DIR)/misc
+
+#------------------------------------------------------------------#
+BUILD_XML_DIR=$(BUILD_DIR)/xml
+
+
+JHALFS_GIT_DIR = $(BUILD_DIR)/jhalfs
+JHALFS_MNT = $(LFS)/jhalfs
+
+DIFFLOG_DIR = /var/lib/jhalfs/BLFS/difflog
+
+
+####################################################################
+# FILE DEFINITIONS
+####################################################################
+
+#------------------------------------------------------------------#
+INDEX_HTML = $(HTML_DIR)/index.html
+
+#------------------------------------------------------------------#
+# BUILD LFS FILES
+LFS_XML = $(BUILD_XML_DIR)/lfs-xml
+BL_CONFIG_IN = $(BUILD_DIR)/bl-config.in
+BL_CONFIG_OUT = $(BUILD_DIR)/bl-config.out
+
+JHALFS_CONFIG = $(JHALFS_GIT_DIR)/configuration
+DIFFLOG_CONVERT = $(JHALFS_MNT)/difflog-convert
+
+
+####################################################################
+# MISC DEFINITIONS
+####################################################################
+
+LFS ?= /mnt/lfs
+
+#------------------------------------------------------------------#
+# GIT
+LFS_GIT = https://git.linuxfromscratch.org/lfs
+JHALFS_GIT = https://git.linuxfromscratch.org/jhalfs
+
+#------------------------------------------------------------------#
+# BROWSER
+BROWSER ?= lynx
+
+### MENU_CONFIG ###
+MENU_CONFIG = python3 $(TOPDIR)/kconfiglib/menuconfig.py
+
+
+####################################################################
+# SCRIPT DEFINITIONS
+####################################################################
+
+#------------------------------------------------------------------#
+# BUILD LFS
+BL_CONFIG_IN_SH = $(SCRIPT_DIR)/build/lfs/bl-config-in.sh
+BL_CONFIG_OUT_SH = $(SCRIPT_DIR)/build/lfs/bl-config-out.sh
+UTIL_GET_JHALFS_SH = $(SCRIPT_DIR)/util/util-get-jhalfs.sh
+BL_JHALFS_CONFIG_SH = $(SCRIPT_DIR)/build/lfs/bl-jhalfs-config.sh
+BL_JHALFS_MNT_SH = $(SCRIPT_DIR)/build/lfs/bl-jhalfs-mnt.sh
+BL_DIFFLOG_CONVERT_SH = $(SCRIPT_DIR)/build/lfs/bl-difflog-convert.sh
+BL_JHALFS_BUILD_SH = $(SCRIPT_DIR)/build/lfs/bl-jhalfs-build.sh
+
+#------------------------------------------------------------------#
+# UTIL
+UTIL_GET_LFSBOOK_SH = $(SCRIPT_DIR)/util/util-get-lfsbook.sh
+
+### EXPORT ALL ###
+export

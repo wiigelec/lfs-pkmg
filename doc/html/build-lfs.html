@@ -1,0 +1,75 @@
+<html>
+	BUILD-LFS DOCUMENTATION
+
+	<body>
+		<hr/>
+		<pre>
+		WORKFLOW:
+
+		*** build-lfs ***
+
+		1) Select LFS rev and branch
+		   *** build-lfs-menuconfig ***
+
+		   a) dowload lfs book
+		      $(LFS_XML)
+		      util-get-lfsbook.sh
+
+		   -- create config in
+		      $(BL_CONFIG_IN)
+		      bl-config-in.sh
+
+		      -- get lfs branches
+		         util-get_branches.sh
+
+		   -- run menuconfig
+		      $(BL_CONFIG_OUT)
+		      bl-config-out.sh
+
+
+		2) Build LFS jhalfs
+		   *** build-lfs-jhalfs ***
+
+		   -- download jhalfs
+		      $(JHALFS_GIT_DIR)
+		      util-get-jhalfs.sh
+
+		   -- create configuration
+		      $(JHALFS_CONFIG)
+		      bl-jhalfs-config.sh
+
+		   -- run jhalfs
+		      $(JHALFS_MNT)
+		      bl-jhalfs-mnt.sh
+
+		   -- difflog convert
+		      $(DIFFLOG_CONVERT)
+		      bl-difflog-convert.sh
+
+		   -- jhalfs build
+		      $(**jhalfs_internal**)
+		      bl-jhalfs-build.sh
+
+		3) Create archives
+		   *** build-lfs-archives ***
+
+		   -- install scripts to $LFS
+		      $(CHROOT_SCRIPTS)
+		      bl-chroot-scriptssh
+
+		   -- chroot
+		      $(ARCHIVE_MNT)
+		      util-lfs-chroot.sh
+
+		      -- create pkglog
+		         util-create-pkglog.sh
+
+		      -- create (custom) archives
+		         util-create-archive.sh
+
+		</pre>
+
+	</body>
+
+
+</html>
