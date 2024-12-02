@@ -33,6 +33,19 @@ pushd $DEST_DIR
 SRC_DIR=/sources
 pushd $SRC_DIR
 
+### FIND FILE ###
+kernelfile=$(find $SRC_DIR -name "linux-*.tar.xz")
+[[ -z $kernelfile ]] && echo "No kernel source file found." && exit 1
+
+# Get versions
+PKG_VER=${kernelfile##*linux-}
+PKG_VER=${PKG_VER%.tar.xz}
+KERNEL_VER=$PKG_VER
+
+# Get config
+kernelconfig=$SRC_DIR/kernel-config
+[[ ! -f $kernelconfig ]] && echo "No kernel config file found." && exit 1
+
 # Extract
 TAR_FILE=linux-$KERNEL_VER.tar.xz
 TAR_DIR=${TAR_FILE%%.tar.xz}
@@ -42,10 +55,8 @@ tar -xf $TAR_FILE
 # Build
 pushd $TAR_DIR
 
-# Download slackware config
-wget https://mirrors.slackware.com/slackware/slackware64-15.0/source/k/kernel-configs/config-huge-5.15.19.x64 -O .config
-
 make mrproper
+cp -v $kernelconfig .config
 make olddefconfig
 
 # Landlock (tracker-miners)

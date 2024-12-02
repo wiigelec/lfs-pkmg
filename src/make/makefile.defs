@@ -45,6 +45,11 @@ JHALFS_GIT_DIR = $(BUILD_DIR)/jhalfs
 JHALFS_MNT = $(LFS)/jhalfs
 
 DIFFLOG_DIR = /var/lib/jhalfs/BLFS/difflog
+PKGLOG_DIR = /var/lib/jhalfs/BLFS/pkglog
+ARCHIVE_DIR = /var/lib/jhalfs/BLFS/archive
+CHROOT_SCRIPTS_DIR = $(JHALFS_MNT)/lfspkmg-scripts
+
+LFS_CUSTOM_DIR = $(SRC_DIR)/build/lfs/custom
 
 
 ####################################################################
@@ -62,6 +67,8 @@ BL_CONFIG_OUT = $(BUILD_DIR)/bl-config.out
 
 JHALFS_CONFIG = $(JHALFS_GIT_DIR)/configuration
 DIFFLOG_CONVERT = $(JHALFS_MNT)/difflog-convert
+CHROOT_SCRIPTS = $(JHALFS_MNT)/lfspkmg-chroot
+ARCHIVE_MNT = $(JHALFS_MNT)/archive-mnt
 
 
 ####################################################################
@@ -91,15 +98,19 @@ MENU_CONFIG = python3 $(TOPDIR)/kconfiglib/menuconfig.py
 # BUILD LFS
 BL_CONFIG_IN_SH = $(SCRIPT_DIR)/build/lfs/bl-config-in.sh
 BL_CONFIG_OUT_SH = $(SCRIPT_DIR)/build/lfs/bl-config-out.sh
-UTIL_GET_JHALFS_SH = $(SCRIPT_DIR)/util/util-get-jhalfs.sh
 BL_JHALFS_CONFIG_SH = $(SCRIPT_DIR)/build/lfs/bl-jhalfs-config.sh
 BL_JHALFS_MNT_SH = $(SCRIPT_DIR)/build/lfs/bl-jhalfs-mnt.sh
 BL_DIFFLOG_CONVERT_SH = $(SCRIPT_DIR)/build/lfs/bl-difflog-convert.sh
 BL_JHALFS_BUILD_SH = $(SCRIPT_DIR)/build/lfs/bl-jhalfs-build.sh
+BL_CHROOT_SCRIPTS_SH = $(SCRIPT_DIR)/build/lfs/bl-chroot-scripts.sh
+BL_RUN_CHROOT_SH = $(SCRIPT_DIR)/build/lfs/bl-run-chroot.sh
 
 #------------------------------------------------------------------#
 # UTIL
 UTIL_GET_LFSBOOK_SH = $(SCRIPT_DIR)/util/util-get-lfsbook.sh
+UTIL_GET_JHALFS_SH = $(SCRIPT_DIR)/util/util-get-jhalfs.sh
+UTIL_CREATE_PKGLOG_SH = $(SCRIPT_DIR)/util/util-create-pkglog.sh
+UTIL_CREATE_ARCHIVE_SH = $(SCRIPT_DIR)/util/util-create-archive.sh
 
 ### EXPORT ALL ###
 export

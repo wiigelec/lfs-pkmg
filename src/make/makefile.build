@@ -11,7 +11,7 @@
 ####################################################################
 
 #------------------------------------------------------------------#
-build-lfs : build-lfs-menuconfig build-lfs-jhalfs
+build-lfs : build-lfs-menuconfig build-lfs-jhalfs build-lfs-archives
 
 clean-build-lfs : clean-build-lfs-menuconfig clean-build-lfs-jhalfs
 
@@ -80,9 +80,14 @@ jhalfs-build : $(JHALFS_MNT) $(DIFFLOG_CONVERT)
 
 
 #------------------------------------------------------------------#
-build-lfs-archives :
+build-lfs-archives : $(ARCHIVE_MNT)
+
+$(CHROOT_SCRIPTS) :
 	@echo
-	@$(call bold_message, Generating LFS package archives...)
+	@$(call bold_message, Installing chroot scripts...)
+	$(BL_CHROOT_SCRIPTS_SH)
 
-
-
+$(ARCHIVE_MNT) : $(CHROOT_SCRIPTS)
+	@echo
+	@$(call bold_message, Running chroot scripts...)
+	$(BL_RUN_CHROOT_SH)
