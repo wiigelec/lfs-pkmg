@@ -66,12 +66,12 @@ $(JHALFS_MNT) : $(JHALFS_CONFIG)
 	@$(call bold_message, Installing jhalfs to $(LFS)...)
 	$(BL_JHALFS_MNT_SH)
 
-$(DIFFLOG_CONVERT) : $(JHALFS_MNT)
+$(DIFFLOG_CONVERT) : 
 	@echo
 	@$(call bold_message, Converting scripts for difflog...)
 	$(BL_DIFFLOG_CONVERT_SH)
 
-jhalfs-build : $(DIFFLOG_CONVERT)
+jhalfs-build : $(JHALFS_MNT) $(DIFFLOG_CONVERT)
 	@echo
 	@$(call bold_message, Building LFS...)
 	$(BL_JHALFS_BUILD_SH)
