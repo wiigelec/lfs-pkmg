@@ -59,7 +59,7 @@ PKGMNGT=y
 PKG_PACK=y
 # LIB_LOAD is not set
 # INSTALL_LOG is not set
-# STRIP is not set
+STRIP=y
 # NO_PROGRESS_BAR is not set
 # end of Build Settings
 
