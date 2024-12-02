@@ -39,4 +39,7 @@ do
 
 done
 
+### INITIALIZE DIFFLOG DIR ###
+sudo mkdir -pv $LFS/$DIFFLOG
+
 touch $DIFFLOG_CONVERT
