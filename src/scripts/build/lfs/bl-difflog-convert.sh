@@ -40,6 +40,6 @@ do
 done
 
 ### INITIALIZE DIFFLOG DIR ###
-sudo mkdir -pv $LFS/$DIFFLOG
+sudo mkdir -pv $LFS/$DIFFLOG_DIR
 
 touch $DIFFLOG_CONVERT
