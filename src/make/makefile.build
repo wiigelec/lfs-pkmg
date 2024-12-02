@@ -40,6 +40,9 @@ $(BL_CONFIG_OUT) : $(BL_CONFIG_IN)
 	$(BL_CONFIG_OUT_SH)
 
 
+.PHONY: build-lfs-menuconfig clean-build-lfs-menuconfig
+
+
 #------------------------------------------------------------------#
 build-lfs-jhalfs : jhalfs-build
 
@@ -72,6 +75,8 @@ jhalfs-build : $(DIFFLOG_CONVERT)
 	@echo
 	@$(call bold_message, Building LFS...)
 	$(BL_JHALFS_BUILD_SH)
+
+.PHONY: build-lfs-jhalfs clean-build-lfs-jhalfs jhalfs-build
 
 
 #------------------------------------------------------------------#
