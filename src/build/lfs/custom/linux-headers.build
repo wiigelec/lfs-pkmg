@@ -5,6 +5,14 @@
 #
 ####################################################################
 
+### FIND FILE ###
+kernelfile=$(find $SRC_DIR -name "linux-*.tar.xz")
+[[ -z $kernelfile ]] && echo "No kernel source file found." && exit 1
+
+# Get versions
+KERNEL_VER=${kernelfile##*linux-}
+KERNEL_VER=${KERNEL_VER%.tar.xz}
+
 
 ####################################################################
 # PACKAGE SETUP
