@@ -6,6 +6,8 @@
 #
 ####################################################################
 
+set -e
+
 SRC_DIR=/sources
 
 ### FIND FILE ###
@@ -60,7 +62,7 @@ cp -v $kernelconfig .config
 make olddefconfig
 
 # IKHEADERS
-sed -i 's/CONFIG_IKHEADERS=m/# CONFIG_IKHEADERS is not set/'
+sed -i 's/CONFIG_IKHEADERS=m/# CONFIG_IKHEADERS is not set/' .config
 
 # Landlock (tracker-miners)
 sed -i 's/# CONFIG_SECURITY_LANDLOCK is not set/CONFIG_SECURITY_LANDLOCK=y/' .config

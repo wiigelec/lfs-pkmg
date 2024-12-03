@@ -21,6 +21,16 @@ define bold_message
   @echo
 endef
 
+define done_message
+  @echo $(BOLD)"===================================================================="
+  @echo $(BLUE)"--------------------------------------------------------------------"
+  @echo  $(BOLD)$(1) $(BLUE)$(2)
+  @echo "--------------------------------------------------------------------"
+  @echo $(BOLD)"===================================================================="$(NORMAL)
+  @echo
+endef
+
+
 
 ####################################################################
 # DIRECTORY DEFINITIONS
@@ -66,6 +76,7 @@ BL_CONFIG_IN = $(BUILD_DIR)/bl-config.in
 BL_CONFIG_OUT = $(BUILD_DIR)/bl-config.out
 
 JHALFS_CONFIG = $(JHALFS_GIT_DIR)/configuration
+JHALFS_BUILD = $(JHALFS_MNT)/jhalfs-build
 DIFFLOG_CONVERT = $(JHALFS_MNT)/difflog-convert
 CHROOT_SCRIPTS = $(JHALFS_MNT)/lfspkmg-chroot
 ARCHIVE_MNT = $(JHALFS_MNT)/archive-mnt

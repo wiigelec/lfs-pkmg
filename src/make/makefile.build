@@ -12,12 +12,14 @@
 
 #------------------------------------------------------------------#
 build-lfs : build-lfs-menuconfig build-lfs-jhalfs build-lfs-archives
+	@echo
+	@$(call done_message, SUCCESS! LFS on $(LFS) build complete.)
 
 clean-build-lfs : clean-build-lfs-menuconfig clean-build-lfs-jhalfs
 
 
 #------------------------------------------------------------------#
-build-lfs-menuconfig : $(BL_CONFIG_OUT)
+build-lfs-menuconfig : $(LFS_XML) $(BL_CONFIG_IN) $(BL_CONFIG_OUT)
 
 clean-build-lfs-menuconfig : 
 	@-rm -rf $(LFS_XML)
@@ -44,7 +46,8 @@ $(BL_CONFIG_OUT) : $(BL_CONFIG_IN)
 
 
 #------------------------------------------------------------------#
-build-lfs-jhalfs : jhalfs-build
+build-lfs-jhalfs : $(JHALFS_GIT_DIR) $(JHALFS_CONFIG) $(JHALFS_MNT) \
+	$(DIFFLOG_CONVERT) $(JHALFS_BUILD)
 
 clean-build-lfs-jhalfs : 
 	@-rm -rf $(JHALFS_GIT_DIR)
@@ -66,21 +69,21 @@ $(JHALFS_MNT) : $(JHALFS_CONFIG)
 	@$(call bold_message, Installing jhalfs to $(LFS)...)
 	$(BL_JHALFS_MNT_SH)
 
-$(DIFFLOG_CONVERT) : 
+$(DIFFLOG_CONVERT) :
 	@echo
 	@$(call bold_message, Converting scripts for difflog...)
 	$(BL_DIFFLOG_CONVERT_SH)
 
-jhalfs-build : $(JHALFS_MNT) $(DIFFLOG_CONVERT)
+$(JHALFS_BUILD) : $(JHALFS_MNT) $(DIFFLOG_CONVERT)
 	@echo
 	@$(call bold_message, Building LFS...)
 	$(BL_JHALFS_BUILD_SH)
 
-.PHONY: build-lfs-jhalfs clean-build-lfs-jhalfs jhalfs-build
+.PHONY: build-lfs-jhalfs clean-build-lfs-jhalfs
 
 
 #------------------------------------------------------------------#
-build-lfs-archives : $(ARCHIVE_MNT)
+build-lfs-archives : $(CHROOT_SCRIPTS) $(ARCHIVE_MNT)
 
 $(CHROOT_SCRIPTS) :
 	@echo

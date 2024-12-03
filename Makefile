@@ -39,3 +39,6 @@ include ./src/make/makefile.build
 
 #include ./src/make/makefile.upgrade
 
+
+nuke : 
+	-rm -rf $(BUILD_DIR)
