@@ -7,6 +7,9 @@
 
 set -e
 
+# lfs book version
+lfsver=$(xmllint --xpath "/book/bookinfo/subtitle[1]/text()" $JHALFS_MNT/prbook.xml | sed 's/.* \(.*\)-.*/\1/')
+
 ### PKGLOG ###
 echo
 echo "Creating pkglogs..."
@@ -22,12 +25,21 @@ sudo chroot $LFS bash -e -c "DIFFLOG_DIR=$DIFFLOG_DIR PKGLOG_DIR=$PKGLOG_DIR /jh
 echo
 echo "Creating archives..."
 echo
-sudo chroot $LFS bash -e -c "PKGLOG_DIR=$PKGLOG_DIR ARCHIVE_DIR=$ARCHIVE_DIR /jhalfs/lfspkmg-scripts/util-create-archive.sh"
+sudo chroot $LFS bash -e -c "PKGLOG_DIR=$PKGLOG_DIR ARCHIVE_DIR=$ARCHIVE_DIR LFS_VER=$lfsver /jhalfs/lfspkmg-scripts/util-create-archive.sh"
 
+#------------------------------------------------------------------#
 ### CUSTOM ###
 echo
 echo "Running custom scripts..."
 echo
+
 # kernel config
-cp $MISC_DIR/kernel-config $LFS/sources
-sudo chroot $LFS bash -e -c "for f in /jhalfs/lfspkmg-scripts/custom/*; do ARCHIVE_DIR=$ARCHIVE_DIR ./\$f; done"
+tmpdir=/tmp/lfspkmg$RANDOM
+mkdir $tmpdir
+pushd $tmpdir > /dev/null
+wget https://mirrors.slackware.com/slackware/slackware64-15.0/kernels/huge.s/config
+mv config $LFS/sources
+popd
+rm -rf $tmpdir
+
+sudo chroot $LFS bash -e -c "for f in /jhalfs/lfspkmg-scripts/custom/*; do ARCHIVE_DIR=$ARCHIVE_DIR LFS_VER=$lfsver ./\$f; done"
