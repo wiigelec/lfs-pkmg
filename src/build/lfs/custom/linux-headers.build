@@ -5,6 +5,8 @@
 #
 ####################################################################
 
+SRC_DIR=/sources
+
 ### FIND FILE ###
 kernelfile=$(find $SRC_DIR -name "linux-*.tar.xz")
 [[ -z $kernelfile ]] && echo "No kernel source file found." && exit 1
@@ -37,7 +39,6 @@ pushd $DEST_DIR
 # PACKAGE BUILD
 ####################################################################
 
-SRC_DIR=/sources
 pushd $SRC_DIR
 
 ### FIND FILE ###
