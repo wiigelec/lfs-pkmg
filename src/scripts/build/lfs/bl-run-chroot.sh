@@ -38,7 +38,7 @@ tmpdir=/tmp/lfspkmg$RANDOM
 mkdir $tmpdir
 pushd $tmpdir > /dev/null
 wget https://mirrors.slackware.com/slackware/slackware64-15.0/kernels/huge.s/config
-mv config $LFS/sources
+mv config $LFS/sources/kernel-config
 popd
 rm -rf $tmpdir
 

@@ -80,6 +80,7 @@ JHALFS_BUILD = $(JHALFS_MNT)/jhalfs-build
 DIFFLOG_CONVERT = $(JHALFS_MNT)/difflog-convert
 CHROOT_SCRIPTS = $(JHALFS_MNT)/lfspkmg-chroot
 ARCHIVE_MNT = $(JHALFS_MNT)/archive-mnt
+JHALFS_LFS = $(JHALFS_MNT)/jhalfs-lfs
 
 
 ####################################################################

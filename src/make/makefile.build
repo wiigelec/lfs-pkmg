@@ -46,13 +46,13 @@ $(BL_CONFIG_OUT) : $(BL_CONFIG_IN)
 
 
 #------------------------------------------------------------------#
-build-lfs-jhalfs : $(JHALFS_GIT_DIR) $(JHALFS_CONFIG) $(JHALFS_MNT) \
+build-lfs-jhalfs : $(JHALFS_GIT_DIR) $(JHALFS_CONFIG) $(JHALFS_LFS) \
 	$(DIFFLOG_CONVERT) $(JHALFS_BUILD)
 
 clean-build-lfs-jhalfs : 
 	@-rm -rf $(JHALFS_GIT_DIR)
 	@-rm $(JHALFS_CONFIG)
-	@-rm -rf $(LFS)/*
+	@-sudo rm -rf $(LFS)/*
 
 $(JHALFS_GIT_DIR) : 
 	@echo
@@ -64,7 +64,7 @@ $(JHALFS_CONFIG) : $(JHALFS_GIT_DIR)
 	@$(call bold_message, Configuring jhalfs...)
 	$(BL_JHALFS_CONFIG_SH)
 
-$(JHALFS_MNT) : $(JHALFS_CONFIG)
+$(JHALFS_LFS) :
 	@echo
 	@$(call bold_message, Installing jhalfs to $(LFS)...)
 	$(BL_JHALFS_MNT_SH)

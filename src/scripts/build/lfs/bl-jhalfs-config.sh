@@ -52,3 +52,6 @@ popd > /dev/null
 cp $MISC_DIR/packageManager.xml $JHALFS_GIT_DIR/pkgmngt
 cp $MISC_DIR/packInstall.sh $JHALFS_GIT_DIR/pkgmngt
 
+
+### DISABLE PROMPTS ###
+sed -i 's/read -r ANSWER/ANSWER=yes/g' $JHALFS_GIT_DIR/jhalfs

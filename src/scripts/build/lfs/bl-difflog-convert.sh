@@ -22,8 +22,8 @@ do
         version=$(grep VERSION= $FILE | sed 's/.*=//')
 
         # diff logs
-        difflog1="$diffdir/$package"-"$version".difflog1
-        difflog2="$diffdir/$package"-"$version".difflog2
+        difflog1="$diffdir/$package"--"$version".difflog1
+        difflog2="$diffdir/$package"--"$version".difflog2
 
         # insert diff log
         sed -i "2 i find / -xdev > $difflog1" $FILE
