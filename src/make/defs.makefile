@@ -42,7 +42,7 @@ endef
 TOPDIR = $(shell pwd)
 
 HTML_DIR = $(TOPDIR)/doc/html
-BUILD_DIR = $(TOPDIR)/build
+BUILD_DIR ?= $(TOPDIR)/build
 SRC_DIR = $(TOPDIR)/src
 SCRIPT_DIR = $(SRC_DIR)/scripts
 MISC_DIR = $(SRC_DIR)/misc
@@ -50,9 +50,11 @@ MISC_DIR = $(SRC_DIR)/misc
 #------------------------------------------------------------------#
 BUILD_XML_DIR=$(BUILD_DIR)/xml
 
+LFS_BOOK = $(BUILD_XML_DIR)/lfs-xml
+BLFS_BOOK = $(BUILD_XML_DIR)/blfs-xml
 
 JHALFS_GIT_DIR = $(BUILD_DIR)/jhalfs
-JHALFS_MNT = $(LFS)/jhalfs
+JHALFS_MNT = $(INSTALLROOT)/jhalfs
 
 DIFFLOG_DIR = /var/lib/jhalfs/BLFS/difflog
 PKGLOG_DIR = /var/lib/jhalfs/BLFS/pkglog
@@ -66,14 +68,20 @@ LFS_CUSTOM_DIR = $(SRC_DIR)/build/lfs/custom
 # FILE DEFINITIONS
 ####################################################################
 
+CURRENT_CONFIG = $(BUILD_DIR)/current-config
+ACTION_CONFIG_IN = $(BUILD_DIR)/action-config.in
+ACTION_CONFIG_OUT = $(BUILD_DIR)/action-config.out
+ACTION_CURRENT_CONFIG = $(BUILD_DIR)/current-config
+
 #------------------------------------------------------------------#
 INDEX_HTML = $(HTML_DIR)/index.html
 
 #------------------------------------------------------------------#
 # BUILD LFS FILES
-LFS_XML = $(BUILD_XML_DIR)/lfs-xml
 BL_CONFIG_IN = $(BUILD_DIR)/bl-config.in
 BL_CONFIG_OUT = $(BUILD_DIR)/bl-config.out
+
+LFS_FULL_XML = $(BUILD_XML_DIR)/lfs-full.xml
 
 JHALFS_CONFIG = $(JHALFS_GIT_DIR)/configuration
 JHALFS_BUILD = $(JHALFS_MNT)/jhalfs-build
@@ -92,6 +100,7 @@ LFS ?= /mnt/lfs
 #------------------------------------------------------------------#
 # GIT
 LFS_GIT = https://git.linuxfromscratch.org/lfs
+BLFS_GIT = https://git.linuxfromscratch.org/blfs
 JHALFS_GIT = https://git.linuxfromscratch.org/jhalfs
 
 #------------------------------------------------------------------#
@@ -105,6 +114,13 @@ MENU_CONFIG = python3 $(TOPDIR)/kconfiglib/menuconfig.py
 ####################################################################
 # SCRIPT DEFINITIONS
 ####################################################################
+
+ACTION_CONFIG_IN_SH = $(SCRIPT_DIR)/action/action-config-in.sh
+ACTION_CONFIG_OUT_SH = $(SCRIPT_DIR)/action/action-config-out.sh
+ACTION_CURRENT_CONFIG_SH = $(SCRIPT_DIR)/action/action-current-config.sh
+ACTION_LAUNCH_ACTION_SH = $(SCRIPT_DIR)/action/action-launch-action.sh
+
+BUILD_LAUNCH_BUILD_SH = $(SCRIPT_DIR)/build/build-launch-build.sh
 
 #------------------------------------------------------------------#
 # BUILD LFS
@@ -120,6 +136,7 @@ BL_RUN_CHROOT_SH = $(SCRIPT_DIR)/build/lfs/bl-run-chroot.sh
 #------------------------------------------------------------------#
 # UTIL
 UTIL_GET_LFSBOOK_SH = $(SCRIPT_DIR)/util/util-get-lfsbook.sh
+UTIL_GET_BLFSBOOK_SH = $(SCRIPT_DIR)/util/util-get-blfsbook.sh
 UTIL_GET_JHALFS_SH = $(SCRIPT_DIR)/util/util-get-jhalfs.sh
 UTIL_CREATE_PKGLOG_SH = $(SCRIPT_DIR)/util/util-create-pkglog.sh
 UTIL_CREATE_ARCHIVE_SH = $(SCRIPT_DIR)/util/util-create-archive.sh
