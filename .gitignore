@@ -1,2 +1,3 @@
 /build
+/kconfiglib/__pycache__
 **/*.swp

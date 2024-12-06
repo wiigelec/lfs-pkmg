@@ -11,6 +11,8 @@ include ./src/make/action.makefile
 
 include ./src/make/build.makefile
 
+include ./src/make/docs.makefile
+
 #include ./src/make/makefile.install
 
 #include ./src/make/makefile.remove
