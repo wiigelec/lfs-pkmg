@@ -47,6 +47,8 @@ SRC_DIR = $(TOPDIR)/src
 SCRIPT_DIR = $(SRC_DIR)/scripts
 MISC_DIR = $(SRC_DIR)/misc
 
+LPM_DIR = /var/lib/lpm
+
 #------------------------------------------------------------------#
 BUILD_XML_DIR=$(BUILD_DIR)/xml
 
@@ -63,6 +65,8 @@ CHROOT_SCRIPTS_DIR = $(JHALFS_MNT)/lfspkmg-scripts
 
 LFS_CUSTOM_DIR = $(SRC_DIR)/scripts/build/lfs/custom
 
+INSTALLED_DIR=$(LPM_DIR)/installed
+
 
 ####################################################################
 # FILE DEFINITIONS
@@ -72,6 +76,10 @@ CURRENT_CONFIG = $(BUILD_DIR)/current-config
 ACTION_CONFIG_IN = $(BUILD_DIR)/action-config.in
 ACTION_CONFIG_OUT = $(BUILD_DIR)/action-config.out
 ACTION_CURRENT_CONFIG = $(BUILD_DIR)/current-config
+
+INSTALL_CONFIG_IN = $(BUILD_DIR)/install/install-config.in
+INSTALL_CONFIG_OUT = $(BUILD_DIR)/install/install-config.out
+INSTALL_PKG_LIST = $(BUILD_DIR)/install/install-pkg-list
 
 #------------------------------------------------------------------#
 INDEX_HTML = $(HTML_DIR)/index.html
@@ -121,6 +129,11 @@ ACTION_CURRENT_CONFIG_SH = $(SCRIPT_DIR)/action/action-current-config.sh
 ACTION_LAUNCH_ACTION_SH = $(SCRIPT_DIR)/action/action-launch-action.sh
 
 BUILD_LAUNCH_BUILD_SH = $(SCRIPT_DIR)/build/build-launch-build.sh
+
+INSTALL_LAUNCH_INSTALL_SH = $(SCRIPT_DIR)/install/install-launch-install.sh
+INSTALL_CONFIG_IN_SH = $(SCRIPT_DIR)/install/install-config-in.sh
+INSTALL_CONFIG_OUT_SH = $(SCRIPT_DIR)/install/install-config-out.sh
+INSTALL_PACKAGE_SH = $(SCRIPT_DIR)/install/install-package.sh
 
 #------------------------------------------------------------------#
 # BUILD LFS

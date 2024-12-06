@@ -13,7 +13,7 @@ include ./src/make/build.makefile
 
 include ./src/make/docs.makefile
 
-#include ./src/make/makefile.install
+include ./src/make/install.makefile
 
 #include ./src/make/makefile.remove
 

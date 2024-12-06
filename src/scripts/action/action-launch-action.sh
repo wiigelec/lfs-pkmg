@@ -8,4 +8,6 @@
 
 source $ACTION_CURRENT_CONFIG
 
-make $ACTION
+env=$(cat $ACTION_CURRENT_CONFIG | xargs)
+
+make $env $ACTION

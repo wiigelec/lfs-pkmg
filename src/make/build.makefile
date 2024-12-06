@@ -38,7 +38,7 @@ jhalfs-git-dir $(JHALFS_GIT_DIR) :
 	@$(call bold_message, Downloading jhalfs...)
 	$(UTIL_GET_JHALFS_SH)
 
-$(JHALFS_CONFIG : $(JHALFS_GIT_DIR)
+$(JHALFS_CONFIG) : $(JHALFS_GIT_DIR)
 jhalfs-config $(JHALFS_CONFIG) :
 	@echo
 	@$(call bold_message, Configuring jhalfs...)
