@@ -34,7 +34,7 @@ do
 
 	### INSTALL ###
 	echo "Installing \$line to \$INSTALLROOT..."
-	tar -xpf \$tmpdir/\$line
+	tar --keep-directory-symlink -xpf \$tmpdir/\$line
 
 	### INSTALLED FILE LIST ###
 	tar -tvf \$tmpdir/\$line | sed 's/.* \.//g' | sed '/^\/$/d' > \$ifl
