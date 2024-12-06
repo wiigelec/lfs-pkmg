@@ -38,8 +38,8 @@ tmpdir=/tmp/lfspkmg$RANDOM
 mkdir $tmpdir
 pushd $tmpdir > /dev/null
 wget https://mirrors.slackware.com/slackware/slackware64-15.0/kernels/huge.s/config
-mv config $LFS/sources/kernel-config
-popd
+mv -v config $LFS/sources/kernel-config
+popd > /dev/null
 rm -rf $tmpdir
 
-sudo chroot $LFS bash -e -c "for f in /jhalfs/lfspkmg-scripts/custom/*; do ARCHIVE_DIR=$ARCHIVE_DIR LFS_VER=$lfsver ./\$f; done"
+sudo chroot $LFS bash -e -c "for f in /jhalfs/lfspkmg-scripts/custom/*; do ARCHIVE_DIR=$ARCHIVE_DIR LFS_VER=$lfsver \$f; done"

@@ -61,7 +61,7 @@ PKGLOG_DIR = /var/lib/jhalfs/BLFS/pkglog
 ARCHIVE_DIR = /var/lib/jhalfs/BLFS/archive
 CHROOT_SCRIPTS_DIR = $(JHALFS_MNT)/lfspkmg-scripts
 
-LFS_CUSTOM_DIR = $(SRC_DIR)/build/lfs/custom
+LFS_CUSTOM_DIR = $(SRC_DIR)/scripts/build/lfs/custom
 
 
 ####################################################################

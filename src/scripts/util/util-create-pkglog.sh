@@ -10,6 +10,10 @@
 [[ ! -d $PKGLOG_DIR ]] && mkdir -p $PKGLOG_DIR
 for FILE in $DIFFLOG_DIR/*.difflog1;
 do
+	### SKIP ###
+	[[ $FILE == *"cleanup--"* ]] && continue
+	[[ $FILE == *"stripping--"* ]] && continue
+
 	### GET PACKAGE NAME AND VERSION ##
     	echo "Processing $FILE..."
 
