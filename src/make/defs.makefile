@@ -81,6 +81,10 @@ INSTALL_CONFIG_IN = $(BUILD_DIR)/install/install-config.in
 INSTALL_CONFIG_OUT = $(BUILD_DIR)/install/install-config.out
 INSTALL_PKG_LIST = $(BUILD_DIR)/install/install-pkg-list
 
+REMOVE_CONFIG_IN = $(BUILD_DIR)/remove/remove-config.in
+REMOVE_CONFIG_OUT = $(BUILD_DIR)/remove/remove-config.out
+REMOVE_PKG_LIST = $(BUILD_DIR)/remove/remove-pkg-list
+
 #------------------------------------------------------------------#
 INDEX_HTML = $(HTML_DIR)/index.html
 
@@ -134,6 +138,11 @@ INSTALL_LAUNCH_INSTALL_SH = $(SCRIPT_DIR)/install/install-launch-install.sh
 INSTALL_CONFIG_IN_SH = $(SCRIPT_DIR)/install/install-config-in.sh
 INSTALL_CONFIG_OUT_SH = $(SCRIPT_DIR)/install/install-config-out.sh
 INSTALL_PACKAGE_SH = $(SCRIPT_DIR)/install/install-package.sh
+
+REMOVE_LAUNCH_SH = $(SCRIPT_DIR)/remove/remove-launch.sh
+REMOVE_CONFIG_IN_SH = $(SCRIPT_DIR)/remove/remove-config-in.sh
+REMOVE_CONFIG_OUT_SH = $(SCRIPT_DIR)/remove/remove-config-out.sh
+REMOVE_PACKAGE_SH = $(SCRIPT_DIR)/remove/remove-package.sh
 
 #------------------------------------------------------------------#
 # BUILD LFS

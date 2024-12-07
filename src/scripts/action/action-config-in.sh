@@ -168,7 +168,7 @@ EOF
 cat >> $ACTION_CONFIG_IN << EOF
 choice
         prompt "Install Type"
-	depends on ACTION__INSTALL
+	depends on ACTION__INSTALL || ACTION__REMOVE
         config    INSTALL_TYPE__PKG_IND
             bool "Individual package"
             help
@@ -203,7 +203,7 @@ EOF
 
 cat >> $ACTION_CONFIG_IN << EOF
 config    INSTALLROOT
-	depends on ACTION__INSTALL || BUILD_TYPE__LFS
+	depends on ACTION__INSTALL || BUILD_TYPE__LFS || ACTION__REMOVE
         string  "Install ROOT"
         default "$LFS"
 EOF

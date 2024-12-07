@@ -7,6 +7,18 @@
 
 set -e
 
+### CONFIRM ###
+echo
+echo "Installing:"
+echo
+echo "$(cat $INSTALL_PKG_LIST | xargs)"
+echo
+echo "to $INSTALLROOT"
+echo
+echo
+read -p "Continue? (Yes): " confirm
+[[ $confirm != "Yes" ]] && echo "Cancelling..." && exit 1
+
 sudo -E sh -e << ROOT_EOF
 
 [[ ! -d \$INSTALLED_DIR ]] && mkdir -p \$INSTALLROOT/\$INSTALLED_DIR
@@ -29,7 +41,7 @@ do
 
 
 	### DOWNLOAD ###
-	echo "Downloading \$line..."
+	#echo "Downloading \$line..."
 	sudo curl --silent -o \$tmpdir/\$line \$ARCHIVEPATH/\$line
 
 	### INSTALL ###
@@ -37,7 +49,7 @@ do
 	tar --keep-directory-symlink -xpf \$tmpdir/\$line
 
 	### INSTALLED FILE LIST ###
-	tar -tvf \$tmpdir/\$line | sed 's/.* \.//g' | sed '/^\/$/d' > \$ifl
+	tar -tf \$tmpdir/\$line | sed 's/^\.//g' | sed '/^\/$/d' > \$ifl
 
         
 done < \$INSTALL_PKG_LIST

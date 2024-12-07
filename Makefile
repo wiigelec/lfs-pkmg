@@ -15,7 +15,7 @@ include ./src/make/docs.makefile
 
 include ./src/make/install.makefile
 
-#include ./src/make/makefile.remove
+include ./src/make/remove.makefile
 
 #include ./src/make/makefile.setup
 
