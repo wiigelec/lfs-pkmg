@@ -30,6 +30,9 @@ sudo mkdir -p \$tmpdir
 pushd \$INSTALLROOT > /dev/null
 
 echo
+echo
+echo "Installing package files to \$INSTALLROOT:"
+echo
 
 while IFS= read -r line;
 do
@@ -45,14 +48,14 @@ do
 	sudo curl --silent -o \$tmpdir/\$line \$ARCHIVEPATH/\$line
 
 	### GET EXTRACTED SIZE ###
-	exsize=\$(xz -l \$tmpdir/\$line | tail -n1 | tr -s ' ' | cut -d' ' -f6-7)
-	exsize=\${exsize// /+}
-	exsize=\${exsize%iB}
+	exsize=\$(xz -l \$tmpdir/\$line | tail -n1 | tr -s ' ' | cut -d' ' -f6-7 \
+		| sed 's/\.[0-9 ] //' | sed 's/,//' | sed 's/B$//' | \
+		numfmt --from=iec-i --to-unit=1k --grouping)
 
 	### FORMAT OUTPUT ###
-	a="Installing+\$line+to+\$INSTALLROOT"
+	a="\$line"
 	b="+\$exsize"
-	message=\$(printf "%-80s %15s" "\$a" "\$b")
+	message=\$(printf "%-80s %10s+K" "\$a" "\$b")
         message=\${message// /.}
         message=\${message//+/ }
 

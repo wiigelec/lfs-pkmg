@@ -7,6 +7,7 @@
 
 set -e
 
+
 ### CONFIRM ###
 echo
 echo "Removing:"
@@ -21,7 +22,25 @@ read -p "Continue? (Yes): " confirm
 
 sudo -E sh -e << ROOT_EOF
 
+update_progress()
+{
+	percomp="\$(printf %.0f "\$((10**4 * \$2/\$3))e-2") %"
+	a="\$1"
+	b="+"
+	message=\$(printf "%-80s %1s" "\$a" "\$b")
+	message=\${message// /.}
+	message=\${message//+/ }
+	c="\$2"
+	d="\$3"
+	message=\$(printf "%-80s [ %5s / %5s ] ( %5s )" "\$message" "\$c" "\$d" "\$percomp")
+	echo -ne "\$message\033[0K\r"
+}
+
 echo
+echo
+echo "Removing package files from \$INSTALLROOT:"
+echo
+	
 
 tmpdir=\$INSTALLROOT/tmp/lfspkmg\$RANDOM
 sudo mkdir -p \$tmpdir
@@ -36,21 +55,27 @@ do
 
 	cnt=1
 	filecnt=\$(wc -l < \$lfi)
-	((filecnt*=2))
+	#((filecnt*=2))
 
+	toggle="false"
 	
 	### PASS 1 FILES
 	while IFS= read -r remove;
 	do
+		# update progress
+		update_progress \$line \$cnt \$filecnt
+		if [[ \$toggle == "true" ]]; then ((cnt++)); toggle="false";
+		else toggle="true"; fi
+
 		# percent complete
-		percomp=\$(printf %.0f "\$((10**4 * \$cnt/\$filecnt))e-2")
-		a="Removing+\$line+from+\$INSTALLROOT+(\${filecnt}+entries)"
-		b="+\$percomp+%"
-		message=\$(printf "%-80s %15s" "\$a" "\$b")
-		message=\${message// /.}
-		message=\${message//+/ }
-		echo -ne "\$message\033[0K\r"
-		((cnt++))
+		#percomp=\$(printf %.0f "\$((10**4 * \$cnt/\$filecnt))e-2")
+		#a="Removing+\$line+from+\$INSTALLROOT+(\${filecnt}+entries)"
+		#b="+\$percomp+%"
+		#message=\$(printf "%-80s %15s" "\$a" "\$b")
+		#message=\${message// /.}
+		#message=\${message//+/ }
+		#echo -ne "\$message\033[0K\r"
+		#((cnt++))
 
 		# parse symlinks
 		remove=\$(echo \$remove | sed 's/ ->.*//g')
@@ -73,15 +98,10 @@ do
 	### PASS 2 DIRS
 	while IFS= read -r remove;
 	do
-		# percent complete
-		percomp=\$(printf %.0f "\$((10**4 * \$cnt/\$filecnt))e-2")
-		a="Removing+\$line+from+\$INSTALLROOT+(\${filecnt}+entries)"
-		b="+\$percomp+%"
-		message=\$(printf "%-80s %15s" "\$a" "\$b")
-		message=\${message// /.}
-		message=\${message//+/ }
-		echo -ne "\$message\033[0K\r"
-		((cnt++))
+		# update progress
+		update_progress \$line \$cnt \$filecnt
+		if [[ \$toggle == "true" ]]; then ((cnt++)); toggle="false";
+		else toggle="true"; fi
 
 		# parse symlinks
 		remove=\$(echo \$remove | sed 's/ ->.*//g')
