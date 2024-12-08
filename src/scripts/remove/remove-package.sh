@@ -24,15 +24,14 @@ sudo -E sh -e << ROOT_EOF
 
 update_progress()
 {
-	percomp="\$(printf %.0f "\$((10**4 * \$2/\$3))e-2") %"
+	percomp="( \$(printf %3.0f "\$((10**4 * \$2/\$3))e-2") % )"
 	a="\$1"
-	b=" "
-	message=\$(printf "%-80s %1s" "\$a" "\$b")
+	b="+\$2"
+	message=\$(printf "%-80s %5s" "\$a" "\$b")
 	message=\${message// /.}
 	message=\${message//+/ }
-	c="\$2"
 	d="\$3"
-	message=\$(printf "%-80s[ %5s / %5s ] ( %5s )" "\$message" "\$c" "\$d" "\$percomp")
+	message=\$(printf "%-80s / %-5s %9s" "\$message" "\$d" "\$percomp")
 	echo -ne "\$message\033[0K\r"
 }
 
