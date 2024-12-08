@@ -7,6 +7,7 @@
 
 set -e
 
+
 ### CONFIRM ###
 echo
 echo "Installing:"
@@ -19,58 +20,22 @@ echo
 read -p "Continue? (Yes): " confirm
 [[ $confirm != "Yes" ]] && echo "Cancelling..." && exit 1
 
-sudo -E sh -e << ROOT_EOF
-
-[[ ! -d \$INSTALLED_DIR ]] && mkdir -p \$INSTALLROOT/\$INSTALLED_DIR
-
-tmpdir=/tmp/lfspkmg/\$RANDOM
-
-sudo mkdir -p \$tmpdir
-
-pushd \$INSTALLROOT > /dev/null
-
 echo
 echo
-echo "Installing package files to \$INSTALLROOT:"
+echo "Installing package files to $INSTALLROOT:"
 echo
 
+### ITERATE INSTALL PACKAGE LIST ###
 while IFS= read -r line;
 do
-
 	### CHECK INSTALLED ###
-	ifl=\${line%.txz}
-	ifl=\$INSTALLROOT/\$INSTALLED_DIR/\$ifl
-	[[ -f \$ifl ]] && echo "Skipping \$line: INSTALLED" && continue 
+	ifl=${line%.txz}
+	ifl=$INSTALLROOT/$INSTALLED_DIR/$ifl
+	[[ -f $ifl ]] && echo "Skipping $line: INSTALLED" && continue 
+
+	sudo -E $UTIL_INSTALL_PKG_SH $line
+
+done < $INSTALL_PKG_LIST
 
 
-	### DOWNLOAD ###
-	#echo "Downloading \$line..."
-	sudo curl --silent -o \$tmpdir/\$line \$ARCHIVEPATH/\$line
 
-	### GET EXTRACTED SIZE ###
-	exsize=\$(xz -l \$tmpdir/\$line | tail -n1 | tr -s ' ' | cut -d' ' -f6-7 \
-		| sed 's/\.[0-9 ] //' | sed 's/,//' | sed 's/B$//' | \
-		numfmt --from=iec-i --to-unit=1k --grouping)
-
-	### FORMAT OUTPUT ###
-	a="\$line"
-	b="+\$exsize"
-	message=\$(printf "%-80s %10s+K" "\$a" "\$b")
-        message=\${message// /.}
-        message=\${message//+/ }
-
-	### INSTALL ###
-	echo "\$message"
-	tar --keep-directory-symlink -xpf \$tmpdir/\$line
-
-	### INSTALLED FILE LIST ###
-	tar -tf \$tmpdir/\$line | sed 's/^\.//g' | sed '/^\/$/d' > \$ifl
-
-        
-done < \$INSTALL_PKG_LIST
-
-popd > /dev/null
-
-rm -rf \$tmpdir
-
-ROOT_EOF

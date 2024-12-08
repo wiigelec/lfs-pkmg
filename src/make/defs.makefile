@@ -144,6 +144,9 @@ REMOVE_CONFIG_IN_SH = $(SCRIPT_DIR)/remove/remove-config-in.sh
 REMOVE_CONFIG_OUT_SH = $(SCRIPT_DIR)/remove/remove-config-out.sh
 REMOVE_PACKAGE_SH = $(SCRIPT_DIR)/remove/remove-package.sh
 
+UTIL_INSTALL_PKG_SH = $(SCRIPT_DIR)/util/util-install-package.sh
+UTIL_REMOVE_PKG_SH = $(SCRIPT_DIR)/util/util-remove-package.sh
+
 #------------------------------------------------------------------#
 # BUILD LFS
 BL_CONFIG_IN_SH = $(SCRIPT_DIR)/build/lfs/bl-config-in.sh
