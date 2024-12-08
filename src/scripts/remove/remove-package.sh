@@ -26,13 +26,13 @@ update_progress()
 {
 	percomp="\$(printf %.0f "\$((10**4 * \$2/\$3))e-2") %"
 	a="\$1"
-	b="+"
+	b=" "
 	message=\$(printf "%-80s %1s" "\$a" "\$b")
 	message=\${message// /.}
 	message=\${message//+/ }
 	c="\$2"
 	d="\$3"
-	message=\$(printf "%-80s [ %5s / %5s ] ( %5s )" "\$message" "\$c" "\$d" "\$percomp")
+	message=\$(printf "%-80s[ %5s / %5s ] ( %5s )" "\$message" "\$c" "\$d" "\$percomp")
 	echo -ne "\$message\033[0K\r"
 }
 
@@ -40,14 +40,12 @@ echo
 echo
 echo "Removing package files from \$INSTALLROOT:"
 echo
-	
 
 tmpdir=\$INSTALLROOT/tmp/lfspkmg\$RANDOM
 sudo mkdir -p \$tmpdir
 
 while IFS= read -r line;
 do
-
 	### INSTALLED FILE LIST ###
         ifl=\$INSTALLROOT/\$INSTALLED_DIR/\$line
 	lfi=\$tmpdir/lfi
