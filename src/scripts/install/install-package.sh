@@ -44,8 +44,20 @@ do
 	#echo "Downloading \$line..."
 	sudo curl --silent -o \$tmpdir/\$line \$ARCHIVEPATH/\$line
 
+	### GET EXTRACTED SIZE ###
+	exsize=\$(xz -l \$tmpdir/\$line | tail -n1 | tr -s ' ' | cut -d' ' -f6-7)
+	exsize=\${exsize// /+}
+	exsize=\${exsize%iB}
+
+	### FORMAT OUTPUT ###
+	a="Installing+\$line+to+\$INSTALLROOT"
+	b="+\$exsize"
+	message=\$(printf "%-80s %15s" "\$a" "\$b")
+        message=\${message// /.}
+        message=\${message//+/ }
+
 	### INSTALL ###
-	echo "Installing \$line to \$INSTALLROOT..."
+	echo "\$message"
 	tar --keep-directory-symlink -xpf \$tmpdir/\$line
 
 	### INSTALLED FILE LIST ###

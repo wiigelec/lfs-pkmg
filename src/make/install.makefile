@@ -18,7 +18,7 @@ INSTALL:
 #------------------------------------------------------------------#
 install-individual : install-config-in install-config-out install-package
 	@echo
-	@$(call done_message, SUCCESS! Package installed.)
+	@$(call done_message, SUCCESS! Package\(s\) installed.)
 
 
 .PHONY: install-individual

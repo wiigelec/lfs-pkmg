@@ -29,33 +29,76 @@ sudo mkdir -p \$tmpdir
 while IFS= read -r line;
 do
 
-	### REMOVE ###
-	echo
-	echo -n "Removing \$line from \$INSTALLROOT..."
-	
 	### INSTALLED FILE LIST ###
         ifl=\$INSTALLROOT/\$INSTALLED_DIR/\$line
 	lfi=\$tmpdir/lfi
 	tac \$ifl > \$lfi
 
 	cnt=1
+	filecnt=\$(wc -l < \$lfi)
+	((filecnt*=2))
 
+	
+	### PASS 1 FILES
 	while IFS= read -r remove;
 	do
+		# percent complete
+		percomp=\$(printf %.0f "\$((10**4 * \$cnt/\$filecnt))e-2")
+		a="Removing+\$line+from+\$INSTALLROOT+(\${filecnt}+entries)"
+		b="+\$percomp+%"
+		message=\$(printf "%-80s %15s" "\$a" "\$b")
+		message=\${message// /.}
+		message=\${message//+/ }
+		echo -ne "\$message\033[0K\r"
+		((cnt++))
+
+		# parse symlinks
+		remove=\$(echo \$remove | sed 's/ ->.*//g')
+
+		# check dir
+		[[ -d \$remove ]] && continue
+
 		# check installed other
 		ex=\${ifl##*/}
 		[[ ! -z \$(grep -r --exclude \$ex "\$remove" \$INSTALLROOT/\$INSTALLED_DIR 2>/dev/null) ]] && continue
 
 		remove=\${remove#/}
 		remove=\$INSTALLROOT/\$remove
-		
-		remove=\$(echo \$remove | sed 's/ ->.*//g')
 
-		rm -d \$remove 2> /dev/null || true
-		[ \$cnt -eq 100 ] && echo -n "." && cnt=1
-		((cnt++))
+		#rm "\$remove" || true
+		rm "\$remove" 2> /dev/null || true
 
 	done < \$lfi
+
+	### PASS 2 DIRS
+	while IFS= read -r remove;
+	do
+		# percent complete
+		percomp=\$(printf %.0f "\$((10**4 * \$cnt/\$filecnt))e-2")
+		a="Removing+\$line+from+\$INSTALLROOT+(\${filecnt}+entries)"
+		b="+\$percomp+%"
+		message=\$(printf "%-80s %15s" "\$a" "\$b")
+		message=\${message// /.}
+		message=\${message//+/ }
+		echo -ne "\$message\033[0K\r"
+		((cnt++))
+
+		# parse symlinks
+		remove=\$(echo \$remove | sed 's/ ->.*//g')
+
+		# check installed other
+		ex=\${ifl##*/}
+		[[ ! -z \$(grep -r --exclude \$ex "^\$remove$" \$INSTALLROOT/\$INSTALLED_DIR 2>/dev/null) ]] && continue
+
+		remove=\${remove#/}
+		remove=\$INSTALLROOT/\$remove
+
+		#rm -d "\$remove" || true
+		rm -d "\$remove" 2> /dev/null || true
+
+	done < \$lfi
+
+	echo
 
 	rm \$lfi
 	rm \$ifl

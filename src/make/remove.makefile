@@ -18,7 +18,7 @@ REMOVE:
 #------------------------------------------------------------------#
 remove-individual : remove-config-in remove-config-out remove-package
 	@echo
-	@$(call done_message, SUCCESS! Package removed.)
+	@$(call done_message, SUCCESS! Package\(s\) removed.)
 
 
 .PHONY: remove-individual
