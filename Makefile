@@ -17,9 +17,7 @@ include ./src/make/install.makefile
 
 include ./src/make/remove.makefile
 
-#include ./src/make/makefile.setup
-
-#include ./src/make/makefile.upgrade
+include ./src/make/upgrade.makefile
 
 ### NUKE ###
 nuke : 

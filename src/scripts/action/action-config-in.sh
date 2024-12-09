@@ -6,6 +6,10 @@
 ####################################################################o
 
 
+### INITIALIZE ###
+
+[[ ! -d $BUILD_DIR/config ]] && mkdir $BUILD_DIR/config
+
 #------------------------------------------------------------------#
 # ACTION
 
@@ -167,20 +171,10 @@ EOF
 
 cat >> $ACTION_CONFIG_IN << EOF
 choice
-        prompt "Install Type"
-	depends on ACTION__INSTALL || ACTION__REMOVE
+        prompt "Type"
+	depends on ACTION__INSTALL || ACTION__REMOVE || ACTION__UPGRADE
         config    INSTALL_TYPE__PKG_IND
             bool "Individual package"
-            help
-		<TODO: help text>
-
-        config    INSTALL_TYPE__PKG_DEPS
-            bool "Package with dependencies"
-            help
-		<TODO: help text>
-
-        config    INSTALL_TYPE__PKG_LIST
-            bool "Package list"
             help
 		<TODO: help text>
 
@@ -199,11 +193,21 @@ config    ARCHIVEPATH
 EOF
 
 #------------------------------------------------------------------#
+# UPGRADE PATH
+
+cat >> $ACTION_CONFIG_IN << EOF
+config    UPGRADEPATH
+	depends on ACTION__UPGRADE
+        string  "Upgrade Path"
+        default "file://$UPGRADE_DIR"
+EOF
+
+#------------------------------------------------------------------#
 # INSTALL ROOT 
 
 cat >> $ACTION_CONFIG_IN << EOF
 config    INSTALLROOT
-	depends on ACTION__INSTALL || BUILD_TYPE__LFS || ACTION__REMOVE
+	depends on ACTION__INSTALL || BUILD_TYPE__LFS || ACTION__REMOVE || ACTION__UPGRADE
         string  "Install ROOT"
         default "$LFS"
 EOF

@@ -33,7 +33,8 @@ do
 	ifl=$INSTALLROOT/$INSTALLED_DIR/$ifl
 	[[ -f $ifl ]] && echo "Skipping $line: INSTALLED" && continue 
 
-	sudo -E $UTIL_INSTALL_PKG_SH $line
+	instpkg=$ARCHIVEPATH/$line
+	sudo -E $UTIL_INSTALL_PKG_SH $instpkg
 
 done < $INSTALL_PKG_LIST
 

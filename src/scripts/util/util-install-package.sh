@@ -9,26 +9,28 @@ set -e
 
 ### INITIALIZE ###
 # install package
-install=$1
+installpkg=$1
 
 # installed dir
-[[ ! -d $INSTALLED_DIR ]] && mkdir -p $INSTALLROOT/$INSTALLED_DIR
+installed_dir=$INSTALLROOT/$INSTALLED_DIR
+[[ ! -d $installed_dir ]] && mkdir -p $installed_dir
 
 # tempdir
-tmpdir=/tmp/lfspkmg/$RANDOM
+tmpdir=$INSTALLROOT/tmp/lfspkmg$RANDOM
 mkdir -p $tmpdir
 
 pushd $INSTALLROOT > /dev/null
 
 ### INSTALLED FILE LIST ###
+install=${installpkg##*/}
 ifl=${install%.txz}
 ifl=$INSTALLROOT/$INSTALLED_DIR/$ifl
 
 tmpinstall=$tmpdir/$install
 
 ### DOWNLOAD ###
-#echo "Downloading $install..."
-curl --silent -o $tmpinstall $ARCHIVEPATH/$install
+#echo "Downloading $installpkg..." && curl -o $tmpinstall $installpkg
+curl --silent -o $tmpinstall $installpkg
 
 ### GET EXTRACTED SIZE ###
 exsize=$(xz -l $tmpinstall | tail -n1 | tr -s ' ' | cut -d' ' -f6-7 \

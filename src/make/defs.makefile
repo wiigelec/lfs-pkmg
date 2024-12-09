@@ -1,6 +1,6 @@
 ####################################################################
 #
-# makefile.defs
+# defs.makefile
 #
 ####################################################################
 
@@ -61,6 +61,7 @@ JHALFS_MNT = $(INSTALLROOT)/jhalfs
 DIFFLOG_DIR = /var/lib/jhalfs/BLFS/difflog
 PKGLOG_DIR = /var/lib/jhalfs/BLFS/pkglog
 ARCHIVE_DIR = /var/lib/jhalfs/BLFS/archive
+UPGRADE_DIR = /var/lib/jhalfs/BLFS/upgrade
 CHROOT_SCRIPTS_DIR = $(JHALFS_MNT)/lfspkmg-scripts
 
 LFS_CUSTOM_DIR = $(SRC_DIR)/scripts/build/lfs/custom
@@ -72,18 +73,22 @@ INSTALLED_DIR=$(LPM_DIR)/installed
 # FILE DEFINITIONS
 ####################################################################
 
-CURRENT_CONFIG = $(BUILD_DIR)/current-config
-ACTION_CONFIG_IN = $(BUILD_DIR)/action-config.in
-ACTION_CONFIG_OUT = $(BUILD_DIR)/action-config.out
-ACTION_CURRENT_CONFIG = $(BUILD_DIR)/current-config
+CURRENT_CONFIG = $(BUILD_DIR)/config/current-config
+ACTION_CONFIG_IN = $(BUILD_DIR)/config/action-config.in
+ACTION_CONFIG_OUT = $(BUILD_DIR)/config/action-config.out
+ACTION_CURRENT_CONFIG = $(BUILD_DIR)/config/current-config
 
-INSTALL_CONFIG_IN = $(BUILD_DIR)/install/install-config.in
-INSTALL_CONFIG_OUT = $(BUILD_DIR)/install/install-config.out
-INSTALL_PKG_LIST = $(BUILD_DIR)/install/install-pkg-list
+INSTALL_CONFIG_IN = $(BUILD_DIR)/config/install-config.in
+INSTALL_CONFIG_OUT = $(BUILD_DIR)/config/install-config.out
+INSTALL_PKG_LIST = $(BUILD_DIR)/config/install-pkg-list
 
-REMOVE_CONFIG_IN = $(BUILD_DIR)/remove/remove-config.in
-REMOVE_CONFIG_OUT = $(BUILD_DIR)/remove/remove-config.out
-REMOVE_PKG_LIST = $(BUILD_DIR)/remove/remove-pkg-list
+REMOVE_CONFIG_IN = $(BUILD_DIR)/config/remove-config.in
+REMOVE_CONFIG_OUT = $(BUILD_DIR)/config/remove-config.out
+REMOVE_PKG_LIST = $(BUILD_DIR)/config/remove-pkg-list
+
+UPGRADE_CONFIG_IN = $(BUILD_DIR)/config/upgrade-config.in
+UPGRADE_CONFIG_OUT = $(BUILD_DIR)/config/upgrade-config.out
+UPGRADE_PKG_LIST = $(BUILD_DIR)/config/upgrade-pkg-list
 
 #------------------------------------------------------------------#
 INDEX_HTML = $(HTML_DIR)/index.html
@@ -127,25 +132,16 @@ MENU_CONFIG = python3 $(TOPDIR)/kconfiglib/menuconfig.py
 # SCRIPT DEFINITIONS
 ####################################################################
 
+#------------------------------------------------------------------#
+# ACTION
 ACTION_CONFIG_IN_SH = $(SCRIPT_DIR)/action/action-config-in.sh
 ACTION_CONFIG_OUT_SH = $(SCRIPT_DIR)/action/action-config-out.sh
 ACTION_CURRENT_CONFIG_SH = $(SCRIPT_DIR)/action/action-current-config.sh
 ACTION_LAUNCH_ACTION_SH = $(SCRIPT_DIR)/action/action-launch-action.sh
 
+#------------------------------------------------------------------#
+# BUILD
 BUILD_LAUNCH_BUILD_SH = $(SCRIPT_DIR)/build/build-launch-build.sh
-
-INSTALL_LAUNCH_INSTALL_SH = $(SCRIPT_DIR)/install/install-launch-install.sh
-INSTALL_CONFIG_IN_SH = $(SCRIPT_DIR)/install/install-config-in.sh
-INSTALL_CONFIG_OUT_SH = $(SCRIPT_DIR)/install/install-config-out.sh
-INSTALL_PACKAGE_SH = $(SCRIPT_DIR)/install/install-package.sh
-
-REMOVE_LAUNCH_SH = $(SCRIPT_DIR)/remove/remove-launch.sh
-REMOVE_CONFIG_IN_SH = $(SCRIPT_DIR)/remove/remove-config-in.sh
-REMOVE_CONFIG_OUT_SH = $(SCRIPT_DIR)/remove/remove-config-out.sh
-REMOVE_PACKAGE_SH = $(SCRIPT_DIR)/remove/remove-package.sh
-
-UTIL_INSTALL_PKG_SH = $(SCRIPT_DIR)/util/util-install-package.sh
-UTIL_REMOVE_PKG_SH = $(SCRIPT_DIR)/util/util-remove-package.sh
 
 #------------------------------------------------------------------#
 # BUILD LFS
@@ -159,12 +155,35 @@ BL_CHROOT_SCRIPTS_SH = $(SCRIPT_DIR)/build/lfs/bl-chroot-scripts.sh
 BL_RUN_CHROOT_SH = $(SCRIPT_DIR)/build/lfs/bl-run-chroot.sh
 
 #------------------------------------------------------------------#
+# INSTALL
+INSTALL_LAUNCH_INSTALL_SH = $(SCRIPT_DIR)/install/install-launch-install.sh
+INSTALL_CONFIG_IN_SH = $(SCRIPT_DIR)/install/install-config-in.sh
+INSTALL_CONFIG_OUT_SH = $(SCRIPT_DIR)/install/install-config-out.sh
+INSTALL_PACKAGE_SH = $(SCRIPT_DIR)/install/install-package.sh
+
+#------------------------------------------------------------------#
+# REMOVE
+REMOVE_LAUNCH_SH = $(SCRIPT_DIR)/remove/remove-launch.sh
+REMOVE_CONFIG_IN_SH = $(SCRIPT_DIR)/remove/remove-config-in.sh
+REMOVE_CONFIG_OUT_SH = $(SCRIPT_DIR)/remove/remove-config-out.sh
+REMOVE_PACKAGE_SH = $(SCRIPT_DIR)/remove/remove-package.sh
+
+#------------------------------------------------------------------#
+# UPGRADE
+UPGRADE_LAUNCH_SH = $(SCRIPT_DIR)/upgrade/upgrade-launch.sh
+UPGRADE_CONFIG_IN_SH = $(SCRIPT_DIR)/upgrade/upgrade-config-in.sh
+UPGRADE_CONFIG_OUT_SH = $(SCRIPT_DIR)/upgrade/upgrade-config-out.sh
+UPGRADE_PACKAGE_SH = $(SCRIPT_DIR)/upgrade/upgrade-package.sh
+
+#------------------------------------------------------------------#
 # UTIL
 UTIL_GET_LFSBOOK_SH = $(SCRIPT_DIR)/util/util-get-lfsbook.sh
 UTIL_GET_BLFSBOOK_SH = $(SCRIPT_DIR)/util/util-get-blfsbook.sh
 UTIL_GET_JHALFS_SH = $(SCRIPT_DIR)/util/util-get-jhalfs.sh
 UTIL_CREATE_PKGLOG_SH = $(SCRIPT_DIR)/util/util-create-pkglog.sh
 UTIL_CREATE_ARCHIVE_SH = $(SCRIPT_DIR)/util/util-create-archive.sh
+UTIL_INSTALL_PKG_SH = $(SCRIPT_DIR)/util/util-install-package.sh
+UTIL_REMOVE_PKG_SH = $(SCRIPT_DIR)/util/util-remove-package.sh
 
 ### EXPORT ALL ###
 export
