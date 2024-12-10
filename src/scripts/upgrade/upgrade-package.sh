@@ -10,7 +10,7 @@ set -e
 ### INITIALIZE ###
 
 # sudo
-if [[ ! -z $NOSUDO ]]; then sudo=bash;
+if [[ ! -z $NOSUDO ]]; then sudo="bash -c";
 else sudo=sudo; fi
 
 
