@@ -34,8 +34,8 @@ ifl=$installed_dir/$ifl
 ### DOWNLOAD ###
 download=$tmpdir/$install
 #echo "Downloading $installpkg..." && curl -o $download $installpkg
-if [[ $download == "file://"* ]]; then
-	cp $installpkg $download
+if [[ $installpkg == "file://"* ]]; then
+	cp ${installpkg#file://} $tmpdir
 else
 	curl --silent -o $download $installpkg
 fi
