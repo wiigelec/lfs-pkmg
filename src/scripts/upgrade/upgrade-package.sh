@@ -10,8 +10,8 @@ set -e
 ### INITIALIZE ###
 
 # sudo
-if [[ ! -z $NOSUDO ]]; then sudo="bash -c";
-else sudo="sudo -E bash -c"; fi
+if [[ ! -z $NOSUDO ]]; then sudo="";
+else sudo="sudo -E"; fi
 
 
 ### CONFIRM ###
@@ -47,9 +47,10 @@ do
 
 		# destdir rename and copy
 		destdir=$INSTALLROOT/tmp/lfspkmg$RANDOM
-		$sudo "DESTDIR=$destdir $UTIL_INSTALL_PKG_SH $upgrpkg"
-		for f in $destdir/etc/*; do $sudo "mv $f $f.new"; done
-		$sudo "cp -a $destdir/* $INSTALLROOT"
+		export DESTDIR=$destdir
+		$sudo $UTIL_INSTALL_PKG_SH $upgrpkg
+		for f in $destdir/etc/*; do $sudo mv $f $f.new; done
+		$sudo cp -a $destdir/* $INSTALLROOT
 		#rm -rf $destdir
 
 
@@ -58,14 +59,15 @@ do
 		
 		# destdir and copy
 		destdir=$INSTALLROOT/tmp/lfspkmg$RANDOM
-		$sudo "DESTDIR=$destdir $UTIL_INSTALL_PKG_SH $upgrpkg"
-		$sudo "cp -a $destdir/* $INSTALLROOT"
+		export DESTDIR=$destdir
+		$sudo $UTIL_INSTALL_PKG_SH $upgrpkg
+		$sudo cp -a $destdir/* $INSTALLROOT
 		#rm -rf $destdir
 
 
 	### INSTALL NEW PACKAGE ###
 	else
-		$sudo "$UTIL_INSTALL_PKG_SH $upgrpkg"
+		$sudo $UTIL_INSTALL_PKG_SH $upgrpkg
 	fi
 
 	### KERNEL SPECIAL HANDLING NO REMOVE ###
@@ -80,7 +82,7 @@ do
 		[[ $test == $iff ]] && continue
 
 		oldpkg=$test
-		$sudo "$UTIL_REMOVE_PKG_SH $oldpkg"
+		$sudo $UTIL_REMOVE_PKG_SH $oldpkg
 	done	
 
 	echo
