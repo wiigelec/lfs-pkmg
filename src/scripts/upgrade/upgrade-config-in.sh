@@ -7,7 +7,11 @@
 
 mkdir -p $BUILD_DIR/install
 
-packagelist=$(curl --silent $UPGRADEPATH | sort)
+if [[ $UPGRADEPATH == "FILE://"* ]]; then
+	packagelist=$(ls $UPGRADEPATH | sort)
+else
+	packagelist=$(curl --silent $UPGRADEPATH | sort)
+fi
 
 [[ -f $UPGRADE_CONFIG_IN ]] && rm $UPGRADE_CONFIG_IN
 
