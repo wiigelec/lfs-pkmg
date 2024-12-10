@@ -7,6 +7,11 @@
 
 set -e
 
+### INITIALIZE ###
+
+# sudo
+if [[ ! -z $NOSUDO ]]; then sudo=bash;
+else sudo=sudo; fi
 
 ### CONFIRM ###
 echo
@@ -29,6 +34,6 @@ echo
 ### ITERATE REMOVE PACKAGE LIST ###
 while IFS= read -r line;
 do
-        sudo -E $UTIL_REMOVE_PKG_SH $line
+        $sudo -E $UTIL_REMOVE_PKG_SH $line
 
 done < $REMOVE_PKG_LIST

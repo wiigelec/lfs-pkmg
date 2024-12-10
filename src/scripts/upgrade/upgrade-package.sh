@@ -7,6 +7,12 @@
 
 set -e
 
+### INITIALIZE ###
+
+# sudo
+if [[ ! -z $NOSUDO ]]; then sudo=bash;
+else sudo=sudo; fi
+
 
 ### CONFIRM ###
 echo
@@ -41,9 +47,9 @@ do
 
 		# destdir rename and copy
 		destdir=$INSTALLROOT/tmp/lfspkmg$RANDOM
-		sudo -E DESTDIR=$destdir $UTIL_INSTALL_PKG_SH $upgrpkg
-		for f in $destdir/etc/*; do sudo mv $f $f.new; done
-		sudo cp -a $destdir/* $INSTALLROOT
+		$sudo -E DESTDIR=$destdir $UTIL_INSTALL_PKG_SH $upgrpkg
+		for f in $destdir/etc/*; do $sudo mv $f $f.new; done
+		$sudo cp -a $destdir/* $INSTALLROOT
 		#rm -rf $destdir
 
 
@@ -52,14 +58,14 @@ do
 		
 		# destdir and copy
 		destdir=$INSTALLROOT/tmp/lfspkmg$RANDOM
-		sudo -E DESTDIR=$destdir $UTIL_INSTALL_PKG_SH $upgrpkg
-		sudo cp -a $destdir/* $INSTALLROOT
+		$sudo -E DESTDIR=$destdir $UTIL_INSTALL_PKG_SH $upgrpkg
+		$sudo cp -a $destdir/* $INSTALLROOT
 		#rm -rf $destdir
 
 
 	### INSTALL NEW PACKAGE ###
 	else
-		sudo -E $UTIL_INSTALL_PKG_SH $upgrpkg
+		$sudo -E $UTIL_INSTALL_PKG_SH $upgrpkg
 	fi
 
 
@@ -71,7 +77,7 @@ do
 		[[ $test == $iff ]] && continue
 
 		oldpkg=$test
-		sudo -E $UTIL_REMOVE_PKG_SH $oldpkg
+		$sudo -E $UTIL_REMOVE_PKG_SH $oldpkg
 	done	
 
 	echo
