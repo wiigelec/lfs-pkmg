@@ -7,8 +7,8 @@
 
 mkdir -p $BUILD_DIR/install
 
-if [[ $UPGRADEPATH == "FILE://"* ]]; then
-	packagelist=$(ls ${UPGRADEPATH##FILE://} | sort)
+if [[ $UPGRADEPATH == "file://"* ]]; then
+	packagelist=$(ls ${UPGRADEPATH##file://} | sort)
 else
 	packagelist=$(curl --silent $UPGRADEPATH | sort)
 fi
