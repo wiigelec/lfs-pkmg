@@ -74,7 +74,9 @@ delete_wrap() {
 
 	# check installed in other package
 	ex=${ifl##*/}
-	[[ ! -z $(grep -r --exclude $ex "$remove" $installed_dir 2>/dev/null) ]] && return
+	installed_dir=${INSTALLROOT}$INSTALLED_DIR
+	#echo "grep -r --exclude $ex $deleteme $installed_dir"
+	[[ ! -z $(grep -r --exclude $ex $deleteme $installed_dir 2>/dev/null) ]] && return
 
 	# delete from install root
 	deleteme=${deleteme#/}

@@ -8,6 +8,7 @@
 set -e
 
 ### INITIALIZE ###
+
 # install package
 installpkg=$1
 
@@ -19,21 +20,24 @@ installed_dir=$INSTALLROOT/$INSTALLED_DIR
 tmpdir=$INSTALLROOT/tmp/lfspkmg$RANDOM
 mkdir -p $tmpdir
 
-pushd $INSTALLROOT > /dev/null
+# destdir
+destdir=${DESTDIR:-$INSTALLROOT}
+[[ ! -d $destdir ]] && mkdir -p $destdir 
+pushd $destdir > /dev/null
 
 ### INSTALLED FILE LIST ###
 install=${installpkg##*/}
 ifl=${install%.txz}
-ifl=$INSTALLROOT/$INSTALLED_DIR/$ifl
+ifl=$installed_dir/$ifl
 
-tmpinstall=$tmpdir/$install
 
 ### DOWNLOAD ###
-#echo "Downloading $installpkg..." && curl -o $tmpinstall $installpkg
-curl --silent -o $tmpinstall $installpkg
+download=$tmpdir/$install
+#echo "Downloading $installpkg..." && curl -o $download $installpkg
+curl --silent -o $download $installpkg
 
 ### GET EXTRACTED SIZE ###
-exsize=$(xz -l $tmpinstall | tail -n1 | tr -s ' ' | cut -d' ' -f6-7 \
+exsize=$(xz -l $download | tail -n1 | tr -s ' ' | cut -d' ' -f6-7 \
 	| sed 's/\.[0-9 ] //' | sed 's/,//' | sed 's/B$//' | \
 	numfmt --from=iec-i --to-unit=1k --grouping)
 
@@ -46,10 +50,10 @@ message=${message//+/ }
 
 ### INSTALL ###
 echo "$message"
-tar --keep-directory-symlink -xpf $tmpinstall
+tar --keep-directory-symlink -xpf $download
 
 ### INSTALLED FILE LIST ###
-tar -tf $tmpinstall | sed 's/^\.//g' | sed '/^\/$/d' > $ifl
+tar -tf $download | sed 's/^\.//g' | sed '/^\/$/d' > $ifl
 
 ### CLEANUP ###
 

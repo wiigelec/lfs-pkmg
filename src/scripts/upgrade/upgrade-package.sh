@@ -14,7 +14,7 @@ echo "Upgrading:"
 echo
 echo "$(cat $UPGRADE_PKG_LIST | xargs)"
 echo
-echo "to $INSTALLROOT"
+echo "on $INSTALLROOT"
 echo
 echo
 read -p "Continue? (Yes): " confirm
@@ -34,16 +34,33 @@ do
 	ifl=$installed_dir/$iff
         #[[ -f $ifl ]] && echo "Skipping $line: INSTALLED" && continue
 
+	upgrpkg=$UPGRADEPATH/$line
 
 	### VOLATILE FILES SPECIAL HANDLING ###
+	if [[ $line == "aa_volatile-files"* ]]; then
+
+		# destdir rename and copy
+		destdir=$INSTALLROOT/tmp/lfspkmg$RANDOM
+		sudo -E DESTDIR=$destdir $UTIL_INSTALL_PKG_SH $upgrpkg
+		for f in $destdir/etc/*; do sudo mv $f $f.new; done
+		sudo cp -a $destdir/* $INSTALLROOT
+		#rm -rf $destdir
 
 
 	### VOLATILE DIRS SPECIAL HANDLING ###
+	elif [[ $line == "aa_volatile-dirs"* ]]; then
+		
+		# destdir and copy
+		destdir=$INSTALLROOT/tmp/lfspkmg$RANDOM
+		sudo -E DESTDIR=$destdir $UTIL_INSTALL_PKG_SH $upgrpkg
+		sudo cp -a $destdir/* $INSTALLROOT
+		#rm -rf $destdir
 
 
 	### INSTALL NEW PACKAGE ###
-	upgrpkg=$UPGRADEPATH/$line
-	sudo -E $UTIL_INSTALL_PKG_SH $upgrpkg
+	else
+		sudo -E $UTIL_INSTALL_PKG_SH $upgrpkg
+	fi
 
 
 	### REMOVE OLD PACKAGE ###
@@ -53,7 +70,7 @@ do
 		test=${p##*/}
 		[[ $test == $iff ]] && continue
 
-		oldpkg=${p##*/}
+		oldpkg=$test
 		sudo -E $UTIL_REMOVE_PKG_SH $oldpkg
 	done	
 
