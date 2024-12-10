@@ -68,6 +68,9 @@ do
 		$sudo "$UTIL_INSTALL_PKG_SH $upgrpkg"
 	fi
 
+	### KERNEL SPECIAL HANDLING NO REMOVE ###
+	[[ $line == "kernel"* ]] && continue
+
 
 	### REMOVE OLD PACKAGE ###
 	findpkg=${line%%--*}
