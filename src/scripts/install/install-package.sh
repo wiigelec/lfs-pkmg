@@ -11,7 +11,7 @@ set -e
 
 # sudo
 if [[ ! -z $NOSUDO ]]; then sudo="bash -c";
-else sudo=sudo; fi
+else sudo="sudo -E bash -c"; fi
 
 ### CONFIRM ###
 echo
@@ -39,7 +39,7 @@ do
 	[[ -f $ifl ]] && echo "Skipping $line: INSTALLED" && continue 
 
 	instpkg=$ARCHIVEPATH/$line
-	$sudo -E $UTIL_INSTALL_PKG_SH $instpkg
+	$sudo "$UTIL_INSTALL_PKG_SH $instpkg"
 
 done < $INSTALL_PKG_LIST
 
