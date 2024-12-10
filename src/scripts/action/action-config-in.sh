@@ -20,12 +20,16 @@ choice
             bool "View documentation"
             help
 		View lfs-pkmg html documentation in your favorite browser.
-
+EOF
+if [[ -z $NOGIT ]]; then
+cat >> $ACTION_CONFIG_IN << EOF
         config    ACTION__BUILD
             bool "Build"
             help
                 Build LFS, BLFS book packages, custom packages, or patches.
-
+EOF
+fi
+cat >> $ACTION_CONFIG_IN << EOF
         config    ACTION__INSTALL
             bool "Install"
             help
