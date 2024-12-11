@@ -7,7 +7,7 @@
 
 ### GIT CLONE LFS BOOK ###
 
-mkdir -p $BUILD_XML_DIR
+mkdir -p $BUILD_GIT_DIR
 
 # nogit
 [[ ! -z $NOGIT ]] && mkdir -p $LFS_BOOK && exit 0

@@ -50,12 +50,12 @@ MISC_DIR = $(SRC_DIR)/misc
 LPM_DIR = /var/lib/lpm
 
 #------------------------------------------------------------------#
-BUILD_XML_DIR=$(BUILD_DIR)/xml
+BUILD_GIT_DIR=$(BUILD_DIR)/git
 
-LFS_BOOK = $(BUILD_XML_DIR)/lfs-xml
-BLFS_BOOK = $(BUILD_XML_DIR)/blfs-xml
+LFS_BOOK = $(BUILD_GIT_DIR)/lfs-book
+BLFS_BOOK = $(BUILD_GIT_DIR)/blfs-book
 
-JHALFS_GIT_DIR = $(BUILD_DIR)/jhalfs
+JHALFS_GIT_DIR = $(BUILD_GIT_DIR)/jhalfs
 JHALFS_MNT = $(INSTALLROOT)/jhalfs
 
 DIFFLOG_DIR = /var/lib/jhalfs/BLFS/difflog
@@ -78,16 +78,16 @@ ACTION_CONFIG_IN = $(BUILD_DIR)/config/action-config.in
 ACTION_CONFIG_OUT = $(BUILD_DIR)/config/action-config.out
 ACTION_CURRENT_CONFIG = $(BUILD_DIR)/config/current-config
 
-INSTALL_CONFIG_IN = $(BUILD_DIR)/config/install-config.in
-INSTALL_CONFIG_OUT = $(BUILD_DIR)/config/install-config.out
+PKGINST_CONFIG_IN = $(BUILD_DIR)/config/pkginst-config.in
+PKGINST_CONFIG_OUT = $(BUILD_DIR)/config/pkginst-config.out
 INSTALL_PKG_LIST = $(BUILD_DIR)/config/install-pkg-list
 
-REMOVE_CONFIG_IN = $(BUILD_DIR)/config/remove-config.in
-REMOVE_CONFIG_OUT = $(BUILD_DIR)/config/remove-config.out
+PKGREM_CONFIG_IN = $(BUILD_DIR)/config/pkgrem-config.in
+PKGREM_CONFIG_OUT = $(BUILD_DIR)/config/pkgrem-config.out
 REMOVE_PKG_LIST = $(BUILD_DIR)/config/remove-pkg-list
 
-UPGRADE_CONFIG_IN = $(BUILD_DIR)/config/upgrade-config.in
-UPGRADE_CONFIG_OUT = $(BUILD_DIR)/config/upgrade-config.out
+PKGUPGR_CONFIG_IN = $(BUILD_DIR)/config/pkgupgr-config.in
+PKGUPGR_CONFIG_OUT = $(BUILD_DIR)/config/pkgupgr-config.out
 UPGRADE_PKG_LIST = $(BUILD_DIR)/config/upgrade-pkg-list
 
 #------------------------------------------------------------------#
@@ -137,11 +137,11 @@ MENU_CONFIG = python3 $(TOPDIR)/kconfiglib/menuconfig.py
 ACTION_CONFIG_IN_SH = $(SCRIPT_DIR)/action/action-config-in.sh
 ACTION_CONFIG_OUT_SH = $(SCRIPT_DIR)/action/action-config-out.sh
 ACTION_CURRENT_CONFIG_SH = $(SCRIPT_DIR)/action/action-current-config.sh
-ACTION_LAUNCH_ACTION_SH = $(SCRIPT_DIR)/action/action-launch-action.sh
+ACTION_LAUNCH_SH = $(SCRIPT_DIR)/action/action-launch.sh
 
 #------------------------------------------------------------------#
 # BUILD
-BUILD_LAUNCH_BUILD_SH = $(SCRIPT_DIR)/build/build-launch-build.sh
+BUILD_LAUNCH_SH = $(SCRIPT_DIR)/build/build-launch.sh
 
 #------------------------------------------------------------------#
 # BUILD LFS
@@ -155,25 +155,19 @@ BL_CHROOT_SCRIPTS_SH = $(SCRIPT_DIR)/build/lfs/bl-chroot-scripts.sh
 BL_RUN_CHROOT_SH = $(SCRIPT_DIR)/build/lfs/bl-run-chroot.sh
 
 #------------------------------------------------------------------#
-# INSTALL
-INSTALL_LAUNCH_INSTALL_SH = $(SCRIPT_DIR)/install/install-launch-install.sh
-INSTALL_CONFIG_IN_SH = $(SCRIPT_DIR)/install/install-config-in.sh
-INSTALL_CONFIG_OUT_SH = $(SCRIPT_DIR)/install/install-config-out.sh
-INSTALL_PACKAGE_SH = $(SCRIPT_DIR)/install/install-package.sh
+# PACKAGE
+PACKAGE_LAUNCH_SH = $(SCRIPT_DIR)/package/package-launch.sh
+PKGINST_CONFIG_IN_SH = $(SCRIPT_DIR)/package/pkginst-config-in.sh
+PKGINST_CONFIG_OUT_SH = $(SCRIPT_DIR)/package/pkginst-config-out.sh
+PKGINST_SH = $(SCRIPT_DIR)/package/pkginst.sh
 
-#------------------------------------------------------------------#
-# REMOVE
-REMOVE_LAUNCH_SH = $(SCRIPT_DIR)/remove/remove-launch.sh
-REMOVE_CONFIG_IN_SH = $(SCRIPT_DIR)/remove/remove-config-in.sh
-REMOVE_CONFIG_OUT_SH = $(SCRIPT_DIR)/remove/remove-config-out.sh
-REMOVE_PACKAGE_SH = $(SCRIPT_DIR)/remove/remove-package.sh
+PKGREM_CONFIG_IN_SH = $(SCRIPT_DIR)/package/pkgrem-config-in.sh
+PKGREM_CONFIG_OUT_SH = $(SCRIPT_DIR)/package/pkgrem-config-out.sh
+PKGREM_SH = $(SCRIPT_DIR)/package/pkgrem.sh
 
-#------------------------------------------------------------------#
-# UPGRADE
-UPGRADE_LAUNCH_SH = $(SCRIPT_DIR)/upgrade/upgrade-launch.sh
-UPGRADE_CONFIG_IN_SH = $(SCRIPT_DIR)/upgrade/upgrade-config-in.sh
-UPGRADE_CONFIG_OUT_SH = $(SCRIPT_DIR)/upgrade/upgrade-config-out.sh
-UPGRADE_PACKAGE_SH = $(SCRIPT_DIR)/upgrade/upgrade-package.sh
+PKGUPGR_CONFIG_IN_SH = $(SCRIPT_DIR)/package/pkgupgr-config-in.sh
+PKGUPGR_CONFIG_OUT_SH = $(SCRIPT_DIR)/package/pkgupgr-config-out.sh
+PKGUPGR_SH = $(SCRIPT_DIR)/package/pkgupgr.sh
 
 #------------------------------------------------------------------#
 # UTIL

@@ -1,13 +1,13 @@
 #!/bin/bash
 ####################################################################
 # 
-# action-launch-action.sh
+# action-launch.sh
 #
 ####################################################################
 
 
-case $BUILD_TYPE in
+source $ACTION_CURRENT_CONFIG
 
-	LFS) make build-lfs ;;
+env=$(cat $ACTION_CURRENT_CONFIG | xargs)
 
-esac
+make $env $ACTIONGROUP

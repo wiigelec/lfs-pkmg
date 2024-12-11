@@ -7,7 +7,7 @@
 BUILD:
 	@echo
 	@$(call bold_message, Launching BUILD...)
-	$(BUILD_LAUNCH_BUILD_SH)
+	$(BUILD_LAUNCH_SH)
 
 
 

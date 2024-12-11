@@ -6,8 +6,8 @@
 ####################################################################
 
 
-source $ACTION_CURRENT_CONFIG
+case $ACTION in
 
-env=$(cat $ACTION_CURRENT_CONFIG | xargs)
+	BUILDLFS) make build-lfs ;;
 
-make $env $ACTION
+esac

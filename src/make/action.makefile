@@ -5,7 +5,7 @@
 ####################################################################
 
 
-action : action-launch-action
+action : action-launch
 
 
 action-config-in : lfs-book blfs-book
@@ -23,10 +23,10 @@ action-current-config : action-config-out
 	@$(call bold_message, Generating current config...)
 	$(ACTION_CURRENT_CONFIG_SH)
 
-action-launch-action : action-current-config 
+action-launch : action-current-config 
 	@echo
 	@$(call bold_message, Launching action...)
-	$(ACTION_LAUNCH_ACTION_SH)
+	$(ACTION_LAUNCH_SH)
 
 lfs-book :
 	@echo

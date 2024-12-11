@@ -40,7 +40,7 @@ do
 	ifl=$installed_dir/$iff
         #[[ -f $ifl ]] && echo "Skipping $line: INSTALLED" && continue
 
-	upgrpkg=$UPGRADEPATH/$line
+	upgrpkg=$MIRRORPATH/$line
 
 	### VOLATILE FILES SPECIAL HANDLING ###
 	if [[ $line == "aa_volatile-files"* ]]; then
