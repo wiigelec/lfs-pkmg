@@ -13,6 +13,8 @@ include ./src/make/build.makefile
 
 include ./src/make/docs.makefile
 
+include ./src/make/list.makefile
+
 include ./src/make/package.makefile
 
 

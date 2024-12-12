@@ -28,10 +28,10 @@ choice
             bool "Documentation"
             help
 		<TODO: help text>
-#        config    ACTIONGROUP__LIST
-#            bool "List"
-#            help
-#		<TODO: help text>
+        config    ACTIONGROUP__LIST
+            bool "List"
+            help
+		<TODO: help text>
         config    ACTIONGROUP__PACKAGE
             bool "Package"
             help
@@ -99,36 +99,36 @@ choice
 
 	#------------------------------------------------------------------#
 	# LIST ACTIONS
-        config    ACTION__LISTARCH
+        config    ACTION__LISTDIR
 	    depends on ACTIONGROUP__LIST
-            bool "Create list from archive"
+            bool "Create list from package directory"
             help
 		<TODO: help text>
-        config    ACTION__LISTDEPS
-	    depends on ACTIONGROUP__LIST
-            bool "Create list from dependency tree"
-            help
-		<TODO: help text>
-        config    ACTION__LISTINSTALL
-	    depends on ACTIONGROUP__LIST
-            bool "Install list"
-            help
-		<TODO: help text>
-        config    ACTION__LISTPATCH
-	    depends on ACTIONGROUP__LIST
-            bool "Install patch"
-            help
-		<TODO: help text>
-        config    ACTION__LISTREMOVE
-	    depends on ACTIONGROUP__LIST
-            bool "Remove list"
-            help
-		<TODO: help text>
-        config    ACTION__LISTUPGRADE
-	    depends on ACTIONGROUP__LIST
-            bool "Upgrade list"
-            help
-		<TODO: help text>
+#        config    ACTION__LISTDEPS
+#	    depends on ACTIONGROUP__LIST
+#            bool "Create list from dependency tree"
+#            help
+#		<TODO: help text>
+#        config    ACTION__LISTINSTALL
+#	    depends on ACTIONGROUP__LIST
+#            bool "Install list"
+#            help
+#		<TODO: help text>
+#        config    ACTION__LISTPATCH
+#	    depends on ACTIONGROUP__LIST
+#            bool "Install patch"
+#            help
+#		<TODO: help text>
+#        config    ACTION__LISTREMOVE
+#	    depends on ACTIONGROUP__LIST
+#            bool "Remove list"
+#            help
+#		<TODO: help text>
+#        config    ACTION__LISTUPGRADE
+#	    depends on ACTIONGROUP__LIST
+#            bool "Upgrade list"
+#            help
+#		<TODO: help text>
 
 	#------------------------------------------------------------------#
 	# PACKAGE ACTIONS
@@ -255,6 +255,24 @@ EOF
 #------------------------------------------------------------------#
 # LIST FIELDS
 
+### LIST NAME ###
+
+cat >> $ACTION_CONFIG_IN << EOF
+config    LISTNAME
+	depends on ACTION__LISTDIR
+        string  "List name"
+        default "ENTER_NAME_HERE"
+EOF
+
+### DIR PATH ###
+
+cat >> $ACTION_CONFIG_IN << EOF
+config    LISTDIRPATH
+	depends on ACTION__LISTDIR
+        string  "List packages path"
+        default "$PACKAGES_DIR"
+EOF
+
 
 
 
@@ -273,16 +291,16 @@ EOF
 
 cat >> $ACTION_CONFIG_IN << EOF
 config    MIRRORPATH
-	depends on ACTIONGROUP__LIST || ACTION__PKGINSTALL || ACTION__PKGUPGRADE
+	depends on ACTION__PKGINSTALL || ACTION__PKGUPGRADE
         string  "Mirror Path"
-        default "file://$ARCHIVE_DIR"
+        default "$PACKAGES_DIR"
 EOF
 
 ### INSTALL ROOT ###
 
 cat >> $ACTION_CONFIG_IN << EOF
 config    INSTALLROOT
-	depends on ACTIONGROUP__LIST || ACTIONGROUP__PACKAGE || ACTION__BUILDLFS
+	depends on ACTIONGROUP__PACKAGE || ACTION__BUILDLFS
         string  "Install ROOT"
         default "$LFS"
 EOF

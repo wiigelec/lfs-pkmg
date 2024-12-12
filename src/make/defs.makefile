@@ -31,6 +31,11 @@ define done_message
 endef
 
 
+ASROOT = as_root() { if [ $$EUID = 0 ]; then $$*; \
+	 elif [ -x /usr/bin/sudo ]; then sudo $$*; \
+	 else su -c \\"$$*\\"; fi }
+
+
 
 ####################################################################
 # DIRECTORY DEFINITIONS
@@ -58,15 +63,15 @@ BLFS_BOOK = $(BUILD_GIT_DIR)/blfs-book
 JHALFS_GIT_DIR = $(BUILD_GIT_DIR)/jhalfs
 JHALFS_MNT = $(INSTALLROOT)/jhalfs
 
-DIFFLOG_DIR = /var/lib/jhalfs/BLFS/difflog
-PKGLOG_DIR = /var/lib/jhalfs/BLFS/pkglog
-ARCHIVE_DIR = /var/lib/jhalfs/BLFS/archive
-UPGRADE_DIR = /var/lib/jhalfs/BLFS/upgrade
+LFS_CUSTOM_DIR = $(SRC_DIR)/scripts/build/lfs/custom
 CHROOT_SCRIPTS_DIR = $(JHALFS_MNT)/lfspkmg-scripts
 
-LFS_CUSTOM_DIR = $(SRC_DIR)/scripts/build/lfs/custom
-
+DIFFLOG_DIR = $(LPM_DIR)/build/difflog
+PKGLOG_DIR = $(LPM_DIR)/build/pkglog
+PACKAGES_DIR = $(LPM_DIR)/packages
+LISTS_DIR = $(LPM_DIR)/lists
 INSTALLED_DIR=$(LPM_DIR)/installed
+
 
 
 ####################################################################
@@ -107,6 +112,7 @@ CHROOT_SCRIPTS = $(JHALFS_MNT)/lfspkmg-chroot
 ARCHIVE_MNT = $(JHALFS_MNT)/archive-mnt
 JHALFS_LFS = $(JHALFS_MNT)/jhalfs-lfs
 
+LMP_VERSION = $(LPM_DIR)/lpm-version
 
 ####################################################################
 # MISC DEFINITIONS
@@ -139,9 +145,11 @@ ACTION_CONFIG_OUT_SH = $(SCRIPT_DIR)/action/action-config-out.sh
 ACTION_CURRENT_CONFIG_SH = $(SCRIPT_DIR)/action/action-current-config.sh
 ACTION_LAUNCH_SH = $(SCRIPT_DIR)/action/action-launch.sh
 
+
 #------------------------------------------------------------------#
 # BUILD
 BUILD_LAUNCH_SH = $(SCRIPT_DIR)/build/build-launch.sh
+
 
 #------------------------------------------------------------------#
 # BUILD LFS
@@ -153,6 +161,13 @@ BL_DIFFLOG_CONVERT_SH = $(SCRIPT_DIR)/build/lfs/bl-difflog-convert.sh
 BL_JHALFS_BUILD_SH = $(SCRIPT_DIR)/build/lfs/bl-jhalfs-build.sh
 BL_CHROOT_SCRIPTS_SH = $(SCRIPT_DIR)/build/lfs/bl-chroot-scripts.sh
 BL_RUN_CHROOT_SH = $(SCRIPT_DIR)/build/lfs/bl-run-chroot.sh
+
+
+#------------------------------------------------------------------#
+# LIST
+LIST_LAUNCH_SH = $(SCRIPT_DIR)/list/list-launch.sh
+LIST_CREATEDIR_SH = $(SCRIPT_DIR)/list/list-createdir.sh
+
 
 #------------------------------------------------------------------#
 # PACKAGE

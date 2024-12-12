@@ -6,6 +6,10 @@
 
 
 action : action-launch
+clean-action : 
+	@-rm $(ACTION_CONFIG_IN)
+	@-rm $(ACTION_CONFIG_OUT)
+	@-rm $(ACTION_CURRENT_CONFIG)
 
 
 action-config-in : lfs-book blfs-book
@@ -42,3 +46,5 @@ blfs-book :
 
 .PHONY: action action-config-in action-config-out action-current-config \
        action-launch-action lfs-book blfs-book	
+
+.PHONY: clean-action-config-in
