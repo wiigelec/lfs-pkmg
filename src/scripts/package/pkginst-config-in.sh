@@ -10,7 +10,7 @@
 
 if [[ $MIRRORPATH == "http://"* || $MIRRORPATH == "https://"* ]]; then
 
-	versionlist=$(curl --silent $ARCHIVEPATH | sort)
+	versionlist=$(curl --silent $MIRRORPATH | sort)
 else
 
 	versionlist=$(ls ${MIRRORPATH} | sort)

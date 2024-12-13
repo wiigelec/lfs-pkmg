@@ -5,6 +5,7 @@
 #
 ####################################################################
 
+set -e
 
 ### RUN MENUCONFIG ###
 
@@ -22,12 +23,21 @@ for lf in $list; do
 	listfile=${lf#CONFIG_}
 	listfile=${listfile%=y}
 
+	### SERVER LIST ###
+	if [[ $listfile == "http..//"* ]]; then
+
+		listfile=${listfile//../:}
+		readlist=$(curl --silent $listfile)
+	else
+		readlist=$(cat $listfile)
+	fi
+
 	listpath=${listfile%/*}
 	listpath=${listpath/lists/packages}
 
-	while IFS= read -r line;
+	for line in $readlist;
 	do
 		echo $listpath/$line >> $INSTALL_PKG_LIST
 
-	done < $listfile
+	done
 done
