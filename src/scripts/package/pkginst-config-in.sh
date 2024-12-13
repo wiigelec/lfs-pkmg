@@ -1,30 +1,45 @@
 #!/bin/bash
 ####################################################################
 # 
-# package-config-in.sh
+# listinst-config-in.sh
 #
 ####################################################################
 
 
-### GET PACKAGE LIST ###
+### GET VERION DIRS ###
 
-if [[ $MIRRORPATH == "file://"* ]]; then
+if [[ $MIRRORPATH == "http://"* || $MIRRORPATH == "https://"* ]]; then
 
-	packagelist=$(ls ${MIRRORPATH#file://} | sort)
+	versionlist=$(curl --silent $ARCHIVEPATH | sort)
 else
 
-	packagelist=$(curl --silent $ARCHIVEPATH | sort)
+	versionlist=$(ls ${MIRRORPATH} | sort)
 fi
 
+### ITERATE VERSIONS ###
 
+echo "menu \"Select Packages\"" > $PKGINST_CONFIG_IN 
 
-### BUILD CONFIG IN ###
+for vl in $versionlist; do
 
-[[ -f $PKGINST_CONFIG_IN ]] && rm $PKGINST_CONFIG_IN
-for p in $packagelist; do
+	pkgdir=$MIRRORPATH/$vl/packages
+	[[ ! -d $pkgdir ]] && continue 
+	[[ -z $(ls $pkgdir) ]] && continue 
 
-	echo "config	$p" >> $PKGINST_CONFIG_IN
-	echo "	bool \"$p\"" >> $PKGINST_CONFIG_IN
+	echo " menu   \"$vl\"" >> $PKGINST_CONFIG_IN 
+
+	### GET PACKAGES ###
+	for pf in $pkgdir/*; do
+
+		pkg=${pf##*/}
+		echo "   config  $pf" >> $PKGINST_CONFIG_IN 
+		echo "     bool  \"$pkg\"" >> $PKGINST_CONFIG_IN 
+
+	done
+
+	echo "  endmenu" >> $PKGINST_CONFIG_IN 
 
 done
+
+echo "endmenu" >> $PKGINST_CONFIG_IN 
 

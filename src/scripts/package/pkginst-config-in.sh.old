@@ -1,0 +1,31 @@
+#!/bin/bash
+####################################################################
+# 
+# pkginst-config-in.sh
+#
+####################################################################
+
+set -e
+
+
+### GET PACKAGE LIST ###
+
+if [[ $MIRRORPATH == "http://"* || $MIRRORPATH == "https://"* ]]; then
+
+	packagelist=$(curl --silent $MIRRORPATH | sort)
+else
+
+	packagelist=$(ls ${MIRRORPATH#file://} | sort)
+fi
+
+
+### BUILD CONFIG IN ###
+
+[[ -f $PKGINST_CONFIG_IN ]] && rm $PKGINST_CONFIG_IN
+for p in $packagelist; do
+
+	echo "config	$p" >> $PKGINST_CONFIG_IN
+	echo "	bool \"$p\"" >> $PKGINST_CONFIG_IN
+
+done
+

@@ -32,7 +32,7 @@ list-create-dir :
 #------------------------------------------------------------------#
 list-install : listinst-config-in listinst-config-out listinst
 	@echo
-	@$(call done_message, SUCCESS! List installed to $INSTALLROOT.)
+	@$(call done_message, SUCCESS! List installed to $(INSTALLROOT).)
 
 .PHONY: list-install
 

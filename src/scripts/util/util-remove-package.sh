@@ -10,20 +10,12 @@ set -e
 ### INTIALIZE ###
 remove=$1
 
-# tempdir
-tmpdir=$INSTALLROOT/tmp/lfspkmg$RANDOM
-mkdir -p $tmpdir
-
 # installed file list
-installed_dir=$INSTALLROOT/$INSTALLED_DIR
-ifl=$installed_dir/$remove
-lfi=$tmpdir/lfi
-tac $ifl > $lfi # reverse for proper dir removal
+ifl=$INSTALLROOT/$INSTALLED_DIR/$1
 
 # output formatting
 cnt=1
-filecnt=$(wc -l < $lfi)
-toggle="false"
+filecnt=$(wc -l < $ifl)
 	
 
 ### FUNCTIONS ###
@@ -42,77 +34,34 @@ update_progress()
 }
 #------------------------------------------------------------------#
 
-#------------------------------------------------------------------#
-delete_file() {
-
-	rm "$1" 2> /dev/null || true
-}
-#------------------------------------------------------------------#
-
-#------------------------------------------------------------------#
-delete_dir() {
-
-	rm -d "$1" 2> /dev/null || true
-}
-#------------------------------------------------------------------#
-
-#------------------------------------------------------------------#
-delete_wrap() {
-
-	local deleteme=$1
-
-	# update progress
-	update_progress $remove $cnt $filecnt
-	if [[ $toggle == "true" ]]; then ((cnt++)); toggle="false";
-	else toggle="true"; fi
-
-	# parse symlinks
-	deleteme=${deleteme/ ->*/}
-
-	# check dir
-	[[ -d $deleteme && $2 == "FILE" ]] && return
-
-	# check installed in other package
-	ex=${ifl##*/}
-	installed_dir=${INSTALLROOT}$INSTALLED_DIR
-	#echo "grep -r --exclude $ex $deleteme $installed_dir"
-	[[ ! -z $(grep -r --exclude $ex $deleteme $installed_dir 2>/dev/null) ]] && return
-
-	# delete from install root
-	deleteme=${deleteme#/}
-	deleteme=$INSTALLROOT/$deleteme
-
-	if [[ $2 == "FILE" ]]; then delete_file $deleteme; fi
-	if [[ $2 == "DIR" ]]; then delete_dir $deleteme; fi
-}
-#------------------------------------------------------------------#
-
 
 ### ITERATE INSTALLED FILE LIST ###
 
-
-### PASS 1  DELETE FILES ###
 while IFS= read -r line;
 do
-	delete_wrap $line "FILE"
+	# update progress
+	[ $((cnt%250)) -eq 0 ] || [ $cnt -eq $filecnt ] || [ $cnt -eq 1 ] && update_progress $remove $cnt $filecnt
+	((cnt++))
 
-done < $lfi
+	# parse symlinks
+	deleteme=${line/ ->*/}
 
+	# lib
+	[[ $deleteme == "/lib/"* ]] && deleteme=/usr$deleteme
 
-### PASS 2 DELETE EMPTY DIRS ###
-while IFS= read -r line;
-do
-	delete_wrap $line "DIR"
+	# check installed in other package
+	#echo "grep -r --exclude ${ifl##*/} ^$deleteme$ ${INSTALLROOT}$INSTALLED_DIR"
+	[[ ! -z $(grep -r --exclude ${ifl##*/} ^$deleteme$ ${INSTALLROOT}$INSTALLED_DIR 2>/dev/null) ]] && continue
 
-done < $lfi
-        
+	rm -d "${INSTALLROOT}$deleteme" 2> /dev/null || true
+	#rm -d "${INSTALLROOT}$deleteme" || true
+
+done < <(tac $ifl)
+
 
 ### CLEANUP ###
 
 echo
 
-rm $lfi
 rm $ifl
-
-rm -rf $tmpdir
 
