@@ -10,8 +10,8 @@ set -e
 ### INITIALIZE ###
 
 # sudo
-if [[ ! -z $NOSUDO ]]; then sudo="";
-else sudo="sudo -E"; fi
+source <(echo $ASROOT)
+export -f as_root
 
 ### CONFIRM ###
 echo
@@ -35,11 +35,11 @@ while IFS= read -r line;
 do
 	### CHECK INSTALLED ###
 	ifl=${line%.txz}
+	ifl=${ifl##*/}
 	ifl=$INSTALLROOT/$INSTALLED_DIR/$ifl
-	[[ -f $ifl ]] && echo "Skipping $line: INSTALLED" && continue 
+	[[ -f $ifl ]] && echo "Skipping ${line##*/}: INSTALLED" && continue 
 
-	instpkg=$MIRRORPATH/$line
-	$sudo $UTIL_INSTALL_PKG_SH $instpkg
+	as_root $UTIL_INSTALL_PKG_SH $line
 
 done < $INSTALL_PKG_LIST
 

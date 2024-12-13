@@ -109,11 +109,11 @@ choice
 #            bool "Create list from dependency tree"
 #            help
 #		<TODO: help text>
-#        config    ACTION__LISTINSTALL
-#	    depends on ACTIONGROUP__LIST
-#            bool "Install list"
-#            help
-#		<TODO: help text>
+        config    ACTION__LISTINSTALL
+	    depends on ACTIONGROUP__LIST
+            bool "Install list"
+            help
+		<TODO: help text>
 #        config    ACTION__LISTPATCH
 #	    depends on ACTIONGROUP__LIST
 #            bool "Install patch"
@@ -264,7 +264,7 @@ config    LISTNAME
         default "ENTER_NAME_HERE"
 EOF
 
-### DIR PATH ###
+### LIST PACKAGES PATH ###
 
 cat >> $ACTION_CONFIG_IN << EOF
 config    LISTDIRPATH
@@ -291,16 +291,16 @@ EOF
 
 cat >> $ACTION_CONFIG_IN << EOF
 config    MIRRORPATH
-	depends on ACTION__PKGINSTALL || ACTION__PKGUPGRADE
+	depends on ACTION__PKGINSTALL || ACTION__PKGUPGRADE || ACTION__LISTINSTALL
         string  "Mirror Path"
-        default "$PACKAGES_DIR"
+        default "$LPM_DIR"
 EOF
 
 ### INSTALL ROOT ###
 
 cat >> $ACTION_CONFIG_IN << EOF
 config    INSTALLROOT
-	depends on ACTIONGROUP__PACKAGE || ACTION__BUILDLFS
+	depends on ACTIONGROUP__PACKAGE || ACTION__BUILDLFS || ACTION__LISTINSTALL
         string  "Install ROOT"
         default "$LFS"
 EOF

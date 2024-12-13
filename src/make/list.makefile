@@ -21,16 +21,37 @@ list-create-dir :
 	$(LIST_CREATEDIR_SH)
 	@$(call done_message, SUCCESS! List created.)
 
+.PHONY: list-create-dir 
 
-.PHONY: 
 
+
+####################################################################
+# INSTALL
+####################################################################
+
+#------------------------------------------------------------------#
+list-install : listinst-config-in listinst-config-out listinst
+	@echo
+	@$(call done_message, SUCCESS! List installed to $INSTALLROOT.)
+
+.PHONY: list-install
 
 #------------------------------------------------------------------#
 
-list-blah-blah : 
+listinst-config-in : 
 	@echo
-	@$(call done_message, Generating package install config in...)
-	$(PKGINST_CONFIG_IN_SH)
+	@$(call done_message, Generating list install config in...)
+	$(LISTINST_CONFIG_IN_SH)
+
+listinst-config-out : 
+	@echo
+	@$(call done_message, Running list install menuconfig...)
+	$(LISTINST_CONFIG_OUT_SH)
+
+listinst : 
+	@echo
+	@$(call done_message, Installing list packages...)
+	$(LISTINST_SH)
 
 .PHONY:
 

@@ -32,7 +32,7 @@ endef
 
 
 ASROOT = as_root() { if [ $$EUID = 0 ]; then $$*; \
-	 elif [ -x /usr/bin/sudo ]; then sudo $$*; \
+	 elif [ -x /usr/bin/sudo ]; then sudo -E $$*; \
 	 else su -c \\"$$*\\"; fi }
 
 
@@ -94,6 +94,10 @@ REMOVE_PKG_LIST = $(BUILD_DIR)/config/remove-pkg-list
 PKGUPGR_CONFIG_IN = $(BUILD_DIR)/config/pkgupgr-config.in
 PKGUPGR_CONFIG_OUT = $(BUILD_DIR)/config/pkgupgr-config.out
 UPGRADE_PKG_LIST = $(BUILD_DIR)/config/upgrade-pkg-list
+
+#------------------------------------------------------------------#
+LISTINST_CONFIG_IN = $(BUILD_DIR)/config/listinst-config.in
+LISTINST_CONFIG_OUT = $(BUILD_DIR)/config/listinst-config.out
 
 #------------------------------------------------------------------#
 INDEX_HTML = $(HTML_DIR)/index.html
@@ -166,7 +170,12 @@ BL_RUN_CHROOT_SH = $(SCRIPT_DIR)/build/lfs/bl-run-chroot.sh
 #------------------------------------------------------------------#
 # LIST
 LIST_LAUNCH_SH = $(SCRIPT_DIR)/list/list-launch.sh
+
 LIST_CREATEDIR_SH = $(SCRIPT_DIR)/list/list-createdir.sh
+
+LISTINST_CONFIG_IN_SH = $(SCRIPT_DIR)/list/listinst-config-in.sh
+LISTINST_CONFIG_OUT_SH = $(SCRIPT_DIR)/list/listinst-config-out.sh
+LISTINST_SH = $(SCRIPT_DIR)/list/listinst.sh
 
 
 #------------------------------------------------------------------#

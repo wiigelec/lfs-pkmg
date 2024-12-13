@@ -13,6 +13,7 @@ set -e
 installpkg=$1
 
 # installed dir
+#echo "installed_dir=$INSTALLROOT/$INSTALLED_DIR"
 installed_dir=$INSTALLROOT/$INSTALLED_DIR
 [[ ! -d $installed_dir ]] && mkdir -p $installed_dir
 
@@ -25,6 +26,7 @@ destdir=${DESTDIR:-$INSTALLROOT}
 [[ ! -d $destdir ]] && mkdir -p $destdir 
 pushd $destdir > /dev/null
 
+
 ### INSTALLED FILE LIST ###
 install=${installpkg##*/}
 ifl=${install%.txz}
@@ -33,12 +35,13 @@ ifl=$installed_dir/$ifl
 
 ### DOWNLOAD ###
 download=$tmpdir/$install
-#echo "Downloading $installpkg..." && curl -o $download $installpkg
-if [[ $installpkg == "file://"* ]]; then
-	cp ${installpkg#file://} $tmpdir
-else
+#echo "Downloading $installpkg to $download"
+if [[ $installpkg == "http://"* || $installpkg == "https://"* ]]; then
 	curl --silent -o $download $installpkg
+else
+	cp $installpkg $tmpdir
 fi
+
 
 ### GET EXTRACTED SIZE ###
 exsize=$(xz -l $download | tail -n1 | tr -s ' ' | cut -d' ' -f6-7 \

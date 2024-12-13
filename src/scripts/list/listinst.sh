@@ -1,15 +1,12 @@
 #!/bin/bash
 ####################################################################
 # 
-# list-launch.sh
+# listinst.sh
 #
 ####################################################################
 
 
-case $ACTION in
+### INSTALL PACKAGES ###
+$PKGINST_SH
 
-        LISTDIR) make list-create-dir ;;
-        LISTINSTALL) make list-install ;;
-
-esac
 
