@@ -14,12 +14,15 @@ export -f as_root
 
 ### INSTALL PACKAGES ###
 
-$PKGINST_SH
+$PKGREM_SH
 
 
 ### LIST FILES ###
 
 listsdir=${INSTALLROOT}$LISTS_DIR
-[[ ! -d $listsdir ]] && as_root mkdir -p $listsdir
-as_root mv $BUILD_DIR/config/*.list $listsdir/
+listsfiles=$(ls $BUILD_DIR/config/*.list)
+for each in $listsfiles; do
+
+	as_root rm ${INSTALLROOT}$LISTS_DIR/${each##*/}
+done
 

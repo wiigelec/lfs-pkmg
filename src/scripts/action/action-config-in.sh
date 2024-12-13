@@ -119,11 +119,11 @@ choice
 #            bool "Install patch"
 #            help
 #		<TODO: help text>
-#        config    ACTION__LISTREMOVE
-#	    depends on ACTIONGROUP__LIST
-#            bool "Remove list"
-#            help
-#		<TODO: help text>
+        config    ACTION__LISTREMOVE
+	    depends on ACTIONGROUP__LIST
+            bool "Remove list"
+            help
+		<TODO: help text>
 #        config    ACTION__LISTUPGRADE
 #	    depends on ACTIONGROUP__LIST
 #            bool "Upgrade list"
@@ -300,7 +300,7 @@ EOF
 
 cat >> $ACTION_CONFIG_IN << EOF
 config    INSTALLROOT
-	depends on ACTIONGROUP__PACKAGE || ACTION__BUILDLFS || ACTION__LISTINSTALL
+	depends on ACTIONGROUP__PACKAGE || ACTION__BUILDLFS || ACTION__LISTINSTALL || ACTION__LISTREMOVE
         string  "Install ROOT"
         default "$LFS"
 EOF

@@ -10,8 +10,10 @@ set -e
 ### INTIALIZE ###
 remove=$1
 
+[[ ! -f $remove ]] && echo "$remove does not exist. SKIPPING" && exit 0
+
 # installed file list
-ifl=$INSTALLROOT/$INSTALLED_DIR/$1
+ifl=$1
 
 # output formatting
 cnt=1
@@ -45,9 +47,6 @@ do
 
 	# parse symlinks
 	deleteme=${line/ ->*/}
-
-	# lib
-	[[ $deleteme == "/lib/"* ]] && deleteme=/usr$deleteme
 
 	# check installed in other package
 	#echo "grep -r --exclude ${ifl##*/} ^$deleteme$ ${INSTALLROOT}$INSTALLED_DIR"

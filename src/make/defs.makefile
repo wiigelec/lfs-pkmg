@@ -99,6 +99,9 @@ UPGRADE_PKG_LIST = $(BUILD_DIR)/config/upgrade-pkg-list
 LISTINST_CONFIG_IN = $(BUILD_DIR)/config/listinst-config.in
 LISTINST_CONFIG_OUT = $(BUILD_DIR)/config/listinst-config.out
 
+LISTREM_CONFIG_IN = $(BUILD_DIR)/config/listrem-config.in
+LISTREM_CONFIG_OUT = $(BUILD_DIR)/config/listrem-config.out
+
 #------------------------------------------------------------------#
 INDEX_HTML = $(HTML_DIR)/index.html
 
@@ -177,6 +180,9 @@ LISTINST_CONFIG_IN_SH = $(SCRIPT_DIR)/list/listinst-config-in.sh
 LISTINST_CONFIG_OUT_SH = $(SCRIPT_DIR)/list/listinst-config-out.sh
 LISTINST_SH = $(SCRIPT_DIR)/list/listinst.sh
 
+LISTREM_CONFIG_IN_SH = $(SCRIPT_DIR)/list/listrem-config-in.sh
+LISTREM_CONFIG_OUT_SH = $(SCRIPT_DIR)/list/listrem-config-out.sh
+LISTREM_SH = $(SCRIPT_DIR)/list/listrem.sh
 
 #------------------------------------------------------------------#
 # PACKAGE

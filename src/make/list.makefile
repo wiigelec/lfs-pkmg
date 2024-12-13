@@ -1,6 +1,6 @@
 ####################################################################
 #
-# install.makefile
+# list.makefile
 #
 ####################################################################
 
@@ -32,7 +32,7 @@ list-create-dir :
 #------------------------------------------------------------------#
 list-install : listinst-config-in listinst-config-out listinst
 	@echo
-	@$(call done_message, SUCCESS! List installed to $(INSTALLROOT).)
+	@$(call done_message, SUCCESS! List\(s\) installed to $(INSTALLROOT).)
 
 .PHONY: list-install
 
@@ -53,5 +53,37 @@ listinst :
 	@$(call done_message, Installing list packages...)
 	$(LISTINST_SH)
 
-.PHONY:
+.PHONY: listinst-config-in listinst-config-out listinst
+
+
+
+####################################################################
+# REMOVE
+####################################################################
+
+#------------------------------------------------------------------#
+list-remove : listrem-config-in listrem-config-out listrem
+	@echo
+	@$(call done_message, SUCCESS! List\(s\) removed from $(INSTALLROOT).)
+
+.PHONY: list-remove
+
+#------------------------------------------------------------------#
+
+listrem-config-in : 
+	@echo
+	@$(call done_message, Generating list remove config in...)
+	$(LISTREM_CONFIG_IN_SH)
+
+listrem-config-out : 
+	@echo
+	@$(call done_message, Running list remove menuconfig...)
+	$(LISTREM_CONFIG_OUT_SH)
+
+listrem : 
+	@echo
+	@$(call done_message, Removing list packages...)
+	$(LISTREM_SH)
+
+.PHONY: listrem-config-in listrem-config-out listrem
 

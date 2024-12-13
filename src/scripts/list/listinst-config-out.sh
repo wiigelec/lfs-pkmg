@@ -18,6 +18,8 @@ KCONFIG_CONFIG=$LISTINST_CONFIG_OUT $MENU_CONFIG $LISTINST_CONFIG_IN
 
 list=$(grep =y $LISTINST_CONFIG_OUT)
 
+rm $BUILD_DIR/config/*.list
+
 for lf in $list; do
 
 	listfile=${lf#CONFIG_}
@@ -35,9 +37,21 @@ for lf in $list; do
 	listpath=${listfile%/*}
 	listpath=${listpath/lists/packages}
 
+	### SAVE LIST ###
+	listsave=$BUILD_DIR/config/${listfile##*/}
+	[[ -f $listsave ]] && rm $listsave
+
+
+	### WRITE INSTALL PACKAGE LIST ###
 	for line in $readlist;
 	do
 		echo $listpath/$line >> $INSTALL_PKG_LIST
+	
+		# write save list
+		echo $line >> $listsave
 
 	done
+
+
 done
+
