@@ -21,6 +21,7 @@ for ip in $instpkg; do
 
 	write=${ip#CONFIG_}
 	write=${write%=y}
+	write=${write//../:}
 
 	echo $write >> $INSTALL_PKG_LIST
 done
