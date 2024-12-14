@@ -221,5 +221,8 @@ UTIL_REMOVE_PKG_SH = $(SCRIPT_DIR)/util/util-remove-package.sh
 UTIL_GET_MIRROR_VERSIONS_SH = $(SCRIPT_DIR)/util/util-get-mirror-versions.sh
 UTIL_LPCONFIG_IN_SH = $(SCRIPT_DIR)/util/util-lpconfig-in.sh
 
+UTIL_MOUNT_KERNFS_SH = $(SCRIPT_DIR)/util/util-mount-kernfs.sh
+UTIL_UMOUNT_KERNFS_SH = $(SCRIPT_DIR)/util/util-umount-kernfs.sh
+
 ### EXPORT ALL ###
 export

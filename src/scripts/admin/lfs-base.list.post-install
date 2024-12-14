@@ -7,4 +7,129 @@
 
 set -e
 
-echo "POST-INSTALL"
+
+### GET ASROOT ###
+source <(echo $ASROOT)
+export -f as_root
+
+
+####################################################################
+# FUNCTIONS
+####################################################################
+
+#------------------------------------------------------------------#
+install_grub ()
+{
+
+	### INSTALL GRUB ###
+	echo
+	echo "Installing grub:"
+	echo
+	as_root $UTIL_MOUNT_KERNFS_SH
+	echo "Partition information:"
+	echo
+	as_root chroot $INSTALLROOT lsblk
+	echo
+	as_root chroot $INSTALLROOT blkid
+
+	### GET PARTITION ###
+	while : ; do
+		echo
+		echo "Enter partition to install grub. 'C' to cancel."
+		read -p "bootloader>  " command
+
+		[[ $command == "C" ]] && break
+
+		while : ; do
+
+			read -p "Install grub to $command. (Yes)? " confirm
+			[[ $confirm != "Yes" ]] && break
+
+			### INSTALL GRUB ###
+			echo "grub-install $command"
+			break
+		done
+	done
+
+	as_root $UTIL_UMOUNT_KERNFS_SH
+}
+
+#------------------------------------------------------------------#
+edit_grub ()
+{
+
+	### EDIT GRUB CONFIG ###
+	echo
+	echo "Editing grub.cfg:"
+	echo
+	as_root vi $INSTALLROOT/boot/grub/grub.cfg
+}
+
+#------------------------------------------------------------------#
+root_passwd ()
+{
+	### SET ROOT PASSWORD ###
+	echo
+	echo "Setting new root password:"
+	echo
+
+	as_root $UTIL_MOUNT_KERNFS_SH
+	if [[ $? != 0 ]]; then echo "Error mounting kernel filesystems."; exit 1; fi
+	as_root chroot $INSTALLROOT bash -c 'passwd root'
+	as_root $UTIL_UMOUNT_KERNFS_SH
+}
+
+
+#------------------------------------------------------------------#
+edit_fstab ()
+{
+	### EDIT FSTAB ###
+	echo
+	echo "Editing fstab:"
+	echo
+	as_root vi $INSTALLROOT/etc/fstab
+}
+
+
+
+####################################################################
+# CONFIGURE INSTALLATION
+####################################################################
+
+### Confirm ###
+echo
+read -p "Configure $INSTALLROOT installation? (Yes): " confirm
+if [[ $confirm != "Yes" ]]; then echo "Cancelling configuration..."; returni 0; fi
+
+### LOOP ###
+while : ; do
+
+	echo
+	echo "Enter command. Type 'h' for list of commands, 'Q' to exit."
+	read -p ">  " command
+	
+
+	### PROCESS COMMAND ###
+	case $command in
+		
+	h)      echo
+		echo "b - install bootloader"
+		echo "g - edit grub.cfg"
+		echo "f - edit fstab"
+		echo "p - set root password"
+		echo
+	;;
+
+	b)	install_grub ;;
+	g)	edit_grub ;;
+	f)	edit_fstab ;;
+	p)	root_passwd ;;	
+		
+	Q) break ;;
+	esac
+
+done
+
+echo
+echo "Configuration complete."
+echo
