@@ -11,12 +11,14 @@ export -f as_root
 
 [[ -z $(ls -A $LISTDIRPATH/) ]] && echo -e "\n>>>>> Nothing to do. <<<<<\n" && exit 1
 
+listdir=${LISTNAME%/*}/
+[[ ! -d $listdir ]] && as_root mkdir -p $listdir
+
 # list file
-listfile=$LISTS_DIR/$LISTNAME.list
-[[ -f $listfile ]] && echo -e "\n>>>>> List file $listfile exists. <<<<<\n" && exit 1
+[[ -f $LISTNAME ]] && echo -e "\n>>>>> List file $LISTNAME exists. <<<<<\n" && exit 1
 
 for FILE in $LISTDIRPATH/*;
 do
 	package=${FILE##*/}
-	echo $package | as_root tee -a $listfile > /dev/null
+	echo $package | as_root tee -a $LISTNAME > /dev/null
 done

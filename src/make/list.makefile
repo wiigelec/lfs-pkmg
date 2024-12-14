@@ -19,7 +19,7 @@ LIST:
 list-create-dir :
 	@echo
 	$(LIST_CREATEDIR_SH)
-	@$(call done_message, SUCCESS! List created.)
+	@$(call done_message, SUCCESS! List $(LISTNAME) created.)
 
 .PHONY: list-create-dir 
 

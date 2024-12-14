@@ -260,8 +260,8 @@ EOF
 cat >> $ACTION_CONFIG_IN << EOF
 config    LISTNAME
 	depends on ACTION__LISTDIR
-        string  "List name"
-        default "ENTER_NAME_HERE"
+	string  "List name (full path)"
+        default "$LISTS_DIR/list-name.list"
 EOF
 
 ### LIST PACKAGES PATH ###
