@@ -216,7 +216,7 @@ UTIL_CREATE_ARCHIVE_SH = $(SCRIPT_DIR)/util/util-create-archive.sh
 UTIL_INSTALL_PKG_SH = $(SCRIPT_DIR)/util/util-install-package.sh
 UTIL_REMOVE_PKG_SH = $(SCRIPT_DIR)/util/util-remove-package.sh
 UTIL_GET_MIRROR_VERSIONS_SH = $(SCRIPT_DIR)/util/util-get-mirror-versions.sh
-UTIL_LIST_CONFIG_IN_SH = $(SCRIPT_DIR)/util/util-list-config-in.sh
+UTIL_CONFIG_IN_SH = $(SCRIPT_DIR)/util/util-config-in.sh
 
 ### EXPORT ALL ###
 export
