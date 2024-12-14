@@ -72,6 +72,9 @@ PACKAGES_DIR = $(LPM_DIR)/packages
 LISTS_DIR = $(LPM_DIR)/lists
 INSTALLED_DIR=$(LPM_DIR)/installed
 
+ADMIN_SCRIPT_DIR = $(SCRIPT_DIR)/admin
+USER_SCRIPT_DIR = $(TOPDIR)/custom
+
 
 
 ####################################################################
@@ -216,7 +219,7 @@ UTIL_CREATE_ARCHIVE_SH = $(SCRIPT_DIR)/util/util-create-archive.sh
 UTIL_INSTALL_PKG_SH = $(SCRIPT_DIR)/util/util-install-package.sh
 UTIL_REMOVE_PKG_SH = $(SCRIPT_DIR)/util/util-remove-package.sh
 UTIL_GET_MIRROR_VERSIONS_SH = $(SCRIPT_DIR)/util/util-get-mirror-versions.sh
-UTIL_CONFIG_IN_SH = $(SCRIPT_DIR)/util/util-config-in.sh
+UTIL_LPCONFIG_IN_SH = $(SCRIPT_DIR)/util/util-lpconfig-in.sh
 
 ### EXPORT ALL ###
 export

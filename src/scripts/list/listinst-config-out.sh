@@ -18,7 +18,7 @@ KCONFIG_CONFIG=$LISTINST_CONFIG_OUT $MENU_CONFIG $LISTINST_CONFIG_IN
 
 list=$(grep =y $LISTINST_CONFIG_OUT)
 
-rm $BUILD_DIR/config/*.list
+rm $BUILD_DIR/config/*.list 2> /dev/null || true 
 
 for lf in $list; do
 
