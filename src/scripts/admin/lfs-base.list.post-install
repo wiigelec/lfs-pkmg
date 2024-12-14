@@ -57,12 +57,45 @@ install_grub ()
 #------------------------------------------------------------------#
 edit_grub ()
 {
+	### CHECK INSTALLED ###
+	grubdir=$INSTALLROOT/boot/grub
+	if [[ ! -d $grubdir ]]; then
+		echo
+		echo "It doesn't appear grub has been installed yet."
+		echo "Please install grub before editing the configuration."
+		echo
+		return 0
+	fi
+
+	### INITIALIZE GRUB CONFIG
+	grubcfg=$grubdir/grub.cfg
+	if [[ ! -f $grubcfg ]]; then
+
+as_root sh -e << ROOT_EOF
+
+cat > $grubcfg << EOF
+# Begin /boot/grub/grub.cfg
+set default=0
+set timeout=5
+
+insmod part_gpt
+insmod ext2
+set root=(XXX)
+
+menuentry "GNU/Linux, Linux X.XX.X-lfs-XX.X" {
+        linux   /boot/vmlinuz-X.XX.X-lfs-XX.X-<systemd> root=/XXX ro
+}
+
+EOF
+
+ROOT_EOF
+	fi
 
 	### EDIT GRUB CONFIG ###
 	echo
 	echo "Editing grub.cfg:"
 	echo
-	as_root vi $INSTALLROOT/boot/grub/grub.cfg
+	as_root vi $grubcfg
 }
 
 #------------------------------------------------------------------#
