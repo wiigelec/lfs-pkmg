@@ -16,12 +16,14 @@
 cat > $ACTION_CONFIG_IN << EOF
 choice
         prompt "Action Group"
+	default ACTIONGROUP__DOCS
 #        config    ACTIONGROUP__AUDIT
 #            bool "Audit"
 #            help
 #		<TODO: help text>
         config    ACTIONGROUP__BUILD
             bool "Build"
+	    default n
             help
 		<TODO: help text>
         config    ACTIONGROUP__DOCS

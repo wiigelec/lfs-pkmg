@@ -3,6 +3,12 @@ lfs package manager
 
 Simple package management solution for LFS / BLFS https://www.linuxfromscratch.org/
 
+--------------------------------------------------------------------
+QUICK START:
+1) run make
+2) accept defaults, enter alternate browser if desired for viewing docs
+--------------------------------------------------------------------
+
 
 lfs-pkmg (pronounced 'pacmag')(lpm for short) does the following:
 
@@ -16,4 +22,4 @@ Remove
 Remove package files associated with an installed package archive.
 
 Upgrade
-Upgrade package files associated with in installed package archive.
+Upgrade package files associated with an installed package archive.
