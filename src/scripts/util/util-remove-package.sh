@@ -25,7 +25,7 @@ filecnt=$(wc -l < $ifl)
 update_progress()
 {
 	percomp="( $(printf %3.0f "$((10**4 * $2/$3))e-2") % )"
-	a="$1"
+	a="Removing:+++$1"
 	b="+$2"
 	message=$(printf "%-80s %6s" "$a" "$b")
 	message=${message// /.}
@@ -42,7 +42,7 @@ update_progress()
 while IFS= read -r line;
 do
 	# update progress
-	[ $((cnt%250)) -eq 0 ] || [ $cnt -eq $filecnt ] || [ $cnt -eq 1 ] && update_progress $remove $cnt $filecnt
+	[ $((cnt%250)) -eq 0 ] || [ $cnt -eq $filecnt ] || [ $cnt -eq 1 ] && update_progress ${remove##*/} $cnt $filecnt
 	((cnt++))
 
 	# parse symlinks

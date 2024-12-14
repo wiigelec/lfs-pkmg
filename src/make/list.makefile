@@ -87,3 +87,35 @@ listrem :
 
 .PHONY: listrem-config-in listrem-config-out listrem
 
+
+
+####################################################################
+# UPGRADE
+####################################################################
+
+#------------------------------------------------------------------#
+list-upgrade : listupgr-config-in listupgr-config-out listupgr
+	@echo
+	@$(call done_message, SUCCESS! List\(s\) upgraded on $(INSTALLROOT).)
+
+.PHONY: list-upgrade
+
+#------------------------------------------------------------------#
+
+listupgr-config-in : 
+	@echo
+	@$(call done_message, Generating list upgrade config in...)
+	$(LISTUPGR_CONFIG_IN_SH)
+
+listupgr-config-out : 
+	@echo
+	@$(call done_message, Running list upgrade menuconfig...)
+	$(LISTUPGR_CONFIG_OUT_SH)
+
+listupgr : 
+	@echo
+	@$(call done_message, Upgrading list packages...)
+	$(LISTUPGR_SH)
+
+.PHONY: listupgr-config-in listupgr-config-out listupgr
+

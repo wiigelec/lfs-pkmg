@@ -102,6 +102,9 @@ LISTINST_CONFIG_OUT = $(BUILD_DIR)/config/listinst-config.out
 LISTREM_CONFIG_IN = $(BUILD_DIR)/config/listrem-config.in
 LISTREM_CONFIG_OUT = $(BUILD_DIR)/config/listrem-config.out
 
+LISTUPGR_CONFIG_IN = $(BUILD_DIR)/config/listupgr-config.in
+LISTUPGR_CONFIG_OUT = $(BUILD_DIR)/config/listupgr-config.out
+
 #------------------------------------------------------------------#
 INDEX_HTML = $(HTML_DIR)/index.html
 
@@ -184,6 +187,10 @@ LISTREM_CONFIG_IN_SH = $(SCRIPT_DIR)/list/listrem-config-in.sh
 LISTREM_CONFIG_OUT_SH = $(SCRIPT_DIR)/list/listrem-config-out.sh
 LISTREM_SH = $(SCRIPT_DIR)/list/listrem.sh
 
+LISTUPGR_CONFIG_IN_SH = $(SCRIPT_DIR)/list/listupgr-config-in.sh
+LISTUPGR_CONFIG_OUT_SH = $(SCRIPT_DIR)/list/listupgr-config-out.sh
+LISTUPGR_SH = $(SCRIPT_DIR)/list/listupgr.sh
+
 #------------------------------------------------------------------#
 # PACKAGE
 PACKAGE_LAUNCH_SH = $(SCRIPT_DIR)/package/package-launch.sh
@@ -208,6 +215,8 @@ UTIL_CREATE_PKGLOG_SH = $(SCRIPT_DIR)/util/util-create-pkglog.sh
 UTIL_CREATE_ARCHIVE_SH = $(SCRIPT_DIR)/util/util-create-archive.sh
 UTIL_INSTALL_PKG_SH = $(SCRIPT_DIR)/util/util-install-package.sh
 UTIL_REMOVE_PKG_SH = $(SCRIPT_DIR)/util/util-remove-package.sh
+UTIL_GET_MIRROR_VERSIONS_SH = $(SCRIPT_DIR)/util/util-get-mirror-versions.sh
+UTIL_LIST_CONFIG_IN_SH = $(SCRIPT_DIR)/util/util-list-config-in.sh
 
 ### EXPORT ALL ###
 export

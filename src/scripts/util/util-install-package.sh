@@ -49,7 +49,7 @@ exsize=$(xz -l $download | tail -n1 | tr -s ' ' | cut -d' ' -f6-7 \
 	numfmt --from=iec-i --to-unit=1k --grouping)
 
 ### FORMAT OUTPUT ###
-a="$install"
+a="Installing:+$install"
 b="+$exsize"
 message=$(printf "%-80s %10s+K" "$a" "$b")
 message=${message// /.}

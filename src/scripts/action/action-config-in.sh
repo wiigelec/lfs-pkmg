@@ -124,11 +124,11 @@ choice
             bool "Remove list"
             help
 		<TODO: help text>
-#        config    ACTION__LISTUPGRADE
-#	    depends on ACTIONGROUP__LIST
-#            bool "Upgrade list"
-#            help
-#		<TODO: help text>
+        config    ACTION__LISTUPGRADE
+	    depends on ACTIONGROUP__LIST
+            bool "Upgrade list"
+            help
+		<TODO: help text>
 
 	#------------------------------------------------------------------#
 	# PACKAGE ACTIONS
@@ -291,7 +291,7 @@ EOF
 
 cat >> $ACTION_CONFIG_IN << EOF
 config    MIRRORPATH
-	depends on ACTION__PKGINSTALL || ACTION__PKGUPGRADE || ACTION__LISTINSTALL
+	depends on ACTION__PKGINSTALL || ACTION__PKGUPGRADE || ACTION__LISTINSTALL || ACTION__LISTUPGRADE
         string  "Mirror Path"
         default "$LPM_DIR"
 EOF
@@ -300,7 +300,7 @@ EOF
 
 cat >> $ACTION_CONFIG_IN << EOF
 config    INSTALLROOT
-	depends on ACTIONGROUP__PACKAGE || ACTION__BUILDLFS || ACTION__LISTINSTALL || ACTION__LISTREMOVE
+	depends on ACTIONGROUP__PACKAGE || ACTION__BUILDLFS || ACTION__LISTINSTALL || ACTION__LISTREMOVE || ACTION__LISTUPGRADE
         string  "Install ROOT"
         default "$LFS"
 EOF

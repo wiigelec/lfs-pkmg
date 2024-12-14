@@ -7,7 +7,7 @@
 
 set -e
 
-### GET VERION DIRS ###
+### GET VERSION DIRS ###
 file="false"
 server="false"
 if [[ $MIRRORPATH == "http://"* || $MIRRORPATH == "https://"* ]]; then
