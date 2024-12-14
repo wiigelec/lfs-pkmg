@@ -16,7 +16,8 @@ KCONFIG_CONFIG=$LISTINST_CONFIG_OUT $MENU_CONFIG $LISTINST_CONFIG_IN
 
 [[ -f $INSTALL_PKG_LIST ]] && rm $INSTALL_PKG_LIST
 
-list=$(grep =y $LISTINST_CONFIG_OUT)
+list=$(grep =y $LISTINST_CONFIG_OUT) || true
+[[ -z $list ]] && echo -e "\n>>>>> No list selected. <<<<<\n" && exit 1
 
 rm $BUILD_DIR/config/*.list 2> /dev/null || true 
 

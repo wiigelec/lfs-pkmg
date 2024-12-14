@@ -14,10 +14,17 @@ source <(echo $ASROOT)
 export -f as_root
 
 ### CONFIRM ###
+installpkglist=$(cat $INSTALL_PKG_LIST | xargs)
+mirrorpath=$(head -n1 $INSTALL_PKG_LIST)
+mirrorpath=${mirrorpath%/*}
+installpkglist=${installpkglist//$mirrorpath\//}
+
 echo
 echo "Installing:"
 echo
-echo "$(cat $INSTALL_PKG_LIST | xargs)"
+echo "$installpkglist"
+echo
+echo "from $mirrorpath"
 echo
 echo "to $INSTALLROOT"
 echo
