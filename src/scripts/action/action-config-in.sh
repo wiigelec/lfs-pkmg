@@ -23,7 +23,6 @@ choice
 #		<TODO: help text>
         config    ACTIONGROUP__BUILD
             bool "Build"
-	    default n
             help
 		<TODO: help text>
         config    ACTIONGROUP__DOCS
@@ -80,11 +79,16 @@ choice
             bool "Build LFS"
             help
 		<TODO: help text>
-#        config    ACTION__BUILDBLFS
-#	    depends on ACTIONGROUP__BUILD
-#            bool "Build BLFS"
-#            help
-#		<TODO: help text>
+        config    ACTION__BUILDBOOTSTRAP
+	    depends on ACTIONGROUP__BUILD
+            bool "Build bootstrap"
+            help
+		<TODO: help text>
+        config    ACTION__BUILDBLFS
+	    depends on ACTIONGROUP__BUILD
+            bool "Build BLFS"
+            help
+		<TODO: help text>
 #        config    ACTION__BUILDPATCH
 #	    depends on ACTIONGROUP__BUILD
 #            bool "Build patch"
@@ -169,7 +173,7 @@ EOF
 cat >> $ACTION_CONFIG_IN << EOF
 choice
         prompt "Init System"
-	depends on ACTION__BUILDLFS || ACTION__BUILDBLFS
+	depends on ACTION__BUILDLFS || ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS
         config    REV__SYSV
             bool "sysvinit"
             help
@@ -218,7 +222,7 @@ EOF
 cat >> $ACTION_CONFIG_IN << EOF
 choice
 prompt "BLFS Branch"
-depends on ACTION__BUILDBLFS
+depends on ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS
 EOF
 
 # get branches
@@ -302,7 +306,7 @@ EOF
 
 cat >> $ACTION_CONFIG_IN << EOF
 config    INSTALLROOT
-	depends on ACTIONGROUP__PACKAGE || ACTION__BUILDLFS || ACTION__LISTINSTALL || ACTION__LISTREMOVE || ACTION__LISTUPGRADE
+	depends on ACTIONGROUP__PACKAGE || ACTION__BUILDLFS || ACTION__BUILDBOOTSTRAP || ACTION__LISTINSTALL || ACTION__LISTREMOVE || ACTION__LISTUPGRADE
         string  "Install ROOT"
         default "$LFS"
 EOF

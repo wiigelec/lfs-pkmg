@@ -1,6 +1,6 @@
 ####################################################################
 #
-# makefile.build
+# build.makefile
 #
 ####################################################################
 
@@ -9,6 +9,62 @@ BUILD:
 	@$(call bold_message, Launching BUILD...)
 	$(BUILD_LAUNCH_SH)
 
+
+
+####################################################################
+# COMMON
+####################################################################
+
+$(LFS_FULL_XML): $(LFS_BOOK)
+lfs-full-xml $(LFS_FULL_XML) :
+	@echo
+	@$(call bold_message, Generating LFS full xml...)
+	$(BUILD_LFS_FULL_XML_SH)
+
+
+$(BLFS_FULL_XML): $(BLFS_BOOK)
+blfs-full-xml $(BLFS_FULL_XML) :
+	@echo
+	@$(call bold_message, Generating BLFS full xml...)
+	$(BUILD_BLFS_FULL_XML_SH)
+
+
+$(PKG_LFS_XML): $(LFS_FULL_XML) 
+pkg-lfs-xml $(PKG_LFS_XML) :
+	@echo
+	@$(call bold_message, Building LFS package list xml...)
+	$(BUILD_PKG_LFS_XML_SH)
+
+
+$(PKG_BLFS_XML): $(BLFS_FULL_XML) 
+pkg-blfs-xml $(PKG_BLFS_XML) :
+	@echo
+	@$(call bold_message, Building BLFS package list xml...)
+	$(BUILD_PKG_BLFS_XML_SH)
+
+
+blfs-deps $(BLFS_DEPS_DONE) :
+	@echo
+	@$(call bold_message, Building book deps...)
+	$(BUILD_DEPS_SH)
+
+
+blfs-trees :
+	@echo
+	@$(call bold_message, Building dependency trees...)
+	$(BUILD_TREES_SH)
+
+
+blfs-scripts $(BLFS_SCRIPTS_DONE) :
+	@echo
+	@$(call bold_message, Building scripts...)
+	$(BUILD_SCRIPTS_SH)
+
+
+blfs-work :
+	@echo
+	@$(call bold_message, Setting up work dir...)
+	$(BUILD_WORK_SH)
 
 
 
@@ -77,3 +133,47 @@ archive-mnt $(ARCHIVE_MNT) :
 	@echo
 	@$(call bold_message, Running chroot scripts...)
 	$(BL_RUN_CHROOT_SH)
+
+
+
+####################################################################
+# BLFS
+####################################################################
+
+
+build-blfs : $(PKG_BLFS_XML) $(BLFS_DEPS_DONE) $(BLFS_SCRIPTS_DONE) \
+	bb-config-in bb-config-out bb-build-list blfs-trees \
+	blfs-work
+	@echo
+	@$(call done_message, SUCCESS! BLFS package build complete.)
+
+bb-config-in :
+	@echo
+	@$(call bold_message, Generating build BLFS config in...)
+	$(BB_CONFIG_IN_SH)
+
+bb-config-out :
+	@echo
+	@$(call bold_message, Generating build BLFS menuconfig...)
+	$(BB_CONFIG_OUT_SH)
+
+bb-build-list :
+	@echo
+	@$(call bold_message, Generating BLFS build list...)
+	$(BB_BUILD_LIST_SH)
+
+bb-build : 
+	@echo
+	@$(call bold_message, Building packages...)
+	$(BUILD_BLFS_SH)
+
+
+
+####################################################################
+# BOOTSTRAP
+####################################################################
+
+
+build-bootstrap : $(BLFS_FULL_XML)
+	@echo
+	@$(call done_message, SUCCESS! Bootstrap build on $(INSTALLROOT) complete.)
