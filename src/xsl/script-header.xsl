@@ -41,6 +41,8 @@
 #
 ####################################################################
 
+set -e
+
 # PACKAGE INFO
 PKG_ID=<xsl:value-of select="@id" />
 <xsl:variable name="match" select="@id" />

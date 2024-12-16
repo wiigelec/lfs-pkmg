@@ -5,9 +5,11 @@
 #
 ####################################################################
 
+LFS_BLD=${LFS_BLD:-blfs}
+
 ### PACKAGE INFO ###
 PKG_ARCH=$(uname -m)
-PKG_LFS=lfs$LFS_VER
+PKG_LFS=${LFS_BLD}$LFS_VER
 PKG_EXT=txz
 
 

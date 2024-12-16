@@ -102,8 +102,8 @@ echo "Generating Makefile..."
 echo
 
 makefile=$WORK_DIR/Makefile
-[ -f $makefile ] && rm $makefile
-scripts=$(ls $WORK_DIR/scripts)
+[[ -f $makefile ]] && rm $makefile
+scripts=$(ls -r $WORK_DIR/scripts)
 
 ### MAKEFILE HEADER ###
 cat << EOF > $makefile
@@ -139,21 +139,35 @@ EOF
 
 ### ADD SCRIPTS ###
 prev=""
+first="true"
 for s in $scripts
 do
-	target1=${s%.build}
-	target2=${prev%.build}
+	[ -z $prev ] && prev=$s && continue
+
+	target1=${prev%.build}
+	target2=${s%.build}
 	package=${target1#*z-}
-	echo "" >> $makefile
 	echo "$target1 : $target2 " >> $makefile
 	echo "	@echo" >> $makefile
 	echo "	@\$(call echo_message)" >> $makefile
 	echo "	@\$(TIMER_SCRIPT) PKG \$\$PPID $target1 &" >> $makefile
 	echo "	@echo" >> $makefile
-	echo "	./scripts/$s" >> $makefile
-	echo "	\$(SCRIPT_DIR)/select.sh VERSINSTPKG $package" >> $makefile
+	echo "	./scripts/$prev" >> $makefile
+	#echo "	\$(SCRIPT_DIR)/select.sh VERSINSTPKG $package" >> $makefile
 	echo "	touch $target1" >> $makefile
+	[[ ! -z $first ]] && echo "	@\$(call end_message)" >> $makefile && first=""
+	echo "" >> $makefile
 	prev=$s
 done
-echo -e "\t@\$(call end_message)" >> $makefile
+
+target1=${prev%.build}
+package=${target1#*z-}
+echo "$target1 :" >> $makefile
+echo "	@echo" >> $makefile
+echo "	@\$(call echo_message)" >> $makefile
+echo "	@\$(TIMER_SCRIPT) PKG \$\$PPID $target1 &" >> $makefile
+echo "	@echo" >> $makefile
+echo "	./scripts/$prev" >> $makefile
+#echo "	\$(SCRIPT_DIR)/select.sh VERSINSTPKG $package" >> $makefile
+echo "	touch $target1" >> $makefile
 

@@ -69,6 +69,7 @@ CHROOT_SCRIPTS_DIR = $(JHALFS_MNT)/lfspkmg-scripts
 
 DIFFLOG_DIR = $(LPM_DIR)/build/difflog
 PKGLOG_DIR = $(LPM_DIR)/build/pkglog
+ARCHIVE_DIR = $(LPM_DIR)/build/archive
 PACKAGES_DIR = $(LPM_DIR)/packages
 LISTS_DIR = $(LPM_DIR)/lists
 INSTALLED_DIR=$(LPM_DIR)/installed
@@ -216,6 +217,9 @@ BUILD_DEPS_SH = $(SCRIPT_DIR)/build/build-deps.sh
 BUILD_TREES_SH = $(SCRIPT_DIR)/build/build-trees.sh
 BUILD_SCRIPTS_SH = $(SCRIPT_DIR)/build/build-scripts.sh
 BUILD_WORK_SH = $(SCRIPT_DIR)/build/build-work.sh
+
+BS_BUILD_LIST_SH = $(SCRIPT_DIR)/build/bootstrap/bs-build-list.sh
+BS_DEPLOY_WORK_SH = $(SCRIPT_DIR)/build/bootstrap/bs-deploy-work.sh
 
 #------------------------------------------------------------------#
 # LIST

@@ -174,6 +174,17 @@ bb-build :
 ####################################################################
 
 
-build-bootstrap : $(BLFS_FULL_XML)
+build-bootstrap : $(PKG_BLFS_XML) $(BLFS_DEPS_DONE) $(BLFS_SCRIPTS_DONE) \
+	bs-build-list blfs-trees blfs-work bs-deploy-work
 	@echo
-	@$(call done_message, SUCCESS! Bootstrap build on $(INSTALLROOT) complete.)
+	@$(call done_message, SUCCESS! Bootstrap package deployed to $(INSTALLROOT).)
+
+bs-build-list :
+	@echo
+	@$(call bold_message, Generating bootstrap build list...)
+	$(BS_BUILD_LIST_SH)
+
+bs-deploy-work :
+	@echo
+	@$(call bold_message, Deploying  bootstrap work package...)
+	$(BS_DEPLOY_WORK_SH)

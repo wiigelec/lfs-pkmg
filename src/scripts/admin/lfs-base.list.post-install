@@ -132,7 +132,7 @@ edit_fstab ()
 ### Confirm ###
 echo
 read -p "Configure $INSTALLROOT installation? (Yes): " confirm
-if [[ $confirm != "Yes" ]]; then echo "Cancelling configuration..."; returni 0; fi
+if [[ $confirm != "Yes" ]]; then echo "Cancelling configuration..."; exit 0; fi
 
 ### LOOP ###
 while : ; do
