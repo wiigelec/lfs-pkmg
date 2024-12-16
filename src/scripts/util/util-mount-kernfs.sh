@@ -8,7 +8,6 @@
 # unmount first
 $UTIL_UMOUNT_KERNFS_SH
 
-{
 mount -v --bind /dev $INSTALLROOT/dev
 mount -vt devpts devpts -o gid=5,mode=0620 $INSTALLROOT/dev/pts
 mount -vt proc proc $INSTALLROOT/proc
@@ -19,4 +18,3 @@ if [ -h $INSTALLROOT/dev/shm ]; then
 else
 	mount -vt tmpfs -o nosuid,nodev tmpfs $INSTALLROOT/dev/shm
 fi
-} > /dev/null

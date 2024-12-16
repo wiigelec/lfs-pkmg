@@ -75,7 +75,7 @@ read -p "Run boostrap chroot build on $INSTALLROOT? (y) " confirm
 if [[ $confirm != "y" ]]; then exit 1; fi
 
 # mount kernfs
-sudo $UTIL_MOUNT_KERNFS_SH
+sudo -E $UTIL_MOUNT_KERNFS_SH
 
 # resolv.conf
 resolvconf=$INSTALLROOT/etc/resolv.conf
@@ -102,4 +102,4 @@ sudo chroot $INSTALLROOT bash -e -c "PKGLOG_DIR=$PKGLOG_DIR ARCHIVE_DIR=$ARCHIVE
 
 ### CLEANUP ###
 
-sudo $UTIL_UMOUNT_KERNFS_SH
+sudo -E $UTIL_UMOUNT_KERNFS_SH
