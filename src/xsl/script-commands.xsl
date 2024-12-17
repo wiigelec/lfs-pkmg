@@ -61,6 +61,7 @@ ROOT_EOF
 <xsl:apply-templates select="//sect2[@id='xorg-env']/screen[not(@role='nodump')]" mode="script-commands" />
 </xsl:if>
 
+### END CONFIGURE MAKE INSTALL ###
 
 ### DIFFLOG2 ###
 sudo -E sh -e &lt;&lt; ROOT_EOF

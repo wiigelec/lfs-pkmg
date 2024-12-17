@@ -23,7 +23,6 @@ linenum=$(grep -n "chmod 644 /etc/pam.d/sudo" $FILE | sed 's/:.*//')
 sed -i "$linenum i [[ -f /etc/pam.d/sudo ]] &&" $FILE
 #------------------------------------------------------------------#
 
-
 #------------------------------------------------------------------#
 # unzip
 FILE=$BLFS_SCRIPTS_DIR/unzip.build
@@ -31,6 +30,15 @@ sed -i '/convmv -f cp936 -t utf-8 -r --nosmart --notest/d' $FILE
 sed -i '/<\/path\/to\/unzipped\/files>/d' $FILE
 #------------------------------------------------------------------#
 
+#------------------------------------------------------------------#
+# post-lfs-config-profile
+FILE=$BLFS_SCRIPTS_DIR/postlfs-config-profile.build
+linenum=$(grep -n "### CONFIGURE MAKE INSTALL ###" $FILE | sed 's/:.*//')
+linenum2=$(grep -n "### END CONFIGURE MAKE INSTALL ###" $FILE | sed 's/:.*//')
+sed -i "${linenum},${linenum2}s/\\$/\\\\\$/g" $FILE
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
 #------------------------------------------------------------------#
 # bash -e
 fix_files=$(grep -rl "bash -e" $BLFS_SCRIPTS_DIR)
