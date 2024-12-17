@@ -21,7 +21,10 @@ for rp in $rmpkg; do
 	write=${rp#CONFIG_}
 	write=${write%=y}
 
-	echo ${INSTALLROOT}${INSTALLED_DIR}/$write >> $REMOVE_PKG_LIST
+	path=${INSTALLROOT}${INSTALLED_DIR}
+	path=${path//\/\//\/}
+
+	echo $path/$write >> $REMOVE_PKG_LIST
 done
 
 

@@ -171,3 +171,6 @@ echo "	./scripts/$prev" >> $makefile
 #echo "	\$(SCRIPT_DIR)/select.sh VERSINSTPKG $package" >> $makefile
 echo "	touch $target1" >> $makefile
 
+
+### WRITE BUILD DIR TO CURRENT CONFIG ###
+echo "BUILD_DIR=$BUILD_DIR" >> ${ACTION_CURRENT_CONFIG/build\/*\//build/config/}

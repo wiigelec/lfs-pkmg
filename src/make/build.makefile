@@ -60,11 +60,18 @@ blfs-scripts $(BLFS_SCRIPTS_DONE) :
 	@$(call bold_message, Building scripts...)
 	$(BUILD_SCRIPTS_SH)
 
-
-blfs-work :
+blfs-init-work :
 	@echo
 	@$(call bold_message, Setting up work dir...)
-	$(BUILD_WORK_SH)
+	$(BUILD_INIT_WORK_SH)
+
+build-work :
+	@echo
+	@$(call bold_message, Building work dir packages...)
+	@$(eval BUILD_DIR = $(shell grep BUILD_DIR $(ACTION_CURRENT_CONFIG) | sed 's/BUILD_DIR=//'))
+	@$(MAKE) -C $(BUILD_DIR)/work
+	@sudo -E $(UTIL_CREATE_PKGLOG_SH)
+	@sudo -E $(UTIL_CREATE_ARCHIVE_SH)
 
 
 ####################################################################
@@ -142,9 +149,9 @@ archive-mnt $(ARCHIVE_MNT) :
 
 build-blfs : $(PKG_BLFS_XML) $(BLFS_DEPS_DONE) $(BLFS_SCRIPTS_DONE) \
 	bb-config-in bb-config-out bb-build-list blfs-trees \
-	blfs-work
+	blfs-init-work
 	@echo
-	@$(call done_message, SUCCESS! BLFS package build complete.)
+	@$(call done_message, SUCCESS! Work dir initialized. Run \'make build-work\' to build packages.)
 
 bb-config-in :
 	@echo

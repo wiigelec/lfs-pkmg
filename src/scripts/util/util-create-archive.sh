@@ -6,6 +6,7 @@
 ####################################################################
 
 LFS_BLD=${LFS_BLD:-blfs}
+LFS_VER=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
 
 ### PACKAGE INFO ###
 PKG_ARCH=$(uname -m)

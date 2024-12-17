@@ -19,7 +19,7 @@ echo "Removing:"
 echo
 echo "$(cat $REMOVE_PKG_LIST | xargs)"
 echo
-echo "from $INSTALLROOT"
+echo "from INSTALLROOT"
 echo
 echo
 read -p "Continue? (Yes): " confirm
