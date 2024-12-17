@@ -5,8 +5,7 @@
 #
 ####################################################################
 
-{
+
 mountpoint -q $INSTALLROOT/dev/shm && umount $INSTALLROOT/dev/shm
 umount $INSTALLROOT/dev/pts
 umount $INSTALLROOT/{sys,proc,run,dev}
-} > /dev/null
