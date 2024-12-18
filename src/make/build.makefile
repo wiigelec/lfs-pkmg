@@ -180,7 +180,7 @@ bb-build :
 
 
 build-bootstrap : $(BLFS_FULL_XML) pkg-blfs-xml $(BLFS_DEPS_DONE) $(BLFS_SCRIPTS_DONE) \
-	bs-build-list blfs-trees blfs-work bs-deploy-work
+	bs-build-list blfs-trees blfs-init-work bs-deploy-work
 	@echo
 	@$(call done_message, SUCCESS! Bootstrap package deployed to $(INSTALLROOT).)
 
