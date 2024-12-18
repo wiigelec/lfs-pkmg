@@ -66,12 +66,9 @@ blfs-init-work :
 
 build-work :
 	@echo
+	@$(eval BUILD_DIR=$(shell grep BUILD_DIR $(ACTION_CURRENT_CONFIG) | sed 's/BUILD_DIR=//'))
 	@$(call bold_message, Building work dir packages...)
-	@$(eval BUILD_DIR = $(shell grep BUILD_DIR $(ACTION_CURRENT_CONFIG) | sed 's/BUILD_DIR=//'))
-	@$(eval LFS_VER = $(shell xmllint --xpath "/book/bookinfo/subtitle/text(\)" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./'))
-	@$(MAKE) -C $(BUILD_DIR)/work
-	@$(shell sudo -E $(UTIL_CREATE_PKGLOG_SH))
-	@$(shell sudo -E LFS_VER=$(LFS_VER) $(UTIL_CREATE_ARCHIVE_SH))
+	@$(BUILD_WORK_SH)
 
 
 ####################################################################

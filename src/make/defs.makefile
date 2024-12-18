@@ -219,6 +219,7 @@ BUILD_DEPS_SH = $(SCRIPT_DIR)/build/build-deps.sh
 BUILD_TREES_SH = $(SCRIPT_DIR)/build/build-trees.sh
 BUILD_SCRIPTS_SH = $(SCRIPT_DIR)/build/build-scripts.sh
 BUILD_INIT_WORK_SH = $(SCRIPT_DIR)/build/build-init-work.sh
+BUILD_WORK_SH = $(SCRIPT_DIR)/build/build-work.sh
 
 BS_BUILD_LIST_SH = $(SCRIPT_DIR)/build/bootstrap/bs-build-list.sh
 BS_DEPLOY_WORK_SH = $(SCRIPT_DIR)/build/bootstrap/bs-deploy-work.sh
