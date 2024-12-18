@@ -33,7 +33,7 @@ done
 
 ### ADD INSTALLED ###
 
-installed=$(ls $INSTALLED_DIR) 
+installed=$(ls ${INSTALL_ROOT}$INSTALLED_DIR) 
 for i in $installed; do
 
 	i=${i%--*}
