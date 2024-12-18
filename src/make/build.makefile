@@ -36,8 +36,7 @@ pkg-lfs-xml $(PKG_LFS_XML) :
 	$(BUILD_PKG_LFS_XML_SH)
 
 
-$(PKG_BLFS_XML): $(BLFS_FULL_XML) 
-pkg-blfs-xml $(PKG_BLFS_XML) :
+pkg-blfs-xml :
 	@echo
 	@$(call bold_message, Building BLFS package list xml...)
 	$(BUILD_PKG_BLFS_XML_SH)
@@ -147,7 +146,7 @@ archive-mnt $(ARCHIVE_MNT) :
 ####################################################################
 
 
-build-blfs : $(PKG_BLFS_XML) $(BLFS_DEPS_DONE) $(BLFS_SCRIPTS_DONE) \
+build-blfs : $(BLFS_FULL_XML) pkg-blfs-xml $(BLFS_DEPS_DONE) $(BLFS_SCRIPTS_DONE) \
 	bb-config-in bb-config-out bb-build-list blfs-trees \
 	blfs-init-work
 	@echo

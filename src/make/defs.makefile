@@ -113,6 +113,8 @@ PKG_LFS_XSL = $(XSL_DIR)/pkg-lfs.xsl
 PKG_BLFS_XML = $(BUILD_DIR)/xml/pkg-blfs.xml
 PKG_BLFS_XSL = $(XSL_DIR)/pkg-blfs.xsl
 
+PKG_ADD_INSTALLED_XSL = $(XSL_DIR)/pkg-add-installed.xsl
+
 BLFS_DEPS_XSL = $(SRC_DIR)/xsl/blfs-deps.xsl
 BLFS_SCRIPTS_XSL = $(SRC_DIR)/xsl/blfs-scripts.xsl
 
