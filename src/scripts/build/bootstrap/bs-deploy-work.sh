@@ -88,6 +88,7 @@ sudo chroot $INSTALLROOT make -C /sources/work
 ### BUILD PACKAGES ###
 
 workscripts=/sources/work/scripts
+bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
 
 echo
 echo "Building pkglogs..."
@@ -97,7 +98,7 @@ sudo chroot $INSTALLROOT bash -e -c "DIFFLOG_DIR=$DIFFLOG_DIR PKGLOG_DIR=$PKGLOG
 echo
 echo "Building packages..."
 echo
-sudo chroot $INSTALLROOT bash -e -c "PKGLOG_DIR=$PKGLOG_DIR ARCHIVE_DIR=$ARCHIVE_DIR LFS_VER=$BLFSBRANCH $workscripts/util-create-archive.sh"
+sudo chroot $INSTALLROOT bash -e -c "PKGLOG_DIR=$PKGLOG_DIR ARCHIVE_DIR=$ARCHIVE_DIR LFS_VER=$bookversion $workscripts/util-create-archive.sh"
 
 
 ### CLEANUP ###

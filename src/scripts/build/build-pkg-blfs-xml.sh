@@ -46,6 +46,7 @@ for i in $installed; do
 	name=${name%-pass1}
 
 	# add/update version
+	echo "Adding installed..."
 	xsltproc --stringparam name $name --stringparam version $version -o $PKG_BLFS_XML $PKG_ADD_INSTALLED_XSL $PKG_BLFS_XML
 
 done
