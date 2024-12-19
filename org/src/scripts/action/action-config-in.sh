@@ -107,14 +107,14 @@ choice
 	# LIST ACTIONS
         config    ACTION__LISTDIR
 	    depends on ACTIONGROUP__LIST
-            bool "Create list from package directory"
+            bool "Create directory list"
             help
 		<TODO: help text>
-#        config    ACTION__LISTDEPS
-#	    depends on ACTIONGROUP__LIST
-#            bool "Create list from dependency tree"
-#            help
-#		<TODO: help text>
+        config    ACTION__LISTDEPS
+	    depends on ACTIONGROUP__LIST
+            bool "Create dependency list"
+            help
+		<TODO: help text>
         config    ACTION__LISTINSTALL
 	    depends on ACTIONGROUP__LIST
             bool "Install list"
@@ -173,7 +173,7 @@ EOF
 cat >> $ACTION_CONFIG_IN << EOF
 choice
         prompt "Init System"
-	depends on ACTION__BUILDLFS || ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS
+	depends on ACTION__BUILDLFS || ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__LISTDEPS
         config    REV__SYSV
             bool "sysvinit"
             help
@@ -222,7 +222,7 @@ EOF
 cat >> $ACTION_CONFIG_IN << EOF
 choice
 prompt "BLFS Branch"
-depends on ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS
+depends on ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__LISTDEPS
 EOF
 
 # get branches
@@ -265,7 +265,7 @@ EOF
 
 cat >> $ACTION_CONFIG_IN << EOF
 config    LISTNAME
-	depends on ACTION__LISTDIR
+	depends on ACTION__LISTDIR || ACTION__LISTDEPS
 	string  "List name (full path)"
         default "$LISTS_DIR/list-name.list"
 EOF
@@ -293,14 +293,25 @@ EOF
 #------------------------------------------------------------------#
 # COMMON FIELDS
 
-### MIRROR PATH ###
+### LIST PATH ###
 
 cat >> $ACTION_CONFIG_IN << EOF
-config    MIRRORPATH
+config    LISTPATH
 	depends on ACTION__PKGINSTALL || ACTION__PKGUPGRADE || ACTION__LISTINSTALL || ACTION__LISTUPGRADE
-        string  "Mirror Path"
+        string  "List Path"
         default "$LPM_DIR"
 EOF
+
+
+### REPOSITORY ###
+
+cat >> $ACTION_CONFIG_IN << EOF
+config    REPOPATH
+	depends on ACTION__PKGINSTALL || ACTION__PKGUPGRADE || ACTION__LISTINSTALL || ACTION__LISTUPGRADE
+        string  "Repository Path"
+        default "$LPM_DIR"
+EOF
+
 
 ### INSTALL ROOT ###
 

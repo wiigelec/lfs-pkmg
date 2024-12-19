@@ -106,6 +106,9 @@ PKGUPGR_CONFIG_IN = $(BUILD_DIR)/config/pkgupgr-config.in
 PKGUPGR_CONFIG_OUT = $(BUILD_DIR)/config/pkgupgr-config.out
 UPGRADE_PKG_LIST = $(BUILD_DIR)/config/upgrade-pkg-list
 
+BUILD_TREES_IN = $(BUILD_DIR)/config/build-trees-in
+BUILD_TREES_OUT = $(BUILD_DIR)/config/build-trees-out
+
 LFS_FULL_XML = $(BUILD_DIR)/xml/lfs-full.xml
 BLFS_FULL_XML = $(BUILD_DIR)/xml/blfs-full.xml
 PKG_LFS_XML = $(BUILD_DIR)/xml/pkg-lfs.xml
@@ -128,6 +131,9 @@ BB_BUILD_LIST = $(BUILD_DIR)/config/bb-build-list
 BB_BUILD_TREE = $(BUILD_DIR)/config/bb-build-tree
 
 #------------------------------------------------------------------#
+LISTDEPS_CONFIG_IN = $(BUILD_DIR)/config/listdeps-config.in
+LISTDEPS_CONFIG_OUT = $(BUILD_DIR)/config/listdeps-config.out
+
 LISTINST_CONFIG_IN = $(BUILD_DIR)/config/listinst-config.in
 LISTINST_CONFIG_OUT = $(BUILD_DIR)/config/listinst-config.out
 
@@ -216,7 +222,6 @@ BB_FIX_DEPS_SH = $(SCRIPT_DIR)/build/blfs/bb-fix-deps.sh
 BB_FIX_SCRIPTS_SH = $(SCRIPT_DIR)/build/blfs/bb-fix-scripts.sh
 BUILD_BLFS_SH = $(SCRIPT_DIR)/build/build-blfs.sh
 BUILD_DEPS_SH = $(SCRIPT_DIR)/build/build-deps.sh
-BUILD_TREES_SH = $(SCRIPT_DIR)/build/build-trees.sh
 BUILD_SCRIPTS_SH = $(SCRIPT_DIR)/build/build-scripts.sh
 BUILD_INIT_WORK_SH = $(SCRIPT_DIR)/build/build-init-work.sh
 BUILD_WORK_SH = $(SCRIPT_DIR)/build/build-work.sh
@@ -229,6 +234,10 @@ BS_DEPLOY_WORK_SH = $(SCRIPT_DIR)/build/bootstrap/bs-deploy-work.sh
 LIST_LAUNCH_SH = $(SCRIPT_DIR)/list/list-launch.sh
 
 LIST_CREATEDIR_SH = $(SCRIPT_DIR)/list/list-createdir.sh
+
+LISTDEPS_CONFIG_IN_SH = $(SCRIPT_DIR)/list/listdeps-config-in.sh
+LISTDEPS_CONFIG_OUT_SH = $(SCRIPT_DIR)/list/listdeps-config-out.sh
+LIST_CREATEDEPS_SH = $(SCRIPT_DIR)/list/list-createdeps.sh
 
 LISTINST_CONFIG_IN_SH = $(SCRIPT_DIR)/list/listinst-config-in.sh
 LISTINST_CONFIG_OUT_SH = $(SCRIPT_DIR)/list/listinst-config-out.sh
@@ -268,6 +277,8 @@ UTIL_INSTALL_PKG_SH = $(SCRIPT_DIR)/util/util-install-package.sh
 UTIL_REMOVE_PKG_SH = $(SCRIPT_DIR)/util/util-remove-package.sh
 UTIL_GET_MIRROR_VERSIONS_SH = $(SCRIPT_DIR)/util/util-get-mirror-versions.sh
 UTIL_LPCONFIG_IN_SH = $(SCRIPT_DIR)/util/util-lpconfig-in.sh
+UTIL_BUILD_TREES_SH = $(SCRIPT_DIR)/util/util-build-trees.sh
+UTIL_ROOT_TREE_SH = $(SCRIPT_DIR)/util/util-root-tree.sh
 
 UTIL_MOUNT_KERNFS_SH = $(SCRIPT_DIR)/util/util-mount-kernfs.sh
 UTIL_UMOUNT_KERNFS_SH = $(SCRIPT_DIR)/util/util-umount-kernfs.sh

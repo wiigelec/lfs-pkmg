@@ -10,7 +10,7 @@ set -e
 
 ### LOCAL DEFS ###
 PROCD_FILE=$DEPTREE_DIR/procd
-ROOT_DEPS=$BB_BUILD_LIST
+ROOT_DEPS=$1
 
 
 ### DEBUG ###
@@ -123,8 +123,8 @@ function debug
 
 ### INITIALIZE ###
 
-echo "" > $PROCD_FILE
 [ ! -d $TREE_DIR ] && mkdir -p $TREE_DIR
+echo "" > $PROCD_FILE
 
 
 ### PROCESS ROOT FILE ###
