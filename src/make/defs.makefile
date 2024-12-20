@@ -51,6 +51,7 @@ SRC_XSL = $(SRC_DIR)/xsl
 DEPTREE_DIR = deptree
 DEPS_DIR = $(DEPTREE_DIR)/deps
 TREES_DIR = $(DEPTREE_DIR)/trees
+BLFS_SCRIPTS_DIR = blfs-scripts
 
 
 #------------------------------------------------------------------#
@@ -71,6 +72,7 @@ SELECT_BLFSPKGS_XSL = $(SRC_XSL)/select-blfspkgs.xsl
 BLFS_PKGS_LIST = $(BUILD_CONFIG)/blfs-pkgs-list
 
 BLFS_DEPS_XSL = $(SRC_XSL)/blfs-deps.xsl
+BLFS_SCRIPTS_XSL = $(SRC_XSL)/blfs-scripts.xsl
 
 
 
