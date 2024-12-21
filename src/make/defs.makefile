@@ -70,6 +70,7 @@ BLFS_SCRIPTS_DIR = blfs-scripts
 
 LPM_DIR = /var/lib/lpm
 LPM_BUILD = $(LPM_DIR)/build
+INSTALLED_DIR = $(LPM_DIR)/installed
 DIFFLOG_DIR = $(LPM_BUILD)/difflog
 PKGLOG_DIR = $(LPM_BUILD)/pkglog
 ARCHIVE_DIR = $(LPM_BUILD)/packages
@@ -95,10 +96,21 @@ BLFS_PKGS_LIST = $(BUILD_CONFIG)/blfs-pkgs-list
 BLFS_DEPS_XSL = $(SRC_XSL)/blfs-deps.xsl
 BLFS_SCRIPTS_XSL = $(SRC_XSL)/blfs-scripts.xsl
 
+INSTPKGS_CONFIG_IN = $(BUILD_CONFIG)/instpkgs-config-in
+INSTPKGS_CONFIG_OUT = $(BUILD_CONFIG)/instpkgs-config-out
+REMV_PKGS_LIST = $(BUILD_CONFIG)/remv-pkgs-list
+
+REPOPKGS_CONFIG_IN = $(BUILD_CONFIG)/repopkgs-config-in
+REPOPKGS_CONFIG_OUT = $(BUILD_CONFIG)/repopkgs-config-out
+INST_PKGS_LIST = $(BUILD_CONFIG)/inst-pkgs-list
+
 WORK_PKGS_TREE = $(BUILD_CONFIG)/work-pkgs-tree
 
 BUILD_PKGLOGS_SH = $(SCRIPTS_FUNCS)/build-pkglogs.sh
 BUILD_ARCHIVES_SH = $(SCRIPTS_FUNCS)/build-archives.sh
+
+INST_PKG_SH = $(SCRIPTS_FUNCS)/inst-pkg.sh
+REMV_PKG_SH = $(SCRIPTS_FUNCS)/remv-pkg.sh
 
 
 #------------------------------------------------------------------#

@@ -304,7 +304,7 @@ EOF
 
 cat << EOF
 config    LISTPATH
-	depends on ACTION__PKGINSTALL || ACTION__PKGUPGRADE || ACTION__LISTINSTALL || ACTION__LISTUPGRADE
+	depends on ACTION__LISTINSTALL || ACTION__LISTUPGRADE
         string  "List Path"
         default "$LPM_DIR"
 EOF
@@ -326,7 +326,7 @@ cat << EOF
 config    INSTALLROOT
 	depends on ACTIONGROUP__PACKAGE || ACTION__BUILDLFS || ACTION__BUILDBOOTSTRAP || ACTION__LISTINSTALL || ACTION__LISTREMOVE || ACTION__LISTUPGRADE
         string  "Install ROOT"
-        default "$LFS"
+        default "/mnt/lfs"
 EOF
 
 

@@ -1,0 +1,80 @@
+#!/bin/bash
+####################################################################
+# 
+# get-lp-listing.func
+#
+####################################################################
+
+
+#------------------------------------------------------------------#
+# get-lp-listing
+#------------------------------------------------------------------#
+function get-lp-listing
+{
+
+selection=$1
+
+# GET VERION DIRS
+file="false"
+server="false"
+if [[ $REPOPATH == "http://"* || $REPOPATH == "https://"* ]]; then
+
+        versionlist=$(curl --silent $REPOPATH | \
+               sed '/href/!d' | sed 's/.*href=\(.*\)<\/a.*/\1/g' | sed 's/.*>\(.*\)\//\1/g' \
+               | sort)
+
+        server="true"
+
+else
+        [[ ! -d $REPOPATH ]] && echo -e "\n>>>>> $REPOPATH does not exist. <<<<<\n" && exit 1
+
+        versionlist=$(ls ${REPOPATH} | sort)
+
+	file="true"
+fi
+
+
+# ITERATE VERSIONS
+
+# select string
+selectstring="<UNKNOWN>"
+[[ $selection == "PACKAGE" ]] && selectstring="Select packages"
+[[ $selection == "LIST" ]] && selectstring="Select lists"
+
+echo "menu \"$selectstring\""
+for v in $versionlist; do
+        echo " menu   \"$v\""
+
+        outlist=""
+                
+	# set path
+        [[ $selection == "PACKAGE" ]] && path=$REPOPATH/$v/packages/
+        [[ $selection == "LIST" ]] && path=$REPOPATH/$v/lists/
+
+        # FROM FILE
+        if [[ $file == "true" ]]; then
+                [[ -d $path ]] && outlist=$(ls $path)
+        fi
+
+        # FROM SERVER
+        if [[ $server == "true" ]]; then
+                outlist="$(curl --silent $path | sed '/href/!d' | sed 's/.*href=\(.*\)<\/a.*/\1/g' | sed 's/.*>\(.*\)$/\1/g')"
+                path=${path//:/..}
+        fi
+
+        # WRITE CONFIG
+        for o in $outlist; do
+
+                name=${o##*/}
+                [[ -z $name ]] && continue
+                echo "   config  ${path}$o"
+                echo "     bool  \"$name\""
+
+        done
+
+        echo "  endmenu"
+done
+
+echo "endmenu"
+
+}
