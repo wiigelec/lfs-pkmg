@@ -9,7 +9,7 @@ BUILD_SCRIPTS = $(SCRIPTS_DIR)/build
 
 BUILD_BLFS_ARCHIVES_SH = $(BUILD_SCRIPTS)/build-blfs-archives.sh
 BUILD_BLFS_VERSIONDIR_SH = $(BUILD_SCRIPTS)/build-blfs-versiondir.sh
-BUILD_BLFS_WORK_SH = $(BUILD_yySCRIPTS)/build-blfs-work.sh
+BUILD_BLFS_WORK_SH = $(BUILD_SCRIPTS)/build-blfs-work.sh
 
 export
 

@@ -98,28 +98,26 @@ endif
 <xsl:variable name="v" select="version/text()" />
 <xsl:variable name="iv" select="installed/text()" />
 
+config  CONFIG_<xsl:value-of select="id" />
 <xsl:choose>
 
 	<!-- not installed -->
         <xsl:when test="not(installed)">
-config  CONFIG_<xsl:value-of select="id" />
 bool "<xsl:value-of select="id" /><xsl:text> </xsl:text><xsl:value-of select="version" />"
-default n
         </xsl:when>
 
 	<!-- current version installed -->
 	<xsl:when test="$v=$iv">
-comment "Installed: <xsl:value-of select="concat(id,' ',version)" />"
+bool "*** INSTALLED: <xsl:value-of select="id" /><xsl:text> </xsl:text><xsl:value-of select="version" /> ***"
 	</xsl:when>
 
 	<!-- other version installed -->
 	<xsl:otherwise>
-config  CONFIG_<xsl:value-of select="id" />
 bool "<xsl:value-of select="concat(id,' ',version)" /> (Installed: <xsl:value-of select="$iv" />)"
-default n
 	</xsl:otherwise>
 
 </xsl:choose>
+default n
 
 </xsl:template>
 

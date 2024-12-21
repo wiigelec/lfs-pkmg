@@ -13,17 +13,21 @@ source $CURRENT_CONFIG
 # VERSION BUILD DIR
 #------------------------------------------------------------------#
 
-bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
-[[ -z $bookversion ]] && echo -e "\n>>>>> No book version. <<<<<\n" && exit 1
+#bookversion=$BOOK_VERSION
+#versionbuilddir=$BUILD_DIR
 
-versionbuilddir=$BUILD_DIR
-if [[ ! $BUILD_DIR == *"$bookversion"* ]]; then
-	versionbuilddir=$BUILD_DIR/$bookversion-$REV
+### GET TRUNK BOOK VERSION ###
+#if [[ $BOOK_VERS == "trunk" ]]; then
+#bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML_NV | sed 's/Version //' | sed 's/-/\./')
+#	versionbuilddir=$BLD_DIR/$bookversion-$REV
+#fi
 
-	mkdir -p $versionbuilddir
+### CREATE BUILD DIR ###
+if [[ ! -d $BUILD_DIR ]]; then
 
-	cp -rv $BUILD_XML $versionbuilddir
+	mkdir -p $BUILD_DIR
 
+	mv -v $BLD_XML $BUILD_DIR
 fi
 
 
@@ -32,8 +36,8 @@ fi
 #------------------------------------------------------------------#
 
 versionbuilddir=${versionbuilddir//\//\\/}
-sed -i "s/BK_VERS=/BOOK_VERS=$bookversion/" $CURRENT_CONFIG
-sed -i "s/BLD_DIR=/BUILD_DIR=$versionbuilddir/" $CURRENT_CONFIG
+sed -i "s/BOOK_VERS=.*/BOOK_VERS=$bookversion/" $CURRENT_CONFIG
+sed -i "s/BUILD_DIR=.*/BUILD_DIR=$versionbuilddir/" $CURRENT_CONFIG
 
 
 

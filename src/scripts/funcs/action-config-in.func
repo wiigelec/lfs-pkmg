@@ -12,11 +12,6 @@
 function action-config-in 
 {
 
-# INITIALIZE
-
-[[ ! -d $BUILD_DIR/config ]] && mkdir $BUILD_DIR/config
-
-
 #------------------------------------------------------------------#
 # ACTION GROUP
 

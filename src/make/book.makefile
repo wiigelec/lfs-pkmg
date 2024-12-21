@@ -18,10 +18,12 @@ export
 
 #------------------------------------------------------------------#
 
-book-blfs-fullxml :
+book-blfs-fullxml $(BLFS_FULL_XML) :
 	@echo
 	@$(call bold_message, Generating BLFS full xml...)
-	$(BOOK_BLFS_FULLXML_SH)
+	@$(BOOK_BLFS_FULLXML_SH)
+
+.PHONY: book-blfs-fullxml
 
 #------------------------------------------------------------------#
 

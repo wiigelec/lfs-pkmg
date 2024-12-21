@@ -6,13 +6,33 @@
 ####################################################################
 
 set -e
+[[ -f $CURRENT_CONFIG ]] && source $CURRENT_CONFIG
 source $SCRIPTS_FUNCS/action-config-in.func
+
+
+#------------------------------------------------------------------#
+function cfg-val
+{
+	cfg=$1
+	grep "^CONFIG_$cfg" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//'
+}
+#------------------------------------------------------------------#
+#------------------------------------------------------------------#
+function sub-cfg
+{
+	cfg=$1
+	local sub=$(cfg-val $cfg)
+	if [[ ! -z $sub ]];then
+		sed -i "s/\($cfg=\).*/\1$sub/" $CURRENT_CONFIG
+	fi
+}
+#------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
 # GENERATE CONFIG IN
 #------------------------------------------------------------------#
 
-mkdir -p $BUILD_CONFIG
+mkdir -p $BLD_CONFIG
 action-config-in > $ACTION_CONFIG_IN
 
 
@@ -27,21 +47,52 @@ KCONFIG_CONFIG=$ACTION_CONFIG_OUT $MENU_CONFIG $ACTION_CONFIG_IN
 # FORMAT CURRENT CONFIG
 #------------------------------------------------------------------#
 
-cp $ACTION_CONFIG_OUT $CURRENT_CONFIG
+action=$(cfg-val "ACTION")
+rev=$(cfg-val "REV")
+lfsbranch=$(cfg-val "BLFSBRANCH")
+blfsbranch=$(cfg-val "BLFSBRANCH")
 
-sed -i '/^#/d' $CURRENT_CONFIG
-sed -i 's/CONFIG_//g' $CURRENT_CONFIG
-sed -i 's/=y//g' $CURRENT_CONFIG
-sed -i 's/__/=/g' $CURRENT_CONFIG
-sed -i 's/"//g' $CURRENT_CONFIG
+builddir=$BLD_DIR/$blfsbranch-$rev 
+buildxmldir=$builddir/xml
 
-echo "BK_VERS=" >> $CURRENT_CONFIG
-echo "BLD_DIR=" >> $CURRENT_CONFIG
+if [[ ! -f $CURRENT_CONFIG ]]; then 
+	
+	echo "Initializing $CURRENT_CONFIG..."
 
-echo "BUILD_XML=\$BUILD_DIR/xml" >> $CURRENT_CONFIG
-echo "BLFS_FULL_XML=\$BUILD_XML/\$BLFS_FULL_XML" >> $CURRENT_CONFIG
-echo "BLFS_PKGLIST_XML=\$BUILD_XML/\$BLFS_PKGLIST_XML" >> $CURRENT_CONFIG
-echo "WORK_DIR=\$BUILD_DIR/work" >> $CURRENT_CONFIG
-echo "BLFS_SCRIPTS_DIR=\$BUILD_DIR/\$BLFS_SCRIPTS_DIR" >> $CURRENT_CONFIG
-echo "TREES_DIR=\$BUILD_DIR/\$TREES_DIR" >> $CURRENT_CONFIG
-echo "DEPS_DIR=\$BUILD_DIR/\$DEPS_DIR" >> $CURRENT_CONFIG
+	cp $ACTION_CONFIG_OUT $CURRENT_CONFIG
+
+	sed -i '/^#/d' $CURRENT_CONFIG
+	sed -i 's/CONFIG_//g' $CURRENT_CONFIG
+	sed -i 's/=y//g' $CURRENT_CONFIG
+	sed -i 's/__/=/g' $CURRENT_CONFIG
+	sed -i 's/"//g' $CURRENT_CONFIG
+
+	### GET BOOKVERSION ###
+
+	echo "BOOK_VERS=$blfsbranch" >> $CURRENT_CONFIG
+	echo "BUILD_DIR=$builddir" >> $CURRENT_CONFIG
+	echo "BLFS_FULL_XML=$buildixmldir/$BLFS_FULL_XML_FILE" >> $CURRENT_CONFIG
+else
+
+	echo "Updating $CURRENT_CONFIG..."
+
+	# REV
+	sub-cfg "REV"
+	
+	# LFS BRANCH
+	sub-cfg "LFSBRANCH"
+
+	# BLFS BRANCH
+	sub-cfg "BLFSBRANCH"
+
+	# BOOK VERSION
+	sed -i "s/\(BOOK_VERS=\).*/\1$blfsbranch/" $CURRENT_CONFIG
+
+	# BUILD DIR
+	builddir=${builddir//\//\\/}
+	sed -i "s/\(BUILD_DIR=\).*/\1$builddir/" $CURRENT_CONFIG
+
+	# BLFS FULL XML
+	buildxmldir=${buildxmldir//\//\\/}
+	sed -i "s/\(BLFS_FULL_XML=\).*/\1$buildxmldir\/$BLFS_FULL_XML_FILE/" $CURRENT_CONFIG
+fi

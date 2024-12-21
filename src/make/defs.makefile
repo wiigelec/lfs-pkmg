@@ -52,16 +52,20 @@ endef
 
 TOPDIR = $(shell pwd)
 
-BUILD_DIR = $(TOPDIR)/build
-CONFIG_DIR = $(BUILD_DIR)/config
-SRC_DIR = $(TOPDIR)/src
 
-BUILD_CONFIG = $(BUILD_DIR)/config
-BUILD_XML = $(BUILD_DIR)/xml
+#------------------------------------------------------------------#
+# NONVERSION
+
+BLD_DIR = $(TOPDIR)/build
+BLD_CONFIG = $(BLD_DIR)/config
+BLD_XML = $(BLD_DIR)/xml
+
+SRC_DIR = $(TOPDIR)/src
 SCRIPTS_DIR = $(SRC_DIR)/scripts
 SCRIPTS_FUNCS = $(SCRIPTS_DIR)/funcs
-
+SRC_MAKE = $(SRC_DIR)/make
 SRC_XSL = $(SRC_DIR)/xsl
+
 
 DEPTREE_DIR = deptree
 DEPS_DIR = $(DEPTREE_DIR)/deps
@@ -80,13 +84,24 @@ ARCHIVE_DIR = $(LPM_BUILD)/packages
 # FILES
 #------------------------------------------------------------------#
 
-ACTION_CONFIG_IN = $(CONFIG_DIR)/action-config-in
-ACTION_CONFIG_OUT = $(CONFIG_DIR)/action-config-out
-CURRENT_CONFIG = $(BUILD_CONFIG)/current-config 
+#------------------------------------------------------------------#
+# NONVERSION
 
-BLFS_FULL_XML = blfs-full.xml
+ACTION_CONFIG_IN = $(BLD_CONFIG)/action-config-in
+ACTION_CONFIG_OUT = $(BLD_CONFIG)/action-config-out
+CURRENT_CONFIG = $(BLD_CONFIG)/current-config
+
+BLFS_FULL_XML_NV = $(BLD_XML)/blfs-full.xml
+
+#------------------------------------------------------------------#
+# VERSION
+
+BLFS_FULL_XML_FILE = blfs-full.xml
+
+
 BLFS_PKGLIST_XML = blfs-pkglist.xml
 BLFS_PKGLIST_XSL = $(SRC_XSL)/blfs-pkglist.xsl
+BLFS_PKGLIST_ADDINST_XSL = $(SRC_XSL)/blfs-pkglist-addinst.xsl
 
 BLFSPKGS_CONFIG_IN = $(BUILD_CONFIG)/blfspkfgs-config-in
 BLFSPKGS_CONFIG_OUT = $(BUILD_CONFIG)/blfspkgs-config-out
@@ -105,6 +120,8 @@ REPOPKGS_CONFIG_OUT = $(BUILD_CONFIG)/repopkgs-config-out
 INST_PKGS_LIST = $(BUILD_CONFIG)/inst-pkgs-list
 
 WORK_PKGS_TREE = $(BUILD_CONFIG)/work-pkgs-tree
+
+ACTION_LAUNCH_SH = $(SCRIPTS_FUNCS)/action-launch.sh
 
 BUILD_PKGLOGS_SH = $(SCRIPTS_FUNCS)/build-pkglogs.sh
 BUILD_ARCHIVES_SH = $(SCRIPTS_FUNCS)/build-archives.sh

@@ -32,9 +32,7 @@ rev=sysv
 # VALIDATE
 #------------------------------------------------------------------#
 
-blfsfullxml=$BUILD_XML/$BLFS_FULL_XML
-
-mkdir -p $BUILD_XML
-make -C $BLFS_GIT_DIR RENDERTMP=$BUILD_XML REV=$rev validate
-[[ "$rev" = "systemd" ]] && mv -v $BUILD_XML/blfs-systemd-full.xml $blfsfullxml
+mkdir -p $BLD_XML
+make -C $BLFS_GIT_DIR RENDERTMP=$BLD_XML REV=$rev validate
+if [[ "$rev" == "systemd" ]]; then mv -v $BLD_XML/blfs-systemd-full.xml $BLFS_FULL_XML_NV; fi
 
