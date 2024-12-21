@@ -13,17 +13,18 @@ source $CURRENT_CONFIG
 # VERSION BUILD DIR
 #------------------------------------------------------------------#
 
-blfsfullxml=$BUILD_XML/$BLFS_FULL_XML
-
-bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $blfsfullxml | sed 's/Version //' | sed 's/-/\./')
+bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
 [[ -z $bookversion ]] && echo -e "\n>>>>> No book version. <<<<<\n" && exit 1
 
 versionbuilddir=$BUILD_DIR
-[[ ! $BUILD_DIR == *"$bookversion"* ]] && versionbuilddir=$BUILD_DIR/$bookversion-$REV
+if [[ ! $BUILD_DIR == *"$bookversion"* ]]; then
+	versionbuilddir=$BUILD_DIR/$bookversion-$REV
 
-mkdir -p $versionbuilddir
+	mkdir -p $versionbuilddir
 
-cp -rv $BUILD_XML $versionbuilddir
+	cp -rv $BUILD_XML $versionbuilddir
+
+fi
 
 
 #------------------------------------------------------------------#

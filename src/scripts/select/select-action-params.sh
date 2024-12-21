@@ -23,7 +23,6 @@ action-config-in > $ACTION_CONFIG_IN
 KCONFIG_CONFIG=$ACTION_CONFIG_OUT $MENU_CONFIG $ACTION_CONFIG_IN
 
 
-
 #------------------------------------------------------------------#
 # FORMAT CURRENT CONFIG
 #------------------------------------------------------------------#
@@ -39,3 +38,10 @@ sed -i 's/"//g' $CURRENT_CONFIG
 echo "BK_VERS=" >> $CURRENT_CONFIG
 echo "BLD_DIR=" >> $CURRENT_CONFIG
 
+echo "BUILD_XML=\$BUILD_DIR/xml" >> $CURRENT_CONFIG
+echo "BLFS_FULL_XML=\$BUILD_XML/\$BLFS_FULL_XML" >> $CURRENT_CONFIG
+echo "BLFS_PKGLIST_XML=\$BUILD_XML/\$BLFS_PKGLIST_XML" >> $CURRENT_CONFIG
+echo "WORK_DIR=\$BUILD_DIR/work" >> $CURRENT_CONFIG
+echo "BLFS_SCRIPTS_DIR=\$BUILD_DIR/\$BLFS_SCRIPTS_DIR" >> $CURRENT_CONFIG
+echo "TREES_DIR=\$BUILD_DIR/\$TREES_DIR" >> $CURRENT_CONFIG
+echo "DEPS_DIR=\$BUILD_DIR/\$DEPS_DIR" >> $CURRENT_CONFIG

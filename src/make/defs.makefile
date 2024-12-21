@@ -1,6 +1,6 @@
 ####################################################################
 #
-# delfs.makefile
+# defs.makefile
 #
 ####################################################################
 
@@ -32,6 +32,21 @@ endef
 
 
 #------------------------------------------------------------------#
+# AS ROOT
+#------------------------------------------------------------------#
+
+define ASROOT
+as_root() 
+{ 
+	if [ $$EUID = 0 ]; then $$*;
+	elif [ -x /usr/bin/sudo ]; then sudo -E $$*;
+	else su -c \\"$$*\\"; 
+	fi 
+}
+endef
+
+
+#------------------------------------------------------------------#
 # DIRECTORIES
 #------------------------------------------------------------------#
 
@@ -52,6 +67,12 @@ DEPTREE_DIR = deptree
 DEPS_DIR = $(DEPTREE_DIR)/deps
 TREES_DIR = $(DEPTREE_DIR)/trees
 BLFS_SCRIPTS_DIR = blfs-scripts
+
+LPM_DIR = /var/lib/lpm
+LPM_BUILD = $(LPM_DIR)/build
+DIFFLOG_DIR = $(LPM_BUILD)/difflog
+PKGLOG_DIR = $(LPM_BUILD)/pkglog
+ARCHIVE_DIR = $(LPM_BUILD)/packages
 
 
 #------------------------------------------------------------------#
@@ -74,6 +95,10 @@ BLFS_PKGS_LIST = $(BUILD_CONFIG)/blfs-pkgs-list
 BLFS_DEPS_XSL = $(SRC_XSL)/blfs-deps.xsl
 BLFS_SCRIPTS_XSL = $(SRC_XSL)/blfs-scripts.xsl
 
+WORK_PKGS_TREE = $(BUILD_CONFIG)/work-pkgs-tree
+
+BUILD_PKGLOGS_SH = $(SCRIPTS_FUNCS)/build-pkglogs.sh
+BUILD_ARCHIVES_SH = $(SCRIPTS_FUNCS)/build-archives.sh
 
 
 #------------------------------------------------------------------#

@@ -48,6 +48,6 @@ book-blfs-scripts :
 
 book-blfs-trees :
 	@echo
-	@$(call bold_message, Processing package dependencies...)
+	@$(call bold_message, Generating dependency trees...)
 	$(BOOK_BLFS_TREES_SH)
 

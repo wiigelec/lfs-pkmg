@@ -1,39 +1,55 @@
 #!/bin/bash
 ####################################################################
 # 
-# book-blfs-pkglist.sh
+# setup-blfs-work.sh
 #
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG
+source $CURRENT_CONFIG 
+source $SCRIPTS_FUNCS/setup-deps.func
+source $SCRIPTS_FUNCS/setup-scripts.func
+source $SCRIPTS_FUNCS/setup-makefile.func
+
+# GET ASROOT 
+
+source <(echo $ASROOT)
+export -f as_root
 
 
 #------------------------------------------------------------------#
-# GET VERSION INFO
+# INITIALIZE WORK DIR
 #------------------------------------------------------------------#
 
-kf6_version=$(grep 'ln -sfv kf6' $BLFS_FULL_XML | sed 's/.* kf6-\(.*\) .*/\1/')
-
-
-#------------------------------------------------------------------#
-# PROCESS XML
-#------------------------------------------------------------------#
-
-xsltproc -o $BLFS_PKGLIST_XML \
-	--stringparam book-version $BOOK_VERS \
-        --stringparam kf6-version $kf6_version \
-        $BLFS_PKGLIST_XSL $BLFS_FULL_XML
-
-# FIX VERSIONS
-
-sed -i 's/\$\$.*-\(.*\)\$\$/\1/' $BLFS_PKGLIST_XML
+[[ -d $WORK_DIR ]] && rm -rf $WORK_DIR
+mkdir -p $WORK_DIR/{scripts,logs}
+> $WORK_PKGS_TREE
 
 
 #------------------------------------------------------------------#
-# UNVERSIONED
+# PACKAGE DEP TREE
 #------------------------------------------------------------------#
 
+setup-deps
+
+
 #------------------------------------------------------------------#
-# UPDATE INSTALLED
+# ORDER BUILD SCRIPTS
 #------------------------------------------------------------------#
+
+setup-scripts
+
+
+#------------------------------------------------------------------#
+# GENERATE MAKEFILE
+#------------------------------------------------------------------#
+
+setup-makefile
+
+
+#------------------------------------------------------------------#
+# INITIALIZE DIFFLOG DIR
+#------------------------------------------------------------------#
+
+[[ ! -d $DIFFLOG_DIR ]] && as_root mkdir -p $DIFFLOG_DIR
+

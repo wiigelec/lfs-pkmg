@@ -1,0 +1,44 @@
+#!/bin/bash
+####################################################################
+# 
+# setup-deps.func
+#
+####################################################################
+
+
+#------------------------------------------------------------------#
+# setup-deps
+#------------------------------------------------------------------#
+function setup-deps
+{
+
+echo
+echo "Processing dependencies..."
+echo
+
+packages=$(cat $BLFS_PKGS_LIST)
+for p in $packages
+do
+        treefile=$TREES_DIR/${p}.tree
+        while IFS= read -r treeline;
+        do
+                echo -ne "$treeline\033[0K\r"
+
+                # check version
+                # handle pass1
+                pass1=""
+                [[ $treeline =~ "-pass1" ]] && pass1=${treeline} && treeline=${treeline%-pass1}
+                iv=$(xmllint --xpath "//package[id='$treeline']/installed/text()" $BLFS_PKGLIST_XML 2>/dev/null) || true
+                bv=$(xmllint --xpath "//package[id='$treeline']/version/text()" $BLFS_PKGLIST_XML 2>/dev/null)
+
+                if [[ "$iv" == "$bv" ]]; then continue; fi
+
+                [[ ! -z $pass1 ]] && treeline=$pass1
+                [[ -z "$(grep -x $treeline $WORK_PKGS_TREE)" ]] && echo $treeline >> $WORK_PKGS_TREE
+        done < $treefile
+
+done
+
+echo -ne "\033[0K\r"
+
+}

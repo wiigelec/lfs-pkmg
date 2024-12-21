@@ -9,10 +9,6 @@ set -e
 source $SCRIPTS_FUNCS/fix-scripts.func
 source $CURRENT_CONFIG
 
-BLFS_SCRIPTS_DIR=$BUILD_DIR/$BLFS_SCRIPTS_DIR
-BUILD_XML=$BUILD_DIR/xml
-BLFS_FULL_XML=$BUILD_XML/$BLFS_FULL_XML
-BLFS_PKGLIST_XML=$BUILD_XML/$BLFS_PKGLIST_XML
 
 #------------------------------------------------------------------#
 # PROCESS XML

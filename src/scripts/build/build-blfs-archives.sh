@@ -1,32 +1,36 @@
 #!/bin/bash
 ####################################################################
 # 
-# book-blfs-deps.sh
+# build-blfs-acrhives.sh
 #
 ####################################################################
 
 set -e
-source $SCRIPTS_FUNCS/fix-deps.func
 source $CURRENT_CONFIG
 
+# GET ASROOT
 
-#------------------------------------------------------------------#
-# PROCESS XML
-#------------------------------------------------------------------#
-
-[[ ! -d $DEPS_DIR ]] && mkdir -p $DEPS_DIR
-xsltproc --stringparam required true \
-        --stringparam recommended true \
-        --stringparam files true \
-        --stringparam depsdir $DEPS_DIR/ \
-        $BLFS_DEPS_XSL $BLFS_FULL_XML
+source <(echo $ASROOT)
+export -f as_root
 
 
 #------------------------------------------------------------------#
-# FIX DEPS
+# CREATE PKGLOGS
 #------------------------------------------------------------------#
 
 echo
-echo "Fixing deps..."
+echo "Building pkglogs..."
+as_root $BUILD_PKGLOGS_SH
+
+
+#------------------------------------------------------------------#
+# CREATE ARCHIVES
+#------------------------------------------------------------------#
+
 echo
-fix-deps
+echo "Building archives..."
+as_root $BUILD_ARCHIVES_SH
+
+
+echo
+echo "Done."

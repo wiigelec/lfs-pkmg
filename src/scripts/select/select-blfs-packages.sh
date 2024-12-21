@@ -8,8 +8,6 @@
 set -e
 source $CURRENT_CONFIG 
 
-BUILD_XML=$BUILD_DIR/xml
-BLFS_PKGLIST_XML=$BUILD_XML/$BLFS_PKGLIST_XML
 
 #------------------------------------------------------------------#
 # PROCESS XML

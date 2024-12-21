@@ -1,0 +1,97 @@
+#!/bin/bash
+####################################################################
+# 
+# setup-makefile.func
+#
+####################################################################
+
+
+#------------------------------------------------------------------#
+# setup-makefile
+#------------------------------------------------------------------#
+function setup-makefile
+{
+
+echo
+echo "Generating Makefile..."
+echo
+
+makefile=$WORK_DIR/Makefile
+[[ -f $makefile ]] && rm $makefile
+scripts=$(ls -r $WORK_DIR/scripts)
+
+### MAKEFILE HEADER ###
+cat << EOF > $makefile
+####################################################################
+# AUTO GENERATED MAKEFILE
+####################################################################
+
+### DISPLAY OUTPUT ###
+BOLD= "[0;1m"
+NORMAL= "[0;0m"
+BLUE= "[1;34m"
+
+define echo_message
+  @echo \$(BLUE)"===================================================================="
+  @echo \$(BOLD)"--------------------------------------------------------------------"
+  @echo \$(BOLD) Building target: \$(BLUE)\$@\$(BOLD)
+  @echo \$(BOLD)"--------------------------------------------------------------------"
+  @echo \$(BLUE)"===================================================================="
+  @echo \$(NORMAL)
+endef
+
+define end_message
+  @echo \$(BOLD)
+  @echo \$(BLUE)"--------------------------------------------------------------------"
+  @echo \$(BOLD)"===================================================================="
+  @echo \$(BOLD) SUCCESS: \$(BLUE)Build completed.\$(BOLD)
+  @echo \$(BOLD)"===================================================================="
+  @echo \$(BLUE)"--------------------------------------------------------------------"
+  @echo \$(NORMAL)
+endef
+
+EOF
+
+### ADD SCRIPTS ###
+prev=""
+first="true"
+for s in $scripts
+do
+	[ -z $prev ] && prev=$s && continue
+
+	target1=${prev%.build}
+	target2=${s%.build}
+	package=${target1#*z-}
+	[[ ! -z $first ]] && message="@\$(call end_message)" && first=""
+
+cat << EOF >> $makefile
+$target1 : $target2
+	@echo
+	@\$(call echo_message)
+	@\$(TIMER_SCRIPT) PKG \$\$PPID $target1 &
+	@echo
+	./scripts/$prev
+#	\$(SCRIPT_DIR)/select.sh VERSINSTPKG $package
+	touch $target1
+	$message
+EOF
+
+	prev=$s
+done
+
+target1=${prev%.build}
+package=${target1#*z-}
+
+cat << EOF >> $makefile
+$target1 :
+	@echo
+	@\$(call echo_message)
+	@\$(TIMER_SCRIPT) PKG \$\$PPID $target1 &
+	@echo
+	./scripts/$prev
+#	\$(SCRIPT_DIR)/select.sh VERSINSTPKG $package
+	touch $target1
+EOF
+
+
+}
