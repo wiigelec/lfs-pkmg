@@ -62,7 +62,10 @@ do
 	target1=${prev%.build}
 	target2=${s%.build}
 	package=${target1#*z-}
-	[[ ! -z $first ]] && message="@\$(call end_message)" && first=""
+
+	# SET END MESSAGE
+	message=""
+	[[ $first == "true" ]] && message="@\$(call end_message)" && first="false"
 
 cat << EOF >> $makefile
 $target1 : $target2
