@@ -71,7 +71,7 @@ exsize=$(xz -l $download | tail -n1 | tr -s ' ' | cut -d' ' -f6-7 \
 # FORMAT OUTPUT
 #------------------------------------------------------------------#
 
-a="Installing:+$install"
+a="Installing:+$file"
 b="+$exsize"
 message=$(printf "%-80s %10s+K" "$a" "$b")
 message=${message// /.}
