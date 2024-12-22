@@ -30,7 +30,7 @@ for FILE in $PKGLOG_DIR/*.pkglog;
 do
     	echo -ne "Processing $FILE...\033[0K\r"
 
-    	# TAR FILES
+    	### TAR FILES ###
     	pkg=${FILE%.pkglog}
     	pkg=${pkg##*/}
 
@@ -38,15 +38,16 @@ do
 
     	tar --no-recursion -cJpf $ARCHIVE_NAME -T $FILE > /dev/null 2>&1
 
-	# STRIP
+	### STRIP ###
 	tmpdir=/tmp/lfspkmg$RANDOM
 	mkdir $tmpdir
 	pushd $tmpdir > /dev/null
 
 	tar -xpf $ARCHIVE_NAME
 
-	find | xargs file | grep -e "executable" -e "shared object" | grep ELF | \
-		cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null
+	stripcmd=$(find | xargs file | grep -e "executable" -e "shared object" | grep ELF | \
+		cut -f 1 -d : | xargs)
+	[[ !-z $stripcmd ]] && echo $stripcmd | strip --strip-unneeded 2> /dev/null
 
 	tar -cJpf $ARCHIVE_NAME .
 
