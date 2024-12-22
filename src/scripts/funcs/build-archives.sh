@@ -34,7 +34,10 @@ do
     	pkg=${FILE%.pkglog}
     	pkg=${pkg##*/}
 
-	ARCHIVE_NAME=$ARCHIVE_DIR/$pkg--$PKG_ARCH--$PKG_LFS.$PKG_EXT
+	archivename=$pkg--$PKG_ARCH--$PKG_LFS.$PKG_EXT
+	archivename=$(echo $archivename | tr '[:upper:]' '[:lower:]')
+
+	ARCHIVE_NAME=$ARCHIVE_DIR/$archivename
 
     	tar --no-recursion -cJpf $ARCHIVE_NAME -T $FILE > /dev/null 2>&1
 

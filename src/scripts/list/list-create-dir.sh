@@ -38,4 +38,13 @@ do
 
 done
 
+### SORT UNIQUE ###
+list=$(cat $listfile | sort -u)
+as_root sed -i '/.*/d' $listfile
+for l in $list;
+do
+        echo $l | as_root tee -a $listfile
+done
+
+
 echo

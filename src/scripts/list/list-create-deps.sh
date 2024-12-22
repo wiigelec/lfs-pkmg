@@ -37,13 +37,25 @@ echo
 bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
 for p in $(cat $WORK_PKGS_TREE);
 do
-	pass1=""
+	# SKIP PASS1
 	[[ $p == *"-pass1" ]] && pass1=$p && p=${p%-pass1} 
+
+	# GET PACKAGE VERSION
 	version=$(xmllint --xpath "//package[id='$p']/version/text()" $BLFS_PKGLIST_XML 2>/dev/null)
 
-	[[ ! -z $pass1 ]] && p=$pass1
+	# SETUP PACKAGE NAME
 	write="$p--$version--$(uname -m)--blfs-${bookversion}.txz"
 	echo $write | as_root tee -a $listfile
 done
+
+### SORT UNIQUE ###
+list=$(cat $listfile | sort -u)
+as_root sed -i '/.*/d' $listfile
+for l in $list;
+do
+	echo $l | as_root tee -a $listfile
+done
+
+
 echo
 
