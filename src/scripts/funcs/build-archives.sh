@@ -28,7 +28,7 @@ PKG_EXT=txz
 
 for FILE in $PKGLOG_DIR/*.pkglog;
 do
-    	echo -ne "Processing $FILE...\033[0K\r"
+    	echo -ne "Archiving $FILE...\033[0K\r"
 
     	### TAR FILES ###
     	pkg=${FILE%.pkglog}
@@ -39,6 +39,9 @@ do
     	tar --no-recursion -cJpf $ARCHIVE_NAME -T $FILE > /dev/null 2>&1
 
 	### STRIP ###
+
+    	echo -ne "Stripping $FILE...\033[0K\r"
+
 	tmpdir=/tmp/lfspkmg$RANDOM
 	mkdir $tmpdir
 	pushd $tmpdir > /dev/null
