@@ -30,14 +30,3 @@ if [[ ! -d $BUILD_DIR ]]; then
 	mv -v $BLD_XML $BUILD_DIR
 fi
 
-
-#------------------------------------------------------------------#
-# UPDATE CURRENT CONFIG
-#------------------------------------------------------------------#
-
-versionbuilddir=${versionbuilddir//\//\\/}
-sed -i "s/BOOK_VERS=.*/BOOK_VERS=$bookversion/" $CURRENT_CONFIG
-sed -i "s/BUILD_DIR=.*/BUILD_DIR=$versionbuilddir/" $CURRENT_CONFIG
-
-
-

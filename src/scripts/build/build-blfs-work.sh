@@ -13,4 +13,7 @@ source $CURRENT_CONFIG
 # RUN MAKE
 #------------------------------------------------------------------#
 
+export BUILD_DIR="$BUILD_DIR"
+export WORK_DIR=${BUILD_DIR}$WORK_DIR
+
 make -C $WORK_DIR

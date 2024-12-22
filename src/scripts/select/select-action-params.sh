@@ -47,52 +47,24 @@ KCONFIG_CONFIG=$ACTION_CONFIG_OUT $MENU_CONFIG $ACTION_CONFIG_IN
 # FORMAT CURRENT CONFIG
 #------------------------------------------------------------------#
 
-action=$(cfg-val "ACTION")
 rev=$(cfg-val "REV")
-lfsbranch=$(cfg-val "BLFSBRANCH")
 blfsbranch=$(cfg-val "BLFSBRANCH")
-
 builddir=$BLD_DIR/$blfsbranch-$rev 
-buildxmldir=$builddir/xml
 
-if [[ ! -f $CURRENT_CONFIG ]]; then 
+[[ -f $CURRENT_CONFIG ]] && rm $CURRENT_CONFIG
 	
-	echo "Initializing $CURRENT_CONFIG..."
+echo "Initializing $CURRENT_CONFIG..."
 
-	cp $ACTION_CONFIG_OUT $CURRENT_CONFIG
+cp $ACTION_CONFIG_OUT $CURRENT_CONFIG
 
-	sed -i '/^#/d' $CURRENT_CONFIG
-	sed -i 's/CONFIG_//g' $CURRENT_CONFIG
-	sed -i 's/=y//g' $CURRENT_CONFIG
-	sed -i 's/__/=/g' $CURRENT_CONFIG
-	sed -i 's/"//g' $CURRENT_CONFIG
+sed -i '/^#/d' $CURRENT_CONFIG
+sed -i 's/CONFIG_//g' $CURRENT_CONFIG
+sed -i 's/=y//g' $CURRENT_CONFIG
+sed -i 's/__/=/g' $CURRENT_CONFIG
+sed -i 's/"//g' $CURRENT_CONFIG
 
-	### GET BOOKVERSION ###
+### GET BOOKVERSION ###
 
-	echo "BOOK_VERS=$blfsbranch" >> $CURRENT_CONFIG
-	echo "BUILD_DIR=$builddir" >> $CURRENT_CONFIG
-	echo "BLFS_FULL_XML=$buildixmldir/$BLFS_FULL_XML_FILE" >> $CURRENT_CONFIG
-else
+echo "BOOK_VERS=$blfsbranch" >> $CURRENT_CONFIG
+echo "BUILD_DIR=$builddir" >> $CURRENT_CONFIG
 
-	echo "Updating $CURRENT_CONFIG..."
-
-	# REV
-	sub-cfg "REV"
-	
-	# LFS BRANCH
-	sub-cfg "LFSBRANCH"
-
-	# BLFS BRANCH
-	sub-cfg "BLFSBRANCH"
-
-	# BOOK VERSION
-	sed -i "s/\(BOOK_VERS=\).*/\1$blfsbranch/" $CURRENT_CONFIG
-
-	# BUILD DIR
-	builddir=${builddir//\//\\/}
-	sed -i "s/\(BUILD_DIR=\).*/\1$builddir/" $CURRENT_CONFIG
-
-	# BLFS FULL XML
-	buildxmldir=${buildxmldir//\//\\/}
-	sed -i "s/\(BLFS_FULL_XML=\).*/\1$buildxmldir\/$BLFS_FULL_XML_FILE/" $CURRENT_CONFIG
-fi

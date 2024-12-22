@@ -13,17 +13,20 @@ source $CURRENT_CONFIG
 # GET VERSION INFO
 #------------------------------------------------------------------#
 
-kf6_version=$(grep 'ln -sfv kf6' $BLFS_FULL_XML | sed 's/.* kf6-\(.*\) .*/\1/')
+kf6version=$(grep 'ln -sfv kf6' $BLFS_FULL_XML | sed 's/.* kf6-\(.*\) .*/\1/')
 
 
 #------------------------------------------------------------------#
 # PROCESS XML
 #------------------------------------------------------------------#
 
+echo "Processing xml..."
+
 xsltproc -o $BLFS_PKGLIST_XML \
 	--stringparam book-version $BOOK_VERS \
-        --stringparam kf6-version $kf6_version \
+        --stringparam kf6-version $kf6version \
         $BLFS_PKGLIST_XSL $BLFS_FULL_XML
+
 
 # FIX VERSIONS
 

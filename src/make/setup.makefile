@@ -16,6 +16,6 @@ export
 
 setup-blfs-work :
 	@echo
-	@$(call bold_message, Setting up work dir...)
+	@$(call bold_message, $@)
 	$(SETUP_BLFS_WORK_SH)
 

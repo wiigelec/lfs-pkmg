@@ -46,10 +46,17 @@ setup-scripts
 
 setup-makefile
 
+echo
+ls $WORK_SCRIPTS
+echo
+
 
 #------------------------------------------------------------------#
 # INITIALIZE DIFFLOG DIR
 #------------------------------------------------------------------#
 
-[[ ! -d $DIFFLOG_DIR ]] && as_root mkdir -p $DIFFLOG_DIR
+as_root rm -rf $DIFFLOG_DIR
+as_root mkdir -p $DIFFLOG_DIR
 
+as_root rm -rf $PKGLOG_DIR
+as_root mkdir -p $PKGLOG_DIR

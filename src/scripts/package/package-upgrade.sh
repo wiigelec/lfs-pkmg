@@ -1,7 +1,7 @@
 #!/bin/bash
 ####################################################################
 # 
-# package-install.sh
+# package-upgrade.sh
 #
 ####################################################################
 
@@ -15,23 +15,23 @@ export -f as_root
 
 
 #------------------------------------------------------------------#
-# INSTALL PACKAGES
+# INSTALL UPGRADE
 #------------------------------------------------------------------#
 
 # CONFIRM
-installpkglist=$(cat $REPO_PKGS_LIST | xargs)
+upgradepkglist=$(cat $REPO_PKGS_LIST | xargs)
 repopath=$(head -n1 $REPO_PKGS_LIST)
 repopath=${repopath%/*}
-installpkglist=${installpkglist//$repopath\//}
+upgradepkglist=${upgradepkglist//$repopath\//}
 
 echo
-echo "Installing:"
+echo "Upgrading:"
 echo
-echo "$installpkglist"
+echo "$upgradepkglist"
 echo
 echo "from $repopath"
 echo
-echo "to $INSTALLROOT"
+echo "on $INSTALLROOT"
 echo
 echo
 read -p "Continue? (Yes): " confirm
@@ -39,18 +39,12 @@ read -p "Continue? (Yes): " confirm
 
 echo
 echo
-echo "Installing package files to $INSTALLROOT:"
+echo "Upgrading package files on $INSTALLROOT:"
 echo
 
 # ITERATE INSTALL PACKAGE LIST
 while IFS= read -r line;
 do
-	# CHECK INSTALLED
-	ifl=${line%.txz}
-	ifl=${ifl##*/}
-	ifl=$INSTALLROOT/$INSTALLED_DIR/$ifl
-	[[ -f $ifl ]] && echo "Skipping ${line##*/}: INSTALLED" && continue
-
-	as_root $INST_PKG_SH $line
+	as_root $UPGR_PKG_SH $line
 
 done < $REPO_PKGS_LIST

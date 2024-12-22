@@ -78,10 +78,10 @@
 <xsl:template match="sect1|sect2" mode="files">
 
 	<xsl:variable name="create-file" select="concat($depsdir,@id,'.deps')" />
-	<xsl:text>Creating </xsl:text>
+	<!-- xsl:text>Creating </xsl:text>
 	<xsl:value-of select="$create-file" />
 	<xsl:text>...</xsl:text>
-	<xsl:text>&#xA;</xsl:text>
+	<xsl:text>&#xA;</xsl:text-->
 
         <exsl:document href="{$create-file}" method="text">
 		

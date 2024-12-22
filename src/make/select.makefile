@@ -19,7 +19,7 @@ export
 
 select-action-params :
 	@echo
-	@$(call bold_message, Launching action menuconfig...)
+	@$(call bold_message, $@)
 	$(SELECT_ACTION_PARAMS_SH)
 
 
@@ -27,7 +27,7 @@ select-action-params :
 
 select-blfs-packages :
 	@echo
-	@$(call bold_message, Launching BLFS package menuconfig...)
+	@$(call bold_message, $@)
 	$(SELECT_BLFS_PACKAGES_SH)
 
 
@@ -35,7 +35,7 @@ select-blfs-packages :
 
 select-installed-packages :
 	@echo
-	@$(call bold_message, Launching installed package menuconfig...)
+	@$(call bold_message, $@)
 	$(SELECT_INST_PACKAGES_SH)
 
 
@@ -43,5 +43,5 @@ select-installed-packages :
 
 select-repo-packages :
 	@echo
-	@$(call bold_message, Launching repo package menuconfig...)
+	@$(call bold_message, $@)
 	$(SELECT_REPO_PACKAGES_SH)

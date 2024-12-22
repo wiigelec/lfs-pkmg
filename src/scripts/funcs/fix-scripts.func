@@ -93,7 +93,10 @@ sed -i 's/\$QT6DIR/\\\$QT6DIR/' $BLFS_SCRIPTS_DIR/qt6.build
 
 #------------------------------------------------------------------#
 # qt5
-sed -i 's/\$QT5DIR/\\\$QT5DIR/' $BLFS_SCRIPTS_DIR/qt5-components.build
+FILE=$BLFS_SCRIPTS_DIR/qt5-components.build
+if [[ -f $FILE ]]; then
+sed -i 's/\$QT5DIR/\\\$QT5DIR/' $FILE
+fi
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#

@@ -20,36 +20,38 @@ export
 
 book-blfs-fullxml $(BLFS_FULL_XML) :
 	@echo
-	@$(call bold_message, Generating BLFS full xml...)
+	@$(call bold_message, blfs-full-xml)
 	@$(BOOK_BLFS_FULLXML_SH)
 
 .PHONY: book-blfs-fullxml
 
 #------------------------------------------------------------------#
 
-book-blfs-pkglist :
+book-blfs-pkglist $(BLFS_PKGLIST_XML) :
 	@echo
-	@$(call bold_message, Generating BLFS package list...)
+	@$(call bold_message, book-blfs-pkglist)
 	$(BOOK_BLFS_PKGLIST_SH)
 
 #------------------------------------------------------------------#
 
-book-blfs-deps :
+book-blfs-deps $(BOOK_BLFS_DEPS) :
 	@echo
-	@$(call bold_message, Reading book dependencies...)
+	@$(call bold_message, book-blfs-deps)
 	$(BOOK_BLFS_DEPS_SH)
+	@touch $(BOOK_BLFS_DEPS)
 
 #------------------------------------------------------------------#
 
-book-blfs-scripts :
+book-blfs-scripts $(BOOK_BLFS_SCRIPTS) :
 	@echo
-	@$(call bold_message, Generating build scrips...)
+	@$(call bold_message, $@)
 	$(BOOK_BLFS_SCRIPTS_SH)
+	@touch $(BOOK_BLFS_SCRIPTS)
 
 #------------------------------------------------------------------#
 
 book-blfs-trees :
 	@echo
-	@$(call bold_message, Generating dependency trees...)
+	@$(call bold_message, $@)
 	$(BOOK_BLFS_TREES_SH)
 

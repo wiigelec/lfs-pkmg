@@ -36,3 +36,15 @@ mkdir -p $BLD_XML
 make -C $BLFS_GIT_DIR RENDERTMP=$BLD_XML REV=$rev validate
 if [[ "$rev" == "systemd" ]]; then mv -v $BLD_XML/blfs-systemd-full.xml $BLFS_FULL_XML_NV; fi
 
+
+#------------------------------------------------------------------#
+# CREATE VERSION DIR
+#------------------------------------------------------------------#
+
+### CREATE BUILD DIR ###
+if [[ ! -d $BUILD_DIR ]]; then
+
+        mkdir -p $BUILD_DIR
+
+        mv -v $BLD_XML $BUILD_DIR
+fi

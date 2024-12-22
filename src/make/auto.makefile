@@ -8,8 +8,6 @@
 #------------------------------------------------------------------#
 
 auto : git-lfs git-blfs select-action-params
-	@echo
-	@$(call bold_message, Launching auto build...)
 	$(ACTION_LAUNCH_SH)
 
 #------------------------------------------------------------------#
@@ -31,10 +29,19 @@ BUILDLFS :
 BUILDBOOTSTRAP : 
 
 #------------------------------------------------------------------#
-BUILDBLFS : $(BLFS_FULL_XML) build-blfs-versiondir
+BUILDBLFS : $(BLFS_FULL_XML) $(BLFS_PKGLIST_XML) $(BOOK_BLFS_DEPS) \
+	$(BOOK_BLFS_SCRIPTS) select-blfs-packages book-blfs-trees \
+	setup-blfs-work
+	@echo
+	@$(call done_message, Success! Run make BUILDWORK)
 
 #------------------------------------------------------------------#
 BUILDPATCH : 
+
+#------------------------------------------------------------------#
+BUILDWORK : build-blfs-work build-blfs-archives 
+	@echo
+	@$(call done_message, Success! Build complete.)
 
 #------------------------------------------------------------------#
 DOCSHTML : 
@@ -58,10 +65,16 @@ LISTREMOVE :
 LISTUPGRADE : 
 
 #------------------------------------------------------------------#
-PKGINSTALL : 
+PKGINSTALL : select-repo-packages package-install 
+	@echo
+	@$(call done_message, Success! Packages installed.)
 
 #------------------------------------------------------------------#
-PKGREMOVE : 
+PKGREMOVE : select-installed-packages package-remove
+	@echo
+	@$(call done_message, Success! Packages removed.)
 
 #------------------------------------------------------------------#
-PKGUPGRADE : 
+PKGUPGRADE : select-repo-packages package-upgrade
+	@echo
+	@$(call done_message, Success! Packages upgraded.)

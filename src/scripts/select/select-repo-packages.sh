@@ -28,4 +28,4 @@ KCONFIG_CONFIG=$REPOPKGS_CONFIG_OUT $MENU_CONFIG $REPOPKGS_CONFIG_IN
 # WRITE PACKAGE LIST
 #------------------------------------------------------------------#
 
-grep CONFIG_.*=y $REPOPKGS_CONFIG_OUT | sed -e 's/CONFIG_//g' -e 's/=y//g' > $INST_PKGS_LIST
+grep CONFIG_.*=y $REPOPKGS_CONFIG_OUT | sed -e 's/CONFIG_//g' -e 's/=y//g' > $REPO_PKGS_LIST
