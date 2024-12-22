@@ -50,6 +50,16 @@ for a in $fix_files; do sed -i 's/as_root/sudo -E/' $a; done
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# linux-pam
+FILE=$BLFS_SCRIPTS_DIR/linux-pam.build
+if [[ -f $FILE ]]; then
+line1=$(grep -n "auth.*nullok" $FILE | sed 's/:.*//')
+line2=$(grep -n "password.*nullok" $FILE | sed 's/:.*//')
+sed -i "$line1,${line2}d" $FILE
+fi
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
 # xorg env
 sed -i 's/<PREFIX>/\/usr/' $BLFS_SCRIPTS_DIR/xorg-env.build
 #------------------------------------------------------------------#
