@@ -1,0 +1,67 @@
+#!/bin/bash
+####################################################################
+# 
+# get-list-pkgs.func
+#
+####################################################################
+
+
+
+#------------------------------------------------------------------#
+# get-list-pkgs
+#------------------------------------------------------------------#
+function get-list-pkgs
+{
+
+list=$1
+
+### GET REPO PATH ###
+repopath=${list%/*}
+repopath=${repopath/lists/packages}
+
+
+### SERVER PATH ###
+if [[ $repopath == "http"* ]]; then
+	
+	list=${list//../:}
+	repopath=${repopath//../:}
+	listpackages=$(curl --silent $list)
+else
+	listpackages=$(cat $l)
+fi
+
+### SETUP PACKAGE PATHS ###
+for lp in $listpackages; do
+
+	echo "$repopath/$lp"      
+done
+
+
+}
+
+#------------------------------------------------------------------#
+# install-list-files
+#------------------------------------------------------------------#
+function install-list-files
+{
+	listsdir=${INSTALLROOT}$LISTS_DIR
+	for l in $(cat $REPO_LIST_LIST); do
+
+		### SERVER LIST ###
+		if [[ $l == "http"* ]]; then
+
+			l=${l//../:}
+			name=${l##*/}
+
+			echo "curl --silent -o $listsdir/$name $l"
+			as_root curl --silent -o $listsdir/$name $l
+		
+		### FILE LIST###
+		else
+			as_root cp $l $listsdir/ 
+		fi
+	done
+
+}
+
+

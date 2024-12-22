@@ -33,7 +33,7 @@ BUILDBLFS : $(BLFS_FULL_XML) $(BLFS_PKGLIST_XML) $(BOOK_BLFS_DEPS) \
 	$(BOOK_BLFS_SCRIPTS) select-blfs-packages book-blfs-trees \
 	setup-blfs-work
 	@echo
-	@$(call done_message, Success! Run make BUILDWORK)
+	@$(call done_message, Success! Run 'make BUILDWORK'.)
 
 #------------------------------------------------------------------#
 BUILDPATCH : 
@@ -58,7 +58,9 @@ LISTDEPS : $(BLFS_FULL_XML) $(BLFS_PKGLIST_XML) select-blfs-packages \
 	@$(call done_message, Success! Dependency list created.)
 
 #------------------------------------------------------------------#
-LISTINSTALL : 
+LISTINSTALL : select-repo-lists list-install 
+	@echo
+	@$(call done_message, Success! Lists installed.)
 
 #------------------------------------------------------------------#
 LISTPATCH : 

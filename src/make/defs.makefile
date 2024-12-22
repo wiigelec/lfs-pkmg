@@ -111,6 +111,10 @@ REPOPKGS_CONFIG_IN = $(BLD_CONFIG)/repopkgs-config-in
 REPOPKGS_CONFIG_OUT = $(BLD_CONFIG)/repopkgs-config-out
 REPO_PKGS_LIST = $(BLD_CONFIG)/repo-pkgs-list
 
+REPOLIST_CONFIG_IN = $(BLD_CONFIG)/repolist-config-in
+REPOLIST_CONFIG_OUT = $(BLD_CONFIG)/repolist-config-out
+REPO_LIST_LIST = $(BLD_CONFIG)/repo-list-list
+
 
 #------------------------------------------------------------------#
 # VERSION
