@@ -56,7 +56,14 @@ sed -i 's/<PREFIX>/\/usr/' $BLFS_SCRIPTS_DIR/xorg-env.build
 
 #------------------------------------------------------------------#
 # xorg libs
-sed -i '/grep -A9 summary \*make_check\.log/d' $BLFS_SCRIPTS_DIR/xorg7-lib.build
+FILE=$BLFS_SCRIPTS_DIR/xorg7-lib.build
+if [[ -f $FILE ]]; then
+sed -i '/grep -A9 summary \*make_check\.log/d' $FILE
+sed -i '/ln -sv $XORG_PREFIX\/lib\/X11 \/usr\/lib\/X11 &&/d' $FILE
+sed -i '/ln -sv $XORG_PREFIX\/include\/X11 \/usr\/include\/X11/d' $FILE
+sed -i '/exit/d' $FILE
+echo "exit" >> $FILE
+fi
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
@@ -92,7 +99,7 @@ sed -i 's/\$QT6DIR/\\\$QT6DIR/' $BLFS_SCRIPTS_DIR/qt6.build
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
-# qt5
+# qt5-components
 FILE=$BLFS_SCRIPTS_DIR/qt5-components.build
 if [[ -f $FILE ]]; then
 sed -i 's/\$QT5DIR/\\\$QT5DIR/' $FILE

@@ -38,15 +38,6 @@ case $PACKAGE in
        unzip -d $JH_UNPACKDIR $SRC_DIR/$PACKAGE
      fi
      ;;
-#  *)
-#     JH_UNPACKDIR=$JH_PKG_DIR-build
-#     mkdir $JH_UNPACKDIR
-#     cp $SRC_DIR/$PACKAGE $JH_UNPACKDIR
-#     ADDITIONAL="$(find . -mindepth 1 -maxdepth 1 -type l)"
-#     if [ -n "$ADDITIONAL" ]; then
-#         cp $ADDITIONAL $JH_UNPACKDIR
-#     fi
-#     ;;
 esac
 
 ### SRC DIR ###
