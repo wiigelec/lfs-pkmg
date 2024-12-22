@@ -29,7 +29,7 @@ BUILDLFS :
 BUILDBOOTSTRAP : 
 
 #------------------------------------------------------------------#
-BUILDBLFS : $(BLFS_FULL_XML) $(BLFS_PKGLIST_XML) $(BOOK_BLFS_DEPS) \
+BUILDBLFS : $(BLFS_FULL_XML) book-blfs-pkglist $(BOOK_BLFS_DEPS) \
 	$(BOOK_BLFS_SCRIPTS) select-blfs-packages book-blfs-trees \
 	setup-blfs-work
 	@echo
