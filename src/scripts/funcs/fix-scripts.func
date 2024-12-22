@@ -67,6 +67,15 @@ fi
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# xorg apps
+FILE=$BLFS_SCRIPTS_DIR/xorg7-app.build
+if [[ -f $FILE ]]; then
+sed -i '/exit/d' $FILE
+echo "exit" >> $FILE
+fi
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
 # harfbuzz/freetype/graphite
 cp $BLFS_SCRIPTS_DIR/freetype2.build $BLFS_SCRIPTS_DIR/freetype2-pass1.build
 cp $BLFS_SCRIPTS_DIR/graphite2.build $BLFS_SCRIPTS_DIR/graphite2-pass1.build

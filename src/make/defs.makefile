@@ -78,6 +78,8 @@ SCRIPTS_FUNCS = $(SCRIPTS_DIR)/funcs
 SRC_MAKE = $(SRC_DIR)/make
 SRC_XSL = $(SRC_DIR)/xsl
 
+MISC_DIR = $(SRC_DIR)/misc
+MISC_LFS = $(MISC_DIR)/lfs
 
 
 LPM_DIR = /var/lib/lpm
@@ -120,6 +122,8 @@ ELAP_TIME = $(BLD_DIR)/elapsed-time
 BLD_TIME=$(BLD_DIR)/bld-time
 PKG_TIME=$(BLD_DIR)/pkg-time
 CUMU_TIME=$(BLD_DIR)/cumu-time
+
+JHALFS_CONFIG = $(JHALFS_GIT_DIR)/configuration
 
 #------------------------------------------------------------------#
 # VERSION

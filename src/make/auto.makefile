@@ -23,7 +23,8 @@ AUDITPF :
 AUDITSF : 
 
 #------------------------------------------------------------------#
-BUILDLFS : 
+BUILDLFS : git-jhalfs setup-lfs-jhalfs setup-lfs-difflog \
+       build-lfs setup-lfs-chroot build-lfs-chroot	
 
 #------------------------------------------------------------------#
 BUILDBOOTSTRAP : 

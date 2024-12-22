@@ -42,7 +42,8 @@ git-blfs:
 git-jhalfs:
 	@echo
 	@$(call bold_message, $@)
-	@git clone $(JHALFS_GIT_URL) $(JHALFS_GIT_DIR)
+	@if [ ! -d $(JHALFS_GIT_DIR) ]; then git clone $(JHALFS_GIT_URL) $(JHALFS_GIT_DIR);\
+	 else pushd $(JHALFS_GIT_DIR)>/dev/null; git pull; popd>/dev/null; fi 
 
 .PHONY: git-jhalfs
 

@@ -44,7 +44,7 @@ book-blfs-deps $(BOOK_BLFS_DEPS) :
 
 book-blfs-scripts $(BOOK_BLFS_SCRIPTS) :
 	@echo
-	@$(call bold_message, $@)
+	@$(call bold_message, book-blfs-scripts)
 	$(BOOK_BLFS_SCRIPTS_SH)
 	@touch $(BOOK_BLFS_SCRIPTS)
 
