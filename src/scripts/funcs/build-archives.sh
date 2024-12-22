@@ -47,7 +47,7 @@ do
 
 	stripcmd=$(find | xargs file | grep -e "executable" -e "shared object" | grep ELF | \
 		cut -f 1 -d : | xargs)
-	[[ !-z $stripcmd ]] && echo $stripcmd | strip --strip-unneeded 2> /dev/null
+	[[ ! -z $stripcmd ]] && echo $stripcmd | strip --strip-unneeded 2> /dev/null
 
 	tar -cJpf $ARCHIVE_NAME .
 
