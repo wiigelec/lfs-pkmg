@@ -25,6 +25,12 @@ export -f as_root
 mkdir -p $WORK_DIR/{scripts,logs}
 > $WORK_PKGS_TREE
 
+# TIMER CLEANUP
+[[ -f $ELAP_TIME ]] && rm $ELAP_TIME
+[[ -f $BLD_TIME ]] && rm $BLD_TIME
+[[ -f $PKG_TIME ]] && rm $PKG_TIME
+[[ -f $CUMU_TIME ]] && rm $CUMU_TIME
+
 
 #------------------------------------------------------------------#
 # PACKAGE DEP TREE
@@ -54,6 +60,8 @@ echo
 #------------------------------------------------------------------#
 # INITIALIZE DIFFLOG DIR
 #------------------------------------------------------------------#
+
+echo "Initializing system build directories..."
 
 as_root rm -rf $DIFFLOG_DIR
 as_root mkdir -p $DIFFLOG_DIR

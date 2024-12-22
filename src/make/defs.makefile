@@ -115,6 +115,11 @@ REPOLIST_CONFIG_IN = $(BLD_CONFIG)/repolist-config-in
 REPOLIST_CONFIG_OUT = $(BLD_CONFIG)/repolist-config-out
 REPO_LIST_LIST = $(BLD_CONFIG)/repo-list-list
 
+TIMER_SCRIPT = $(SCRIPTS_FUNCS)/timer.sh
+ELAP_TIME = $(BLD_DIR)/elapsed-time
+BLD_TIME=$(BLD_DIR)/bld-time
+PKG_TIME=$(BLD_DIR)/pkg-time
+CUMU_TIME=$(BLD_DIR)/cumu-time
 
 #------------------------------------------------------------------#
 # VERSION

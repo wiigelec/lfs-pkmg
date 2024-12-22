@@ -45,9 +45,10 @@ do
 
 	tar -xpf $ARCHIVE_NAME
 
-	stripcmd=$(find | xargs file | grep -e "executable" -e "shared object" | grep ELF | \
-		cut -f 1 -d : | xargs)
-	[[ ! -z $stripcmd ]] && echo $stripcmd | strip --strip-unneeded 2> /dev/null
+	{
+	find | xargs file | grep -e "executable" -e "shared object" | grep ELF | \
+	cut -f 1 -d : | xargs | strip --strip-unneeded
+	} > /dev/null 2>&1 || true
 
 	tar -cJpf $ARCHIVE_NAME .
 

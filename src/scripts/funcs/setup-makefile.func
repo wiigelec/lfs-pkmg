@@ -71,7 +71,6 @@ $target1 : $target2
 	@\$(TIMER_SCRIPT) PKG \$\$PPID $target1 &
 	@echo
 	./scripts/$prev
-#	\$(SCRIPT_DIR)/select.sh VERSINSTPKG $package
 	touch $target1
 	$message
 EOF
@@ -86,7 +85,7 @@ cat << EOF >> $makefile
 $target1 :
 	@echo
 	@\$(call echo_message)
-#	@\$(TIMER_SCRIPT) PKG \$\$PPID $target1 &
+	@\$(TIMER_SCRIPT) PKG \$\$PPID $target1 &
 	@echo
 	./scripts/$prev
 	touch $target1

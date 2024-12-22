@@ -28,3 +28,6 @@ build-blfs-work :
 	@$(call bold_message, $@)
 	$(BUILD_BLFS_WORK_SH)
 
+
+watch-timer :
+	@watch -n1 tail -n25 $(ELAP_TIME)
