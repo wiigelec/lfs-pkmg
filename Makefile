@@ -21,6 +21,8 @@ include ./src/make/defs.makefile
 
 include ./src/make/git.makefile
 
+include ./src/make/list.makefile
+
 include ./src/make/package.makefile
 
 include ./src/make/select.makefile

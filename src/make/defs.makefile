@@ -82,6 +82,7 @@ SRC_XSL = $(SRC_DIR)/xsl
 
 LPM_DIR = /var/lib/lpm
 LPM_BUILD = $(LPM_DIR)/build
+LISTS_DIR = $(LPM_DIR)/lists
 INSTALLED_DIR = $(LPM_DIR)/installed
 DIFFLOG_DIR = $(LPM_BUILD)/difflog
 PKGLOG_DIR = $(LPM_BUILD)/pkglog

@@ -27,7 +27,7 @@ do
                 # check version
                 # handle pass1
                 pass1=""
-                [[ $treeline =~ "-pass1" ]] && pass1=${treeline} && treeline=${treeline%-pass1}
+                [[ $treeline == *"-pass1" ]]  && pass1=${treeline} && treeline=${treeline%-pass1}
                 iv=$(xmllint --xpath "//package[id='$treeline']/installed/text()" $BLFS_PKGLIST_XML 2>/dev/null) || true
                 bv=$(xmllint --xpath "//package[id='$treeline']/version/text()" $BLFS_PKGLIST_XML 2>/dev/null)
 

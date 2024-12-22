@@ -47,10 +47,15 @@ BUILDWORK : build-blfs-work build-blfs-archives
 DOCSHTML : 
 
 #------------------------------------------------------------------#
-LISTDIR : 
+LISTDIR : list-create-dir
+	@echo
+	@$(call done_message, Success! Directory list created.)
 
 #------------------------------------------------------------------#
-LISTDEPS : 
+LISTDEPS : $(BLFS_FULL_XML) $(BLFS_PKGLIST_XML) select-blfs-packages \
+	$(BOOK_BLFS_DEPS) book-blfs-trees list-create-deps
+	@echo
+	@$(call done_message, Success! Dependency list created.)
 
 #------------------------------------------------------------------#
 LISTINSTALL : 

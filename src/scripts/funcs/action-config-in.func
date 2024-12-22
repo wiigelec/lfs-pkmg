@@ -263,13 +263,22 @@ EOF
 #------------------------------------------------------------------#
 # LIST FIELDS
 
+### LIST PATH ###
+
+cat << EOF
+config    LISTPATH
+	depends on ACTION__LISTDIR || ACTION__LISTDEPS
+	string  "List path"
+        default "$LISTS_DIR"
+EOF
+
 ### LIST NAME ###
 
 cat << EOF
 config    LISTNAME
 	depends on ACTION__LISTDIR || ACTION__LISTDEPS
-	string  "List name (full path)"
-        default "$LISTS_DIR/list-name.list"
+	string  "List name"
+        default "list-name.list"
 EOF
 
 ### LIST PACKAGES PATH ###
@@ -277,8 +286,8 @@ EOF
 cat << EOF
 config    LISTDIRPATH
 	depends on ACTION__LISTDIR
-        string  "List packages path"
-        default "$PACKAGES_DIR"
+        string  "Archive dir"
+        default "$ARCHIVE_DIR"
 EOF
 
 
