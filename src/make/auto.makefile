@@ -23,8 +23,8 @@ AUDITPF :
 AUDITSF : 
 
 #------------------------------------------------------------------#
-BUILDLFS : git-jhalfs setup-lfs-jhalfs setup-lfs-difflog \
-       build-lfs setup-lfs-chroot build-lfs-chroot	
+BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG) \
+       build-lfs $(SETUP_LFS_CHROOT) build-lfs-chroot	
 
 #------------------------------------------------------------------#
 BUILDBOOTSTRAP : 
@@ -86,3 +86,4 @@ PKGREMOVE : select-installed-packages package-remove
 PKGUPGRADE : select-repo-packages package-upgrade
 	@echo
 	@$(call done_message, Success! Packages upgraded.)
+

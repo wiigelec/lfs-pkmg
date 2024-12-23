@@ -80,6 +80,7 @@ SRC_XSL = $(SRC_DIR)/xsl
 
 MISC_DIR = $(SRC_DIR)/misc
 MISC_LFS = $(MISC_DIR)/lfs
+LFS_CUSTOM_DIR = $(MISC_LFS)/custom
 
 
 LPM_DIR = /var/lib/lpm
@@ -89,6 +90,7 @@ INSTALLED_DIR = $(LPM_DIR)/installed
 DIFFLOG_DIR = $(LPM_BUILD)/difflog
 PKGLOG_DIR = $(LPM_BUILD)/pkglog
 ARCHIVE_DIR = $(LPM_BUILD)/packages
+
 
 
 #------------------------------------------------------------------#
@@ -123,6 +125,7 @@ BLD_TIME=$(BLD_DIR)/bld-time
 PKG_TIME=$(BLD_DIR)/pkg-time
 CUMU_TIME=$(BLD_DIR)/cumu-time
 
+JHALFS_DIR = ${INSTALLROOT}/jhalfs
 JHALFS_CONFIG = $(JHALFS_GIT_DIR)/configuration
 
 #------------------------------------------------------------------#
