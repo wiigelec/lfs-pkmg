@@ -44,6 +44,11 @@ do
 	# SYSTEMD
 	[[ $package == "systemd" ]] && package=$package-base
 	
+	# CLEANUP
+	[[ $package == "cleanup" ]] && continue
+
+	# STRIPPING
+	[[ $package == "stripping" ]] && continue
 
         # version
         version=$(grep VERSION= $FILE | sed 's/.*=//')
