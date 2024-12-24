@@ -80,6 +80,10 @@ sourcework=$INSTALLROOT/sources/work
 workscripts=$sourcework/scripts
 cp -r $WORK_DIR $INSTALLROOT/sources/
 
+
+### PKGLOG ###
+cp $BUILD_PKGLOG_SH $workscripts/
+
 ### ARCHIVE ###
 cp $BUILD_ARCHIVES_SH $workscripts/
 
