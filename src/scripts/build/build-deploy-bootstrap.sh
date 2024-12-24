@@ -82,7 +82,7 @@ cp -r $WORK_DIR $INSTALLROOT/sources/
 
 
 ### PKGLOG ###
-cp $BUILD_PKGLOG_SH $workscripts/
+cp $BUILD_PKGLOGS_SH $workscripts/
 
 ### ARCHIVE ###
 cp $BUILD_ARCHIVES_SH $workscripts/
