@@ -25,6 +25,7 @@
 	<xsl:apply-templates select="//sect1[@id = $package]" mode="script-commands" />
 	<xsl:apply-templates select="//sect2[@id = $package]" mode="script-commands"  />
 	<xsl:apply-templates select="//sect3[@id = $package]" mode="script-commands"  />
+	<xsl:apply-templates select="//sect4[@id = $package]" mode="script-commands"  />
 
 </xsl:template>
 
@@ -33,7 +34,7 @@
 #
 ####################################################################
 -->
-<xsl:template match="sect1|sect2|sect3" mode="script-commands" >
+<xsl:template match="sect1|sect2|sect3|sect4" mode="script-commands" >
 ####################################################################
 # BUILD COMMANDS
 ####################################################################
@@ -50,6 +51,7 @@ ROOT_EOF
 <xsl:apply-templates select=".//sect1[not(@role='package') and not(@role='kernel')]/screen[not(@role='nodump')][not(@remap)]" mode="script-commands"  />
 <xsl:apply-templates select=".//sect2[not(@role='package') and not(@role='kernel')]/screen[not(@role='nodump')][not(@remap)]" mode="script-commands"  />
 <xsl:apply-templates select=".//sect3[not(@role='package') and not(@role='kernel')]/screen[not(@role='nodump')][not(@remap)]" mode="script-commands" />
+<xsl:apply-templates select=".//sect4[not(@role='package') and not(@role='kernel')]/screen[not(@role='nodump')][not(@remap)]" mode="script-commands" />
 
 <!-- PERL MODULES -->
 <xsl:if test="contains(@id,'perl-')">
