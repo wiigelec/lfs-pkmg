@@ -23,11 +23,22 @@ AUDITPF :
 AUDITSF : 
 
 #------------------------------------------------------------------#
-BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG) \
-       build-lfs $(SETUP_LFS_CHROOT) build-lfs-chroot	
+BOOTSTRAPWORK : build-bootstrap-work build-bootstrap-archives
+	@echo
+	@$(call done_message, Success! Bootstrap complete.)
 
 #------------------------------------------------------------------#
-BUILDBOOTSTRAP : 
+BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG) \
+       build-lfs $(SETUP_LFS_CHROOT) build-lfs-chroot	
+	@echo
+	@$(call done_message, Success! LFS build complete.)
+
+#------------------------------------------------------------------#
+BUILDBOOTSTRAP : $(BLFS_FULL_XML) book-blfs-pkglist $(BOOK_BLFS_DEPS) \
+	$(BOOK_BLFS_SCRIPTS) setup-bootstrap-group book-blfs-trees \
+	setup-blfs-work build-deploy-bootstrap
+	@echo
+	@$(call done_message, Success! Run 'make BOOTSTRAPWORK'.)
 
 #------------------------------------------------------------------#
 BUILDBLFS : $(BLFS_FULL_XML) book-blfs-pkglist $(BOOK_BLFS_DEPS) \

@@ -17,7 +17,7 @@ export -f as_root
 JHALFS_CHROOT_SCRIPTS=$INSTALLROOT/jhalfs/lpm-scripts
 
 #------------------------------------------------------------------#
-# COPOY SCRIPTS
+# COPY SCRIPTS
 #------------------------------------------------------------------#
 
 ### CREATE DIR ###

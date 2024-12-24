@@ -75,6 +75,7 @@ BLD_XML = $(BLD_DIR)/xml
 SRC_DIR = $(TOPDIR)/src
 SCRIPTS_DIR = $(SRC_DIR)/scripts
 SCRIPTS_FUNCS = $(SCRIPTS_DIR)/funcs
+SCRIPTS_UTIL = $(SCRIPTS_DIR)/util
 SRC_MAKE = $(SRC_DIR)/make
 SRC_XSL = $(SRC_DIR)/xsl
 
@@ -128,6 +129,8 @@ CUMU_TIME=$(BLD_DIR)/cumu-time
 JHALFS_DIR = ${INSTALLROOT}/jhalfs
 JHALFS_CONFIG = $(JHALFS_GIT_DIR)/configuration
 
+BOOTSTRAP_GROUP_LIST = $(MISC_LFS)/bootstrap.group
+
 #------------------------------------------------------------------#
 # VERSION
 
@@ -158,6 +161,9 @@ BUILD_ARCHIVES_SH = $(SCRIPTS_FUNCS)/build-archives.sh
 INST_PKG_SH = $(SCRIPTS_FUNCS)/inst-pkg.sh
 REMV_PKG_SH = $(SCRIPTS_FUNCS)/remv-pkg.sh
 UPGR_PKG_SH = $(SCRIPTS_FUNCS)/upgr-pkg.sh
+
+UTIL_MOUNT_KERNFS_SH = $(SCRIPTS_UTIL)/util-mount-kernfs.sh
+UTIL_UMOUNT_KERNFS_SH = $(SCRIPTS_UTIL)/util-umount-kernfs.sh
 
 
 #------------------------------------------------------------------#

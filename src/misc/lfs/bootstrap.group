@@ -1,0 +1,7 @@
+wget
+sudo
+git
+libxml2
+libxslt
+DocBook
+docbook-xsl

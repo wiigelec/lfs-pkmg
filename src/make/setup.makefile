@@ -11,12 +11,21 @@ SETUP_LFS_JHALFS = $(JHALFS_DIR)/setup-lfs-jhalfs
 SETUP_LFS_DIFFLOG = $(JHALFS_DIR)/setup-lfs-difflog
 SETUP_LFS_CHROOT = $(JHALFS_DIR)/setup-lfs-chroot
 
+SETUP_BOOTSTRAP_GROUP_SH = $(SETUP_SCRIPTS)/setup-bootstrap-group.sh
 SETUP_LFS_CHROOT_SH = $(SETUP_SCRIPTS)/setup-lfs-chroot.sh
 SETUP_LFS_DIFFLOG_SH = $(SETUP_SCRIPTS)/setup-lfs-difflog.sh
 SETUP_LFS_JHALFS_SH = $(SETUP_SCRIPTS)/setup-lfs-jhalfs.sh
 SETUP_BLFS_WORK_SH = $(SETUP_SCRIPTS)/setup-blfs-work.sh
 
 export
+
+
+#------------------------------------------------------------------#
+
+setup-bootstrap-group :
+	@echo
+	@$(call bold_message, $@)
+	$(SETUP_BOOTSTRAP_GROUP_SH)
 
 
 #------------------------------------------------------------------#

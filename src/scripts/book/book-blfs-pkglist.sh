@@ -48,8 +48,11 @@ done
 # UPDATE INSTALLED
 #------------------------------------------------------------------#
 
+installeddir=${INSTALLROOT}$INSTALLED_DIR
+[[ ! -d $installeddir ]] && exit 0
+
 echo "Adding installed..."
-installed=$(ls ${INSTALLROOT}$INSTALLED_DIR)
+installed=$(ls $installeddir)
 for i in $installed; do
 
         i=${i%--*}
