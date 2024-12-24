@@ -92,6 +92,8 @@ DIFFLOG_DIR = $(LPM_BUILD)/difflog
 PKGLOG_DIR = $(LPM_BUILD)/pkglog
 ARCHIVE_DIR = $(LPM_BUILD)/packages
 
+ADMIN_SCRIPT_DIR = $(MISC_DIR)/admin
+USER_SCRIPT_DIR = $(TOPDIR)/user
 
 
 #------------------------------------------------------------------#

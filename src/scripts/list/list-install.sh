@@ -14,11 +14,32 @@ source $SCRIPTS_FUNCS/get-list-pkgs.func
 source <(echo $ASROOT)
 export -f as_root
 
+echo "Reading list packages..."
+
+lists=$(cat $REPO_LIST_LIST)
+
 
 #------------------------------------------------------------------#
 # PRE-INSTALL SCRIPTS
 #------------------------------------------------------------------#
 
+echo "Running list pre-install scripts..."
+
+### USER ###
+for each in $lists; do
+
+        each=${each##*/}
+        script=$USER_SCRIPT_DIR/$each.pre-install
+        [[ -f $script ]] && $script
+done
+
+### ADMIN ###
+for each in $lists; do
+
+        each=${each##*/}
+        script=$ADMIN_SCRIPT_DIR/$each.pre-install
+        [[ -f $script ]] && $script
+done
 
 
 #------------------------------------------------------------------#
@@ -31,7 +52,7 @@ listsdir=${INSTALLROOT}$LISTS_DIR
 > $REPO_PKGS_LIST
 
 # ITERATE LISTS
-for l in $(cat $REPO_LIST_LIST);
+for l in $lists;
 do
 
 	get-list-pkgs $l >> $REPO_PKGS_LIST
@@ -55,6 +76,24 @@ as_root $PACKAGE_INSTALL_SH
 #------------------------------------------------------------------#
 # POST-INSTALL SCRIPTS
 #------------------------------------------------------------------#
+
+echo "Running list post-install scripts..."
+
+### USER ###
+for each in $lists; do
+
+        each=${each##*/}
+        script=$USER_SCRIPT_DIR/$each.post-install
+        [[ -f $script ]] && $script
+done
+
+### ADMIN ###
+for each in $lists; do
+
+        each=${each##*/}
+        script=$ADMIN_SCRIPT_DIR/$each.post-install
+        [[ -f $script ]] && $script
+done
 
 
 

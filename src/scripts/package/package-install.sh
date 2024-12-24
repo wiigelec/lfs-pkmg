@@ -14,11 +14,11 @@ source <(echo $ASROOT)
 export -f as_root
 
 
+
 #------------------------------------------------------------------#
-# INSTALL PACKAGES
+# CONFIRM
 #------------------------------------------------------------------#
 
-# CONFIRM
 installpkglist=$(cat $REPO_PKGS_LIST | xargs)
 
 echo
@@ -36,24 +36,55 @@ echo
 echo "Installing package files to $INSTALLROOT:"
 echo
 
+
+packages=$(cat $REPO_PKGS_LIST)
+
+
+#------------------------------------------------------------------#
+# PRE INSTALL SCRIPTS
+#------------------------------------------------------------------#
+
+echo "Running package pre-install scripts..."
+
+for each in $packages; do
+
+        each=${each##*/}
+	each=${each%%--*}
+
+	### USER ###
+        script=$USER_SCRIPT_DIR/$each.package.pre-install
+        [[ -f $script ]] && echo $script && $script
+
+	### ADMIN ###
+        script=$ADMIN_SCRIPT_DIR/$each.package.pre-install
+        [[ -f $script ]] && echo $script && $script
+done
+
+
+#------------------------------------------------------------------#
+# INSTALL PACKAGES
+#------------------------------------------------------------------#
+
+echo -e "Installing packages...\n"
+
 # ITERATE INSTALL PACKAGE LIST
 error="false"
-while IFS= read -r line;
+for p in $packages;
 do
 	# CHECK INSTALLED
-	ifl=${line%.txz}
+	ifl=${p%.txz}
 	ifl=${ifl##*/}
 	ifl=$INSTALLROOT/$INSTALLED_DIR/$ifl
-	[[ -f $ifl ]] && echo "Skipping ${line##*/}: INSTALLED" && continue
+	[[ -f $ifl ]] && echo "Skipping ${p##*/}: INSTALLED" && continue
 
 	set +e
-	as_root $INST_PKG_SH $line
+	as_root $INST_PKG_SH $p
 	ret=$?
 	set -e
 
 	[ $ret -ne 0 ] && error="true"
 
-done < $REPO_PKGS_LIST
+done
 
 if [[ $error == "true" ]]; then 
 
@@ -62,3 +93,27 @@ if [[ $error == "true" ]]; then
 	echo
 	exit 1
 fi
+
+
+#------------------------------------------------------------------#
+# POST INSTALL SCRIPTS
+#------------------------------------------------------------------#
+
+echo -e "\nRunning package post-install scripts..."
+
+for each in $packages; do
+
+        each=${each##*/}
+	each=${each%%--*}
+
+	### USER ###
+        script=$USER_SCRIPT_DIR/$each.package.post-install
+        [[ -f $script ]] && echo $script && $script
+
+	### ADMIN ###
+        script=$ADMIN_SCRIPT_DIR/$each.package.post-install
+        [[ -f $script ]] && echo $script && $script
+done
+
+
+exit 0

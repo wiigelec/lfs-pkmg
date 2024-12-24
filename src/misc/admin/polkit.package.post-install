@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo -E chroot $INSTALLROOT bash -c 'groupadd -fg 27 polkitd'
+sudo -E chroot $INSTALLROOT bash -c 'id -u polkitd &>/dev/null || useradd -c "PolicyKit Daemon Owner" -d /etc/polkit-1 -u 27 \
+        -g polkitd -s /bin/false polkitd' || true
