@@ -18,7 +18,7 @@ echo "Creating pkglogs..."
 echo
 sudo chroot $INSTALLROOT bash -e -c "DIFFLOG_DIR=$DIFFLOG_DIR \
 	PKGLOG_DIR=$PKGLOG_DIR \
-	/sources/work/build-pkglogs.sh"
+	/sources/work/scripts/build-pkglogs.sh"
 
 
 #------------------------------------------------------------------#
@@ -31,4 +31,4 @@ echo
 sudo chroot $INSTALLROOT bash -e -c "PKGLOG_DIR=$PKGLOG_DIR \
 	ARCHIVE_DIR=$ARCHIVE_DIR \
 	BOOK_VERS=$BOOK_VERS \
-	/sources/work/build-archives.sh"
+	/sources/work/scripts/build-archives.sh"
