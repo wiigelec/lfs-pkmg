@@ -60,6 +60,16 @@ fi
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# shadow
+FILE=$BLFS_SCRIPTS_DIR/shadow.build
+if [[ -f $FILE ]]; then
+linenum=$(grep -n "for FUNCTION in FAIL_DELAY" $FILE | sed 's/:.*//')
+linenum2=$(grep -n "### END CONFIGURE MAKE INSTALL ###" $FILE | sed 's/:.*//')
+sed -i "${linenum},${linenum2}s/\\$/\\\\\$/g" $FILE
+fi
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
 # xorg env
 sed -i 's/<PREFIX>/\/usr/' $BLFS_SCRIPTS_DIR/xorg-env.build
 #------------------------------------------------------------------#
