@@ -34,7 +34,6 @@ do
     	pkg=${pkg##*/}
 
 	archivename=$pkg--$PKG_ARCH--$PKG_LFS.$PKG_EXT
-	archivename=$(echo $archivename | tr '[:upper:]' '[:lower:]')
 
 	ARCHIVE_NAME=$ARCHIVE_DIR/$archivename
 

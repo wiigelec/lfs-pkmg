@@ -36,7 +36,7 @@ do
 	[[ $package == "dbus" ]] && package=$package-base
 	
 	# PYTHON
-	[[ $package == "Python" ]] && package=python3-base
+	[[ $package == "Python" ]] && package=$package-base
 	
 	# SHADOW
 	[[ $package == "shadow" ]] && package=$package-base

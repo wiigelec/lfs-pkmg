@@ -53,7 +53,6 @@ function install-list-files
 			l=${l//../:}
 			name=${l##*/}
 
-			echo "curl --silent -o $listsdir/$name $l"
 			as_root curl --silent -o $listsdir/$name $l
 		
 		### FILE LIST###
