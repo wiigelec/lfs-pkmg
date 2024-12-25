@@ -22,6 +22,16 @@ echo
 echo "Building pkglogs..."
 as_root $BUILD_PKGLOGS_SH
 
+### COMBINE PASS1 ###
+pass1=$(find $PKGLOG_DIR -name "*-pass1")
+for p in $pass1;
+do
+	np=${p/-pass1//}
+	write=$(cat $p $np)
+
+	echo $write | sort -u > $np
+done
+
 
 #------------------------------------------------------------------#
 # CREATE ARCHIVES
