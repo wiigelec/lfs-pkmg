@@ -72,13 +72,15 @@ LISTDEPS : $(BLFS_FULL_XML) $(BLFS_PKGLIST_XML) select-blfs-packages \
 #------------------------------------------------------------------#
 LISTINSTALL : select-repo-lists list-install 
 	@echo
-	@$(call done_message, Success! Lists installed.)
+	@$(call done_message, Success! List packages installed.)
 
 #------------------------------------------------------------------#
 LISTPATCH : 
 
 #------------------------------------------------------------------#
-LISTREMOVE : 
+LISTREMOVE : select-installed-lists list-remove
+	@echo
+	@$(call done_message, Success! List packages removed.)
 
 #------------------------------------------------------------------#
 LISTUPGRADE : 

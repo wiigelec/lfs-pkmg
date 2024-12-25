@@ -110,6 +110,10 @@ CURRENT_CONFIG = $(BLD_CONFIG)/current-config
 BLFS_FULL_XML_NV = $(BLD_XML)/blfs-full.xml
 WORK_PKGS_TREE = $(BLD_CONFIG)/work-pkgs-tree
 
+INSTLISTS_CONFIG_IN = $(BLD_CONFIG)/instlists-config-in
+INSTLISTS_CONFIG_OUT = $(BLD_CONFIG)/instlists-config-out
+REMV_LISTS_LIST = $(BLD_CONFIG)/remv-lists-list
+
 INSTPKGS_CONFIG_IN = $(BLD_CONFIG)/instpkgs-config-in
 INSTPKGS_CONFIG_OUT = $(BLD_CONFIG)/instpkgs-config-out
 REMV_PKGS_LIST = $(BLD_CONFIG)/remv-pkgs-list
