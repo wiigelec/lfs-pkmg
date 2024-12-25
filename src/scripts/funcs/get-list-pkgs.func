@@ -15,24 +15,23 @@ function get-list-pkgs
 
 list=$1
 
-### GET REPO PATH ###
-repopath=$REPOPATH
+### GET LIST PATH ###
+listpath=${list%/*}
 
 
 ### SERVER PATH ###
-if [[ $repopath == "http"* ]]; then
+if [[ $listpath == "http"* ]]; then
 	
 	list=${list//../:}
-	repopath=${repopath//../:}
 	listpackages=$(curl --silent $list)
 else
-	listpackages=$(cat $l)
+	listpackages=$(cat $list)
 fi
 
 ### SETUP PACKAGE PATHS ###
 for lp in $listpackages; do
 
-	echo "$repopath/$lp"      
+	echo "$REPOPATH/$lp"      
 done
 
 
