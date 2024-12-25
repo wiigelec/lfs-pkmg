@@ -88,6 +88,8 @@ tar --keep-directory-symlink -xpf $download
 ### INSTALLED FILE LIST ###
 tar -tf $download | sed 's/^\.//g' | sed '/^\/$/d' > $ifl
 
+chroot $INSTALLROOT ldconfig
+
 
 ### CLEANUP ###
 
