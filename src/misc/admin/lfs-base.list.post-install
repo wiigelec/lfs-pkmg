@@ -12,6 +12,8 @@ set -e
 source <(echo $ASROOT)
 export -f as_root
 
+export LFS="$INSTALLROOT"
+
 
 ####################################################################
 # FUNCTIONS
