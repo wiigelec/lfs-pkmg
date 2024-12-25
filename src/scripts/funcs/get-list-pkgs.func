@@ -15,8 +15,11 @@ function get-list-pkgs
 
 list=$1
 
-### GET LIST PATH ###
+### GET PATHS ###
 listpath=${list%/*}
+listvers=${listpath%/lists}
+listvers=${listvers##*/}
+repopath=$REPOPATH/$listvers/packages
 
 
 ### SERVER PATH ###
@@ -31,7 +34,7 @@ fi
 ### SETUP PACKAGE PATHS ###
 for lp in $listpackages; do
 
-	echo "$REPOPATH/$lp"      
+	echo "$repopath/$lp"      
 done
 
 
