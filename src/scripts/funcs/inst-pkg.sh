@@ -43,6 +43,7 @@ if [[ $installpkg == "http"* ]]; then
 
 	download=$tmpdir/$file
 	curl --silent -o $download $installpkg
+	[[ -z $(file $download | grep XZ) ]] && rm $download
 
 ### FILE ###
 else
