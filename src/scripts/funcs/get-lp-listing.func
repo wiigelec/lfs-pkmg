@@ -14,6 +14,10 @@ function get-lp-listing
 
 selection=$1
 
+### SET REPOPATH ###
+
+[[ $selection == "LIST" ]] && REPOPATH=$LISTPATH
+
 # GET VERION DIRS
 file="false"
 server="false"
