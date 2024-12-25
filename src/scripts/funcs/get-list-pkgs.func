@@ -16,8 +16,7 @@ function get-list-pkgs
 list=$1
 
 ### GET REPO PATH ###
-repopath=${list%/*}
-repopath=${repopath/lists/packages}
+repopath=$REPOPATH
 
 
 ### SERVER PATH ###

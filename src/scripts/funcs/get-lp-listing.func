@@ -14,31 +14,32 @@ function get-lp-listing
 
 selection=$1
 
-### SET REPOPATH ###
+### GET DISPLAYPATH ###
+displaypath=$REPOPATH
+[[ $selection = "LIST" ]] && displaypath=$LISTPATH
 
-[[ $selection == "LIST" ]] && REPOPATH=$LISTPATH
 
-# GET VERION DIRS
+### GET VERION DIRS ###
 file="false"
 server="false"
-if [[ $REPOPATH == "http://"* || $REPOPATH == "https://"* ]]; then
+if [[ $displaypath == "http"* ]]; then
 
-        versionlist=$(curl --silent $REPOPATH | \
+        versionlist=$(curl --silent $displaypath | \
                sed '/href/!d' | sed 's/.*href=\(.*\)<\/a.*/\1/g' | sed 's/.*>\(.*\)\//\1/g' \
                | sort)
 
         server="true"
 
 else
-        [[ ! -d $REPOPATH ]] && echo -e "\n>>>>> $REPOPATH does not exist. <<<<<\n" && exit 1
+        [[ ! -d $displaypath ]] && echo -e "\n>>>>> $displaypath does not exist. <<<<<\n" && exit 1
 
-        versionlist=$(ls ${REPOPATH} | sort)
+        versionlist=$(ls ${displaypath} | sort)
 
 	file="true"
 fi
 
 
-# ITERATE VERSIONS
+### ITERATE VERSIONS ###
 
 # select string
 selectstring="<UNKNOWN>"
@@ -52,8 +53,8 @@ for v in $versionlist; do
         outlist=""
                 
 	# set path
-        [[ $selection == "PACKAGE" ]] && path=$REPOPATH/$v/packages/
-        [[ $selection == "LIST" ]] && path=$REPOPATH/$v/lists/
+        [[ $selection == "PACKAGE" ]] && path=$displaypath/$v/packages/
+        [[ $selection == "LIST" ]] && path=$displaypath/$v/lists/
 
         # FROM FILE
         if [[ $file == "true" ]]; then
