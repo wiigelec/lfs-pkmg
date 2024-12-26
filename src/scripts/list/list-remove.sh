@@ -47,7 +47,7 @@ done
 #------------------------------------------------------------------#
 
 # INITIALIZE
-> $REPO_PKGS_LIST
+> $REMV_PKGS_LIST
 
 # ITERATE LISTS
 for l in $lists;
