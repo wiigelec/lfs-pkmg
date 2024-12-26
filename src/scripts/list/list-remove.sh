@@ -52,9 +52,10 @@ done
 # ITERATE LISTS
 for l in $lists;
 do
-
+	exclude="$exclude --exclude=${l##*/}"
 	get-list-pkgs $l >> $REMV_PKGS_LIST
 done
+
 
 # SORT UNIQUE
 listpackages=$(cat $REMV_PKGS_LIST | sort -u)
@@ -62,9 +63,14 @@ listpackages=$(cat $REMV_PKGS_LIST | sort -u)
 for lp in $listpackages; do
 
 	pkg=${lp##*/}
+	
+	### CHECK USED ###
+	[[ ! -z $(grep $exclude -r $pkg $LISTS_DIR || true) ]] && continue
+
 	pkg=${pkg%.txz}
 	pkg=${INSTALLROOT}$INSTALLED_DIR/$pkg
 	pkg=${pkg//\/\//\/}
+
 	echo $pkg >> $REMV_PKGS_LIST
 done
 
