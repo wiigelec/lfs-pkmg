@@ -30,7 +30,11 @@ do
 	write=$(cat $p $np)
 	write=$(echo $write | sort -u)
 
-	echo $write | as_root tee -a $np
+	as_root > $np
+	for each in $write; 
+	do
+		echo $each | as_root tee -a $np
+	done
 
 	as_root rm $p
 done
