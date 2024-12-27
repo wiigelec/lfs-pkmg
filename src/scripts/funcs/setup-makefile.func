@@ -73,7 +73,7 @@ $target1 : $target2
 	@\$(call echo_message)
 	@\$(TIMER_SCRIPT) PKG \$\$PPID $target1 &
 	@echo
-	./scripts/$prev | tee ./logs/$@
+	./scripts/$prev | tee ./logs/\$@
 	touch $target1
 	$message
 EOF
@@ -90,7 +90,7 @@ $target1 :
 	@\$(call echo_message)
 	@\$(TIMER_SCRIPT) PKG \$\$PPID $target1 &
 	@echo
-	./scripts/$prev | tee ./logs/$@
+	./scripts/$prev | tee ./logs/\$@
 	touch $target1
 EOF
 
