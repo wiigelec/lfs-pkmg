@@ -27,14 +27,9 @@ pass1=$(find $PKGLOG_DIR -name "*-pass1--*")
 for p in $pass1;
 do
 	np=${p/-pass1/}
-	write=$(cat $p $np)
-	write=$(echo $write | sort -u)
-
-	as_root > $np
-	for each in $write; 
-	do
-		echo $each | as_root tee -a $np
-	done
+	write="$(cat $p $np | sort -u)"
+		
+	as_root bash -c echo "$write" > $np
 
 	as_root rm $p
 done
