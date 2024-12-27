@@ -26,10 +26,11 @@ as_root $BUILD_PKGLOGS_SH
 pass1=$(find $PKGLOG_DIR -name "*-pass1--*")
 for p in $pass1;
 do
-	np=${p/-pass1//}
+	np=${p/-pass1/}
 	write=$(cat $p $np)
+	write=$(echo $write | sort -u)
 
-	echo $write | sort -u > $np
+	echo $write | as_root tee -a $np
 
 	as_root rm $p
 done
