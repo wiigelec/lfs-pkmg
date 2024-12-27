@@ -29,7 +29,7 @@ do
 	np=${p/-pass1/}
 	write="$(cat $p $np | sort -u)"
 		
-	as_root bash -c echo "$write" > $np
+	echo "$write" | as_root tee $np > /dev/null
 
 	as_root rm $p
 done
