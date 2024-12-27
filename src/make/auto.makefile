@@ -23,11 +23,6 @@ AUDITPF :
 AUDITSF : 
 
 #------------------------------------------------------------------#
-BOOTSTRAPWORK : build-bootstrap-work build-bootstrap-archives
-	@echo
-	@$(call done_message, Success! Bootstrap complete.)
-
-#------------------------------------------------------------------#
 BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG) \
        build-lfs $(SETUP_LFS_CHROOT) build-lfs-chroot	
 	@echo
@@ -49,11 +44,6 @@ BUILDBLFS : $(BLFS_FULL_XML) book-blfs-pkglist $(BOOK_BLFS_DEPS) \
 
 #------------------------------------------------------------------#
 BUILDPATCH : 
-
-#------------------------------------------------------------------#
-BUILDWORK : build-blfs-work build-blfs-archives 
-	@echo
-	@$(call done_message, Success! Build complete.)
 
 #------------------------------------------------------------------#
 DOCSHTML : 
@@ -99,4 +89,28 @@ PKGREMOVE : select-installed-packages package-remove
 PKGUPGRADE : select-repo-packages package-upgrade
 	@echo
 	@$(call done_message, Success! Packages upgraded.)
+
+
+
+#------------------------------------------------------------------#
+# BUILD WORK TARGETS
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
+BOOTSTRAPWORK : build-bootstrap-work build-bootstrap-archives
+	@echo
+	@$(call done_message, Success! Bootstrap complete.)
+
+
+#------------------------------------------------------------------#
+BUILDWORK : build-blfs-work build-blfs-archives 
+	@echo
+	@$(call done_message, Success! Build complete.)
+
+
+#------------------------------------------------------------------#
+WORKARCHIVES : build-blfs-archives
+	@echo
+	@$(call done_message, Success! Archives complete.)
+
 
