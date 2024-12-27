@@ -30,6 +30,8 @@ do
 	write=$(cat $p $np)
 
 	echo $write | sort -u > $np
+
+	as_root rm $p
 done
 
 
