@@ -26,6 +26,8 @@ cat << EOF > $makefile
 # AUTO GENERATED MAKEFILE
 ####################################################################
 
+SHELL = /bin/bash -o pipefail
+
 ### DISPLAY OUTPUT ###
 BOLD= "[0;1m"
 NORMAL= "[0;0m"
@@ -73,7 +75,7 @@ $target1 : $target2
 	@\$(call echo_message)
 	@\$(TIMER_SCRIPT) PKG \$\$PPID $target1 &
 	@echo
-	./scripts/$prev | tee ./logs/\$@
+	script -eq -c "./scripts/$prev" | tee ./logs/\$@ 
 	touch $target1
 	$message
 EOF
@@ -90,7 +92,7 @@ $target1 :
 	@\$(call echo_message)
 	@\$(TIMER_SCRIPT) PKG \$\$PPID $target1 &
 	@echo
-	./scripts/$prev | tee ./logs/\$@
+	script -eq -c "./scripts/$prev" | tee ./logs/\$@ 
 	touch $target1
 EOF
 
