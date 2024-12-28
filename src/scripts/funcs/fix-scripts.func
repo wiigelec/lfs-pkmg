@@ -46,7 +46,7 @@ for a in $fix_files; do sed -i 's/bash -e/set -e/' $a; done
 #------------------------------------------------------------------#
 # as_root
 fix_files=$(grep -rl "as_root" $BLFS_SCRIPTS_DIR)
-for a in $fix_files; do sed -i 's/as_root/sudo -E/' $a; done
+for a in $fix_files; do sed -i 's/as_root/sudo/' $a; done
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
@@ -188,7 +188,7 @@ sed -i '/The options used here are:/,+5d' $FILE
 sed -i '/exit/d' $FILE
 echo "exit" >> $FILE
 linenum=$(grep -n "# Setup xsessions (X11 sessions)" $FILE | sed 's/:.*//')
-sed -i "$linenum i sudo -E sh -e << ROOT_EOF" $FILE
+sed -i "$linenum i sudo sh -e << ROOT_EOF" $FILE
 linenum=$(grep -n "ln -sfv \$KF6_PREFIX/share/xdg-desktop-portal/portals/kde.portal" $FILE | sed 's/:.*//')
 ((linenum++))
 sed -i "$linenum i ROOT_EOF" $FILE

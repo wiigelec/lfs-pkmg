@@ -41,7 +41,7 @@
 
 
 ### DIFFLOG1 ###
-sudo -E sh -e &lt;&lt; ROOT_EOF
+sudo sh -e &lt;&lt; ROOT_EOF
 touch $TIMESTAMP
 find / -xdev > $difflog1
 ROOT_EOF
@@ -66,7 +66,7 @@ ROOT_EOF
 ### END CONFIGURE MAKE INSTALL ###
 
 ### DIFFLOG2 ###
-sudo -E sh -e &lt;&lt; ROOT_EOF
+sudo sh -e &lt;&lt; ROOT_EOF
 find / -xdev > $difflog2
 find / -xdev -newer $TIMESTAMP >> $difflog2
 rm $TIMESTAMP
@@ -86,7 +86,7 @@ ROOT_EOF
 	<xsl:if test="@role = 'root'">
 		<xsl:text>&#xA;</xsl:text>
 		<xsl:text>&#xA;</xsl:text>
-		<xsl:text>sudo -E sh -e &lt;&lt; ROOT_EOF</xsl:text>
+		<xsl:text>sudo sh -e &lt;&lt; ROOT_EOF</xsl:text>
 	</xsl:if>
 
         <xsl:text>&#xA;</xsl:text>
