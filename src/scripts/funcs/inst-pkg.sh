@@ -18,9 +18,9 @@ installpkg=$1
 installed_dir=$INSTALLROOT/$INSTALLED_DIR
 [[ ! -d $installed_dir ]] && mkdir -p $installed_dir
 
-# TEMP DIR
-tmpdir=/tmp/lfspkmg$RANDOM
-mkdir -p $tmpdir
+# DOWNLOAD DIR
+downloaddir=${INSTALLROOT}$PKG_DOWNLOAD_DIR
+[[ ! -d $downloaddir ]] && mkdir -p $downloaddir
 
 # DESTDIR
 destdir=${DESTDIR:-$INSTALLROOT}
@@ -41,7 +41,7 @@ ifl=$installed_dir/$name
 ### SERVER ###
 if [[ $installpkg == "http"* ]]; then
 
-	download=$tmpdir/$file
+	download=$downloaddir/$file
 	curl --silent -o $download $installpkg
 	[[ -z $(file $download | grep XZ) ]] && rm $download
 
@@ -54,7 +54,6 @@ fi
 if [[ ! -f $download ]]; then
 
 	echo "SKIPPING: $installpkg not found."
-	rm  -rf $tmpdir
 	exit 1
 fi
 
@@ -96,4 +95,3 @@ chroot $INSTALLROOT ldconfig > /dev/null 2>&1 || true
 
 popd > /dev/null
 
-rm -rf $tmpdir

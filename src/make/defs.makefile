@@ -88,6 +88,7 @@ LPM_DIR = /var/lib/lpm
 LPM_BUILD = $(LPM_DIR)/build
 LISTS_DIR = $(LPM_DIR)/lists
 INSTALLED_DIR = $(LPM_DIR)/installed
+PKG_DOWNLOAD_DIR = $(LPM_DIR)/downloads
 DIFFLOG_DIR = $(LPM_BUILD)/difflog
 PKGLOG_DIR = $(LPM_BUILD)/pkglog
 ARCHIVE_DIR = $(LPM_BUILD)/packages
