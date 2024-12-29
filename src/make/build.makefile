@@ -14,7 +14,8 @@
 BLD_SCRIPTS = $(SRC_SCRIPTS)/build
 
 # target files
-BUILD_LFS_CHROOT = $(JHALFS_DIR)/build-lfs-chroot
+BUILD_LFS_CHROOT_SCRIPTS = $(JHALFS_DIR)/build-lfs-chroot-scripts
+BUILD_LFS_CHROOT_ARCHIVES = $(JHALFS_DIR)/build-lfs-chroot-archives
 
 # target scripts
 BUILD_BOOTSTRAP_ARCHIVES_SH = $(BLD_SCRIPTS)/build-bootstrap-archives.sh
@@ -22,7 +23,8 @@ BUILD_BOOTSTRAP_WORK_SH = $(BLD_SCRIPTS)/build-bootstrap-work.sh
 BUILD_DEPLOY_BOOTSTRAP_SH = $(BLD_SCRIPTS)/build-deploy-bootstrap.sh
 BUILD_GROUP_LIST_SH = $(BLD_SCRIPTS)/build-group-list.sh
 BUILD_LFS_SH = $(BLD_SCRIPTS)/build-lfs.sh
-BUILD_LFS_CHROOT_SH = $(BLD_SCRIPTS)/build-lfs-chroot.sh
+BUILD_LFS_CHROOT_SCRIPTS_SH = $(BLD_SCRIPTS)/build-lfs-chroot-scripts.sh
+BUILD_LFS_CHROOT_ARCHIVES_SH = $(BLD_SCRIPTS)/build-lfs-chroot-archives.sh
 BUILD_BLFS_ARCHIVES_SH = $(BLD_SCRIPTS)/build-blfs-archives.sh
 BUILD_BLFS_WORK_SH = $(BLD_SCRIPTS)/build-blfs-work.sh
 
@@ -93,12 +95,23 @@ build-lfs :
 
 
 #------------------------------------------------------------------#
-build-lfs-chroot $(BUILD_LFS_CHROOT) :
+build-lfs-chroot-scripts $(BUILD_LFS_CHROOT_SCRIPTS) :
 	@echo
-	@$(call bold_message, build-lfs-chroot)
-	$(BUILD_LFS_CHROOT_SH)
+	@$(call bold_message, build-lfs-chroot-scripts)
+	$(BUILD_LFS_CHROOT_SCRIPTS_SH)
+	@touch $@
 
-.PHONY: build-lfs-chroot
+.PHONY: build-lfs-chroot-scripts
+
+
+#------------------------------------------------------------------#
+build-lfs-chroot-archives $(BUILD_LFS_CHROOT_ARCHIVES) :
+	@echo
+	@$(call bold_message, build-lfs-chroot-archives)
+	$(BUILD_LFS_CHROOT_ARCHIVES_SH)
+	@touch $@
+
+.PHONY: build-lfs-chroot-archives
 
 
 #------------------------------------------------------------------#
