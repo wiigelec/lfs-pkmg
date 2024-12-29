@@ -1,5 +1,13 @@
 
 #-----------------------------------------------------------------------------#
 
-upgrade-package.help
+upgrade-package
+
+Used to upgrade a package by installing the new package and removing the old.
+
+Workflow targets:
+
+	select-action-params (PACKAGE, UPGRADE, REPOSITORY, INSTALLROOT)
+	select-repo-packages
+	package-upgrade
 

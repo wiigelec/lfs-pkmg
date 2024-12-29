@@ -8,6 +8,6 @@
 # DEFINITIONS
 #------------------------------------------------------------------#
 
-BOOK_VERS = 12.2
-BUILD_DIR = /home/wiigelec/lfs-pkmg/build/12.2-SYSD
+BOOK_VERS = trunk
+BUILD_DIR = /home/wiigelec/lfs-pkmg/build/trunk-SYSD
 INSTALLROOT = /mnt/lfs
