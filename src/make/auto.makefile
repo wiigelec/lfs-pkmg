@@ -53,7 +53,8 @@ AUDITSF :
 
 #------------------------------------------------------------------#
 BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG) \
-       build-lfs $(SETUP_LFS_CHROOT) build-lfs-chroot	
+       build-lfs $(SETUP_LFS_CHROOT) build-lfs-chroot-scripts \
+       build-lfs-chroot-archives
 	@echo
 	@$(call done_message, Success! LFS build complete.)
 

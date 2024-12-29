@@ -10,6 +10,26 @@ source $CURRENT_CONFIG
 
 
 #------------------------------------------------------------------#
+# KERNEL CONFIG
+#------------------------------------------------------------------#
+
+kernelconfig=/sources/kernel-config
+if [[ ! -f $kernelconfig ]]; then
+
+	echo
+	echo "No kernel config provided, default config will be used."
+	read -p "Continue? (y) " confirm
+	if [[ $confirm != "y" ]]; then 
+
+		echo
+		echo ">>>>> Please provide a valid kernel config file $kernelconfig to continue. <<<<<"
+		echo
+		exit 1 
+	fi
+fi
+
+
+#------------------------------------------------------------------#
 # INSTALL CONFIGURATION FILE
 #------------------------------------------------------------------#
 
@@ -58,4 +78,6 @@ cp $LFS_JHALFS/packInstall.sh $JHALFS_GIT_DIR/pkgmngt
 ./jhalfs run
 
 popd > /dev/null
+
+if [[ -f $kernelconfig ]]; then cp -v $kernelconfig $JHALFS_DIR; fi
 
