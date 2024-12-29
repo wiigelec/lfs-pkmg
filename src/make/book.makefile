@@ -14,7 +14,7 @@
 BOOK_SCRIPTS = $(SRC_SCRIPTS)/book
 
 # target files
-BOOK_BLFS_DEPS = $(BUILD_DEPTREE)/book-blfs-deps
+BOOK_BLFS_DEPS = $(BUILD_DIR)/book-blfs-deps
 BOOK_BLFS_SCRIPTS = ${BUILD_DIR}/book-blfs-scripts
 BLFS_FULL_XML = $(BUILD_XML)/blfs-full.xml
 BLFS_PKGLIST_XML = $(BUILD_XML)/blfs-pkglist.xml

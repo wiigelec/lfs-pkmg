@@ -52,5 +52,10 @@ export LPM_ARCHIVE=$LPM_ARCHIVE
 as_root $BUILD_ARCHIVES_SH
 
 
+### CLEANUP ###
+
+as_root rm $LPM_PKGLOG/*
+
+
 echo
 echo "Done."

@@ -42,9 +42,5 @@ if [[ "$rev" == "systemd" ]]; then mv -v $BLD_XML/blfs-systemd-full.xml $BLFS_FU
 #------------------------------------------------------------------#
 
 ### CREATE BUILD DIR ###
-if [[ ! -d $BUILD_DIR ]]; then
-
-        mkdir -p $BUILD_DIR
-
-        mv -v $BLD_XML $BUILD_DIR
-fi
+[[ ! -d $BUILD_DIR ]] && mkdir -p $BUILD_DIR
+mv -v $BLD_XML $BUILD_DIR

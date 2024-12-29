@@ -7,7 +7,6 @@ Used to build a blfs package.
 
 Workflow targets:
 
-	git-lfs
 	git-blfs
 	select-action-params (BUILD, BLFS, REV, BRANCH)
 	book-blfs-fullxml
