@@ -29,9 +29,14 @@ export
 
 #------------------------------------------------------------------#
 auto : git-lfs git-blfs select-action-params
-	$(ACTION_LAUNCH_SH)
+	$(MAKE) action-launch
 
 .PHONY: auto
+
+action-launch :
+	$(ACTION_LAUNCH_SH)
+
+.PHONY: action-launch
 
 
 #------------------------------------------------------------------#

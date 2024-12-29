@@ -14,7 +14,7 @@ source $CURRENT_CONFIG
 #------------------------------------------------------------------#
 
 pushd $JHALFS_GIT_DIR > /dev/null
-cp $MISC_LFS/configuration ./
+cp $LFS_JHALFS/configuration ./
 
 
 #------------------------------------------------------------------#
@@ -47,8 +47,8 @@ sed -i "s/BUILDDIR=.*/BUILDDIR=\"$installroot\"/" $JHALFS_CONFIG
 # INSTALL PACKAGE MANAGEMENT
 #------------------------------------------------------------------#
 
-cp $MISC_LFS/packageManager.xml $JHALFS_GIT_DIR/pkgmngt
-cp $MISC_LFS/packInstall.sh $JHALFS_GIT_DIR/pkgmngt
+cp $LFS_JHALFS/packageManager.xml $JHALFS_GIT_DIR/pkgmngt
+cp $LFS_JHALFS/packInstall.sh $JHALFS_GIT_DIR/pkgmngt
 
 
 #------------------------------------------------------------------#

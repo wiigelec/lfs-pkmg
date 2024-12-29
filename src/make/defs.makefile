@@ -50,14 +50,11 @@ endef
 # DIRECTORIES
 #------------------------------------------------------------------#
 
-TOPDIR := $(shell pwd)
+TOPDIR = $(shell pwd)
 
 #------------------------------------------------------------------#
 # VERSION
 
-BUILD_DIR = $(shell if [[ -f $(CURRENT_CONFIG) ]]; then \
-	    grep BUILD_DIR= $(CURRENT_CONFIG) | sed 's/BUILD_DIR=//';\
-	    fi)
 BUILD_XML = $(BUILD_DIR)/xml
 BUILD_DEPTREE = $(BUILD_DIR)/deptree
 DEPTREE_DEPS = $(BUILD_DEPTREE)/deps
@@ -80,7 +77,7 @@ BLD_XML = $(BLD_DIR)/xml
 DOC_DIR = $(TOPDIR)/doc
 
 # jhalfs
-JHALFS_DIR = ${INSTALLROOT}/jhalfs
+JHALFS_DIR = $(INSTALLROOT)/jhalfs
 
 # lpm
 LPM_DIR = /var/lib/lpm
@@ -126,6 +123,7 @@ BOOTSTRAP_GROUP_LIST = $(MISC_LFS)/bootstrap.group
 ACTION_CONFIG_IN = $(BLD_CONFIG)/action-config-in
 ACTION_CONFIG_OUT = $(BLD_CONFIG)/action-config-out
 CURRENT_CONFIG = $(BLD_CONFIG)/current-config
+CURRENT_CONFIG_MAKE = $(SRC_MAKE)/current-config.makefile
 
 # blfs packages
 BLFSPKGS_CONFIG_IN = $(BLD_CONFIG)/blfspkfgs-config-in

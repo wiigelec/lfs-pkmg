@@ -54,7 +54,21 @@ sed -i 's/=y//g' $CURRENT_CONFIG
 sed -i 's/__/=/g' $CURRENT_CONFIG
 sed -i 's/"//g' $CURRENT_CONFIG
 
-### GET BOOKVERSION ###
-[[ ! -z $blfsbranch ]] && echo "BOOK_VERS=$blfsbranch" >> $CURRENT_CONFIG
-if [[ ! -z $builddir ]]; then echo "BUILD_DIR=$builddir" >> $CURRENT_CONFIG; fi
+
+### WRITE CURRENT CONFIG MAKEFILE ###
+installroot=$(cfg-val "INSTALLROOT")
+if [[ ! -z $blfsbranch ]]; then 
+	sed -i "s/\(BOOK_VERS = \).*/\1$blfsbranch/" $CURRENT_CONFIG_MAKE; 
+fi
+if [[ ! -z $builddir ]]; then
+	builddir=${builddir//\//\\/}
+	sed -i "s/\(BUILD_DIR = \).*/\1$builddir/" $CURRENT_CONFIG_MAKE; 
+fi
+if [[ ! -z $installroot ]]; then 
+	installroot=${installroot##CONFIG_}
+	installroot=${installroot##INSTALLROOT=}
+	installroot=${installroot//\"/}
+	installroot=${installroot//\//\\/}
+	sed -i "s/\(INSTALLROOT = \).*/\1$installroot/" $CURRENT_CONFIG_MAKE; 
+fi
 

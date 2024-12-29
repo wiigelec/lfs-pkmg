@@ -1,5 +1,20 @@
 
 #-----------------------------------------------------------------------------#
 
-build-lfs.help
+build-lfs
+
+Used to build LFS packages.
+
+Workflow targets:
+
+	git-lfs
+	select-action-params (BUILD, LFS, REV, BRANCH, INSTALLROOT)
+	git-jhalfs
+	setup-lfs-jhalfs
+	setup-lfs-difflog
+	build-lfs
+	setup-lfs-chroot
+	build-lfs-chroot-scripts
+	build-lfs-chroot-archives
+	
 
