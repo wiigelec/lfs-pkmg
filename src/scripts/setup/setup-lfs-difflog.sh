@@ -20,7 +20,7 @@ JHALFS_CH08=$INSTALLROOT/jhalfs/lfs-commands/chapter08
 # CONVERT CHO08
 #------------------------------------------------------------------#
 
-diffdir=$DIFFLOG_DIR
+diffdir=$LPM_DIFFLOG
 
 for FILE in $JHALFS_CH08/*;
 do
