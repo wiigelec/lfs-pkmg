@@ -13,9 +13,15 @@ function fix-deps
 {
 
 #------------------------------------------------------------------#
+# dejavu-fonts
+fix_files=$(grep -rl dejavu-fonts $DEPTREE_DEPS)
+for a in $fix_files; do sed -i '/dejavu-fonts/d' $a; done
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# polkit-agent
+fix_files=$(grep -rl polkit-agent $DEPTREE_DEPS)
+for a in $fix_files; do sed -i '/polkit-agent/d' $a; done
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#

@@ -1,5 +1,19 @@
 
 #-----------------------------------------------------------------------------#
 
-create-list-deps.help
+create-list-deps
+
+Used to create a list from a package dependency tree.
+
+Workflow tasks:
+
+	git-blfs
+	select-action-params (LIST, LIST DEPS, REV, BRANCH, LIST FILE)
+	book-blfs-fullxml
+	book-blfs-pkglist
+	select-blfs-packages
+	book-blfs-deps
+	book-blfs-trees
+	list-create-deps
+
 

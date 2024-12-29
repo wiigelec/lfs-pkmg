@@ -28,8 +28,10 @@ setup-deps
 # WRITE LIST FILE
 #------------------------------------------------------------------#
 
-listfile=$LISTPATH/$LISTNAME
+listfile=$LISTFILE
+listdir=${listfile%/*}
 [[ -f $listfile ]] && echo -e "\n>>>>> $listfile exists. <<<<<\n" && exit 1
+[[ ! -d $listdir ]] && as_root mkdir -p $listdir
 
 ### GET PACKAGE INFO ###
 echo "Getting package info..."
