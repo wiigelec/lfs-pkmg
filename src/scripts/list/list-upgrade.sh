@@ -1,7 +1,7 @@
 #!/bin/bash
 ####################################################################
 # 
-# list-install.sh
+# list-upgrade.sh
 #
 ####################################################################
 
@@ -21,16 +21,16 @@ lists=$(cat $REPO_LIST_LIST)
 
 
 #------------------------------------------------------------------#
-# PRE-INSTALL SCRIPTS
+# PRE-UPGRADE SCRIPTS
 #------------------------------------------------------------------#
 
-echo "Running list pre-install scripts..."
+echo "Running list pre-upgrade scripts..."
 
 ### USER ###
 for each in $lists; do
 
         each=${each##*/}
-        script=$USER_SCRIPT_DIR/$each.pre-install
+        script=$USER_SCRIPT_DIR/$each.pre-upgrade
         [[ -f $script ]] && $script
 done
 
@@ -38,13 +38,13 @@ done
 for each in $lists; do
 
         each=${each##*/}
-        script=$ADMIN_SCRIPT_DIR/$each.pre-install
+        script=$ADMIN_SCRIPT_DIR/$each.pre-upgrade
         [[ -f $script ]] && $script
 done
 
 
 #------------------------------------------------------------------#
-# WRITE INSTALL LIST
+# WRITE UPGRADE LIST
 #------------------------------------------------------------------#
 
 # INITIALIZE
@@ -71,21 +71,21 @@ done
 # INSTALL PACKAGES
 #------------------------------------------------------------------#
 
-as_root $PACKAGE_INSTALL_SH
+as_root $PACKAGE_UPGRADE_SH
 
 
 #------------------------------------------------------------------#
-# POST-INSTALL SCRIPTS
+# POST-UPGRADE SCRIPTS
 #------------------------------------------------------------------#
 
 echo
-echo "Running list post-install scripts..."
+echo "Running list post-upgrade scripts..."
 
 ### USER ###
 for each in $lists; do
 
         each=${each##*/}
-        script=$USER_SCRIPT_DIR/$each.post-install
+        script=$USER_SCRIPT_DIR/$each.post-upgrade
         [[ -f $script ]] && $script
 done
 
@@ -93,7 +93,7 @@ done
 for each in $lists; do
 
         each=${each##*/}
-        script=$ADMIN_SCRIPT_DIR/$each.post-install
+        script=$ADMIN_SCRIPT_DIR/$each.post-upgrade
         [[ -f $script ]] && $script
 done
 
@@ -106,4 +106,11 @@ done
 echo "Installing list files..."
 
 install-list-files
+
+for each in $lists;
+do
+	listname=${each##*/}
+	listfile=${INSTALLROOT}$LPM_LISTS/$listname
+        as_root rm $listfile
+done
 

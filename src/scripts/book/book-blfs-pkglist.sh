@@ -43,11 +43,12 @@ sed -i 's/\$\$.*-\(.*\)\$\$/\1/' $BLFS_PKGLIST_XML
 #------------------------------------------------------------------#
 
 unversioned=$(grep -F "$" $BLFS_PKGLIST_XML | sed 's/.*<id>\(.*\)<\/id>.*/\1/')
-[[ ! -z $unversioned ]] && echo -e "\nWARNING: the following packages are unversioned:\n"
+[[ ! -z $unversioned ]] && echo -e "\n>>>>> WARNING: the following packages are unversioned: <<<<<\n"
 for each in $unversioned
 do
         echo $each
 done
+[[ ! -z $unversioned ]] && echo
 
 #------------------------------------------------------------------#
 # UPDATE INSTALLED

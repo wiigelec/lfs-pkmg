@@ -20,6 +20,7 @@ LIST_CREATE_DIR_SH = $(LIST_SCRIPTS)/list-create-dir.sh
 LIST_CREATE_DEPS_SH = $(LIST_SCRIPTS)/list-create-deps.sh
 LIST_INSTALL_SH = $(LIST_SCRIPTS)/list-install.sh
 LIST_REMOVE_SH = $(LIST_SCRIPTS)/list-remove.sh
+LIST_UPGRADE_SH = $(LIST_SCRIPTS)/list-upgrade.sh
 
 
 ### OTHER DEFS ###
@@ -66,4 +67,13 @@ list-remove:
 	$(LIST_REMOVE_SH)
 
 .PHONY: list-remove
+
+
+#------------------------------------------------------------------#
+list-upgrade:
+	@echo
+	@$(call bold_message, $@)
+	$(LIST_UPGRADE_SH)
+
+.PHONY: list-upgrade
 

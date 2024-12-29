@@ -8,6 +8,6 @@
 # DEFINITIONS
 #------------------------------------------------------------------#
 
-BOOK_VERS = trunk
-BUILD_DIR = /home/wiigelec/lfs-pkmg/build/trunk-SYSD
-INSTALLROOT = /mnt/lfs
+BOOK_VERS = BOOK_VERS
+BUILD_DIR = BUILD_DIR
+INSTALLROOT = INSTALLROOT

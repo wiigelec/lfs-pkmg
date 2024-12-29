@@ -123,7 +123,9 @@ LISTREMOVE : select-installed-lists list-remove
 
 
 #------------------------------------------------------------------#
-LISTUPGRADE : 
+LISTUPGRADE : select-repo-lists list-upgrade
+	@echo
+	@$(call done_message, Success! List packages upgraded.)
 
 #------------------------------------------------------------------#
 PKGINSTALL : select-repo-packages package-install 

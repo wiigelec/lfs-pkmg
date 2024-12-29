@@ -1,5 +1,14 @@
 
 #-----------------------------------------------------------------------------#
 
-upgrade-list.help
+upgrade-list
+
+Used to upgrade list packages.
+
+Workflow tasks:
+
+	select-action-params (LIST, UPGRADE, LIST PATH, REPOSITORY,
+		INSTALLROOT)
+	select-repo-lists
+	list-upgrade
 
