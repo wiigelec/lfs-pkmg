@@ -15,6 +15,7 @@ function get-list-pkgs
 
 list=$1
 
+
 ### GET PATHS ###
 listpath=${list%/*}
 listvers=${listpath%/lists}

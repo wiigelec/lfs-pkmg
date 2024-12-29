@@ -48,7 +48,7 @@ done
 #------------------------------------------------------------------#
 
 # INITIALIZE
-listsdir=${INSTALLROOT}$LISTS_DIR
+listsdir=${INSTALLROOT}$LPM_LISTS
 [[ ! -d $listsdir ]] && as_root mkdir -p $listsdir
 > $REPO_PKGS_LIST
 

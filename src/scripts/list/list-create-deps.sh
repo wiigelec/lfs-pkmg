@@ -55,7 +55,7 @@ list=$(cat $listfile | sort -u)
 as_root sed -i '/.*/d' $listfile
 for l in $list;
 do
-	echo $l | as_root tee -a $listfile
+	echo $l | as_root tee -a $listfile > /dev/null
 done
 
 

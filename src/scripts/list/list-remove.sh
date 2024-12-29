@@ -67,7 +67,7 @@ for lp in $listpackages; do
 	pkg=${lp##*/}
 	
 	### CHECK USED ###
-	[[ ! -z $(grep $exclude -r $pkg $LISTS_DIR || true) ]] && continue
+	[[ ! -z $(grep $exclude -r $pkg $LPM_LISTS || true) ]] && continue
 
 	pkg=${pkg%.txz}
 	pkg=${INSTALLROOT}$LPM_INSTALLED/$pkg
@@ -88,6 +88,7 @@ as_root $PACKAGE_REMOVE_SH
 # POST-REMOVE SCRIPTS
 #------------------------------------------------------------------#
 
+echo
 echo "Running list post-remove scripts..."
 
 ### USER ###
