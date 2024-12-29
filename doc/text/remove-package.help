@@ -1,5 +1,13 @@
 
 #-----------------------------------------------------------------------------#
 
-remove-package.help
+remove-package
+
+Used to remove an installed package.
+
+Workflow targets:
+
+	select-action-params (PACKAGE, REMOVE. INSTALLROOT)
+	select-installed-packages
+	package-remove
 

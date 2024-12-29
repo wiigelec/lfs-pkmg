@@ -20,6 +20,7 @@ export -f as_root
 
 echo
 echo "Building pkglogs..."
+as_root rm $LPM_PKGLOG/* > /dev/null 2>&1 || true
 export LPM_PKGLOG=$LPM_PKGLOG
 as_root $BUILD_PKGLOGS_SH
 

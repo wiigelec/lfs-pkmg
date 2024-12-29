@@ -66,5 +66,4 @@ echo "Initializing system build directories..."
 as_root rm -rf $LPM_DIFFLOG
 as_root mkdir -p $LPM_DIFFLOG
 
-as_root rm -rf $LPM_ARCHIVE
 as_root mkdir -p $LPM_ARCHIVE

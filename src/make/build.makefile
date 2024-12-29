@@ -35,9 +35,10 @@ BUILD_ARCHIVES_SH = $(SCRIPTS_FUNCS)/build-archives.sh
 # timer
 TIMER_SCRIPT = $(SCRIPTS_FUNCS)/timer.sh
 ELAP_TIME = $(BUILD_WORK)/elapsed-time
-BLD_TIME=$(BUILD_WORK)/bld-time
-PKG_TIME=$(BUILD_WORK)/pkg-time
-CUMU_TIME=$(BUILD_WORK)/cumu-time
+BLD_TIME = $(BUILD_WORK)/bld-time
+PKG_TIME = $(BUILD_WORK)/pkg-time
+CUMU_TIME = $(BUILD_WORK)/cumu-time
+
 
 export
 
