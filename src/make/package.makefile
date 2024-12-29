@@ -11,7 +11,7 @@
 ### TARGET DEFS ###
 
 # directories
-PACKAGE_SCRIPTS = $(SCRIPTS_DIR)/package
+PACKAGE_SCRIPTS = $(SRC_SCRIPTS)/package
 
 # target files
 

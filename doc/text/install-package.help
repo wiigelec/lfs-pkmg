@@ -1,5 +1,13 @@
 
 #-----------------------------------------------------------------------------#
 
-install-package.help
+install-package
+
+Used to install a previously built package.
+
+Workflow targets:
+
+	select-action-params (PACKAGE, INSTALL, REPO PATH, INSTALLROOT)
+	select-repo-packages
+	package-install
 

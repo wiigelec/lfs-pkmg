@@ -68,7 +68,7 @@ for lp in $listpackages; do
 	[[ ! -z $(grep $exclude -r $pkg $LISTS_DIR || true) ]] && continue
 
 	pkg=${pkg%.txz}
-	pkg=${INSTALLROOT}$INSTALLED_DIR/$pkg
+	pkg=${INSTALLROOT}$LPM_INSTALLED/$pkg
 	pkg=${pkg//\/\//\/}
 
 	echo $pkg >> $REMV_PKGS_LIST

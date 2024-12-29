@@ -15,11 +15,11 @@ source $CURRENT_CONFIG
 
 installpkg=$1
 
-installed_dir=$INSTALLROOT/$INSTALLED_DIR
+installed_dir=$INSTALLROOT/$LPM_INSTALLED
 [[ ! -d $installed_dir ]] && mkdir -p $installed_dir
 
 # DOWNLOAD DIR
-downloaddir=${INSTALLROOT}$PKG_DOWNLOAD_DIR
+downloaddir=${INSTALLROOT}$LPM_DOWNLOADS
 [[ ! -d $downloaddir ]] && mkdir -p $downloaddir
 
 # DESTDIR

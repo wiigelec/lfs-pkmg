@@ -31,7 +31,7 @@ if [[ $displaypath == "http"* ]]; then
         server="true"
 
 else
-        [[ ! -d $displaypath ]] && echo -e "\n>>>>> $displaypath does not exist. <<<<<\n" && exit 1
+        [[ ! -d $displaypath ]] && echo -e "\n>>>>> $displaypath does not exist. <<<<<\n" >&2 && exit 1
 
         versionlist=$(ls ${displaypath} | sort)
 

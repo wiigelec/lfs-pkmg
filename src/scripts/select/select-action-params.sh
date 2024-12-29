@@ -17,16 +17,7 @@ function cfg-val
 	grep "^CONFIG_$cfg" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//'
 }
 #------------------------------------------------------------------#
-#------------------------------------------------------------------#
-function sub-cfg
-{
-	cfg=$1
-	local sub=$(cfg-val $cfg)
-	if [[ ! -z $sub ]];then
-		sed -i "s/\($cfg=\).*/\1$sub/" $CURRENT_CONFIG
-	fi
-}
-#------------------------------------------------------------------#
+
 
 #------------------------------------------------------------------#
 # GENERATE CONFIG IN
@@ -49,7 +40,7 @@ KCONFIG_CONFIG=$ACTION_CONFIG_OUT $MENU_CONFIG $ACTION_CONFIG_IN
 
 rev=$(cfg-val "REV")
 blfsbranch=$(cfg-val "BLFSBRANCH")
-builddir=$BLD_DIR/$blfsbranch-$rev 
+[[ ! -z $blfsbranch ]] && builddir=$BLD_DIR/$blfsbranch-$rev 
 
 [[ -f $CURRENT_CONFIG ]] && rm $CURRENT_CONFIG
 	
@@ -64,8 +55,6 @@ sed -i 's/__/=/g' $CURRENT_CONFIG
 sed -i 's/"//g' $CURRENT_CONFIG
 
 ### GET BOOKVERSION ###
-cat >> $CURRENT_CONFIG << EOF
-BOOK_VERS=$blfsbranch
-BUILD_DIR=$builddir
-EOF
+[[ ! -z $blfsbranch ]] && echo "BOOK_VERS=$blfsbranch" >> $CURRENT_CONFIG
+if [[ ! -z $builddir ]]; then echo "BUILD_DIR=$builddir" >> $CURRENT_CONFIG; fi
 

@@ -13,7 +13,7 @@ source $CURRENT_CONFIG
 # GET INSTALLED PACKAGES
 #------------------------------------------------------------------#
 
-installedlist=$(ls ${INSTALLROOT}$INSTALLED_DIR | sort)
+installedlist=$(ls ${INSTALLROOT}$LPM_INSTALLED | sort)
 
 if [[ -z $installedlist ]]; then
         echo
@@ -26,7 +26,7 @@ fi
 
 for i in $installedlist; do
 
-        echo "config    ${INSTALLROOT}$INSTALLED_DIR/$i" >> $INSTPKGS_CONFIG_IN
+        echo "config    ${INSTALLROOT}$LPM_INSTALLED/$i" >> $INSTPKGS_CONFIG_IN
         echo "  bool \"$i\"" >> $INSTPKGS_CONFIG_IN
 
 done

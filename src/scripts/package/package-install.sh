@@ -74,7 +74,7 @@ do
 	# CHECK INSTALLED
 	ifl=${p%.txz}
 	ifl=${ifl##*/}
-	ifl=$INSTALLROOT/$INSTALLED_DIR/$ifl
+	ifl=$INSTALLROOT/$LPM_INSTALLED/$ifl
 	[[ -f $ifl ]] && echo "Skipping ${p##*/}: INSTALLED" && continue
 
 	set +e

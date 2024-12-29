@@ -53,7 +53,7 @@ done
 # UPDATE INSTALLED
 #------------------------------------------------------------------#
 
-installeddir=${INSTALLROOT}$INSTALLED_DIR
+installeddir=${INSTALLROOT}$LPM_INSTALLED
 [[ ! -d $installeddir ]] && exit 0
 
 echo "Adding installed..."

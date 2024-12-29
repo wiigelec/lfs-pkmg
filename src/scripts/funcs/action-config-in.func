@@ -192,6 +192,7 @@ EOF
 
 ### LFS BRANCHES ### 
 
+if [[ -d $LFS_GIT_DIR ]]; then
 cat << EOF
 choice
 prompt "LFS Branch"
@@ -218,9 +219,11 @@ cat << EOF
 endchoice
 
 EOF
+fi
 
 ### BLFS BRANCHES ###
 
+if [[ -d $BLFS_GIT_DIR ]]; then
 cat << EOF
 choice
 prompt "BLFS Branch"
@@ -247,6 +250,7 @@ cat << EOF
 endchoice
 
 EOF
+fi
 
 #------------------------------------------------------------------#
 # DOCS FIELDS

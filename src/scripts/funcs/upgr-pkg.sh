@@ -14,7 +14,7 @@ file=${path##*/}
 package=${file%.txz}
 
 ### CHECK INSTALLED ###
-installed_dir=${INSTALLROOT}$INSTALLED_DIR
+installed_dir=${INSTALLROOT}$LPM_INSTALLED
 if [[ -f $installed_dir/$package ]]; then echo "Skipping:   $package INSTALLED";
 
 else
@@ -55,7 +55,7 @@ fi
 
 ### REMOVE OLD PACKAGE ###
 pkgname=${package%%--*}
-installed_dir=${INSTALLROOT}$INSTALLED_DIR
+installed_dir=${INSTALLROOT}$LPM_INSTALLED
 for p in $(find $installed_dir -name $pkgname--*); 
 do
 	# don't remove upgraded

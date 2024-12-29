@@ -50,8 +50,8 @@ do
 	deleteme=${line/ ->*/}
 
 	# check installed in other package
-	#echo "grep -r --exclude ${ifl##*/} ^$deleteme$ ${INSTALLROOT}$INSTALLED_DIR"
-	[[ ! -z $(grep -r --exclude ${ifl##*/} ^$deleteme$ ${INSTALLROOT}$INSTALLED_DIR 2>/dev/null) ]] && continue
+	#echo "grep -r --exclude ${ifl##*/} ^$deleteme$ ${INSTALLROOT}$LPM_INSTALLED"
+	[[ ! -z $(grep -r --exclude ${ifl##*/} ^$deleteme$ ${INSTALLROOT}$LPM_INSTALLED 2>/dev/null) ]] && continue
 
 	rm -d "${INSTALLROOT}$deleteme" 2> /dev/null || true
 	#rm -d "${INSTALLROOT}$deleteme" || true
