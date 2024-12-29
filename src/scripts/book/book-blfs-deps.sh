@@ -14,11 +14,11 @@ source $CURRENT_CONFIG
 # PROCESS XML
 #------------------------------------------------------------------#
 
-[[ ! -d $DEPS_DIR ]] && mkdir -p $DEPS_DIR
+[[ ! -d $DEPTREE_DEPS ]] && mkdir -p $DEPTREE_DEPS
 xsltproc --stringparam required true \
         --stringparam recommended true \
         --stringparam files true \
-        --stringparam depsdir $DEPS_DIR/ \
+        --stringparam depsdir $DEPTREE_DEPS/ \
         $BLFS_DEPS_XSL $BLFS_FULL_XML
 
 
@@ -30,3 +30,4 @@ echo
 echo "Fixing deps..."
 echo
 fix-deps
+

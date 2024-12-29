@@ -16,9 +16,9 @@ echo
 echo "Generating Makefile..."
 echo
 
-makefile=$WORK_DIR/Makefile
+makefile=$BUILD_WORK/Makefile
 [[ -f $makefile ]] && rm $makefile
-scripts=$(ls -r $WORK_DIR/scripts)
+scripts=$(ls -r $BUILD_WORK/scripts)
 
 ### MAKEFILE HEADER ###
 cat << EOF > $makefile

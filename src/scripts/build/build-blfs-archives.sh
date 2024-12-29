@@ -1,7 +1,7 @@
 #!/bin/bash
 ####################################################################
 # 
-# build-blfs-acrhives.sh
+# build-blfs-archives.sh
 #
 ####################################################################
 
@@ -20,6 +20,7 @@ export -f as_root
 
 echo
 echo "Building pkglogs..."
+export LPM_PKGLOG=$LPM_PKGLOG
 as_root $BUILD_PKGLOGS_SH
 
 ### COMBINE PASS1 ###
@@ -39,15 +40,14 @@ done
 # CREATE ARCHIVES
 #------------------------------------------------------------------#
 
-### GET TRUNK VERSION ###
-if [[ $BLFSBRANCH == "trunk" ]]; then
+### GET BOOK VERSION ###
 
-	bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" ${BUILD_DIR}$BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
-	[[ ! -z $bookversion ]] && sed -i "s/\(BOOK_VERS=\).*/\1$bookversion/" $CURRENT_CONFIG
-fi
+bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
+[[ ! -z $bookversion ]] && export BOOK_VERS=$bookversion
 
 echo
 echo "Building archives..."
+export LPM_ARCHIVE=$LPM_ARCHIVE
 as_root $BUILD_ARCHIVES_SH
 
 

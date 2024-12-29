@@ -10,9 +10,9 @@
 # build-pkglogs
 #------------------------------------------------------------------#
 
-[[ -z $(ls -A $DIFFLOG_DIR) ]] && echo ">>>>> Nothing to be done. <<<<<"  && exit 1
-[[ ! -d $PKGLOG_DIR ]] && mkdir -p $PKGLOG_DIR
-for FILE in $DIFFLOG_DIR/*.difflog1;
+[[ -z $(ls -A $LPM_DIFFLOG) ]] && echo ">>>>> Nothing to be done. <<<<<"  && exit 1
+[[ ! -d $LPM_PKGLOG ]] && mkdir -p $LPM_PKGLOG
+for FILE in $LPM_DIFFLOG/*.difflog1;
 do
 	### SKIP ###
 	[[ $FILE == *"cleanup--"* ]] && continue
@@ -26,7 +26,7 @@ do
     	diff1=$FILE
     	diff2=$pkg.difflog2
     	pkg=${pkg##*/}
-    	log=$PKGLOG_DIR/$pkg.pkglog
+    	log=$LPM_PKGLOG/$pkg.pkglog
 
     	# diff
 	[[ $(diff $diff1 $diff2 > $log.tmp) ]] && true

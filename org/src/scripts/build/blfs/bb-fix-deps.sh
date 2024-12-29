@@ -13,25 +13,19 @@ echo
 echo "Fixing dep files..."
 echo
  
-# fix dejavu-fonts
-fix_files=$(grep -rl dejavu-fonts $DEPS_DIR)
-for a in $fix_files; do sed -i '/dejavu-fonts/d' $a; done
 
-# fix polkit-agent
-fix_files=$(grep -rl polkit-agent $DEPS_DIR)
-for a in $fix_files; do sed -i '/polkit-agent/d' $a; done
 
-# fix server-mail
-fix_files=$(grep -rl server-mail $DEPS_DIR)
-for a in $fix_files; do sed -i 's/server-mail/dovecot/' $a; done
+# fix dovecot
+fix_files=$(grep -rl dovecot $DEPS_DIR)
+for a in $fix_files; do sed -i 's/dovecot/dovecot/' $a; done
 
-# fix x-window-system
-fix_files=$(grep -rl x-window-system $DEPS_DIR)
-for a in $fix_files; do sed -i 's/x-window-system/xinit/' $a; done
+# fix xinit
+fix_files=$(grep -rl xinit $DEPS_DIR)
+for a in $fix_files; do sed -i 's/xinit/xinit/' $a; done
 
-# fix java-bin
-fix_files=$(grep -rl java-bin $DEPS_DIR)
-for a in $fix_files; do sed -i 's/java-bin/java/' $a; done
+# fix java
+fix_files=$(grep -rl java $DEPS_DIR)
+for a in $fix_files; do sed -i 's/java/java/' $a; done
 
 # harfbuzz/freetype/graphite
 sed -i 's/\(freetype2\)/\1-pass1/' $DEPS_DIR/harfbuzz.deps

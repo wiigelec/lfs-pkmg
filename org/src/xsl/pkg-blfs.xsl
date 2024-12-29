@@ -50,7 +50,7 @@
 
 <!-- SECT2 PACKAGE -->
 <xsl:variable name="sect2-pkg">
-	%java-bin%
+	%java%
 </xsl:variable>
 
 <!-- ### VERSIONS ### -->

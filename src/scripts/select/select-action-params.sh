@@ -64,7 +64,8 @@ sed -i 's/__/=/g' $CURRENT_CONFIG
 sed -i 's/"//g' $CURRENT_CONFIG
 
 ### GET BOOKVERSION ###
-
-echo "BOOK_VERS=$blfsbranch" >> $CURRENT_CONFIG
-echo "BUILD_DIR=$builddir" >> $CURRENT_CONFIG
+cat >> $CURRENT_CONFIG << EOF
+BOOK_VERS=$blfsbranch
+BUILD_DIR=$builddir
+EOF
 

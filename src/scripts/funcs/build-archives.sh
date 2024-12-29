@@ -6,7 +6,6 @@
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG
 
 
 #------------------------------------------------------------------#
@@ -22,11 +21,11 @@ PKG_EXT=txz
 
 
 ### PACKAGE ARCHIVE ###
-[[ -z $(ls -A $PKGLOG_DIR) ]] && exit
-[[ ! -d $ARCHIVE_DIR ]] && mkdir -p $ARCHIVE_DIR
+[[ -z $(ls -A $LPM_PKGLOG) ]] && exit
+[[ ! -d $LPM_ARCHIVE ]] && mkdir -p $LPM_ARCHIVE
 
 
-for FILE in $PKGLOG_DIR/*.pkglog;
+for FILE in $LPM_PKGLOG/*.pkglog;
 do
     	echo -ne "Archiving $FILE...\033[0K\r"
 
@@ -36,7 +35,7 @@ do
 
 	archivename=$pkg--$PKG_ARCH--$PKG_LFS.$PKG_EXT
 
-	ARCHIVE_NAME=$ARCHIVE_DIR/$archivename
+	ARCHIVE_NAME=$LPM_ARCHIVE/$archivename
 
     	tar --no-recursion -cJpf $ARCHIVE_NAME -T $FILE > /dev/null 2>&1
 

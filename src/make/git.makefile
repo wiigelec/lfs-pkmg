@@ -4,19 +4,36 @@
 #
 ####################################################################
 
+#------------------------------------------------------------------#
+# DEFINITIONS
+#------------------------------------------------------------------#
 
-LFS_GIT_URL = https://git.linuxfromscratch.org/lfs
+### TARGET DEFS ###
+
+# directories
+BLFS_GIT_DIR = $(BLD_DIR)/git/blfs-book
 LFS_GIT_DIR = $(BLD_DIR)/git/lfs-book
+JHALFS_GIT_DIR = $(BLD_DIR)/git/jhalfs
+
+# target files
+
+# target scripts
+
+
+### OTHER DEFS ###
 
 BLFS_GIT_URL = https://git.linuxfromscratch.org/blfs
-BLFS_GIT_DIR = $(BLD_DIR)/git/blfs-book
-
+LFS_GIT_URL = https://git.linuxfromscratch.org/lfs
 JHALFS_GIT_URL = https://git.linuxfromscratch.org/jhalfs
-JHALFS_GIT_DIR = $(BLD_DIR)/git/jhalfs
+
+export
 
 
 #------------------------------------------------------------------#
+# TARGETS
+#------------------------------------------------------------------#
 
+#------------------------------------------------------------------#
 git-lfs:
 	@echo
 	@$(call bold_message, $@)
@@ -27,7 +44,6 @@ git-lfs:
 
 
 #------------------------------------------------------------------#
-
 git-blfs:
 	@echo
 	@$(call bold_message, $@)
@@ -38,7 +54,6 @@ git-blfs:
 
 
 #------------------------------------------------------------------#
-
 git-jhalfs:
 	@echo
 	@$(call bold_message, $@)

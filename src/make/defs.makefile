@@ -50,127 +50,130 @@ endef
 # DIRECTORIES
 #------------------------------------------------------------------#
 
-TOPDIR = $(shell pwd)
+TOPDIR := $(shell pwd)
 
 #------------------------------------------------------------------#
 # VERSION
 
-BOOK_BLFS_DEPS = $(DEPTREE_DIR)/book-blfs-deps
-DEPTREE_DIR = ${BUILD_DIR}/deptree
-DEPS_DIR = $(DEPTREE_DIR)/deps
-TREES_DIR = $(DEPTREE_DIR)/trees
+BUILD_DIR = $(shell if [[ -f $(CURRENT_CONFIG) ]]; then \
+	    grep BUILD_DIR= $(CURRENT_CONFIG) | sed 's/BUILD_DIR=//';\
+	    fi)
+BUILD_XML = $(BUILD_DIR)/xml
+BUILD_DEPTREE = $(BUILD_DIR)/deptree
+DEPTREE_DEPS = $(BUILD_DEPTREE)/deps
+DEPTREE_TREES = $(BUILD_DEPTREE)/trees
 
-BLFS_SCRIPTS_DIR = ${BUILD_DIR}/blfs-scripts
-
-WORK_DIR = ${BUILD_DIR}/work
-WORK_SCRIPTS = $(WORK_DIR)/scripts 
+BUILD_SCRIPTS = $(BUILD_DIR)/blfs-scripts
+BUILD_WORK = $(BUILD_DIR)/work
+WORK_SCRIPTS = $(BUILD_WORK)/scripts 
+WORK_LOGS = $(BUILD_WORK)/logs
 
 #------------------------------------------------------------------#
 # NONVERSION
 
+# build
 BLD_DIR = $(TOPDIR)/build
 BLD_CONFIG = $(BLD_DIR)/config
 BLD_XML = $(BLD_DIR)/xml
 
-SRC_DIR = $(TOPDIR)/src
-SCRIPTS_DIR = $(SRC_DIR)/scripts
-SCRIPTS_FUNCS = $(SCRIPTS_DIR)/funcs
-SCRIPTS_UTIL = $(SCRIPTS_DIR)/util
-SRC_MAKE = $(SRC_DIR)/make
-SRC_XSL = $(SRC_DIR)/xsl
+# docs
+DOC_DIR = $(TOPDIR)/doc
 
-MISC_DIR = $(SRC_DIR)/misc
-MISC_LFS = $(MISC_DIR)/lfs
-LFS_CUSTOM_DIR = $(MISC_LFS)/custom
+# jhalfs
+JHALFS_DIR = ${INSTALLROOT}/jhalfs
 
-
+# lpm
 LPM_DIR = /var/lib/lpm
 LPM_BUILD = $(LPM_DIR)/build
-LISTS_DIR = $(LPM_DIR)/lists
-INSTALLED_DIR = $(LPM_DIR)/installed
-PKG_DOWNLOAD_DIR = $(LPM_DIR)/downloads
-DIFFLOG_DIR = $(LPM_BUILD)/difflog
-PKGLOG_DIR = $(LPM_BUILD)/pkglog
-ARCHIVE_DIR = $(LPM_BUILD)/packages
+LPM_ARCHIVE = $(LPM_BUILD)/packages
+LPM_DIFFLOG = $(LPM_BUILD)/difflog
+LPM_DOWNLOADS = $(LPM_DIR)/downloads
+LPM_INSTALLED = $(LPM_DIR)/installed
+LPM_LISTS = $(LPM_DIR)/lists
+LPM_PKGLOG = $(LPM_BUILD)/pkglog
 
-ADMIN_SCRIPT_DIR = $(MISC_DIR)/admin
-USER_SCRIPT_DIR = $(TOPDIR)/user
+# misc
+MISC_DIR = $(SRC_DIR)/misc
+MISC_LFS = $(MISC_DIR)/lfs
+LFS_BUILD = $(MISC_LFS)/build
+LFS_GROUP = $(MISC_LFS)/group
+LFS_JHALFS = $(MISC_LFS)/jhalfs
+MISC_SYSTEM = $(MISC_DIR)/system
+SYSTEM_BUILD = $(MISC_SYSTEM)/build
+SYSTEM_LIST = $(MISC_SYSTEM)/list
+SYSTEM_PACKAGE = $(MISC_SYSTEM)/package
+
+# src
+SRC_DIR = $(TOPDIR)/src
+SRC_MAKE = $(SRC_DIR)/make
+SRC_SCRIPTS = $(SRC_DIR)/scripts
+SCRIPTS_FUNCS = $(SRC_SCRIPTS)/funcs
+SCRIPTS_UTIL = $(SRC_SCRIPTS)/util
+SRC_XSL = $(SRC_DIR)/xsl
 
 
 #------------------------------------------------------------------#
 # FILES
 #------------------------------------------------------------------#
 
-#------------------------------------------------------------------#
-# NONVERSION
+# bootstrap
+BOOTSTRAP_GROUP_LIST = $(MISC_LFS)/bootstrap.group
 
+#------------------------------------------------------------------#
+# CONFIGS
+
+# action
 ACTION_CONFIG_IN = $(BLD_CONFIG)/action-config-in
 ACTION_CONFIG_OUT = $(BLD_CONFIG)/action-config-out
 CURRENT_CONFIG = $(BLD_CONFIG)/current-config
 
-BLFS_FULL_XML_NV = $(BLD_XML)/blfs-full.xml
+# blfs packages
+BLFSPKGS_CONFIG_IN = $(BLD_CONFIG)/blfspkfgs-config-in
+BLFSPKGS_CONFIG_OUT = $(BLD_CONFIG)/blfspkgs-config-out
+BLFS_PKGS_LIST = $(BLD_CONFIG)/blfs-pkgs-list
+
+# build work
 WORK_PKGS_TREE = $(BLD_CONFIG)/work-pkgs-tree
 
+# installed lists
 INSTLISTS_CONFIG_IN = $(BLD_CONFIG)/instlists-config-in
 INSTLISTS_CONFIG_OUT = $(BLD_CONFIG)/instlists-config-out
 REMV_LISTS_LIST = $(BLD_CONFIG)/remv-lists-list
 
+# installed packages
 INSTPKGS_CONFIG_IN = $(BLD_CONFIG)/instpkgs-config-in
 INSTPKGS_CONFIG_OUT = $(BLD_CONFIG)/instpkgs-config-out
 REMV_PKGS_LIST = $(BLD_CONFIG)/remv-pkgs-list
 
-REPOPKGS_CONFIG_IN = $(BLD_CONFIG)/repopkgs-config-in
-REPOPKGS_CONFIG_OUT = $(BLD_CONFIG)/repopkgs-config-out
-REPO_PKGS_LIST = $(BLD_CONFIG)/repo-pkgs-list
-
+# repository lists
 REPOLIST_CONFIG_IN = $(BLD_CONFIG)/repolist-config-in
 REPOLIST_CONFIG_OUT = $(BLD_CONFIG)/repolist-config-out
 REPO_LIST_LIST = $(BLD_CONFIG)/repo-list-list
 
-TIMER_SCRIPT = $(SCRIPTS_FUNCS)/timer.sh
-ELAP_TIME = $(BLD_DIR)/elapsed-time
-BLD_TIME=$(BLD_DIR)/bld-time
-PKG_TIME=$(BLD_DIR)/pkg-time
-CUMU_TIME=$(BLD_DIR)/cumu-time
+# repository packages
+REPOPKGS_CONFIG_IN = $(BLD_CONFIG)/repopkgs-config-in
+REPOPKGS_CONFIG_OUT = $(BLD_CONFIG)/repopkgs-config-out
+REPO_PKGS_LIST = $(BLD_CONFIG)/repo-pkgs-list
 
-JHALFS_DIR = ${INSTALLROOT}/jhalfs
+# END CONFIGS
+#------------------------------------------------------------------#
+
+# jhalfs
 JHALFS_CONFIG = $(JHALFS_GIT_DIR)/configuration
 
-BOOTSTRAP_GROUP_LIST = $(MISC_LFS)/bootstrap.group
-
-#------------------------------------------------------------------#
-# VERSION
-
-BUILD_XML = ${BUILD_DIR}/xml
-BLFS_FULL_XML = $(BUILD_XML)/blfs-full.xml
-BLFS_PKGLIST_XML = $(BUILD_XML)/blfs-pkglist.xml
-
-BOOK_BLFS_SCRIPTS = ${BUILD_DIR}/book-blfs-scripts
-
-BLFS_PKGLIST_XSL = $(SRC_XSL)/blfs-pkglist.xsl
-BLFS_PKGLIST_ADDINST_XSL = $(SRC_XSL)/blfs-pkglist-addinst.xsl
-
-BLFSPKGS_CONFIG_IN = $(BLD_CONFIG)/blfspkfgs-config-in
-BLFSPKGS_CONFIG_OUT = $(BLD_CONFIG)/blfspkgs-config-out
-SELECT_BLFSPKGS_XSL = $(SRC_XSL)/select-blfspkgs.xsl
-BLFS_PKGS_LIST = $(BLD_CONFIG)/blfs-pkgs-list
-
-BLFS_DEPS_XSL = $(SRC_XSL)/blfs-deps.xsl
-BLFS_SCRIPTS_XSL = $(SRC_XSL)/blfs-scripts.xsl
-
-
-
-ACTION_LAUNCH_SH = $(SCRIPTS_FUNCS)/action-launch.sh
-
-BUILD_PKGLOGS_SH = $(SCRIPTS_FUNCS)/build-pkglogs.sh
-BUILD_ARCHIVES_SH = $(SCRIPTS_FUNCS)/build-archives.sh
-
-INST_PKG_SH = $(SCRIPTS_FUNCS)/inst-pkg.sh
-REMV_PKG_SH = $(SCRIPTS_FUNCS)/remv-pkg.sh
-UPGR_PKG_SH = $(SCRIPTS_FUNCS)/upgr-pkg.sh
-
+# scripts
 UTIL_MOUNT_KERNFS_SH = $(SCRIPTS_UTIL)/util-mount-kernfs.sh
 UTIL_UMOUNT_KERNFS_SH = $(SCRIPTS_UTIL)/util-umount-kernfs.sh
+
+# xml
+BLFS_FULL_XML_NV = $(BLD_XML)/blfs-full.xml
+
+# xsl
+BLFS_DEPS_XSL = $(SRC_XSL)/blfs-deps.xsl
+BLFS_PKGLIST_XSL = $(SRC_XSL)/blfs-pkglist.xsl
+BLFS_PKGLIST_ADDINST_XSL = $(SRC_XSL)/blfs-pkglist-addinst.xsl
+BLFS_SCRIPTS_XSL = $(SRC_XSL)/blfs-scripts.xsl
+SELECT_BLFSPKGS_XSL = $(SRC_XSL)/select-blfspkgs.xsl
 
 
 #------------------------------------------------------------------#
@@ -178,5 +181,6 @@ UTIL_UMOUNT_KERNFS_SH = $(SCRIPTS_UTIL)/util-umount-kernfs.sh
 #------------------------------------------------------------------#
 
 MENU_CONFIG = python3 $(TOPDIR)/kconfiglib/menuconfig.py
+
 
 export

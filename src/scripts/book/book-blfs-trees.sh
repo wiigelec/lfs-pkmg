@@ -10,7 +10,7 @@ set -e
 source $SCRIPTS_FUNCS/fix-deps.func
 source $CURRENT_CONFIG
 
-PROCD_FILE=$DEPTREE_DIR/procd
+PROCD_FILE=$BUILD_DEPTREE/procd
 ROOT_DEPS=$BLFS_PKGS_LIST
 
 #------------------------------------------------------------------#
@@ -79,7 +79,7 @@ function recurse
 			[[ $line = '' ]] && continue 
 
 			### RECURSE ###
-			recurse "$DEPS_DIR/$line.deps"
+			recurse "$DEPTREE_DEPS/$line.deps"
 
 		done < $file
 	
@@ -124,7 +124,7 @@ function debug
 
 # INITIALIZE
 
-[[ ! -d $TREES_DIR ]] && mkdir -p $TREES_DIR
+[[ ! -d $DEPTREE_TREES ]] && mkdir -p $DEPTREE_TREES
 echo "" > $PROCD_FILE
 
 
@@ -134,8 +134,8 @@ set -e
 echo "Reading $ROOT_DEPS..."
 while IFS= read -r line;
 do
-	deps_file=$DEPS_DIR/${line}.deps
-	tree_file=$TREES_DIR/${line}.tree
+	deps_file=$DEPTREE_DEPS/${line}.deps
+	tree_file=$DEPTREE_TREES/${line}.tree
 	> $PROCD_FILE
 	
 	# create tree file

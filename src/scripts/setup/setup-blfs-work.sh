@@ -21,8 +21,8 @@ export -f as_root
 # INITIALIZE WORK DIR
 #------------------------------------------------------------------#
 
-[[ -d $WORK_DIR ]] && rm -rf $WORK_DIR
-mkdir -p $WORK_DIR/{scripts,logs}
+[[ -d $BUILD_WORK ]] && rm -rf $BUILD_WORK
+mkdir -p $BUILD_WORK/{scripts,logs}
 > $WORK_PKGS_TREE
 
 # TIMER CLEANUP
@@ -63,8 +63,8 @@ echo
 
 echo "Initializing system build directories..."
 
-as_root rm -rf $DIFFLOG_DIR
-as_root mkdir -p $DIFFLOG_DIR
+as_root rm -rf $LPM_DIFFLOG
+as_root mkdir -p $LPM_DIFFLOG
 
-as_root rm -rf $PKGLOG_DIR
-as_root mkdir -p $PKGLOG_DIR
+as_root rm -rf $LPM_ARCHIVE
+as_root mkdir -p $LPM_ARCHIVE

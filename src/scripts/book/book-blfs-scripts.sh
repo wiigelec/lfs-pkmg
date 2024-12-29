@@ -14,10 +14,10 @@ source $CURRENT_CONFIG
 # PROCESS XML
 #------------------------------------------------------------------#
 
-[[ ! -d $BLFS_SCRIPTS_DIR ]] && mkdir -p $BLFS_SCRIPTS_DIR
+[[ ! -d $BUILD_SCRIPTS ]] && mkdir -p $BUILD_SCRIPTS
 xsltproc --stringparam files true \
         --stringparam pkglist $BLFS_PKGLIST_XML \
-        --stringparam scriptsdir $BLFS_SCRIPTS_DIR/ \
+        --stringparam scriptsdir $BUILD_SCRIPTS/ \
         $BLFS_SCRIPTS_XSL $BLFS_FULL_XML
 
 

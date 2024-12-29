@@ -73,8 +73,8 @@ function time_package
 function timer_manager
 {
 	### INITIALIZE FILES ###
-	first_target=$(ls $WORK_DIR/scripts | head -n1 | sed 's/.build//')
-	last_target=$(ls $WORK_DIR/scripts | tail -n1 | sed 's/.build//')
+	first_target=$(ls $BUILD_WORK/scripts | head -n1 | sed 's/.build//')
+	last_target=$(ls $BUILD_WORK/scripts | tail -n1 | sed 's/.build//')
 	[[ $first_target == $last_target ]] && single_target=true
 
 	### INITIALIZE DISPLAY ###

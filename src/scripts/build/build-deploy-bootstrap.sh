@@ -25,12 +25,12 @@ if [[ $confirm != "y" ]]; then exit 1; fi
 echo "Downloading files..."
 
 pushd $INSTALLROOT/sources > /dev/null
-wgetlist=$(grep -r PKG_URL= $WORK_DIR/scripts)
+wgetlist=$(grep -r PKG_URL= $BUILD_WORK/scripts)
 for each in $wgetlist; do
         each=${each##*PKG_URL=}
         wget -nc $each
 done
-wgetlist=$(grep -r "wget h" $WORK_DIR/scripts)
+wgetlist=$(grep -r "wget h" $BUILD_WORK/scripts)
 for each in $wgetlist; do
         [[ $each == *"wget"* ]] && continue
         each=${each##*.build:}
@@ -47,7 +47,7 @@ popd > /dev/null
 
 echo "Modifying work..."
 
-pushd $WORK_DIR/scripts > /dev/null
+pushd $BUILD_WORK/scripts > /dev/null
 for each in ./*.build; do
         sed -i '/ROOT_EOF/d' $each
         sed -i 's/^wget/#wget/g' $each
@@ -61,7 +61,7 @@ popd > /dev/null
 
 ### FIX MAKEFILE ###
 
-makefile=$WORK_DIR/Makefile
+makefile=$BUILD_WORK/Makefile
 sed -i "5 i DIFFLOG_DIR=$DIFFLOG_DIR" $makefile
 sed -i "6 i export" $makefile
 sed -i '/TIMER_SCRIPT/d' $makefile
@@ -78,7 +78,7 @@ echo "Copying scripts..."
 ### COPY WORK DIR ###
 sourcework=$INSTALLROOT/sources/work
 workscripts=$sourcework/scripts
-cp -r $WORK_DIR $INSTALLROOT/sources/
+cp -r $BUILD_WORK $INSTALLROOT/sources/
 
 
 ### PKGLOG ###

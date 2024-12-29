@@ -18,7 +18,7 @@ echo
 packages=$(cat $BLFS_PKGS_LIST)
 for p in $packages
 do
-        treefile=$TREES_DIR/${p}.tree
+        treefile=$DEPTREE_TREES/${p}.tree
         while IFS= read -r treeline;
         do
                 echo -ne "$treeline\033[0K\r"

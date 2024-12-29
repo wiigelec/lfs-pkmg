@@ -1,0 +1,28 @@
+
+#-----------------------------------------------------------------------------#
+
+lfs-pkmg can be run in two modes: auto and manual
+
+To run in auto mode use 'make auto'
+
+Manual mode involves calling a set of individual targets in a specific order 
+to complete a task. The target set is referred to as a workflow. Manual mode
+is useful for learning how the tool works and troubleshooting by moving 
+step-by-step through the task workflows.
+
+The following task workflows are available. Use 'make help-<task>' for more 
+detailed information on a specific task. Worflow targets are run using
+'make <workflow-target>':
+
+	audit
+	build-blfs
+	build-lfs
+	create-list-dir
+	create-list-deps
+	install-list
+	install-package
+	remove-list
+	remove-package
+	upgrade-list
+	upgrade-package
+

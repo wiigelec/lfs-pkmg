@@ -1,0 +1,22 @@
+
+#-----------------------------------------------------------------------------#
+
+build-blfs
+
+Used to build a blfs package. 
+
+Workflow targets:
+
+	git-lfs
+	git-blfs
+	select-action-params (BUILD, BLFS, REV, BRANCH)
+	book-blfs-fullxml
+	book-blfs-pkglist
+	book-blfs-deps
+	book-blfs-scripts
+	select-blfs-packages
+	book-blfs-trees
+	setup-blfs-work
+	build-blfs-work (watch-timer)
+	build-blfs-archives
+

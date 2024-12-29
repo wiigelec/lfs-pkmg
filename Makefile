@@ -6,7 +6,7 @@
 
 #------------------------------------------------------------------#
 default: 
-	@echo -e "\nrun make help for a list of topics"
+	@echo -e "\nRun 'make help' for a list of help topics."
 
 
 #------------------------------------------------------------------#
@@ -20,6 +20,8 @@ include ./src/make/build.makefile
 include ./src/make/defs.makefile
 
 include ./src/make/git.makefile
+
+include ./src/make/help.makefile
 
 include ./src/make/list.makefile
 

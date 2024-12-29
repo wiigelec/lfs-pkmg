@@ -21,8 +21,8 @@ cnt=1
 while IFS= read -r line;
 do
         file=""
-        file=$(find $BLFS_SCRIPTS_DIR -name "$line.build")
-        [ -z $file ] && echo "File $line not found in $BLFS_SCRIPTS_DIR." && continue
+        file=$(find $BUILD_SCRIPTS -name "$line.build")
+        [ -z $file ] && echo "File $line not found in $BUILD_SCRIPTS." && continue
 
         # create ordered list
         if [ "$cnt" -lt 10 ]; then
@@ -34,7 +34,7 @@ do
         fi
 
         name=${file##*/}
-        work_script=$WORK_DIR/scripts/$order-z-$name
+        work_script=$BUILD_WORK/scripts/$order-z-$name
         cp $file $work_script
         echo -ne "Copied ${work_script##*/}\033[0K\r"
 
@@ -44,7 +44,7 @@ done < $WORK_PKGS_TREE
 
 [ $cnt -eq 1 ] && echo -e "\n>>>>> Nothing to be done. <<<<<\n" && exit 1
 
-chmod +x $WORK_DIR/scripts/*
+chmod +x $BUILD_WORK/scripts/*
 
 echo -ne "\033[0K\r"
 

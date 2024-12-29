@@ -28,6 +28,11 @@ xsltproc -o $BLFS_PKGLIST_XML \
         $BLFS_PKGLIST_XSL $BLFS_FULL_XML
 
 
+# FIX JAVA BIN VERSION
+
+javaversion=$(xmllint --xpath "//package[id='openjdk']/version/text()" $BLFS_PKGLIST_XML 2>/dev/null)
+sed -i "s/\\\$\\\$Java Binary\\\$\\\$/$javaversion/" $BLFS_PKGLIST_XML
+
 # FIX VERSIONS
 
 sed -i 's/\$\$.*-\(.*\)\$\$/\1/' $BLFS_PKGLIST_XML
