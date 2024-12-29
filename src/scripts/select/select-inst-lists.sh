@@ -13,7 +13,7 @@ source $CURRENT_CONFIG
 # GET INSTALLED LISTS
 #------------------------------------------------------------------#
 
-installedlist=$(ls ${INSTALLROOT}$LISTS_DIR | sort)
+installedlist=$(ls ${INSTALLROOT}$LPM_LISTS | sort)
 
 if [[ -z $installedlist ]]; then
         echo
@@ -26,7 +26,7 @@ fi
 
 for i in $installedlist; do
 
-        echo "config    ${INSTALLROOT}$LISTS_DIR/$i" >> $INSTLISTS_CONFIG_IN
+        echo "config    ${INSTALLROOT}$LPM_LISTS/$i" >> $INSTLISTS_CONFIG_IN
         echo "  bool \"$i\"" >> $INSTLISTS_CONFIG_IN
 
 done

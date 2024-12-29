@@ -1,5 +1,12 @@
 
 #-----------------------------------------------------------------------------#
 
-create-list-dir.help
+create-list-dir
+
+Used to create a list from a directory of archives.
+
+Workflow targets:
+
+	select-action-params (LIST, CREATE DIR, ARCHIVE DIR, LIST NAME)
+	list-create-dir
 

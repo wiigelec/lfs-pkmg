@@ -46,6 +46,8 @@ done
 # WRITE REMOVE PACKAGES LIST
 #------------------------------------------------------------------#
 
+echo "Getting list packages..."
+
 # INITIALIZE
 > $REMV_PKGS_LIST
 

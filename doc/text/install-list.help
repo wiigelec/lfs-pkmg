@@ -1,5 +1,13 @@
 
 #-----------------------------------------------------------------------------#
 
-install-list.help
+install-list
 
+Used to install packages from a list.
+
+Workflow tasks:
+
+	select-action-params (LIST, INSTALL, LIST PATH, REPOSITORY PATH, 
+		INSTALLROOT)
+	select-repo-lists
+	list-install

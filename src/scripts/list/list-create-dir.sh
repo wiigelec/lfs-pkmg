@@ -28,9 +28,11 @@ archives=$(ls $LISTDIRPATH)
 # WRITE LIST FILE
 #------------------------------------------------------------------#
 
-listfile=$LISTPATH/$LISTNAME
+listfile=$LISTFILE
+listpath=${listfile%/*}
 
 [[ -f $listfile ]] && echo -e "\n>>>>> $listfile exists. <<<<<\n" && exit 1
+[[ ! -d $listpath ]] && as_root mkdir -p $listpath
 
 for a in $archives;
 do
@@ -39,12 +41,9 @@ do
 done
 
 ### SORT UNIQUE ###
-list=$(cat $listfile | sort -u)
+list="$(cat $listfile | sort -u)"
 as_root sed -i '/.*/d' $listfile
-for l in $list;
-do
-        echo $l | as_root tee -a $listfile
-done
+echo "$list" | as_root tee $listfile > /dev/null
 
 
 echo

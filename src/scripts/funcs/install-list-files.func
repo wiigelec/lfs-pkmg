@@ -1,0 +1,34 @@
+#!/bin/bash
+####################################################################
+# 
+# install-list-file.func
+#
+####################################################################
+
+
+#------------------------------------------------------------------#
+# install-list-files
+#------------------------------------------------------------------#
+function install-list-files
+{
+	listsdir=${INSTALLROOT}$LPM_LISTS
+	[[ ! -d $listsdir ]] && as_root mkdir -p $listsdir
+	for l in $(cat $REPO_LIST_LIST); do
+
+		### SERVER LIST ###
+		if [[ $l == "http"* ]]; then
+
+			l=${l//../:}
+			name=${l##*/}
+
+			as_root curl --silent -o $listsdir/$name $l
+		
+		### FILE LIST###
+		else
+			as_root cp $l $listsdir/ 
+		fi
+	done
+
+}
+
+

@@ -40,28 +40,3 @@ done
 
 }
 
-#------------------------------------------------------------------#
-# install-list-files
-#------------------------------------------------------------------#
-function install-list-files
-{
-	listsdir=${INSTALLROOT}$LISTS_DIR
-	for l in $(cat $REPO_LIST_LIST); do
-
-		### SERVER LIST ###
-		if [[ $l == "http"* ]]; then
-
-			l=${l//../:}
-			name=${l##*/}
-
-			as_root curl --silent -o $listsdir/$name $l
-		
-		### FILE LIST###
-		else
-			as_root cp $l $listsdir/ 
-		fi
-	done
-
-}
-
-

@@ -1,5 +1,13 @@
 
 #-----------------------------------------------------------------------------#
 
-remove-list.help
+remove-list
+
+Used to remove list packages.
+
+Workflow targets:
+
+	select-action-params (LIST, REMOVE, INSTALLROOT)
+	select-installed-lists
+	list-remove
 
