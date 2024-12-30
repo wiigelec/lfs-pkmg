@@ -11,6 +11,8 @@ default:
 
 #------------------------------------------------------------------#
 
+include ./src/make/audit.makefile
+
 include ./src/make/auto.makefile
 
 include ./src/make/book.makefile

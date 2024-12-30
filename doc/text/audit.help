@@ -1,5 +1,25 @@
 
 #-----------------------------------------------------------------------------#
 
-audit.help
+audit
+
+Used to assess the integrity of installed packages and files on the system. 
+There are four separte targets that may be used independantly of each other 
+and in no required order. They are described as follows:
+
+
+	audit-installed-packages -- identify installed packages not associated
+		with a list
+
+
+	audit-list-packages -- identify list packages that are not installed
+
+
+	audit-package-files -- identify package files that are missing from
+		the system
+
+
+	audit-system-files -- identify system files that are not associated
+		with an installed package
+
 
