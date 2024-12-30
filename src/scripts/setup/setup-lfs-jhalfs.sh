@@ -79,5 +79,5 @@ cp $LFS_JHALFS/packInstall.sh $JHALFS_GIT_DIR/pkgmngt
 
 popd > /dev/null
 
-if [[ -f $kernelconfig ]]; then cp -v $kernelconfig $JHALFS_DIR; fi
+if [[ -f $kernelconfig ]]; then cp -v $kernelconfig $INSTALLROOT/sources; fi
 
