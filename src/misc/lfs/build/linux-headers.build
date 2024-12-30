@@ -34,6 +34,7 @@ ARCHIVE_NAME=$LPM_ARCHIVE/$PKG_NAME--$PKG_VER--$PKG_ARCH--$PKG_LFS.$PKG_EXT
 
 ### DESTDIR ###
 DEST_DIR=/sources/destdir
+[[ -d $DEST_DIR ]] && rm -rf $DEST_DIR
 mkdir -pv $DEST_DIR
 pushd $DEST_DIR
 
