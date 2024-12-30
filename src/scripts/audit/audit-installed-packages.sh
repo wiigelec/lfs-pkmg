@@ -25,9 +25,8 @@ installedpkgs=$(ls $LPM_INSTALLED)
 latch=false
 for FILE in $installedpkgs;
 do
-	echo $FILE
 	pkg=${FILE##*/}
-	found=$(grep $pkg $LPM_LISTS/*)
+	[[ -d $LPM_LISTS ]] && found=$(grep -r $pkg $LPM_LISTS)
 	if [[ -z "$found" ]]; then
 		echo "$pkg"
 		latch=true
