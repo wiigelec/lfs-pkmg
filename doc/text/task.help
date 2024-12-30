@@ -16,6 +16,7 @@ detailed information on a specific task. Worflow targets are run using
 
 	audit
 	build-blfs
+	build-bootstrap
 	build-lfs
 	create-list-dir
 	create-list-deps

@@ -16,8 +16,8 @@ source $CURRENT_CONFIG
 echo
 echo "Creating pkglogs..."
 echo
-sudo chroot $INSTALLROOT bash -e -c "DIFFLOG_DIR=$DIFFLOG_DIR \
-	PKGLOG_DIR=$PKGLOG_DIR \
+sudo chroot $INSTALLROOT bash -e -c "LPM_DIFFLOG=$LPM_DIFFLOG \
+	LPM_PKGLOG=$LPM_PKGLOG \
 	/sources/work/scripts/build-pkglogs.sh"
 
 
@@ -28,7 +28,7 @@ sudo chroot $INSTALLROOT bash -e -c "DIFFLOG_DIR=$DIFFLOG_DIR \
 echo
 echo "Creating archives..."
 echo
-sudo chroot $INSTALLROOT bash -e -c "PKGLOG_DIR=$PKGLOG_DIR \
-	ARCHIVE_DIR=$ARCHIVE_DIR \
+sudo chroot $INSTALLROOT bash -e -c "LPM_PKGLOG=$LPM_PKGLOG \
+	LPM_ARCHIVE=$LPM_ARCHIVE \
 	BOOK_VERS=$BOOK_VERS \
 	/sources/work/scripts/build-archives.sh"

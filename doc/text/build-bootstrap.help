@@ -1,0 +1,22 @@
+
+#-----------------------------------------------------------------------------#
+
+build-bootstrap
+
+Used to build packages required to run lfs-pkmg.
+
+Workflow tasks:
+
+	git-blfs
+	select-action-params (BUILD, BOOTSTRAP, REV, BRANCH, INSTALLROOT)
+	book-blfs-fullxml
+	book-blfs-pkglist 
+	book-blfs-deps 
+        book-blfs-scripts 
+	setup-bootstrap-group 
+	book-blfs-trees
+        setup-blfs-work 
+	build-deploy-bootstrap
+	build-bootstrap-work
+	build-bootstrap-archives
+

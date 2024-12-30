@@ -157,14 +157,6 @@ PKGUPGRADE : select-repo-packages package-upgrade
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
-BUILDARCHIVES : build-blfs-archives
-	@echo
-	@$(call done_message, Success! Archives complete.)
-
-.PHONY: BUILDARCHIVES
-
-
-#------------------------------------------------------------------#
 BOOTSTRAPWORK : build-bootstrap-work build-bootstrap-archives
 	@echo
 	@$(call done_message, Success! Bootstrap complete.)

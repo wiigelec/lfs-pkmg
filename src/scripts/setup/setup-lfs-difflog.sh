@@ -78,5 +78,5 @@ echo -ne "\033[0K\r"
 # INITIALIZE DIFFLOG
 #------------------------------------------------------------------#
 
-as_root mkdir -pv $INSTALLROOT/$DIFFLOG_DIR
+as_root mkdir -pv $INSTALLROOT/$LPM_DIFFLOG
 

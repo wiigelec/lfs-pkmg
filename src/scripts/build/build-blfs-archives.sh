@@ -25,7 +25,7 @@ export LPM_PKGLOG=$LPM_PKGLOG
 as_root $BUILD_PKGLOGS_SH
 
 ### COMBINE PASS1 ###
-pass1=$(find $PKGLOG_DIR -name "*-pass1--*")
+pass1=$(find $LPM_PKGLOG -name "*-pass1--*")
 for p in $pass1;
 do
 	np=${p/-pass1/}

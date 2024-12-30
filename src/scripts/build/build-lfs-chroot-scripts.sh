@@ -25,5 +25,5 @@ echo "Running custom scripts..."
 echo
 
 sudo chroot $INSTALLROOT bash -e -c "for f in /jhalfs/lpm-scripts/lfs/*; \\
-	do echo \"Running \$f...\"; ARCHIVE_DIR=$LPM_ARCHIVE LFS_VER=$lfsver \$f; done"
+	do echo \"Running \$f...\"; LPM_ARCHIVE=$LPM_ARCHIVE LFS_VER=$lfsver \$f; done"
 

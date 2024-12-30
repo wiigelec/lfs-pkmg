@@ -23,6 +23,7 @@ DOC_TEXT = $(DOC_DIR)/text
 # help files
 AUDIT_HELP = $(DOC_TEXT)/audit.help
 BUILD_BLFS_HELP = $(DOC_TEXT)/build-blfs.help
+BUILD_BOOTSTRAP_HELP = $(DOC_TEXT)/build-bootstrap.help
 BUILD_LFS_HELP = $(DOC_TEXT)/build-lfs.help
 CREATE_LIST_DIR_HELP = $(DOC_TEXT)/create-list-dir.help
 CREATE_LIST_DEPS_HELP = $(DOC_TEXT)/create-list-deps.help
@@ -60,6 +61,13 @@ help-build-blfs:
 	@cat $(BUILD_BLFS_HELP)
 
 .PHONY: help-build-blfs
+
+
+#------------------------------------------------------------------#
+help-build-bootstrap:
+	@cat $(BUILD_BOOTSTRAP_HELP)
+
+.PHONY: help-build-bootstrap
 
 
 #------------------------------------------------------------------#

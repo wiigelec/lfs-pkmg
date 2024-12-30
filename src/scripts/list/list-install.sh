@@ -30,15 +30,15 @@ echo "Running list pre-install scripts..."
 for each in $lists; do
 
         each=${each##*/}
-        script=$USER_SCRIPT_DIR/$each.pre-install
+        script=$USER_LIST/$each.pre-install
         [[ -f $script ]] && $script
 done
 
-### ADMIN ###
+### SYSTEM ###
 for each in $lists; do
 
         each=${each##*/}
-        script=$ADMIN_SCRIPT_DIR/$each.pre-install
+        script=$SYSTEM_LIST/$each.pre-install
         [[ -f $script ]] && $script
 done
 
@@ -85,15 +85,16 @@ echo "Running list post-install scripts..."
 for each in $lists; do
 
         each=${each##*/}
-        script=$USER_SCRIPT_DIR/$each.post-install
+        script=$USER_LIST/$each.post-install
         [[ -f $script ]] && $script
 done
 
-### ADMIN ###
+### SYSTEM ###
 for each in $lists; do
 
         each=${each##*/}
-        script=$ADMIN_SCRIPT_DIR/$each.post-install
+        script=$SYSTEM_LIST/$each.post-install
+	echo $script
         [[ -f $script ]] && $script
 done
 

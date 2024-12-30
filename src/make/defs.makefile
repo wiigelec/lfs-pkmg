@@ -90,12 +90,12 @@ LPM_LISTS = $(LPM_DIR)/lists
 LPM_PKGLOG = $(LPM_BUILD)/pkglog
 
 # misc
-MISC_DIR = $(SRC_DIR)/misc
-MISC_LFS = $(MISC_DIR)/lfs
+SRC_MISC = $(SRC_DIR)/misc
+MISC_LFS = $(SRC_MISC)/lfs
 LFS_BUILD = $(MISC_LFS)/build
 LFS_GROUP = $(MISC_LFS)/group
 LFS_JHALFS = $(MISC_LFS)/jhalfs
-MISC_SYSTEM = $(MISC_DIR)/system
+MISC_SYSTEM = $(SRC_MISC)/system
 SYSTEM_BUILD = $(MISC_SYSTEM)/build
 SYSTEM_LIST = $(MISC_SYSTEM)/list
 SYSTEM_PACKAGE = $(MISC_SYSTEM)/package
@@ -114,7 +114,7 @@ SRC_XSL = $(SRC_DIR)/xsl
 #------------------------------------------------------------------#
 
 # bootstrap
-BOOTSTRAP_GROUP_LIST = $(MISC_LFS)/bootstrap.group
+BOOTSTRAP_GROUP_LIST = $(LFS_GROUP)/bootstrap.group
 
 #------------------------------------------------------------------#
 # CONFIGS

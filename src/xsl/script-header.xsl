@@ -68,9 +68,9 @@ SRC_DIR=$SOURCE_DIR/$PKG_ID
 
 # DIFF LOGS
 TIMESTAMP=/tmp/timestamp$RANDOM
-[ ! -d $DIFFLOG_DIR ] &amp;&amp; sudo mkdir -p $DIFFLOG_DIR
-difflog1=$DIFFLOG_DIR/${PKG_ID}--${PKG_VERS}.difflog1
-difflog2=$DIFFLOG_DIR/${PKG_ID}--${PKG_VERS}.difflog2
+[ ! -d $LPM_DIFFLOG ] &amp;&amp; sudo mkdir -p $LPM_DIFFLOG
+difflog1=$LPM_DIFFLOG/${PKG_ID}--${PKG_VERS}.difflog1
+difflog2=$LPM_DIFFLOG/${PKG_ID}--${PKG_VERS}.difflog2
 </xsl:template>
 
 

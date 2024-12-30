@@ -62,11 +62,11 @@ popd > /dev/null
 ### FIX MAKEFILE ###
 
 makefile=$BUILD_WORK/Makefile
-sed -i "5 i DIFFLOG_DIR=$DIFFLOG_DIR" $makefile
+sed -i "5 i LPM_DIFFLOG=$LPM_DIFFLOG" $makefile
 sed -i "6 i export" $makefile
 sed -i '/TIMER_SCRIPT/d' $makefile
 
-sudo mkdir -p ${INSTALLROOT}/$DIFFLOG_DIR
+sudo mkdir -p ${INSTALLROOT}/$LPM_DIFFLOG
 
 
 #------------------------------------------------------------------#

@@ -40,7 +40,7 @@ export
 #------------------------------------------------------------------#
 book-blfs-fullxml $(BLFS_FULL_XML) :
 	@echo
-	@$(call bold_message, blfs-full-xml)
+	@$(call bold_message, book-blfs-fullxml)
 	$(BOOK_BLFS_FULLXML_SH)
 
 .PHONY: book-blfs-fullxml
