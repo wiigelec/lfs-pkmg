@@ -94,7 +94,6 @@ for each in $lists; do
 
         each=${each##*/}
         script=$SYSTEM_LIST/$each.post-install
-	echo $script
         [[ -f $script ]] && $script
 done
 
