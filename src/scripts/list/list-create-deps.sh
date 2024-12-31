@@ -36,7 +36,6 @@ listdir=${listfile%/*}
 ### GET PACKAGE INFO ###
 echo "Getting package info..."
 echo
-bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
 for p in $(cat $WORK_PKGS_TREE);
 do
 	# SKIP PASS1
@@ -46,7 +45,7 @@ do
 	version=$(xmllint --xpath "//package[id='$p']/version/text()" $BLFS_PKGLIST_XML 2>/dev/null)
 
 	# SETUP PACKAGE NAME
-	write="$p--$version--$(uname -m)--blfs-${bookversion}.txz"
+	write="$p--$version--$(uname -m)--blfs-${BOOK_VERS}.txz"
 	echo $write | as_root tee -a $listfile
 done
 

@@ -41,11 +41,6 @@ done
 # CREATE ARCHIVES
 #------------------------------------------------------------------#
 
-### GET BOOK VERSION ###
-
-bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
-[[ ! -z $bookversion ]] && export BOOK_VERS=$bookversion
-
 echo
 echo "Building archives..."
 export LPM_ARCHIVE=$LPM_ARCHIVE

@@ -14,36 +14,42 @@ function fix-deps
 
 #------------------------------------------------------------------#
 # dejavu-fonts
+echo "dejavu-fonts"
 fix_files=$(grep -rl dejavu-fonts $DEPTREE_DEPS)
 for a in $fix_files; do sed -i '/dejavu-fonts/d' $a; done
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
 # polkit-agent
+echo "polkit-agent"
 fix_files=$(grep -rl polkit-agent $DEPTREE_DEPS)
 for a in $fix_files; do sed -i '/polkit-agent/d' $a; done
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
 # dovecot
+echo "dovecot"
 fix_files=$(grep -rl dovecot $DEPTREE_DEPS)
 for a in $fix_files; do sed -i 's/dovecot/dovecot/' $a; done
 #------------------------------------------------------------------#
 	
 #------------------------------------------------------------------#
 # xinit
+echo "xinit"
 fix_files=$(grep -rl xinit $DEPTREE_DEPS)
 for a in $fix_files; do sed -i 's/xinit/xinit/' $a; done
 #------------------------------------------------------------------#
 	
 #------------------------------------------------------------------#
 # java
+echo "java"
 fix_files=$(grep -rl java $DEPTREE_DEPS)
 for a in $fix_files; do sed -i 's/java/java/' $a; done
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
 # harfbuzz/freetype/graphite
+echo "harfbuzz/freetype/graphite"
 sed -i 's/\(freetype2\)/\1-pass1/' $DEPTREE_DEPS/harfbuzz.deps	
 sed -i 's/\(graphite2\)/\1-pass1/' $DEPTREE_DEPS/harfbuzz.deps
 
@@ -65,6 +71,7 @@ cp $DEPTREE_DEPS/harfbuzz.deps $DEPTREE_DEPS/graphite2.deps
 	
 #------------------------------------------------------------------#
 # libva/mesa
+echo "libva/mesa"
 sed -i 's/\(libva\)/\1-pass1/' $DEPTREE_DEPS/mesa.deps	
 cp $DEPTREE_DEPS/libva.deps $DEPTREE_DEPS/libva-pass1.deps
 sed -i '/libva/d' $DEPTREE_DEPS/libva-pass1.deps
@@ -75,6 +82,7 @@ echo "--libva--" >> $DEPTREE_DEPS/mesa.deps
 
 #------------------------------------------------------------------#
 # gcr
+echo "gcr"
 sed -i '/--gcr--/d' $DEPTREE_DEPS/gcr.deps
 echo "openssh" >> $DEPTREE_DEPS/gcr.deps 
 echo "--gcr--" >> $DEPTREE_DEPS/gcr.deps

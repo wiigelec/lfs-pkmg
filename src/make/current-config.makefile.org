@@ -8,6 +8,8 @@
 # DEFINITIONS
 #------------------------------------------------------------------#
 
+REV = REV
+BRANCH = BRANCH
 BOOK_VERS = BOOK_VERS
 BUILD_DIR = BUILD_DIR
 INSTALLROOT = INSTALLROOT

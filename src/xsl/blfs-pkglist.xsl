@@ -64,6 +64,8 @@
 	%ojdk-conf%
 	%postlfs-config-profile%
 	%postlfs-config-vimrc%
+	%postlfs-config-random%
+	%postlfs-config-netfs%
 	%initramfs%
 	%tex-path%
 </xsl:variable>

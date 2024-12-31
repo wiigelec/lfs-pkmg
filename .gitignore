@@ -1,3 +1,4 @@
 /build
 /kconfiglib/__pycache__
 **/*.swp
+/src/make/current-config.makefile
