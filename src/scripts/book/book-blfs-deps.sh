@@ -7,7 +7,6 @@
 
 set -e
 source $SCRIPTS_FUNCS/fix-deps.func
-source $CURRENT_CONFIG
 
 
 #------------------------------------------------------------------#

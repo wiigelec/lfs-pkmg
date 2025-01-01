@@ -6,7 +6,6 @@
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG 
 
 
 #------------------------------------------------------------------#
@@ -28,3 +27,4 @@ KCONFIG_CONFIG=$BLFSPKGS_CONFIG_OUT $MENU_CONFIG $BLFSPKGS_CONFIG_IN
 #------------------------------------------------------------------#
 
 grep CONFIG_CONFIG.*=y $BLFSPKGS_CONFIG_OUT | sed 's/CONFIG_CONFIG_//g' | sed 's/=y//g' > $BLFS_PKGS_LIST
+

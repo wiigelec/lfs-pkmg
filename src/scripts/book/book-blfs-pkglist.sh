@@ -6,7 +6,6 @@
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG
 
 
 #------------------------------------------------------------------#
@@ -50,6 +49,7 @@ do
 done
 [[ ! -z $unversioned ]] && echo
 
+
 #------------------------------------------------------------------#
 # UPDATE INSTALLED
 #------------------------------------------------------------------#
@@ -74,3 +74,4 @@ for i in $installed; do
         xsltproc --stringparam name $name --stringparam version $version -o $BLFS_PKGLIST_XML $BLFS_PKGLIST_ADDINST_XSL $BLFS_PKGLIST_XML
 
 done
+

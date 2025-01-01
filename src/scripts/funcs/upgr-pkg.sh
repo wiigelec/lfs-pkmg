@@ -6,12 +6,14 @@
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG
+
+### GET PARAMETERS ###
 
 path=$1
 
 file=${path##*/}
 package=${file%.txz}
+
 
 ### CHECK INSTALLED ###
 installed_dir=${INSTALLROOT}$LPM_INSTALLED
@@ -49,6 +51,7 @@ else
 	fi
 fi
 
+
 ### KERNEL SPECIAL HANDLING NO REMOVE ###
 [[ $package == "kernel"* ]] && exit 0
 
@@ -64,3 +67,4 @@ do
 	$REMV_PKG_SH $p
 	
 done
+

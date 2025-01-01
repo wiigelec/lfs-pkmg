@@ -6,7 +6,6 @@
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG 
 
 
 #------------------------------------------------------------------#
@@ -44,3 +43,4 @@ KCONFIG_CONFIG=$INSTPKGS_CONFIG_OUT $MENU_CONFIG $INSTPKGS_CONFIG_IN
 #------------------------------------------------------------------#
 
 grep CONFIG_.*=y $INSTPKGS_CONFIG_OUT | sed -e 's/CONFIG_//g' -e 's/=y//g' > $REMV_PKGS_LIST
+

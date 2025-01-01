@@ -6,13 +6,18 @@
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG
 source $SCRIPTS_FUNCS/get-list-pkgs.func
+
 
 # GET ASROOT
 
 source <(echo $ASROOT)
 export -f as_root
+
+
+#------------------------------------------------------------------#
+# GET LIST PACKAGES
+#------------------------------------------------------------------#
 
 echo "Reading list packages..."
 

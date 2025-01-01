@@ -6,7 +6,6 @@
 ####################################################################
 
 set -e
-[[ -f $CURRENT_CONFIG ]] && source $CURRENT_CONFIG
 source $SCRIPTS_FUNCS/action-config-in.func
 
 
@@ -14,7 +13,6 @@ source $SCRIPTS_FUNCS/action-config-in.func
 function cfg-val
 {
 	cfg=$1
-	grep "^CONFIG_$cfg" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//'
 }
 #------------------------------------------------------------------#
 
@@ -40,16 +38,6 @@ KCONFIG_CONFIG=$ACTION_CONFIG_OUT $MENU_CONFIG $ACTION_CONFIG_IN
 
 echo "Initializing $CURRENT_CONFIG..."
 
-rev=$(cfg-val "REV")
-lfsbranch=$(cfg-val "LFSBRANCH")
-blfsbranch=$(cfg-val "BLFSBRANCH")
-installroot=$(cfg-val "INSTALLROOT")
-
-[[ ! -z $lfsbranch ]] && branch=$lfsbranch
-[[ ! -z $blfsbranch ]] && branch=$blfsbranch && builddir=$BLD_DIR/$blfsbranch-$rev
-
-[[ -f $CURRENT_CONFIG ]] && rm $CURRENT_CONFIG
-	
 cp $ACTION_CONFIG_OUT $CURRENT_CONFIG
 
 sed -i '/^#/d' $CURRENT_CONFIG
@@ -57,34 +45,32 @@ sed -i 's/CONFIG_//g' $CURRENT_CONFIG
 sed -i 's/=y//g' $CURRENT_CONFIG
 sed -i 's/__/=/g' $CURRENT_CONFIG
 sed -i 's/"//g' $CURRENT_CONFIG
+sed -i 's/=/ = /g' $CURRENT_CONFIG
 
 
-### CURRENT CONFIG MAKEFILE ###
+### SET BUILD DIR ###
 
-cp $CURRENT_CONFIG_MAKE.org $CURRENT_CONFIG_MAKE
+rev=$(grep "^CONFIG_REV" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//')
+blfsbranch=$(grep "^CONFIG_BLFSBRANCH" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//')
 
-# rev
-if [[ ! -z $rev ]]; then 
-	sed -i "s/\(REV = \).*/\1$rev/" $CURRENT_CONFIG_MAKE; 
-fi
+[[ ! -z $blfsbranch ]] && branch=$blfsbranch && builddir=$BLD_DIR/$blfsbranch-$rev
+[[ ! -z $builddir ]] && echo "BUILD_DIR = $builddir" >> $CURRENT_CONFIG
 
-# branch
-if [[ ! -z $branch ]]; then 
-	sed -i "s/\(BRANCH = \).*/\1$branch/" $CURRENT_CONFIG_MAKE; 
-fi
 
-# build dir
-if [[ ! -z $builddir ]]; then
-	builddir=${builddir//\//\\/}
-	sed -i "s/\(BUILD_DIR = \).*/\1$builddir/" $CURRENT_CONFIG_MAKE; 
-fi
+#------------------------------------------------------------------#
+# CHECKOUT LPM BRANCH
+#------------------------------------------------------------------#
 
-# installroot
-if [[ ! -z $installroot ]]; then 
-	installroot=${installroot##CONFIG_}
-	installroot=${installroot##INSTALLROOT=}
-	installroot=${installroot//\"/}
-	installroot=${installroot//\//\\/}
-	sed -i "s/\(INSTALLROOT = \).*/\1$installroot/" $CURRENT_CONFIG_MAKE; 
-fi
+lfsbranch=$(grep "^CONFIG_LFSBRANCH" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//')
+
+[[ ! -z $lfsbranch ]] && lpmbranch=$lfsbranch
+[[ ! -z $blfsbranch ]] && lpmbranch=$blfsbranch
+
+[[ $lmpbranch == "trunk" ]] && lpmbranch="main"
+
+set +e
+echo "Getting LPM branch..."
+[[ ! -z $lpmbranch ]] && git checkout $lpmbranch
+
+if [ $? -ne 0 ]; then echo -e "\n>>>>> Unsported (B)LFS version. <<<<<\n"; exit 1; fi
 

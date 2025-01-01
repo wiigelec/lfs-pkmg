@@ -8,7 +8,7 @@
 
 set -e
 source $SCRIPTS_FUNCS/fix-deps.func
-source $CURRENT_CONFIG
+
 
 PROCD_FILE=$BUILD_DEPTREE/procd
 ROOT_DEPS=$BLFS_PKGS_LIST
@@ -114,7 +114,6 @@ function debug
 	if [[ -z $nospace ]]; then s=$spaces; fi
 	echo "${s}$1"
 }
-
 
 
 #------------------------------------------------------------------#

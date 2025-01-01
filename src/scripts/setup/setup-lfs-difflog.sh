@@ -6,7 +6,7 @@
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG 
+
 
 # GET ASROOT
 
@@ -15,6 +15,7 @@ export -f as_root
 
 
 JHALFS_CH08=$INSTALLROOT/jhalfs/lfs-commands/chapter08
+
 
 #------------------------------------------------------------------#
 # CONVERT CHO08

@@ -6,14 +6,19 @@
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG
 source $SCRIPTS_FUNCS/get-list-pkgs.func
 source $SCRIPTS_FUNCS/install-list-files.func
+
 
 # GET ASROOT
 
 source <(echo $ASROOT)
 export -f as_root
+
+
+#------------------------------------------------------------------#
+# Get list packages
+#------------------------------------------------------------------#
 
 echo "Reading list packages..."
 

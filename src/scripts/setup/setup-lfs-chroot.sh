@@ -6,7 +6,7 @@
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG 
+
 
 # GET ASROOT
 
@@ -15,6 +15,7 @@ export -f as_root
 
 
 JHALFS_CHROOT_SCRIPTS=$INSTALLROOT/jhalfs/lpm-scripts
+
 
 #------------------------------------------------------------------#
 # COPY SCRIPTS

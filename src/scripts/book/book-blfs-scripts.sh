@@ -7,7 +7,6 @@
 
 set -e
 source $SCRIPTS_FUNCS/fix-scripts.func
-source $CURRENT_CONFIG
 
 
 #------------------------------------------------------------------#
@@ -29,3 +28,4 @@ echo
 echo "Fixing scripts..."
 echo
 fix-scripts
+

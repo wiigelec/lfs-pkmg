@@ -6,7 +6,6 @@
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG
 
 
 #------------------------------------------------------------------#
@@ -35,3 +34,4 @@ done
 
 [[ $latch == false ]] && echo "All installed packages associated with a list."
 echo
+

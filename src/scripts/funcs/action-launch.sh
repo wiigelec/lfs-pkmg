@@ -10,7 +10,6 @@
 # MAKE ACTION
 #------------------------------------------------------------------#
 
-source $CURRENT_CONFIG
 
 echo
 echo "Launching $ACTION"

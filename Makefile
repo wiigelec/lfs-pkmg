@@ -19,7 +19,7 @@ include ./src/make/book.makefile
 
 include ./src/make/build.makefile
 
--include ./src/make/current-config.makefile
+-include $(CURRENT_CONFIG)
 
 include ./src/make/defs.makefile
 

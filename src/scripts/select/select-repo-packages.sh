@@ -6,7 +6,6 @@
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG 
 source $SCRIPTS_FUNCS/get-lp-listing.func
 
 
@@ -33,3 +32,4 @@ sed -i 's/\.\./:/g' $REPO_PKGS_LIST
 sed -i 's/\(http.*:\)\/\//\1/g' $REPO_PKGS_LIST
 sed -i 's/\/\//\//g' $REPO_PKGS_LIST
 sed -i 's/\(http[s]*:\)/\1\/\//g' $REPO_PKGS_LIST
+

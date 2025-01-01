@@ -6,7 +6,6 @@
 ####################################################################
 
 set -e
-source $CURRENT_CONFIG 
 source $SCRIPTS_FUNCS/setup-deps.func
 source $SCRIPTS_FUNCS/setup-scripts.func
 source $SCRIPTS_FUNCS/setup-makefile.func
