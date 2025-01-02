@@ -56,10 +56,9 @@ AUDITSF :
 
 #------------------------------------------------------------------#
 BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG) \
-       build-lfs $(SETUP_LFS_CHROOT) build-lfs-chroot-scripts \
-       build-lfs-chroot-archives
+       build-lfs 
 	@echo
-	@$(call done_message, Success! LFS build complete.)
+	@$(call done_message, Success! Run 'make BUILDLFSCHROOT'.)
 
 .PHONY: BUILDLFS
 
@@ -165,6 +164,22 @@ BOOTSTRAPWORK : build-bootstrap-work build-bootstrap-archives
 	@$(call done_message, Success! Bootstrap complete.)
 
 .PHONY: BOOTSTRAPWORK
+
+
+#------------------------------------------------------------------#
+BUILDLFSARCHIVES : build-lfs-chroot-archives
+	@echo
+	@$(call done_message, Success! LFS build complete.)
+
+.PHONY: BUILDLFSCHROOT
+
+
+#------------------------------------------------------------------#
+BUILDLFSCHROOT : $(SETUP_LFS_CHROOT) build-lfs-chroot-scripts
+	@echo
+	@$(call done_message, Success! Run 'make BUILDLFSARCHIVES'.)
+
+.PHONY: BUILDLFSCHROOT
 
 
 #------------------------------------------------------------------#
