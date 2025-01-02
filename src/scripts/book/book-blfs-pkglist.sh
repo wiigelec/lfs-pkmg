@@ -12,6 +12,15 @@ set -e
 # GET VERSION INFO
 #------------------------------------------------------------------#
 
+### GET BOOK VERSION ###
+
+bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
+if [[ ! -z $bookversion ]]; then
+        echo "BOOK_VERS = $bookversion" >> $CURRENT_CONFIG
+	export "BOOK_VERS=$bookversion"
+fi
+
+# KF6
 kf6version=$(grep 'ln -sfv kf6' $BLFS_FULL_XML | sed 's/.* kf6-\(.*\) .*/\1/')
 
 
@@ -20,6 +29,10 @@ kf6version=$(grep 'ln -sfv kf6' $BLFS_FULL_XML | sed 's/.* kf6-\(.*\) .*/\1/')
 #------------------------------------------------------------------#
 
 echo "Processing xml..."
+
+[[ -z $BOOK_VERS ]] && \
+	echo -e "\n>>>>> No book version in $CURRENT_CONFIG. <<<<<\n" && \
+	exit 1
 
 xsltproc -o $BLFS_PKGLIST_XML \
 	--stringparam book-version $BOOK_VERS \

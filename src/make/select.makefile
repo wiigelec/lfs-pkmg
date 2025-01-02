@@ -27,7 +27,6 @@ SELECT_REPO_PACKAGES_SH = $(SELECT_SCRIPTS)/select-repo-packages.sh
 ### OTHER DEFS ###
 
 
-export
 
 
 #------------------------------------------------------------------#

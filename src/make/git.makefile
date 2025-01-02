@@ -26,7 +26,6 @@ BLFS_GIT_URL = https://git.linuxfromscratch.org/blfs
 LFS_GIT_URL = https://git.linuxfromscratch.org/lfs
 JHALFS_GIT_URL = https://git.linuxfromscratch.org/jhalfs
 
-export
 
 
 #------------------------------------------------------------------#

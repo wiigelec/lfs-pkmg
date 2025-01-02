@@ -29,8 +29,6 @@ SETUP_BLFS_WORK_SH = $(SETUP_SCRIPTS)/setup-blfs-work.sh
 ### OTHER DEFS ###
 
 
-export
-
 
 #------------------------------------------------------------------#
 # TARGETS

@@ -30,7 +30,6 @@ BOOK_BLFS_PKGLIST_SH = $(BOOK_SCRIPTS)/book-blfs-pkglist.sh
 ### OTHER DEFS ###
 
 
-export
 
 
 #------------------------------------------------------------------#

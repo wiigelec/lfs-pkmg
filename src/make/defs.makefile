@@ -122,7 +122,7 @@ BOOTSTRAP_GROUP_LIST = $(LFS_GROUP)/bootstrap.group
 # action
 ACTION_CONFIG_IN = $(BLD_CONFIG)/action-config-in
 ACTION_CONFIG_OUT = $(BLD_CONFIG)/action-config-out
-CURRENT_CONFIG = $(BLD_CONFIG)/current-config
+CURRENT_CONFIG = $(BLD_CONFIG)/current-config.makefile
 
 # blfs packages
 BLFSPKGS_CONFIG_IN = $(BLD_CONFIG)/blfspkfgs-config-in
@@ -179,5 +179,5 @@ SELECT_BLFSPKGS_XSL = $(SRC_XSL)/select-blfspkgs.xsl
 
 MENU_CONFIG = python3 $(TOPDIR)/kconfiglib/menuconfig.py
 
-
 export
+

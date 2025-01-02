@@ -27,7 +27,6 @@ INST_PKG_SH = $(SCRIPTS_FUNCS)/inst-pkg.sh
 REMV_PKG_SH = $(SCRIPTS_FUNCS)/remv-pkg.sh
 UPGR_PKG_SH = $(SCRIPTS_FUNCS)/upgr-pkg.sh
 
-export
 
 
 #------------------------------------------------------------------#

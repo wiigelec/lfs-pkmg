@@ -28,7 +28,6 @@ LIST_UPGRADE_SH = $(LIST_SCRIPTS)/list-upgrade.sh
 USER_LIST = $(TOPDIR)/user/list
 
 
-export
 
 
 #------------------------------------------------------------------#

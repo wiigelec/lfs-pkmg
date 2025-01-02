@@ -25,8 +25,6 @@ AUDIT_SYSTEM_FILES_SH = $(SCRIPTS_AUDIT)/audit-installed-files.sh
 ### OTHER DEFS ###
 
 
-export
-
 
 #------------------------------------------------------------------#
 # TARGETS

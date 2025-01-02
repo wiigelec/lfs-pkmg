@@ -35,7 +35,6 @@ TASK_HELP = $(DOC_TEXT)/task.help
 UPGRADE_LIST_HELP = $(DOC_TEXT)/upgrade-list.help
 UPGRADE_PACKAGE_HELP = $(DOC_TEXT)/upgrade-package.help
 
-export
 
 
 #------------------------------------------------------------------#
