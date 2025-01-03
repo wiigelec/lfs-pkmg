@@ -1,7 +1,7 @@
 #!/bin/bash
 ####################################################################
 #
-# linux-headers.build
+# bootscripts-sysv.build
 #
 ####################################################################
 
@@ -10,12 +10,12 @@ set -e
 SRC_DIR=/sources
 
 ### FIND FILE ###
-kernelfile=$(find $SRC_DIR -name "linux-*.tar.xz")
-[[ -z $kernelfile ]] && echo "No kernel source file found." && exit 1
+bootscriptsfile=$(find $SRC_DIR -name "lfs-bootscripts*.tar.xz")
+[[ -z $bootscriptsfile ]] && echo "No bootscripts source file found." && exit 1
 
 # Get versions
-KERNEL_VER=${kernelfile##*linux-}
-KERNEL_VER=${KERNEL_VER%.tar.xz}
+BOOTSCRIPTS_VER=${bootscriptsfile##*lfs-bootscripts-}
+BOOTSCRIPTS_VER=${BOOTSCRIPTS_VER%.tar.xz}
 
 
 ####################################################################
@@ -23,14 +23,17 @@ KERNEL_VER=${KERNEL_VER%.tar.xz}
 ####################################################################
 
 ### PACKAGE PARAMETERS ###
-PKG_NAME=linux-headers
-PKG_VER=$KERNEL_VER
+PKG_NAME=bootscripts-sysv
+PKG_VER=$BOOTSCRIPTS_VER
 PKG_ARCH=$(uname -m)
 PKG_LFS=lfs-$LFS_VER
 PKG_EXT=txz
 ARCHIVE_NAME=$LPM_ARCHIVE/$PKG_NAME--$PKG_VER--$PKG_ARCH--$PKG_LFS.$PKG_EXT
 
 
+####################################################################
+# PACKAGE BUILD
+####################################################################
 
 ### DESTDIR ###
 DEST_DIR=/sources/destdir
@@ -38,15 +41,10 @@ DEST_DIR=/sources/destdir
 mkdir -pv $DEST_DIR
 pushd $DEST_DIR
 
-
-####################################################################
-# PACKAGE BUILD
-####################################################################
-
 pushd $SRC_DIR
 
 # Extract
-TAR_FILE=linux-$KERNEL_VER.tar.xz
+TAR_FILE=lfs-bootscripts-$BOOTSCRIPTS_VER.tar.xz
 TAR_DIR=${TAR_FILE%%.tar.xz}
 [[ -d $TAR_DIR ]] && rm -rf $TAR_DIR
 tar -xf $TAR_FILE
@@ -54,14 +52,8 @@ tar -xf $TAR_FILE
 # Build
 pushd $TAR_DIR
 
-make mrproper
-make headers
-
-find usr/include -type f ! -name '*.h' -delete
-
 # Destdir install
-mkdir -pv $DEST_DIR/usr
-cp -rv usr/include $DEST_DIR/usr
+DESTDIR=$DEST_DIR make install
 
 popd #TAR_DIR
 
