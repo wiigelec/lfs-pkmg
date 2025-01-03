@@ -55,10 +55,9 @@ AUDITPF :
 AUDITSF : 
 
 #------------------------------------------------------------------#
-BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG) \
-       build-lfs 
+BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG) 
 	@echo
-	@$(call done_message, Success! Run 'make BUILDLFSCHROOT'.)
+	@$(call done_message, Success! Run 'make LFSPACKAGES'.)
 
 .PHONY: BUILDLFS
 
@@ -155,6 +154,34 @@ PKGUPGRADE : select-repo-packages package-upgrade
 
 
 #------------------------------------------------------------------#
+# LFS TARGETS
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
+LFSARCHIVES : build-lfs-chroot-archives
+	@echo
+	@$(call done_message, Success! Run 'make LFSCHROOT'.)
+
+.PHONY: LFSARCHIVES
+
+
+#------------------------------------------------------------------#
+LFSCHROOT : $(SETUP_LFS_CHROOT) build-lfs-chroot-scripts
+	@echo
+	@$(call done_message, Success! LFS build complete.)
+
+.PHONY: LFSCHROOT
+
+
+#------------------------------------------------------------------#
+LFSPACKAGES : build-lfs
+	@echo
+	@$(call done_message, Success! Run 'make LFSARCHIVES'.)
+
+.PHONY: LFSPACKAGES
+
+
+#------------------------------------------------------------------#
 # BUILD WORK TARGETS
 #------------------------------------------------------------------#
 
@@ -164,22 +191,6 @@ BOOTSTRAPWORK : build-bootstrap-work build-bootstrap-archives
 	@$(call done_message, Success! Bootstrap complete.)
 
 .PHONY: BOOTSTRAPWORK
-
-
-#------------------------------------------------------------------#
-BUILDLFSARCHIVES : build-lfs-chroot-archives
-	@echo
-	@$(call done_message, Success! LFS build complete.)
-
-.PHONY: BUILDLFSCHROOT
-
-
-#------------------------------------------------------------------#
-BUILDLFSCHROOT : $(SETUP_LFS_CHROOT) build-lfs-chroot-scripts
-	@echo
-	@$(call done_message, Success! Run 'make BUILDLFSARCHIVES'.)
-
-.PHONY: BUILDLFSCHROOT
 
 
 #------------------------------------------------------------------#
