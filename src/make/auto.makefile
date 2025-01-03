@@ -160,7 +160,7 @@ PKGUPGRADE : select-repo-packages package-upgrade
 #------------------------------------------------------------------#
 LFSARCHIVES : $(SETUP_LFS_CHROOT) build-lfs-chroot-archives
 	@echo
-	@$(call done_message, Success! Run 'make LFSCHROOT'.)
+	@$(call done_message, Success! LFS build complete.)
 
 .PHONY: LFSARCHIVES
 
@@ -168,7 +168,7 @@ LFSARCHIVES : $(SETUP_LFS_CHROOT) build-lfs-chroot-archives
 #------------------------------------------------------------------#
 LFSCHROOT : $(SETUP_LFS_CHROOT) build-lfs-chroot-scripts
 	@echo
-	@$(call done_message, Success! LFS build complete.)
+	@$(call done_message, Success! Run 'make LFSARCHIVES'.)
 
 .PHONY: LFSCHROOT
 
@@ -176,7 +176,7 @@ LFSCHROOT : $(SETUP_LFS_CHROOT) build-lfs-chroot-scripts
 #------------------------------------------------------------------#
 LFSPACKAGES : build-lfs
 	@echo
-	@$(call done_message, Success! Run 'make LFSARCHIVES'.)
+	@$(call done_message, Success! Run 'make LFSCHROOT'.)
 
 .PHONY: LFSPACKAGES
 
