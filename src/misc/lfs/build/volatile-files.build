@@ -15,7 +15,7 @@ set -e
 PKG_NAME=aa_volatile-files
 PKG_VER=$LFS_VER
 PKG_ARCH=$(uname -m)
-PKG_LFS=lfs-$LFS_VER
+PKG_LFS=lfs-$LFS_VER-$(echo $REV | tr '[:upper:]' '[:lower:]')
 PKG_EXT=txz
 ARCHIVE_NAME=$LPM_ARCHIVE/$PKG_NAME--$PKG_VER--$PKG_ARCH--$PKG_LFS.$PKG_EXT
 
@@ -45,7 +45,9 @@ cp -a /etc/gshadow ./etc
 
 cp -a /etc/fstab ./etc
 
-cp -a /lib64/* ./lib64
+case $(uname -m) in
+  x86_64) cp -a /lib64/* ./lib64 ;;
+esac
 
 
 ####################################################################

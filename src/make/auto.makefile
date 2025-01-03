@@ -158,7 +158,7 @@ PKGUPGRADE : select-repo-packages package-upgrade
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
-LFSARCHIVES : build-lfs-chroot-archives
+LFSARCHIVES : $(SETUP_LFS_CHROOT) build-lfs-chroot-archives
 	@echo
 	@$(call done_message, Success! Run 'make LFSCHROOT'.)
 

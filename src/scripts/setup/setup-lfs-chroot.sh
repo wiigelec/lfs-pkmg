@@ -33,6 +33,14 @@ cp $BUILD_ARCHIVES_SH $JHALFS_CHROOT_SCRIPTS
 ### LFS CUSTOM ###
 cp $LFS_BUILD/* $JHALFS_CHROOT_SCRIPTS/lfs
 
+### SYSV / SYSD ###
+if [[ $REV == "SYSD" ]]; then
+	
+	find $JHALFS_CHROOT_SCRIPTS -name "*-sysv*" -delete
+else
+	find $JHALFS_CHROOT_SCRIPTS -name "*-sysd*" -delete
+fi
+
 
 #------------------------------------------------------------------#
 # INITIALIZE DIRS
