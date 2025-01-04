@@ -45,7 +45,6 @@ sed -i 's/CONFIG_//g' $CURRENT_CONFIG
 sed -i 's/=y//g' $CURRENT_CONFIG
 sed -i 's/__/=/g' $CURRENT_CONFIG
 sed -i 's/"//g' $CURRENT_CONFIG
-sed -i 's/=/ = /g' $CURRENT_CONFIG
 
 
 ### SET BUILD DIR ###
@@ -54,7 +53,7 @@ rev=$(grep "^CONFIG_REV" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//')
 blfsbranch=$(grep "^CONFIG_BLFSBRANCH" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//')
 
 [[ ! -z $blfsbranch ]] && branch=$blfsbranch && builddir=$BLD_DIR/$blfsbranch-$rev
-[[ ! -z $builddir ]] && echo "BUILD_DIR = $builddir" >> $CURRENT_CONFIG
+[[ ! -z $builddir ]] && echo "BUILD_DIR=$builddir" >> $CURRENT_CONFIG
 
 
 #------------------------------------------------------------------#

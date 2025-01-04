@@ -46,7 +46,7 @@ book-blfs-fullxml $(BLFS_FULL_XML) :
 
 
 #------------------------------------------------------------------#
-book-blfs-pkglist $(BLFS_PKGLIST_XML) :
+book-blfs-pkglist :
 	@echo
 	@$(call bold_message, book-blfs-pkglist)
 	$(BOOK_BLFS_PKGLIST_SH)

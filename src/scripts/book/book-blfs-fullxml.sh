@@ -45,3 +45,12 @@ if [[ "$rev" == "systemd" ]]; then mv -v $BLD_XML/blfs-systemd-full.xml $BLFS_FU
 [[ ! -d $BUILD_DIR ]] && mkdir -p $BUILD_DIR
 mv -v $BLD_XML $BUILD_DIR
 
+
+#------------------------------------------------------------------#
+# GET BOOK VERSION
+#------------------------------------------------------------------#
+
+bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
+if [[ ! -z $bookversion ]]; then
+        echo "BOOK_VERS=$bookversion" >> $CURRENT_CONFIG
+fi

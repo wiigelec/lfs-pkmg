@@ -6,19 +6,12 @@
 ####################################################################
 
 set -e
+source $CURRENT_CONFIG
 
 
 #------------------------------------------------------------------#
 # GET VERSION INFO
 #------------------------------------------------------------------#
-
-### GET BOOK VERSION ###
-
-bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
-if [[ ! -z $bookversion ]]; then
-        echo "BOOK_VERS = $bookversion" >> $CURRENT_CONFIG
-	export "BOOK_VERS=$bookversion"
-fi
 
 # KF6
 kf6version=$(grep 'ln -sfv kf6' $BLFS_FULL_XML | sed 's/.* kf6-\(.*\) .*/\1/')
