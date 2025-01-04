@@ -79,8 +79,13 @@ fi
 
 #------------------------------------------------------------------#
 # xorg env
+FILE=$BUILD_SCRIPTS/xorg-env.build
+echo ${FILE##*/}
+if [[ -f $FILE ]]; then
 echo "xorg-env"
-sed -i 's/<PREFIX>/\/usr/' $BUILD_SCRIPTS/xorg-env.build
+sed -i 's/<PREFIX>/\/usr/' $FILE
+sed -i 's/^XORG_CONFIG=.*/XORG_CONFIG="$XORG_CONFIG"/' $FILE
+fi
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
