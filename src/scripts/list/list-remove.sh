@@ -72,7 +72,7 @@ for lp in $listpackages; do
 	pkg=${lp##*/}
 	
 	### CHECK USED ###
-	[[ ! -z $(grep $exclude -r $pkg $LPM_LISTS || true) ]] && continue
+	[[ ! -z $(grep $exclude -r $pkg ${INSTALLROOT}$LPM_LISTS || true) ]] && continue
 
 	pkg=${pkg%.txz}
 	pkg=${INSTALLROOT}$LPM_INSTALLED/$pkg
