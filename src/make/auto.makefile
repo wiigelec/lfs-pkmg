@@ -95,7 +95,7 @@ LISTDIR : list-create-dir
 
 
 #------------------------------------------------------------------#
-LISTDEPS : $(BLFS_FULL_XML) $(BLFS_PKGLIST_XML) select-blfs-packages \
+LISTDEPS : $(BLFS_FULL_XML) book-blfs-pkglist select-blfs-packages \
 	$(BOOK_BLFS_DEPS) book-blfs-trees list-create-deps
 	@echo
 	@$(call done_message, Success! Dependency list created.)
