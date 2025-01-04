@@ -53,7 +53,6 @@ for each in ./*.build; do
 		sed -i 's/sudo \(sh -e << ROOT_EOF\)/\1/g' $each
 	else
 		sed -i '/ROOT_EOF/d' $each
-	else
 	fi
         sed -i 's/^wget/#wget/g' $each
         sed -i 's/SRC_DIR=\$SOURCE_DIR\/\$PKG_ID/SRC_DIR=\$SOURCE_DIR/g' $each
