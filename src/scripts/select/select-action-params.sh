@@ -61,21 +61,20 @@ blfsbranch=$(grep "^CONFIG_BLFSBRANCH" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e
 # CHECKOUT LPM BRANCH
 #------------------------------------------------------------------#
 
-action=$(grep "^CONFIG_ACTION" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//')
 
-if [[ $action == "BUILD"* ]]; then
+lfsbranch=$(grep "^CONFIG_LFSBRANCH" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//')
 
-	lfsbranch=$(grep "^CONFIG_LFSBRANCH" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//')
+[[ ! -z $lfsbranch ]] && lpmbranch=$lfsbranch
+[[ ! -z $blfsbranch ]] && lpmbranch=$blfsbranch
 
-	[[ ! -z $lfsbranch ]] && lpmbranch=$lfsbranch
-	[[ ! -z $blfsbranch ]] && lpmbranch=$blfsbranch
+[[ $lpmbranch == "trunk" ]] && lpmbranch="main"
 
-	[[ $lpmbranch == "trunk" ]] && lpmbranch="main"
-
+if [[ ! -z $lpmbranch ]]; then
 	set +e
 	echo "Getting LPM branch..."
-	[[ ! -z $lpmbranch ]] && git checkout $lpmbranch
+	git checkout $lpmbranch
 
 	if [ $? -ne 0 ]; then echo -e "\n>>>>> Unsported (B)LFS version. <<<<<\n"; exit 1; fi
 fi
 
+exit
