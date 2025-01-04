@@ -71,6 +71,7 @@ chmod -v 664  ./var/log/lastlog
 chmod -v 600  ./var/log/btmp
 
 ### 9.5 ###
+cp -a /etc/sysconfig/ifconfig.eth0 ./etc/sysconfig
 cp -a /etc/resolv.conf ./etc
 
 ### 9.6 ###
@@ -99,6 +100,7 @@ cp -a /usr/share/info/dir ./usr/share/info
 mkdir ./usr/bin
 cp -a /usr/bin/cc ./usr/bin
 cp -a /usr/bin/sh ./usr/bin
+mkdir -p ./var/lib/hwclock
 
 
 ####################################################################
