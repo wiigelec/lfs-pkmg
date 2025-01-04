@@ -37,6 +37,7 @@ echo ${FILE##*/}
 linenum=$(grep -n "### CONFIGURE MAKE INSTALL ###" $FILE | sed 's/:.*//')
 linenum2=$(grep -n "### END CONFIGURE MAKE INSTALL ###" $FILE | sed 's/:.*//')
 sed -i "${linenum},${linenum2}s/\\$/\\\\\$/g" $FILE
+sed -i 's/export LANG=<ll>.*/export LANG=C.UTF-8/g' $FILE
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
