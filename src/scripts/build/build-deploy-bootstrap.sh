@@ -48,7 +48,7 @@ echo "Modifying work..."
 
 pushd $BUILD_WORK/scripts > /dev/null
 for each in ./*.build; do
-        sed -i '/ROOT_EOF/d' $each
+	sed -i 's/sudo \(sh -e << ROOT_EOF\)/\1/g' $each
         sed -i 's/^wget/#wget/g' $each
         sed -i 's/SRC_DIR=\$SOURCE_DIR\/\$PKG_ID/SRC_DIR=\$SOURCE_DIR/g' $each
         sed -i 's/\.\.\/\$PACKAGE/\$PACKAGE/g' $each
