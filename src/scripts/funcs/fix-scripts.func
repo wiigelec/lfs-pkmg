@@ -129,6 +129,7 @@ sed -i 's/{PKG_ID}/{PKG_ID}-pass1/g' $BUILD_SCRIPTS/graphite2-pass1.build
 #------------------------------------------------------------------#
 # mesa/libva
 FILE=$BUILD_SCRIPTS/libva-pass1.build
+cp $BUILD_SCRIPTS/libva.build $BUILD_SCRIPTS/libva-pass1.build
 echo ${FILE##*/}
 if [[ -f $FILE ]]; then
 cp $BUILD_SCRIPTS/libva.build $FILE
