@@ -61,7 +61,7 @@ BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG)
 
 
 #------------------------------------------------------------------#
-BUILDBOOTSTRAP : $(BLFS_FULL_XML) book-blfs-pkglist $(BOOK_BLFS_DEPS) \
+BUILDBOOTSTRAP : book-blfs-fullxml book-blfs-pkglist $(BOOK_BLFS_DEPS) \
 	$(BOOK_BLFS_SCRIPTS) setup-bootstrap-group book-blfs-trees \
 	setup-blfs-work build-deploy-bootstrap
 	@echo
@@ -71,7 +71,7 @@ BUILDBOOTSTRAP : $(BLFS_FULL_XML) book-blfs-pkglist $(BOOK_BLFS_DEPS) \
 
 
 #------------------------------------------------------------------#
-BUILDBLFS : $(BLFS_FULL_XML) book-blfs-pkglist $(BOOK_BLFS_DEPS) \
+BUILDBLFS : book-blfs-fullxml book-blfs-pkglist $(BOOK_BLFS_DEPS) \
 	$(BOOK_BLFS_SCRIPTS) select-blfs-packages book-blfs-trees \
 	setup-blfs-work
 	@echo
@@ -95,7 +95,7 @@ LISTDIR : list-create-dir
 
 
 #------------------------------------------------------------------#
-LISTDEPS : $(BLFS_FULL_XML) book-blfs-pkglist select-blfs-packages \
+LISTDEPS : book-blfs-fullxml book-blfs-pkglist select-blfs-packages \
 	$(BOOK_BLFS_DEPS) book-blfs-trees list-create-deps
 	@echo
 	@$(call done_message, Success! Dependency list created.)

@@ -37,7 +37,7 @@ BOOK_BLFS_PKGLIST_SH = $(BOOK_SCRIPTS)/book-blfs-pkglist.sh
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
-book-blfs-fullxml $(BLFS_FULL_XML) :
+book-blfs-fullxml :
 	@echo
 	@$(call bold_message, book-blfs-fullxml)
 	$(BOOK_BLFS_FULLXML_SH)

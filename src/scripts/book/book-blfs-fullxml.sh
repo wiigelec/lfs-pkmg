@@ -9,41 +9,38 @@ set -e
 
 
 #------------------------------------------------------------------#
-# CHECKOUT BRANCH
+# GENERATE BLFS FULL XML
 #------------------------------------------------------------------#
 
-# GET BRANCH
-branch=${BLFSBRANCH##*=}
-pushd $BLFS_GIT_DIR  > /dev/null
-git pull
-git checkout $branch
-popd > /dev/null
+if [[ ! -f $BLFS_FULL_XML ]]; then
+
+	### GET BRANCH ###
+
+	branch=${BLFSBRANCH##*=}
+	pushd $BLFS_GIT_DIR  > /dev/null
+	git pull
+	git checkout $branch
+	popd > /dev/null
 
 
-#------------------------------------------------------------------#
-# SET REV
-#------------------------------------------------------------------#
-
-rev=sysv
-[[ $REV == "SYSD" ]] && rev=systemd
+	### SET REV ###
+	
+	rev=sysv
+	[[ $REV == "SYSD" ]] && rev=systemd
 
 
-#------------------------------------------------------------------#
-# VALIDATE
-#------------------------------------------------------------------#
+	#### VALIDATE ###
 
-mkdir -p $BLD_XML
-make -C $BLFS_GIT_DIR RENDERTMP=$BLD_XML REV=$rev validate
-if [[ "$rev" == "systemd" ]]; then mv -v $BLD_XML/blfs-systemd-full.xml $BLFS_FULL_XML_NV; fi
+	mkdir -p $BLD_XML
+	make -C $BLFS_GIT_DIR RENDERTMP=$BLD_XML REV=$rev validate
+	if [[ "$rev" == "systemd" ]]; then mv -v $BLD_XML/blfs-systemd-full.xml $BLFS_FULL_XML_NV; fi
 
 
-#------------------------------------------------------------------#
-# CREATE VERSION DIR
-#------------------------------------------------------------------#
+	### CREATE BUILD DIR ###
 
-### CREATE BUILD DIR ###
-[[ ! -d $BUILD_DIR ]] && mkdir -p $BUILD_DIR
-mv -v $BLD_XML $BUILD_DIR
+	[[ ! -d $BUILD_DIR ]] && mkdir -p $BUILD_DIR
+	mv -v $BLD_XML $BUILD_DIR
+fi
 
 
 #------------------------------------------------------------------#
