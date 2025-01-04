@@ -179,5 +179,3 @@ SELECT_BLFSPKGS_XSL = $(SRC_XSL)/select-blfspkgs.xsl
 
 MENU_CONFIG = python3 $(TOPDIR)/kconfiglib/menuconfig.py
 
-export
-

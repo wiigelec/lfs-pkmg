@@ -16,8 +16,6 @@ default:
 
 include ./src/make/audit.makefile
 
-include ./src/make/auto.makefile
-
 include ./src/make/book.makefile
 
 include ./src/make/build.makefile
@@ -35,6 +33,10 @@ include ./src/make/package.makefile
 include ./src/make/select.makefile
 
 include ./src/make/setup.makefile
+
+include ./src/make/auto.makefile
+
+export
 
 #------------------------------------------------------------------#
 nuke: 

@@ -4,8 +4,6 @@
 #
 ####################################################################
 
-include $(CURRENT_CONFIG)
-export
 
 #------------------------------------------------------------------#
 # DEFINITIONS
@@ -55,7 +53,7 @@ AUDITPF :
 AUDITSF : 
 
 #------------------------------------------------------------------#
-BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG) 
+BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG)
 	@echo
 	@$(call done_message, Success! Run 'make LFSPACKAGES'.)
 
