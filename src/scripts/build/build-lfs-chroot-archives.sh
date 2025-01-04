@@ -37,7 +37,7 @@ echo
 sudo chroot $INSTALLROOT bash -e -c "LPM_PKGLOG=$LPM_PKGLOG \
 	LPM_ARCHIVE=$LPM_ARCHIVE \
 	BOOK_VERS=$lfsver \
-	LFS_BLD=lfs \
+	LFS_BLD=lfs REV=$REV \
 	/jhalfs/lpm-scripts/build-archives.sh"
 
 

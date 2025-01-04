@@ -14,13 +14,13 @@ default:
 
 -include ./build/config/current-config.makefile
 
+include ./src/make/defs.makefile
+
 include ./src/make/audit.makefile
 
 include ./src/make/book.makefile
 
 include ./src/make/build.makefile
-
-include ./src/make/defs.makefile
 
 include ./src/make/git.makefile
 

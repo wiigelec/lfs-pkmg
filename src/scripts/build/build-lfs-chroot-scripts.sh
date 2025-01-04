@@ -14,6 +14,7 @@ set -e
 
 lfsvers=$(xmllint --xpath "/book/bookinfo/subtitle[1]/text()" $JHALFS_DIR/prbook.xml)
 lfsvers=${lfsvers##* }
+lfsvers=${lfsvers%-*}
 
 
 #------------------------------------------------------------------#
