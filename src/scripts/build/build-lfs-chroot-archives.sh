@@ -12,7 +12,9 @@ set -e
 # GET JHALFS BOOK VERSION
 #------------------------------------------------------------------#
 
-lfsver=$(xmllint --xpath "/book/bookinfo/subtitle[1]/text()" $JHALFS_DIR/prbook.xml | sed 's/.* \(.*\)-.*/\1/')
+lfsvers=$(xmllint --xpath "/book/bookinfo/subtitle[1]/text()" $JHALFS_DIR/prbook.xml)
+lfsvers=${lfsvers##* }
+lfsvers=${lfsvers%-*}
 
 
 #------------------------------------------------------------------#
@@ -36,7 +38,7 @@ echo "Creating archives..."
 echo
 sudo chroot $INSTALLROOT bash -e -c "LPM_PKGLOG=$LPM_PKGLOG \
 	LPM_ARCHIVE=$LPM_ARCHIVE \
-	BOOK_VERS=$lfsver \
+	BOOK_VERS=$lfsvers \
 	LFS_BLD=lfs REV=$REV \
 	/jhalfs/lpm-scripts/build-archives.sh"
 
