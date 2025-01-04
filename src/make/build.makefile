@@ -94,23 +94,21 @@ build-lfs :
 
 
 #------------------------------------------------------------------#
-build-lfs-chroot-scripts $(BUILD_LFS_CHROOT_SCRIPTS) :
-	@echo
-	@$(call bold_message, build-lfs-chroot-scripts)
-	$(BUILD_LFS_CHROOT_SCRIPTS_SH)
-	@touch $@
-
-.PHONY: build-lfs-chroot-scripts
-
-
-#------------------------------------------------------------------#
-build-lfs-chroot-archives $(BUILD_LFS_CHROOT_ARCHIVES) :
+build-lfs-chroot-archives :
 	@echo
 	@$(call bold_message, build-lfs-chroot-archives)
 	$(BUILD_LFS_CHROOT_ARCHIVES_SH)
-	@touch $@
 
 .PHONY: build-lfs-chroot-archives
+
+
+#------------------------------------------------------------------#
+build-lfs-chroot-scripts :
+	@echo
+	@$(call bold_message, build-lfs-chroot-scripts)
+	$(BUILD_LFS_CHROOT_SCRIPTS_SH)
+
+.PHONY: build-lfs-chroot-scripts
 
 
 #------------------------------------------------------------------#
