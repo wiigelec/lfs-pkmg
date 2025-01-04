@@ -274,7 +274,7 @@ cat << EOF
 config    LISTFILE
 	depends on ACTION__LISTDIR || ACTION__LISTDEPS
 	string  "List file (full path)"
-        default "$LPM_DIR/$BRANCH-$REV/lists/list-name.list"
+        default "$LPM_BUILD/lists/list-name.list"
 EOF
 
 ### LIST PACKAGES PATH ###
