@@ -44,7 +44,7 @@ do
 	version=$(xmllint --xpath "//package[id='$p']/version/text()" $BLFS_PKGLIST_XML 2>/dev/null)
 
 	# SETUP PACKAGE NAME
-	write="$p--$version--$(uname -m)--blfs-${BOOK_VERS}-$REV.txz"
+	write="$p--$version--$(uname -m)--blfs-${BOOK_VERS}-$(echo $REV | tr [:upper:] [:lower:]).txz"
 	echo $write | as_root tee -a $listfile
 done
 
