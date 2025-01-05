@@ -6,7 +6,6 @@
 ####################################################################
 
 set -e
-source $SCRIPTS_FUNCS/fix-scripts.func
 
 
 #------------------------------------------------------------------#
@@ -24,8 +23,14 @@ xsltproc --stringparam files true \
 # FIX SCRIPTS
 #------------------------------------------------------------------#
 
-echo
-echo "Fixing scripts..."
-echo
-fix-scripts
 
+if [[ -f $CUSTOM_FIX_SCRIPTS_SH ]]; then 
+
+	echo
+	echo "Fixing scripts..."
+	echo
+	
+	$CUSTOM_FIX_SCRIPTS_SH
+fi
+
+exit

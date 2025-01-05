@@ -7,7 +7,6 @@
 
 
 set -e
-source $SCRIPTS_FUNCS/fix-deps.func
 
 
 PROCD_FILE=$BUILD_DEPTREE/procd
@@ -79,7 +78,13 @@ function recurse
 			[[ $line = '' ]] && continue 
 
 			### RECURSE ###
-			recurse "$DEPTREE_DEPS/$line.deps"
+			df="$DEPTREE_DEPS/$line.deps"
+			if [[ ! $line == "--"*"--" ]] && [[ ! -f $df ]]; then
+				echo "Deps file $df not found, SKIPPING."
+				continue
+			fi
+				
+			recurse $df
 
 		done < $file
 	

@@ -74,3 +74,19 @@ book-blfs-trees :
 	@$(call bold_message, $@)
 	$(BOOK_BLFS_TREES_SH)
 
+
+#------------------------------------------------------------------#
+# CLEAN
+#------------------------------------------------------------------#
+
+clean-deps :
+	-rm $(BOOK_BLFS_DEPS)
+
+clean-fullxml :
+	-rm $(BLFS_FULL_XML)
+
+clean-scripts :
+	-rm $(BOOK_BLFS_SCRIPTS)
+
+clean-trees :
+	-rm -rf $(DEPTREE_TREES)

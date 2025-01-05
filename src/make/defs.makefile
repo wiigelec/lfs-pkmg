@@ -73,6 +73,10 @@ BLD_DIR = $(TOPDIR)/build
 BLD_CONFIG = $(BLD_DIR)/config
 BLD_XML = $(BLD_DIR)/xml
 
+# custom
+CUSTOM_DIR = $(TOPDIR)/custom
+CUSTOM_SCRIPTS = $(CUSTOM_DIR)/scripts
+
 # docs
 DOC_DIR = $(TOPDIR)/doc
 
@@ -154,6 +158,10 @@ REPO_PKGS_LIST = $(BLD_CONFIG)/repo-pkgs-list
 
 # END CONFIGS
 #------------------------------------------------------------------#
+
+# custom
+CUSTOM_FIX_DEPS_SH = $(CUSTOM_SCRIPTS)/fix-deps.sh
+CUSTOM_FIX_SCRIPTS_SH = $(CUSTOM_SCRIPTS)/fix-scripts.sh
 
 # jhalfs
 JHALFS_CONFIG = $(JHALFS_GIT_DIR)/configuration

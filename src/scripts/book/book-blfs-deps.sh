@@ -6,7 +6,6 @@
 ####################################################################
 
 set -e
-source $SCRIPTS_FUNCS/fix-deps.func
 
 
 #------------------------------------------------------------------#
@@ -25,8 +24,15 @@ xsltproc --stringparam required true \
 # FIX DEPS
 #------------------------------------------------------------------#
 
-echo
-echo "Fixing deps..."
-echo
-fix-deps
+
+if [[ -f $CUSTOM_FIX_DEPS_SH ]]; then 
+
+	echo
+	echo "Fixing deps..."
+	echo
+
+	$CUSTOM_FIX_DEPS_SH
+fi
+
+exit
 
