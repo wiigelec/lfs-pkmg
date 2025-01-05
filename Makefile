@@ -41,8 +41,8 @@ export
 
 #------------------------------------------------------------------#
 update: 
-	git checkout main
-	git pull
+	@git checkout main
+	@git pull
 
 
 #------------------------------------------------------------------#
@@ -50,6 +50,7 @@ update-custom:
 	@if [[ -d $(CUSTOM_DIR) ]]; then \
 	pushd $(CUSTOM_DIR) > /dev/null; \
 	git pull; \
+	popd > /dev/null; \
 	fi
 
 
