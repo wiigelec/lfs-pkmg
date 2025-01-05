@@ -24,6 +24,9 @@ file="false"
 server="false"
 if [[ $displaypath == "http"* ]]; then
 
+	tst=${displaypath##*/}
+	[[ ! -z $tst ]] && displaypath=$displaypath/
+
         versionlist=$(curl --silent $displaypath | \
                sed '/href/!d' | sed 's/.*href=\(.*\)<\/a.*/\1/g' | sed 's/.*>\(.*\)\//\1/g' \
                | sort)
