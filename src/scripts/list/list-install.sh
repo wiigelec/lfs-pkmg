@@ -29,23 +29,18 @@ lists=$(cat $REPO_LIST_LIST)
 # PRE-INSTALL SCRIPTS
 #------------------------------------------------------------------#
 
-echo "Running list pre-install scripts..."
+if [[ -d $CUSTOM_LIST ]]; then
 
-### USER ###
-for each in $lists; do
+	echo "Running list pre-install scripts..."
 
-        each=${each##*/}
-        script=$USER_LIST/$each.pre-install
-        [[ -f $script ]] && $script
-done
+	for each in $lists; do
 
-### SYSTEM ###
-for each in $lists; do
+        	each=${each##*/}
+        	script=$CUSTOM_LIST/$each.pre-install
+        	[[ -f $script ]] && echo $script && $script
+	done
+fi
 
-        each=${each##*/}
-        script=$SYSTEM_LIST/$each.pre-install
-        [[ -f $script ]] && $script
-done
 
 
 #------------------------------------------------------------------#
@@ -83,25 +78,17 @@ as_root $PACKAGE_INSTALL_SH
 # POST-INSTALL SCRIPTS
 #------------------------------------------------------------------#
 
-echo
-echo "Running list post-install scripts..."
+if [[ -d $CUSTOM_LIST ]]; then
 
-### USER ###
-for each in $lists; do
+	echo -e "\nRunning list post-install scripts..."
 
-        each=${each##*/}
-        script=$USER_LIST/$each.post-install
-        [[ -f $script ]] && $script
-done
+	for each in $lists; do
 
-### SYSTEM ###
-for each in $lists; do
-
-        each=${each##*/}
-        script=$SYSTEM_LIST/$each.post-install
-        [[ -f $script ]] && $script
-done
-
+        	each=${each##*/}
+        	script=$CUSTOM_LIST/$each.post-install
+        	[[ -f $script ]] && echo $script && $script
+	done
+fi
 
 
 #------------------------------------------------------------------#

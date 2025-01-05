@@ -43,21 +43,20 @@ packages=$(cat $REPO_PKGS_LIST)
 # PRE INSTALL SCRIPTS
 #------------------------------------------------------------------#
 
-echo "Running package pre-install scripts..."
+if [[ -d $CUSTOM_PACKAGE ]]; then
 
-for each in $packages; do
+	echo "Running package pre-install scripts..."
 
-        each=${each##*/}
-	each=${each%%--*}
+	for each in $packages; do
 
-	### USER ###
-        script=$USER_SCRIPT_DIR/$each.package.pre-install
-        [[ -f $script ]] && echo $script && $script
+        	each=${each##*/}
+		each=${each%%--*}
 
-	### ADMIN ###
-        script=$ADMIN_SCRIPT_DIR/$each.package.pre-install
-        [[ -f $script ]] && echo $script && $script
-done
+        	script=$CUSTOM_PACKAGE/$each.package.pre-install
+        	[[ -f $script ]] && echo $script && $script
+
+	done
+fi
 
 
 #------------------------------------------------------------------#
@@ -98,21 +97,18 @@ fi
 # POST INSTALL SCRIPTS
 #------------------------------------------------------------------#
 
-echo -e "\nRunning package post-install scripts..."
+if [[ -d $CUSTOM_PACKAGE ]]; then
 
-for each in $packages; do
+	echo -e "\nRunning package post-install scripts..."
 
-        each=${each##*/}
-	each=${each%%--*}
+	for each in $packages; do
 
-	### USER ###
-        script=$USER_SCRIPT_DIR/$each.package.post-install
-        [[ -f $script ]] && echo $script && $script
+        	each=${each##*/}
+		each=${each%%--*}
 
-	### ADMIN ###
-        script=$ADMIN_SCRIPT_DIR/$each.package.post-install
-        [[ -f $script ]] && echo $script && $script
-done
+        	script=$CUSTOM_PACKAGE/$each.package.post-install
+        	if [[ -f $script ]]; then echo $script; $script; fi
 
+	done
+fi
 
-exit 0

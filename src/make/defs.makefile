@@ -75,6 +75,8 @@ BLD_XML = $(BLD_DIR)/xml
 
 # custom
 CUSTOM_DIR = $(TOPDIR)/custom
+CUSTOM_LIST = $(CUSTOM_DIR)/list
+CUSTOM_PACKAGE = $(CUSTOM_DIR)/package
 CUSTOM_SCRIPTS = $(CUSTOM_DIR)/scripts
 
 # docs
