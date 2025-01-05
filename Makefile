@@ -38,6 +38,13 @@ include ./src/make/auto.makefile
 
 export
 
+
+#------------------------------------------------------------------#
+update: 
+	git checkout main
+	git pull
+
+
 #------------------------------------------------------------------#
 nuke: 
 	-rm -rf $(BLD_DIR)
