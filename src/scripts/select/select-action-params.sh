@@ -74,6 +74,8 @@ if [[ ! -z $lpmbranch ]]; then
 	git checkout $lpmbranch
 
 	if [ $? -ne 0 ]; then echo -e "\n>>>>> Unsported (B)LFS version. <<<<<\n"; exit 1; fi
+
+	git pull
 fi
 
 exit
