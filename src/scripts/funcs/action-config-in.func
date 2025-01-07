@@ -168,7 +168,7 @@ EOF
 cat << EOF
 choice
         prompt "Init System"
-	depends on ACTION__BUILDLFS || ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__LISTDEPS
+	depends on ACTION__BUILDLFS || ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__BUILDCUSTOM || ACTION__LISTDEPS
         config    REV__SYSV
             bool "sysvinit"
             help
@@ -220,7 +220,7 @@ if [[ -d $BLFS_GIT_DIR ]]; then
 cat << EOF
 choice
 prompt "BLFS Branch"
-depends on ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__LISTDEPS
+depends on ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__BUILDCUSTOM || ACTION__LISTDEPS
 EOF
 
 # get branches
