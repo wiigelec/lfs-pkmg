@@ -18,23 +18,23 @@ function action-config-in
 cat << EOF
 choice
         prompt "Action Group"
+
 	default ACTIONGROUP__DOCS
 #        config    ACTIONGROUP__AUDIT
 #            bool "Audit"
 #            help
 #		<TODO: help text>
+		
         config    ACTIONGROUP__BUILD
             bool "Build"
             help
 		<TODO: help text>
-        config    ACTIONGROUP__DOCS
-            bool "Documentation"
-            help
-		<TODO: help text>
+
         config    ACTIONGROUP__LIST
             bool "List"
             help
 		<TODO: help text>
+
         config    ACTIONGROUP__PACKAGE
             bool "Package"
             help
@@ -97,13 +97,6 @@ choice
 #            help
 #		<TODO: help text>
 	
-	#------------------------------------------------------------------#
-	# DOCS ACTIONS
-        config    ACTION__DOCSHTML
-	    depends on ACTIONGROUP__DOCS
-            bool "HTML Documentation"
-            help
-		<TODO: help text>
 
 	#------------------------------------------------------------------#
 	# LIST ACTIONS
