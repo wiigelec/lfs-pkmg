@@ -98,9 +98,10 @@ function recurse
 	### WRITE TO TREE ONLY ENDPOINTS ###
 	if [[ ! -z $endpoint ]]; then
 
-		if [[ -z $(grep -x $name $tree_file) ]]; then
+		if [[ -z $(grep -x $name $tree_file) ]] || [ $level -eq 2 ]; then
 			debug ""
 			debug ">>>>> LEVEL:$level Adding $name to tree. <<<<<"
+			[ $level -eq 2 ] && sed -i "/$name/d" $tree_file
 			echo $name >> $tree_file
 		else
 			debug "Skipping $name, already in tree."
