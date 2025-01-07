@@ -91,11 +91,11 @@ choice
             bool "Build BLFS"
             help
 		<TODO: help text>
-#        config    ACTION__BUILDPATCH
-#	    depends on ACTIONGROUP__BUILD
-#            bool "Build patch"
-#            help
-#		<TODO: help text>
+        config    ACTION__BUILDCUSTOM
+	    depends on ACTIONGROUP__BUILD
+            bool "Build custom"
+            help
+		<TODO: help text>
 	
 
 	#------------------------------------------------------------------#

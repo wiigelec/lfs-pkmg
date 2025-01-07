@@ -53,9 +53,9 @@ AUDITPF :
 AUDITSF : 
 
 #------------------------------------------------------------------#
-BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG)
+BUILDCUSTOM :
 	@echo
-	@$(call done_message, Success! Run 'make LFSPACKAGES'.)
+	@$(call done_message, Success! Run \'make BUILDWORK\'.)
 
 .PHONY: BUILDLFS
 
@@ -65,7 +65,7 @@ BUILDBOOTSTRAP : book-blfs-fullxml book-blfs-pkglist $(BOOK_BLFS_DEPS) \
 	$(BOOK_BLFS_SCRIPTS) setup-bootstrap-group book-blfs-trees \
 	setup-blfs-work build-deploy-bootstrap
 	@echo
-	@$(call done_message, Success! Run 'make BOOTSTRAPWORK'.)
+	@$(call done_message, Success! Run \'make BOOTSTRAPWORK\'.)
 
 .PHONY: BUILDBOOTSTRAP
 
@@ -75,16 +75,18 @@ BUILDBLFS : book-blfs-fullxml book-blfs-pkglist $(BOOK_BLFS_DEPS) \
 	$(BOOK_BLFS_SCRIPTS) select-blfs-packages book-blfs-trees \
 	setup-blfs-work
 	@echo
-	@$(call done_message, Success! Run 'make BUILDWORK'.)
+	@$(call done_message, Success! Run \'make BUILDWORK\'.)
 
 .PHONY: BUILDBLFS
 
 
 #------------------------------------------------------------------#
-BUILDPATCH : 
+BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG)
+	@echo
+	@$(call done_message, Success! Run \'make LFSPACKAGES\'.)
 
-#------------------------------------------------------------------#
-DOCSHTML : 
+.PHONY: BUILDLFS
+
 
 #------------------------------------------------------------------#
 LISTDIR : list-create-dir
@@ -166,7 +168,7 @@ LFSARCHIVES : $(SETUP_LFS_CHROOT) build-lfs-chroot-archives
 #------------------------------------------------------------------#
 LFSCHROOT : $(SETUP_LFS_CHROOT) build-lfs-chroot-scripts
 	@echo
-	@$(call done_message, Success! Run 'make LFSARCHIVES'.)
+	@$(call done_message, Success! Run \'make LFSARCHIVES\'.)
 
 .PHONY: LFSCHROOT
 
@@ -174,7 +176,7 @@ LFSCHROOT : $(SETUP_LFS_CHROOT) build-lfs-chroot-scripts
 #------------------------------------------------------------------#
 LFSPACKAGES : build-lfs
 	@echo
-	@$(call done_message, Success! Run 'make LFSCHROOT'.)
+	@$(call done_message, Success! Run \'make LFSCHROOT\'.)
 
 .PHONY: LFSPACKAGES
 
