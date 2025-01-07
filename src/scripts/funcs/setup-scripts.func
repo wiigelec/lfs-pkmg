@@ -12,7 +12,6 @@
 function setup-scripts
 {
 
-echo
 echo "Ordering build scripts..."
 echo
 
@@ -42,9 +41,12 @@ do
 
 done < $WORK_PKGS_TREE
 
-[ $cnt -eq 1 ] && echo -e "\n>>>>> Nothing to be done. <<<<<\n" && exit 1
+if [[ $ACTION != "BUILDCUSTOM" ]]; then
 
-chmod +x $BUILD_WORK/scripts/*
+	[ $cnt -eq 1 ] && echo -e ">>>>> Nothing to be done. <<<<<\n" && exit 1
+
+	chmod +x $BUILD_WORK/scripts/*
+fi
 
 echo -ne "\033[0K\r"
 

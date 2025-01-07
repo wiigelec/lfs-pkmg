@@ -12,13 +12,14 @@
 function setup-makefile
 {
 
-echo
 echo "Generating Makefile..."
 echo
 
 makefile=$BUILD_WORK/Makefile
 [[ -f $makefile ]] && rm $makefile
 scripts=$(ls -r $BUILD_WORK/scripts)
+
+[[ -z $scripts ]] && echo -e ">>>>> Nothing to be done. <<<<<\n" && exit 1
 
 ### MAKEFILE HEADER ###
 cat << EOF > $makefile

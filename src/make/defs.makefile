@@ -62,7 +62,7 @@ DEPTREE_TREES = $(BUILD_DEPTREE)/trees
 
 BUILD_SCRIPTS = $(BUILD_DIR)/blfs-scripts
 BUILD_WORK = $(BUILD_DIR)/work
-WORK_SCRIPTS = $(BUILD_WORK)/scripts 
+WORK_SCRIPTS = $(BUILD_WORK)/scripts
 WORK_LOGS = $(BUILD_WORK)/logs
 
 #------------------------------------------------------------------#
@@ -76,6 +76,8 @@ BLD_XML = $(BLD_DIR)/xml
 # custom
 CUSTOM_DIR = $(TOPDIR)/custom
 CUSTOM_LIST = $(CUSTOM_DIR)/list
+CUSTOM_BUILD = $(CUSTOM_DIR)/build
+CUSTOM_GROUP = $(CUSTOM_DIR)/group
 CUSTOM_PACKAGE = $(CUSTOM_DIR)/package
 CUSTOM_SCRIPTS = $(CUSTOM_DIR)/scripts
 
@@ -129,6 +131,11 @@ BOOTSTRAP_GROUP_LIST = $(LFS_GROUP)/bootstrap.group
 ACTION_CONFIG_IN = $(BLD_CONFIG)/action-config-in
 ACTION_CONFIG_OUT = $(BLD_CONFIG)/action-config-out
 CURRENT_CONFIG = $(BLD_CONFIG)/current-config.makefile
+
+# custom packages
+CSTMPKGS_CONFIG_IN = $(BLD_CONFIG)/cstmpkfgs-config-in
+CSTMPKGS_CONFIG_OUT = $(BLD_CONFIG)/cstmpkgs-config-out
+CSTM_BLDS_LIST = $(BLD_CONFIG)/cstm-blds-list
 
 # blfs packages
 BLFSPKGS_CONFIG_IN = $(BLD_CONFIG)/blfspkfgs-config-in

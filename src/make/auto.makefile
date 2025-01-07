@@ -55,7 +55,7 @@ AUDITSF :
 #------------------------------------------------------------------#
 BUILDCUSTOM : book-blfs-fullxml book-blfs-pkglist $(BOOK_BLFS_DEPS) \
 	$(BOOK_BLFS_SCRIPTS) select-custom-packages book-blfs-trees \
-	setup-custom-work
+	setup-blfs-work setup-custom-work
 	@echo
 	@$(call done_message, Success! Run \'make BUILDWORK\'.)
 

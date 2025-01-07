@@ -1,7 +1,7 @@
 #!/bin/bash
 ####################################################################
 # 
-# setup-blfs-work.sh
+# setup-custom-work.sh
 #
 ####################################################################
 
@@ -35,6 +35,7 @@ mkdir -p $BUILD_WORK/{scripts,logs}
 # PACKAGE DEP TREE
 #------------------------------------------------------------------#
 
+echo
 setup-deps
 
 
@@ -49,11 +50,15 @@ setup-scripts
 # GENERATE MAKEFILE
 #------------------------------------------------------------------#
 
-setup-makefile
+if [[ $ACTION != "BUILDCUSTOM" ]]; then
 
-echo
-ls $WORK_SCRIPTS
-echo
+	setup-makefile
+
+	echo
+	ls $WORK_SCRIPTS
+	echo
+	echo
+fi
 
 
 #------------------------------------------------------------------#
@@ -66,3 +71,4 @@ as_root rm -rf $LPM_DIFFLOG
 as_root mkdir -p $LPM_DIFFLOG
 
 as_root mkdir -p $LPM_ARCHIVE
+

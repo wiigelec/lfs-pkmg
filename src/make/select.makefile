@@ -17,6 +17,7 @@ SELECT_SCRIPTS = $(SRC_SCRIPTS)/select
 
 # target scripts
 SELECT_ACTION_PARAMS_SH = $(SELECT_SCRIPTS)/select-action-params.sh
+SELECT_CUSTOM_PACKAGES_SH = $(SELECT_SCRIPTS)/select-custom-packages.sh
 SELECT_BLFS_PACKAGES_SH = $(SELECT_SCRIPTS)/select-blfs-packages.sh
 SELECT_INST_LISTS_SH = $(SELECT_SCRIPTS)/select-inst-lists.sh
 SELECT_INST_PACKAGES_SH = $(SELECT_SCRIPTS)/select-inst-packages.sh
@@ -40,6 +41,15 @@ select-action-params :
 	$(SELECT_ACTION_PARAMS_SH)
 
 .PHONY: select-action-params
+
+
+#------------------------------------------------------------------#
+select-custom-packages :
+	@echo
+	@$(call bold_message, $@)
+	$(SELECT_CUSTOM_PACKAGES_SH)
+
+.PHONY: select-custom-packages
 
 
 #------------------------------------------------------------------#

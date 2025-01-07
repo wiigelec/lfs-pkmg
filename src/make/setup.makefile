@@ -19,11 +19,12 @@ SETUP_LFS_DIFFLOG = $(JHALFS_DIR)/setup-lfs-difflog
 SETUP_LFS_JHALFS = $(JHALFS_DIR)/setup-lfs-jhalfs
 
 # target scripts
+SETUP_BLFS_WORK_SH = $(SETUP_SCRIPTS)/setup-blfs-work.sh
+SETUP_CUSTOM_WORK_SH = $(SETUP_SCRIPTS)/setup-custom-work.sh
 SETUP_BOOTSTRAP_GROUP_SH = $(SETUP_SCRIPTS)/setup-bootstrap-group.sh
 SETUP_LFS_CHROOT_SH = $(SETUP_SCRIPTS)/setup-lfs-chroot.sh
 SETUP_LFS_DIFFLOG_SH = $(SETUP_SCRIPTS)/setup-lfs-difflog.sh
 SETUP_LFS_JHALFS_SH = $(SETUP_SCRIPTS)/setup-lfs-jhalfs.sh
-SETUP_BLFS_WORK_SH = $(SETUP_SCRIPTS)/setup-blfs-work.sh
 
 
 ### OTHER DEFS ###
@@ -33,6 +34,24 @@ SETUP_BLFS_WORK_SH = $(SETUP_SCRIPTS)/setup-blfs-work.sh
 #------------------------------------------------------------------#
 # TARGETS
 #------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
+setup-blfs-work :
+	@echo
+	@$(call bold_message, $@)
+	$(SETUP_BLFS_WORK_SH)
+
+.PHONY: setup-blfs-work
+
+
+#------------------------------------------------------------------#
+setup-custom-work :
+	@echo
+	@$(call bold_message, $@)
+	$(SETUP_CUSTOM_WORK_SH)
+
+.PHONY: setup-custom-work
+
 
 #------------------------------------------------------------------#
 setup-bootstrap-group :
@@ -71,14 +90,4 @@ setup-lfs-jhalfs $(SETUP_LFS_JHALFS) :
 	@touch $(SETUP_LFS_JHALFS)
 
 .PHONY: setup-lfs-jhafs
-
-
-#------------------------------------------------------------------#
-setup-blfs-work :
-	@echo
-	@$(call bold_message, $@)
-	$(SETUP_BLFS_WORK_SH)
-
-.PHONY: setup-blfs-work
-
 
