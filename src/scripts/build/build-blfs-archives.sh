@@ -49,7 +49,7 @@ as_root $BUILD_ARCHIVES_SH
 
 ### CLEANUP ###
 
-as_root rm $LPM_PKGLOG/*
+as_root rm $LPM_PKGLOG/* > /dev/null 2>&1 || true
 
 
 echo

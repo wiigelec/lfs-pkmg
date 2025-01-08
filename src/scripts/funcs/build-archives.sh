@@ -21,6 +21,15 @@ PKG_LFS=$LFS_BLD-$BOOK_VERS-$rev
 PKG_EXT=txz
 
 
+### CHECK PKGLOGS ###
+
+if [[ -z $(ls $LPM_PKGLOG) ]]; then
+	echo ">>>>> Nothing to be done. <<<<<"
+        [[ $ACTION == "BUILDCUSTOM" ]] && exit 0
+        exit 1
+fi
+
+
 ### PACKAGE ARCHIVE ###
 [[ -z $(ls -A $LPM_PKGLOG) ]] && exit
 [[ ! -d $LPM_ARCHIVE ]] && mkdir -p $LPM_ARCHIVE

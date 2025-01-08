@@ -10,7 +10,12 @@
 # build-pkglogs
 #------------------------------------------------------------------#
 
-[[ -z $(ls -A $LPM_DIFFLOG) ]] && echo ">>>>> Nothing to be done. <<<<<"  && exit 1
+if [[ -z $(ls -A $LPM_DIFFLOG) ]]; then
+	echo ">>>>> Nothing to be done. <<<<<"
+	[[ $ACTION == "BUILDCUSTOM" ]] && exit 0
+	exit 1
+fi
+
 [[ ! -d $LPM_PKGLOG ]] && mkdir -p $LPM_PKGLOG
 for FILE in $LPM_DIFFLOG/*.difflog1;
 do
