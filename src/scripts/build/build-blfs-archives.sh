@@ -27,7 +27,7 @@ as_root $BUILD_PKGLOGS_SH
 
 ### COMBINE PASS1 ###
 
-if [[ ! -z $(ls $LPM_PKGLOG > /dev/null 2>&1) ]]; then
+if [[ -d $LPM_PKGLOG ]]; then
 	pass1=$(find $LPM_PKGLOG -name "*-pass1--*")
 	for p in $pass1;
 	do

@@ -40,6 +40,13 @@ export
 
 
 #------------------------------------------------------------------#
+clean-la: 
+	@for libdir in /lib /usr/lib \$(shell find /opt -name lib); do \
+		find $$libdir -name \*.la ! -path \*ImageMagick\* -delete -print; \
+	done
+
+
+#------------------------------------------------------------------#
 update: 
 	@git checkout main
 	@git pull
