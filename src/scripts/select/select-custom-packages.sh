@@ -14,7 +14,7 @@ set -e
 
 ### GROUP ###
 
-groups=$(ls $CUSTOM_GROUP)
+[[ -d $CUSTOM_GROUP ]] && groups=$(ls $CUSTOM_GROUP)
 
 cat > $CSTMPKGS_CONFIG_IN << EOF
 
@@ -38,7 +38,7 @@ echo "endif" >> $CSTMPKGS_CONFIG_IN
 
 ### BUILD ###
 
-builds=$(ls $CUSTOM_BUILD)
+[[ -d $CUSTOM_BUILD ]] && builds=$(ls $CUSTOM_BUILD)
 
 cat >> $CSTMPKGS_CONFIG_IN << EOF
 
