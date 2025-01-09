@@ -24,18 +24,21 @@ as_root rm $LPM_PKGLOG/* > /dev/null 2>&1 || true
 export LPM_PKGLOG=$LPM_PKGLOG
 as_root $BUILD_PKGLOGS_SH
 
+
 ### COMBINE PASS1 ###
-pass1=$(find $LPM_PKGLOG -name "*-pass1--*")
-for p in $pass1;
-do
-	np=${p/-pass1/}
-	write="$(cat $p $np | sort -u)"
+
+if [[ ! -z $(ls $LPM_PKGLOG > /dev/null 2>&1) ]]; then
+	pass1=$(find $LPM_PKGLOG -name "*-pass1--*")
+	for p in $pass1;
+	do
+		np=${p/-pass1/}
+		write="$(cat $p $np | sort -u)"
 		
-	echo "$write" | as_root tee $np > /dev/null
+		echo "$write" | as_root tee $np > /dev/null
 
-	as_root rm $p
-done
-
+		as_root rm $p
+	done
+fi
 
 #------------------------------------------------------------------#
 # CREATE ARCHIVES

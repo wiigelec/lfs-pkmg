@@ -23,7 +23,7 @@ PKG_EXT=txz
 
 ### CHECK PKGLOGS ###
 
-if [[ -z $(ls $LPM_PKGLOG) ]]; then
+if [[ -z $(ls $LPM_PKGLOG > /dev/null 2>&1) ]]; then
 	echo ">>>>> Nothing to be done. <<<<<"
         [[ $ACTION == "BUILDCUSTOM" ]] && exit 0
         exit 1
