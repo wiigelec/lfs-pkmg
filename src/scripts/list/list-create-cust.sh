@@ -30,6 +30,7 @@ $LIST_CREATE_DEPS_SH
 
 echo
 echo "Processing .build files..."
+echo
 
 pkgarch=$(uname -m)
 pkglfs=blfs-$BOOK_VERS-$(echo $REV | tr '[:upper:]' '[:lower:]')
