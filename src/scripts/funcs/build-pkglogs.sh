@@ -65,7 +65,7 @@ do
     	sed -i '/^\/var\/log\/journal/d' $log.tmp
     	sed -i '/^\/var\/log\/wtmp/d' $log.tmp
     	sed -i '/^\/var\/lib\/NetworkManager/d' $log.tmp
-    	sed -i '/^\/var\/lib\/lpm/d' $log.tmp
+	sed -i '/^\/var\/lib\/lpm\/pretend/p;/^\/var\/lib\/lpm/d' $log.tmp
 
     	# sort
     	cat $log.tmp | sort -u > $log

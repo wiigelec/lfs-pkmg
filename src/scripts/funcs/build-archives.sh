@@ -18,6 +18,7 @@ rev=$(echo $REV | tr '[:upper:]' '[:lower:]')
 # PACKAGE INFO
 PKG_ARCH=$(uname -m)
 PKG_LFS=$LFS_BLD-$BOOK_VERS-$rev
+[[ ! -z $BUILD_PRETEND ]] && PKG_LFS="PRETEND$PKG_LFS"
 PKG_EXT=txz
 
 

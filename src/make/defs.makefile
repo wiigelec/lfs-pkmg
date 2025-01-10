@@ -96,6 +96,7 @@ LPM_DOWNLOADS = $(LPM_DIR)/downloads
 LPM_INSTALLED = $(LPM_DIR)/installed
 LPM_LISTS = $(LPM_DIR)/lists
 LPM_PKGLOG = $(LPM_BUILD)/pkglog
+LPM_PRETEND = $(LPM_DIR)/pretend
 
 # misc
 SRC_MISC = $(SRC_DIR)/misc

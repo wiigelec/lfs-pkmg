@@ -28,6 +28,7 @@ BUILD_LFS_CHROOT_SCRIPTS_SH = $(BLD_SCRIPTS)/build-lfs-chroot-scripts.sh
 BUILD_LFS_CHROOT_ARCHIVES_SH = $(BLD_SCRIPTS)/build-lfs-chroot-archives.sh
 BUILD_BLFS_ARCHIVES_SH = $(BLD_SCRIPTS)/build-blfs-archives.sh
 BUILD_BLFS_WORK_SH = $(BLD_SCRIPTS)/build-blfs-work.sh
+BUILD_PRETEND_SH = $(BLD_SCRIPTS)/build-pretend.sh
 
 
 ### OTHER DEFS ###
@@ -47,6 +48,24 @@ CUMU_TIME = $(BUILD_WORK)/cumu-time
 #------------------------------------------------------------------#
 # TARGETS
 #------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
+build-blfs-archives :
+	@echo
+	@$(call bold_message, $@)
+	$(BUILD_BLFS_ARCHIVES_SH)
+
+.PHONY: build-blfs-archives
+
+
+#------------------------------------------------------------------#
+build-blfs-work :
+	@echo
+	@$(call bold_message, $@)
+	$(BUILD_BLFS_WORK_SH)
+
+.PHONY: build-blfs-work
+
 
 #------------------------------------------------------------------#
 build-bootstrap-archives :
@@ -112,21 +131,14 @@ build-lfs-chroot-scripts :
 
 
 #------------------------------------------------------------------#
-build-blfs-archives :
+build-pretend :
 	@echo
-	@$(call bold_message, $@)
-	$(BUILD_BLFS_ARCHIVES_SH)
-
-.PHONY: build-blfs-archives
-
-
-#------------------------------------------------------------------#
-build-blfs-work :
+	@$(call bold_message, build-pretend)
+	$(BUILD_PRETEND_SH)
 	@echo
-	@$(call bold_message, $@)
-	$(BUILD_BLFS_WORK_SH)
+	@$(call done_message, Success! Run \'make BUILDWORK\'.)
 
-.PHONY: build-blfs-work
+.PHONY: build-pretend
 
 
 #------------------------------------------------------------------#
