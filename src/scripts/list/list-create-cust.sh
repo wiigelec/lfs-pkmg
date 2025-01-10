@@ -55,3 +55,8 @@ for bp in $buildpkgs; do
 	echo "$arcname" | as_root tee -a $LISTFILE
 done
 
+### FINAL SORT ###
+
+listfile="$(cat $LISTFILE)"
+echo "$listfile" | sort | as_root tee $LISTFILE > /dev/null
+
