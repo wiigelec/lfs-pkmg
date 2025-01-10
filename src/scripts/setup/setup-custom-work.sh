@@ -58,8 +58,8 @@ do
 
 	### CHECK INSTALLED ###
 
-	pkgname=$(grep ^PKG_NAME= $buildfile | sed 's/.*=//')
-        pkgver=$(grep ^PKG_VER= $buildfile | sed 's/.*=//')
+	pkgname=$(grep ^PKG_NAME= $buildscript | sed 's/.*=//')
+        pkgver=$(grep ^PKG_VER= $buildscript | sed 's/.*=//')
         arcname=$pkgname--$pkgver--$pkgarch--$pkglfs
 	[[ -f $LPM_INSTALLED/$arcname ]] && continue
 
