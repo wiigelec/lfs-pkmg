@@ -91,6 +91,16 @@ BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG)
 
 
 #------------------------------------------------------------------#
+LISTCUST : book-blfs-fullxml book-blfs-pkglist $(BOOK_BLFS_DEPS) \
+	$(BOOK_BLFS_SCRIPTS) select-custom-packages book-blfs-trees \
+	list-create-cust
+	@echo
+	@$(call done_message, Success! Custom list created.)
+
+.PHONY: LISTCUST
+
+
+#------------------------------------------------------------------#
 LISTDIR : list-create-dir
 	@echo
 	@$(call done_message, Success! Directory list created.)

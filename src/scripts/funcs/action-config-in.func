@@ -110,6 +110,11 @@ choice
             bool "Create dependency list"
             help
 		<TODO: help text>
+        config    ACTION__LISTCUST
+	    depends on ACTIONGROUP__LIST
+            bool "Create custom list"
+            help
+		<TODO: help text>
         config    ACTION__LISTINSTALL
 	    depends on ACTIONGROUP__LIST
             bool "Install list"
@@ -168,7 +173,7 @@ EOF
 cat << EOF
 choice
         prompt "Init System"
-	depends on ACTION__BUILDLFS || ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__BUILDCUSTOM || ACTION__LISTDEPS
+	depends on ACTION__BUILDLFS || ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__BUILDCUSTOM || ACTION__LISTDEPS || ACTION__LISTCUST
         config    REV__SYSV
             bool "sysvinit"
             help
@@ -220,7 +225,7 @@ if [[ -d $BLFS_GIT_DIR ]]; then
 cat << EOF
 choice
 prompt "BLFS Branch"
-depends on ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__BUILDCUSTOM || ACTION__LISTDEPS
+depends on ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__BUILDCUSTOM || ACTION__LISTDEPS || ACTION__LISTCUST
 EOF
 
 # get branches
@@ -265,7 +270,7 @@ EOF
 
 cat << EOF
 config    LISTFILE
-	depends on ACTION__LISTDIR || ACTION__LISTDEPS
+	depends on ACTION__LISTDIR || ACTION__LISTDEPS || ACTION__LISTCUST
 	string  "List file (full path)"
         default "$LPM_BUILD/lists/list-name.list"
 EOF

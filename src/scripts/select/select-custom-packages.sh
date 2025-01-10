@@ -12,14 +12,38 @@ set -e
 # GET DIRECTORY LISTINGS
 #------------------------------------------------------------------#
 
+### META ###
+
+[[ -d $CUSTOM_META ]] && metas=$(ls $CUSTOM_META)
+
+cat > $CSTMPKGS_CONFIG_IN << EOF
+
+menuconfig MENU_META
+bool "Meta"
+default n
+
+if MENU_META
+EOF
+
+for mts in $metas; 
+do
+
+	echo "config META_$mts" >> $CSTMPKGS_CONFIG_IN
+	echo "  bool \"$mts\"" >> $CSTMPKGS_CONFIG_IN
+	echo "  default n" >> $CSTMPKGS_CONFIG_IN
+done
+
+echo "endif" >> $CSTMPKGS_CONFIG_IN
+
+
 ### GROUP ###
 
 [[ -d $CUSTOM_GROUP ]] && groups=$(ls $CUSTOM_GROUP)
 
-cat > $CSTMPKGS_CONFIG_IN << EOF
+cat >> $CSTMPKGS_CONFIG_IN << EOF
 
 menuconfig MENU_GROUP
-bool "group"
+bool "Group"
 default n
 
 if MENU_GROUP
@@ -43,7 +67,7 @@ echo "endif" >> $CSTMPKGS_CONFIG_IN
 cat >> $CSTMPKGS_CONFIG_IN << EOF
 
 menuconfig MENU_BUILD
-bool "build"
+bool "Build"
 default n
 
 if MENU_BUILD
@@ -70,7 +94,35 @@ KCONFIG_CONFIG=$CSTMPKGS_CONFIG_OUT $MENU_CONFIG $CSTMPKGS_CONFIG_IN
 # WRITE OUTPUT LIST
 #------------------------------------------------------------------#
 
-### GROUPS TO BLFS_PKGS_LIST
+### CLEAN FILE ###
+
+sed -i '/^#/d' $CSTMPKGS_CONFIG_OUT
+sed -i '/^CONFIG_MENU/d' $CSTMPKGS_CONFIG_OUT
+
+
+### META CONVERT GROUP AND BUILD ###
+
+while IFS= read -r line;
+do
+	if [[ $line == "CONFIG_META_"* ]]; then
+		metafile=${line##CONFIG_META_}
+		metafile=${metafile%=y}
+		metafile=$CUSTOM_META/$metafile
+		metafile=$(cat $metafile)
+		tempfile="$metafile "
+	else
+		tempfile="$line "
+	fi
+
+done < $CSTMPKGS_CONFIG_OUT
+
+echo "$tempfile" | sed \
+	-e 's/\(.*.group\)/CONFIG_GROUP_\1=y/g' \
+	-e 's/\(.*.build\)/CONFIG_BUILD_\1=y/g' \
+	> $CSTMPKGS_CONFIG_OUT
+
+
+### GROUPS TO BLFS_PKGS_LIST ###
 
 [[ -f $BLFS_PKGS_LIST ]] && rm $BLFS_PKGS_LIST
 touch $BLFS_PKGS_LIST
@@ -83,7 +135,7 @@ do
 done
 
 
-### BUILDS TO CSTM_BLDS_LIST
+### BUILDS TO CSTM_BLDS_LIST ###
 
 [[ -f $CSTM_BLDS_LIST ]] && rm $CSTM_BLDS_LIST
 touch $CSTM_BLDS_LIST

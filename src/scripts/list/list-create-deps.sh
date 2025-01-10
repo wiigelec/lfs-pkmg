@@ -49,6 +49,12 @@ do
 	echo $write | as_root tee -a $listfile
 done
 
+if [[ ! -s $listfile ]]; then
+	echo -e ">>>>> Nothing to be done. <<<<<\n"
+	[[ $ACTION == "LISTCUST" ]] && exit 0
+	exit 1
+fi
+
 ### SORT UNIQUE ###
 list=$(cat $listfile | sort -u)
 as_root sed -i '/.*/d' $listfile

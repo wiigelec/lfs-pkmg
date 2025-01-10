@@ -78,6 +78,7 @@ CUSTOM_DIR = $(TOPDIR)/custom
 CUSTOM_LIST = $(CUSTOM_DIR)/list
 CUSTOM_BUILD = $(CUSTOM_DIR)/build
 CUSTOM_GROUP = $(CUSTOM_DIR)/group
+CUSTOM_META = $(CUSTOM_DIR)/meta
 CUSTOM_PACKAGE = $(CUSTOM_DIR)/package
 CUSTOM_SCRIPTS = $(CUSTOM_DIR)/scripts
 
@@ -135,7 +136,7 @@ ACTION_CONFIG_OUT = $(BLD_CONFIG)/action-config-out
 CURRENT_CONFIG = $(BLD_CONFIG)/current-config.makefile
 
 # custom packages
-CSTMPKGS_CONFIG_IN = $(BLD_CONFIG)/cstmpkfgs-config-in
+CSTMPKGS_CONFIG_IN = $(BLD_CONFIG)/cstmpkgs-config-in
 CSTMPKGS_CONFIG_OUT = $(BLD_CONFIG)/cstmpkgs-config-out
 CSTM_BLDS_LIST = $(BLD_CONFIG)/cstm-blds-list
 

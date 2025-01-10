@@ -16,6 +16,7 @@ LIST_SCRIPTS = $(SRC_SCRIPTS)/list
 # target files
 
 # target scripts
+LIST_CREATE_CUST_SH = $(LIST_SCRIPTS)/list-create-cust.sh
 LIST_CREATE_DIR_SH = $(LIST_SCRIPTS)/list-create-dir.sh
 LIST_CREATE_DEPS_SH = $(LIST_SCRIPTS)/list-create-deps.sh
 LIST_INSTALL_SH = $(LIST_SCRIPTS)/list-install.sh
@@ -33,6 +34,15 @@ USER_LIST = $(TOPDIR)/user/list
 #------------------------------------------------------------------#
 # TARGETS
 #------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
+list-create-cust:
+	@echo
+	@$(call bold_message, $@)
+	$(LIST_CREATE_CUST_SH)
+
+.PHONY: list-create-cust
+
 
 #------------------------------------------------------------------#
 list-create-dir:
