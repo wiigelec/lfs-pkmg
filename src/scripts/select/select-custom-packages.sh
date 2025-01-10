@@ -103,6 +103,8 @@ sed -i 's/=y//g' $CSTMPKGS_CONFIG_OUT
 
 configout="$(cat $CSTMPKGS_CONFIG_OUT)"
 
+>$CSTM_BLDS_LIST
+>$BLFS_PKGS_LIST
 
 ### ITERATE CONFIG ###
 
