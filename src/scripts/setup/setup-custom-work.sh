@@ -40,6 +40,9 @@ else
 	((cnt++))
 fi
 
+pkgarch=$(uname -m)
+pkglfs=blfs-$BOOK_VERS-$(echo $REV | tr '[:upper:]' '[:lower:]')
+
 for cb in $cstmbld; 
 do
 	if [ $cnt -lt 10 ]; then
@@ -52,6 +55,14 @@ do
 
 	file=$order-z-$cb
 	bldscript=$CUSTOM_BUILD/$cb
+
+	### CHECK INSTALLED ###
+
+	pkgname=$(grep ^PKG_NAME= $buildfile | sed 's/.*=//')
+        pkgver=$(grep ^PKG_VER= $buildfile | sed 's/.*=//')
+        arcname=$pkgname--$pkgver--$pkgarch--$pkglfs
+	[[ -f $LPM_INSTALLED/$arcname ]] && continue
+
 	cp $bldscript $WORK_SCRIPTS/$file
         
 	((cnt++))
