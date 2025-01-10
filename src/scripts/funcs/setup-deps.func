@@ -30,7 +30,9 @@ do
                 iv=$(xmllint --xpath "//package[id='$treeline']/installed/text()" $BLFS_PKGLIST_XML 2>/dev/null) || true
                 bv=$(xmllint --xpath "//package[id='$treeline']/version/text()" $BLFS_PKGLIST_XML 2>/dev/null)
 
-                if [[ "$iv" == "$bv" && $ACTION != "LISTDEPS" ]]; then continue; fi
+                if [[ "$iv" == "$bv" ]] \
+			&& [[ $ACTION != "LISTDEPS" ]] \
+			&& [[ $ACTION != "LISTCUST" ]]; then continue; fi
 
                 [[ ! -z $pass1 ]] && treeline=$pass1
                 [[ -z "$(grep -x $treeline $WORK_PKGS_TREE)" ]] && echo $treeline >> $WORK_PKGS_TREE
