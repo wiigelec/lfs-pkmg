@@ -38,9 +38,18 @@ pkgext=txz
 
 buildpkgs=$(cat $CSTM_BLDS_LIST)
 for bp in $buildpkgs; do
+
 	### GET PACKAGE INFO ###
-	pkgname=$(grep ^PKG_NAME= $CUSTOM_BUILD/$bp | sed 's/.*=//')
-	pkgver=$(grep ^PKG_VER= $CUSTOM_BUILD/$bp | sed 's/.*=//')
+
+	buildfile=$CUSTOM_BUILD/$bp
+	if [[ ! -f $buildfile ]]; then 
+		echo -e ">>>>> Build file $buildfile does not exist. <<<<<\n"
+		sudo rm $LISTFILE
+		exit 1
+	fi
+	
+	pkgname=$(grep ^PKG_NAME= $buildfile | sed 's/.*=//')
+	pkgver=$(grep ^PKG_VER= $buildfile | sed 's/.*=//')
 	arcname=$pkgname--$pkgver--$pkgarch--$pkglfs.$pkgext
 
 	echo "$arcname" | as_root tee -a $LISTFILE
