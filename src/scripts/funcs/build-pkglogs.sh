@@ -68,13 +68,14 @@ do
 	sed -i '/^\/var\/lib\/lpm\/pretend/p;/^\/var\/lib\/lpm/d' $log.tmp
 
 	### KF6 INTRO FIX ###
-	if [[ $log == *"kf6-intro"* ]]; then
+	logtmp=$log.tmp
+	if [[ $logtmp == *"kf6-intro--"* ]]; then
 		# get version
-		version=${log#kf6-intro--}
-		version=${version%.pkglog}
+		version=${logtmp#*kf6-intro--}
+		version=${version%.pkglog*}
 
 		# replace kf6
-		sed -i "s/kf6\//kf6-$version\//g" $log
+		sed -i "s/kf6\//kf6-$version\//g" $logtmp
 	fi
 
 
