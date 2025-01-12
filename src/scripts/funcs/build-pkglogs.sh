@@ -67,6 +67,17 @@ do
     	sed -i '/^\/var\/lib\/NetworkManager/d' $log.tmp
 	sed -i '/^\/var\/lib\/lpm\/pretend/p;/^\/var\/lib\/lpm/d' $log.tmp
 
+	### KF6 INTRO FIX ###
+	if [[ $log == *"kf6-intro"* ]]; then
+		# get version
+		version=${log#kf6-intro--}
+		version=${version%.pkglog}
+
+		# replace kf6
+		sed -i "s/kf6\//kf6-$version\//g" $log
+	fi
+
+
     	# sort
     	cat $log.tmp | sort -u > $log
     	rm $log.tmp
