@@ -119,8 +119,22 @@ ROOT_EOF
 -->
 <xsl:template match="userinput" mode="lfs-script-commands">
 
+	<!-- ROOT COMMANDS -->
+	<xsl:if test="@remap='install'">
+		<xsl:text>&#xA;</xsl:text>
+		<xsl:text>&#xA;</xsl:text>
+		<xsl:text>sudo sh -e &lt;&lt; ROOT_EOF</xsl:text>
+	</xsl:if>
+
         <xsl:text>&#xA;</xsl:text>
         <xsl:value-of select="." />
+
+	<!-- ROOT COMMANDS -->
+	<xsl:if test="@remap='install'">
+		<xsl:text>&#xA;</xsl:text>
+		<xsl:text>ROOT_EOF</xsl:text>
+		<xsl:text>&#xA;</xsl:text>
+	</xsl:if>
 
 </xsl:template>
 
