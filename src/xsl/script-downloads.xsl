@@ -62,6 +62,24 @@ fi
 </xsl:variable>
 
 
+<xsl:variable name="maindownload">
+PACKAGE=${PKG_URL##*/}
+
+# SOURCE DIR
+if [[ -d $SRC_DIR ]]; then
+sudo sh -e &lt;&lt; ROOT_EOF
+rm -rf $SRC_DIR
+ROOT_EOF
+fi
+
+mkdir -p $SRC_DIR
+cd $SRC_DIR
+
+if [[ -f ../$PACKAGE ]]; then mv ../$PACKAGE ./;
+	else wget $PKG_URL; fi
+</xsl:variable>
+
+
 <!--
 ####################################################################
 # ROOT
@@ -107,20 +125,8 @@ fi
 <xsl:template match="ulink" mode="main">
 PKG_URL=<xsl:value-of select="@url" />
 
-PACKAGE=${PKG_URL##*/}
+<xsl:value-of select="$maindownload" />
 
-# SOURCE DIR
-if [[ -d $SRC_DIR ]]; then
-sudo sh -e &lt;&lt; ROOT_EOF
-rm -rf $SRC_DIR
-ROOT_EOF
-fi
-
-mkdir -p $SRC_DIR
-cd $SRC_DIR
-
-if [[ -f ../$PACKAGE ]]; then mv ../$PACKAGE ./; 
-else wget $PKG_URL; fi
 </xsl:template>
 
 <!-- additional downloads -->
@@ -143,6 +149,10 @@ else wget $PKG_URL; fi
 ####################################################################
 
 ### MAIN DOWNLOAD ###
+
+PKG_URL=<xsl:value-of select="./sect1info/address" />
+
+<xsl:value-of select="$maindownload" />
 
 </xsl:template>
 
