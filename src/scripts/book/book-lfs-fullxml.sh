@@ -1,7 +1,7 @@
 #!/bin/bash
 ####################################################################
 # 
-# book-blfs-fullxml.sh
+# book-lfs-fullxml.sh
 #
 ####################################################################
 
@@ -9,17 +9,17 @@ set -e
 
 
 #------------------------------------------------------------------#
-# GENERATE BLFS FULL XML
+# GENERATE LFS FULL XML
 #------------------------------------------------------------------#
 	
 [[ -z $BUILD_DIR ]] && echo -e "\n>>>>> BUILD_DIR undefined. <<<<<\n" && exit 1
 
-if [[ ! -f $BLFS_FULL_XML ]]; then
+if [[ ! -f $LFS_FULL_XML ]]; then
 
 	### GET BRANCH ###
 
-	branch=${BLFSBRANCH##*=}
-	pushd $BLFS_GIT_DIR  > /dev/null
+	branch=${LFSBRANCH##*=}
+	pushd $LFS_GIT_DIR  > /dev/null
 	git checkout $branch
 	git pull
 	popd > /dev/null
@@ -34,27 +34,21 @@ if [[ ! -f $BLFS_FULL_XML ]]; then
 	#### VALIDATE ###
 
 	mkdir -p $BLD_XML
-	make -C $BLFS_GIT_DIR RENDERTMP=$BLD_XML REV=$rev validate
-	if [[ "$rev" == "systemd" ]]; then mv -v $BLD_XML/blfs-systemd-full.xml $BLFS_FULL_XML_NV; fi
+	make -C $LFS_GIT_DIR RENDERTMP=$BLD_XML REV=$rev validate
 
 
 	### CREATE BUILD DIR ###
 
-	if [[ ! -d $BUILD_DIR ]]; then 
-		mkdir -p $BUILD_DIR
-		mv -v $BLD_XML $BUILD_DIR
-	else
-		mv -v $BLD_XML/* $BUILD_XML/
-		rm -rf $BLD_XML
-	fi
+	[[ ! -d $BUILD_DIR ]] && mkdir -p $BUILD_DIR
+	mv -v $BLD_XML $BUILD_DIR
 fi
-
 
 #------------------------------------------------------------------#
 # GET BOOK VERSION
 #------------------------------------------------------------------#
 
-bookversion=$(xmllint --xpath "/book/bookinfo/subtitle/text()" $BLFS_FULL_XML | sed 's/Version //' | sed 's/-/\./')
+bookversion=$(xmllint --xpath "/book/bookinfo/subtitle[1]/text()" $LFS_FULL_XML | sed -e 's/Version //' -e 's/-sys.*//g')
 if [[ ! -z $bookversion ]]; then
-        echo "BOOK_VERS=$bookversion" >> $CURRENT_CONFIG
+        echo "LFS_VERS=$bookversion" >> $CURRENT_CONFIG
 fi
+

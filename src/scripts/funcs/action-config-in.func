@@ -91,6 +91,11 @@ choice
             bool "Build BLFS"
             help
 		<TODO: help text>
+        config    ACTION__BUILDPATCH
+	    depends on ACTIONGROUP__BUILD
+            bool "Build patch"
+            help
+		<TODO: help text>
         config    ACTION__BUILDCUSTOM
 	    depends on ACTIONGROUP__BUILD
             bool "Build custom"
@@ -173,7 +178,7 @@ EOF
 cat << EOF
 choice
         prompt "Init System"
-	depends on ACTION__BUILDLFS || ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__BUILDCUSTOM || ACTION__LISTDEPS || ACTION__LISTCUST
+	depends on ACTION__BUILDLFS || ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__BUILDCUSTOM || ACTION__LISTDEPS || ACTION__LISTCUST || ACTION__BUILDPATCH
         config    REV__SYSV
             bool "sysvinit"
             help
@@ -194,7 +199,7 @@ if [[ -d $LFS_GIT_DIR ]]; then
 cat << EOF
 choice
 prompt "LFS Branch"
-depends on ACTION__BUILDLFS
+depends on ACTION__BUILDLFS || ACTION__BUILDPATCH
 EOF
 
 # get branches
@@ -225,7 +230,7 @@ if [[ -d $BLFS_GIT_DIR ]]; then
 cat << EOF
 choice
 prompt "BLFS Branch"
-depends on ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__BUILDCUSTOM || ACTION__LISTDEPS || ACTION__LISTCUST
+depends on ACTION__BUILDBOOTSTRAP || ACTION__BUILDBLFS || ACTION__BUILDCUSTOM || ACTION__LISTDEPS || ACTION__LISTCUST || ACTION__BUILDPATCH
 EOF
 
 # get branches

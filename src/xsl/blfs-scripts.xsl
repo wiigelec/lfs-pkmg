@@ -16,6 +16,7 @@
 
 <xsl:param name="files" />
 <xsl:param name="scriptsdir" />
+<xsl:param name="book" />
 
 <!-- INCLUDES -->
 <xsl:include href="script-header.xsl" />
@@ -34,9 +35,18 @@
                 <!-- create files -->
                 <xsl:when test="not($files='')">
 
-			<xsl:apply-templates select="//sect1[@id]" mode="files" />
-                        <xsl:apply-templates select="//sect2[@id]" mode="files" />
-                        <xsl:apply-templates select="//sect3[@id]" mode="files" />
+			<xsl:choose>
+				<!-- LFS BOOK -->
+				<xsl:when test="$book='LFS'">
+					<xsl:apply-templates select="//chapter[@id='chapter-building-system']/sect1[@role='wrap']" mode="lfs-files" />
+				</xsl:when>
+				<!-- BLFS BOOK -->
+				<xsl:otherwise>
+					<xsl:apply-templates select="//sect1[@id]" mode="files" />
+                        		<xsl:apply-templates select="//sect2[@id]" mode="files" />
+					<xsl:apply-templates select="//sect3[@id]" mode="files" />
+				</xsl:otherwise>
+			</xsl:choose>
 
                 </xsl:when>
                 <xsl:otherwise>
@@ -68,16 +78,12 @@
 
 <!--
 ####################################################################
-# SECT1 SECT2 CREATE FILES
+# SECT1 SECT2 SECT3 CREATE FILES
 ####################################################################
 -->
 <xsl:template match="sect1|sect2|sect3" mode="files">
 
 	<xsl:variable name="create-file" select="concat($scriptsdir,@id,'.build')" />
-        <!-- xsl:text>Creating </xsl:text>
-        <xsl:value-of select="$create-file" />
-        <xsl:text>...</xsl:text>
-	<xsl:text>&#xA;</xsl:text -->
 
         <exsl:document href="{$create-file}" method="text">
 
@@ -97,6 +103,33 @@
 
 </xsl:template>
 
+<!--
+####################################################################
+# SECT1 (LFS) CREATE FILES
+####################################################################
+-->
+<xsl:template match="sect1" mode="lfs-files">
+
+	<xsl:variable name="create-file" select="concat($scriptsdir,./sect1info/productname,'.build')" />
+
+        <exsl:document href="{$create-file}" method="text">
+
+		<!-- HEADER -->
+		<xsl:apply-templates select="." mode="lfs-script-header" />
+
+                <!-- DOWNLOADS -->
+                <xsl:apply-templates select="." mode="lfs-script-download" />
+
+                <!-- COMMANDS -->
+                <xsl:apply-templates select="." mode="script-commands"  />
+
+                <!-- FOOTER -->
+                <xsl:apply-templates select="." mode="script-footer" />
+
+	</exsl:document>
+
+
+</xsl:template>
 
 
 </xsl:stylesheet>

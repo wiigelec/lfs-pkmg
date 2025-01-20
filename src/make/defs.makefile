@@ -183,9 +183,11 @@ UTIL_MOUNT_KERNFS_SH = $(SCRIPTS_UTIL)/util-mount-kernfs.sh
 UTIL_UMOUNT_KERNFS_SH = $(SCRIPTS_UTIL)/util-umount-kernfs.sh
 
 # xml
+LFS_FULL_XML_NV = $(BLD_XML)/lfs-full.xml
 BLFS_FULL_XML_NV = $(BLD_XML)/blfs-full.xml
 
 # xsl
+LFS_PKGLIST_XSL = $(SRC_XSL)/lfs-pkglist.xsl
 BLFS_DEPS_XSL = $(SRC_XSL)/blfs-deps.xsl
 BLFS_PKGLIST_XSL = $(SRC_XSL)/blfs-pkglist.xsl
 BLFS_PKGLIST_ADDINST_XSL = $(SRC_XSL)/blfs-pkglist-addinst.xsl

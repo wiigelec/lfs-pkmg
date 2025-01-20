@@ -48,6 +48,13 @@ ROOT_EOF
 
 	
 ### CONFIGURE MAKE INSTALL ###
+<xsl:choose>
+<!-- LFS BOOK -->
+<xsl:when test="$book='LFS'">
+<xsl:apply-templates select="sect2[@role='installation']/screen[not(@role='nodump')]/userinput[not(@remap='test')]" mode="lfs-script-commands"  />
+</xsl:when>
+<!-- BLFS BOOK -->
+<xsl:otherwise>
 <xsl:apply-templates select=".//sect1[not(@role='package') and not(@role='kernel')]/screen[not(@role='nodump')][not(@remap)]" mode="script-commands"  />
 <xsl:apply-templates select=".//sect2[not(@role='package') and not(@role='kernel')]/screen[not(@role='nodump')][not(@remap)]" mode="script-commands"  />
 <xsl:apply-templates select=".//sect3[not(@role='package') and not(@role='kernel')]/screen[not(@role='nodump')][not(@remap)]" mode="script-commands" />
@@ -63,6 +70,9 @@ ROOT_EOF
 <xsl:apply-templates select="//sect2[@id='xorg-env']/screen[not(@role='nodump')]" mode="script-commands" />
 </xsl:if>
 
+</xsl:otherwise>
+</xsl:choose>
+
 ### END CONFIGURE MAKE INSTALL ###
 
 ### DIFFLOG2 ###
@@ -77,7 +87,7 @@ ROOT_EOF
 
 <!--
 ####################################################################
-#
+# SCREEN
 ####################################################################
 -->
 <xsl:template match="screen" mode="script-commands">
@@ -101,6 +111,18 @@ ROOT_EOF
 
 </xsl:template>
 
+
+<!--
+####################################################################
+# USERINPUT (LFS)
+####################################################################
+-->
+<xsl:template match="userinput" mode="lfs-script-commands">
+
+        <xsl:text>&#xA;</xsl:text>
+        <xsl:value-of select="." />
+
+</xsl:template>
 
 
 

@@ -45,6 +45,11 @@ clean-config:
 
 
 #------------------------------------------------------------------#
+clean-current:
+	-rm -rf $(BUILD_DIR)	
+
+
+#------------------------------------------------------------------#
 clean-la: 
 	@for libdir in /lib /usr/lib \$(shell find /opt -name lib); do \
 		find $$libdir -name \*.la ! -path \*ImageMagick\* -delete -print; \

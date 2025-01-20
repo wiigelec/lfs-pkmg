@@ -91,6 +91,16 @@ BUILDLFS : git-jhalfs $(SETUP_LFS_JHALFS) $(SETUP_LFS_DIFFLOG)
 
 
 #------------------------------------------------------------------#
+BUILDPATCH : book-lfs-fullxml book-blfs-fullxml book-lfs-pkglist \
+	book-blfs-pkglist $(BOOK_LFS_SCRIPTS) $(BOOK_LFS_SCRIPTS) \
+	select-installed-packages setup-patch-work
+	@echo
+	@$(call done_message, Success! Run \'make BUILDWORK\'.)
+
+.PHONY: BUILDPATCH
+
+
+#------------------------------------------------------------------#
 LISTCUST : book-blfs-fullxml book-blfs-pkglist $(BOOK_BLFS_DEPS) \
 	select-custom-packages book-blfs-trees list-create-cust
 	@echo

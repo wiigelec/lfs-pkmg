@@ -25,6 +25,7 @@ SETUP_BOOTSTRAP_GROUP_SH = $(SETUP_SCRIPTS)/setup-bootstrap-group.sh
 SETUP_LFS_CHROOT_SH = $(SETUP_SCRIPTS)/setup-lfs-chroot.sh
 SETUP_LFS_DIFFLOG_SH = $(SETUP_SCRIPTS)/setup-lfs-difflog.sh
 SETUP_LFS_JHALFS_SH = $(SETUP_SCRIPTS)/setup-lfs-jhalfs.sh
+SETUP_PATCH_WORK_SH = $(SETUP_SCRIPTS)/setup-patch-work.sh
 
 
 ### OTHER DEFS ###
@@ -90,4 +91,14 @@ setup-lfs-jhalfs $(SETUP_LFS_JHALFS) :
 	@touch $(SETUP_LFS_JHALFS)
 
 .PHONY: setup-lfs-jhafs
+
+
+#------------------------------------------------------------------#
+setup-patch-work :
+	@echo
+	@$(call bold_message, $@)
+	$(SETUP_PATCH_WORK_SH)
+
+.PHONY: setup-blfs-work
+
 
