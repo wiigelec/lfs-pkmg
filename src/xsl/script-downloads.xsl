@@ -154,8 +154,8 @@ PKG_URL=<xsl:value-of select="./sect1info/address" />
 
 <xsl:value-of select="$maindownload" />
 
+### FILE EXTRACTION ###
+<xsl:value-of select="$extractdownload" />
 </xsl:template>
-
-
 
 </xsl:stylesheet>
