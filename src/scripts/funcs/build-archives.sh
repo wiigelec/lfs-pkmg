@@ -17,7 +17,6 @@ rev=$(echo $REV | tr '[:upper:]' '[:lower:]')
 
 # PACKAGE INFO
 PKG_ARCH=$(uname -m)
-PKG_LFS=$LFS_BLD-$BOOK_VERS-$rev
 [[ ! -z $BUILD_PRETEND ]] && PKG_LFS="PRETEND$PKG_LFS"
 PKG_EXT=txz
 
@@ -43,6 +42,13 @@ do
     	### TAR FILES ###
     	pkg=${FILE%.pkglog}
     	pkg=${pkg##*/}
+
+
+	### CHECK BOOK ###
+	[[ -f $LFS_PKGLIST_XML ]] && set +e && lfsbook=$(grep ">${pkg%--*}<" $LFS_PKGLIST_XML) && set -e
+	[[ ! -z $lfsbook ]] && LFS_BLD="lfs"
+
+	PKG_LFS=$LFS_BLD-$BOOK_VERS-$rev
 
 	archivename=$pkg--$PKG_ARCH--$PKG_LFS.$PKG_EXT
 

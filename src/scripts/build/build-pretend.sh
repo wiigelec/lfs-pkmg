@@ -57,8 +57,7 @@ do
 	line2=$(grep -n "### END CONFIGURE MAKE INSTALL ###" $ff)
 	line2=${line2%%:*}
 	
-	destdir=$(grep ^DESTDIR= $ff)
-	echo $detsdir
+	set +e && destdir=$(grep ^DESTDIR= $ff) && set -e
 	[[ ! -z $destdir ]] && LPM_PRETEND="\$DESTDIR$LPM_PRETEND"
 
 	sed -i "$(($line1+2)),$(($line2-2))d" $ff
