@@ -18,6 +18,7 @@ detailed information on a specific task. Worflow targets are run using
 	build-blfs
 	build-bootstrap
 	build-lfs
+	build-patch
 	create-list-dir
 	create-list-deps
 	install-list

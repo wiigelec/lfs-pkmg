@@ -1,0 +1,21 @@
+
+#-----------------------------------------------------------------------------#
+
+build-patch
+
+Used to build updated LFS/BLFS packages.
+
+Workflow targets:
+
+	git-lfs
+	git-blfs
+	select-action-params (BUILD, PATCH, REV, BRANCH[trunk])
+	book-lfs-fullxml
+	book-blfs-fullxml
+	book-lfs-pkglist
+	book-blfs-pkglist
+	book-lfs-scripts
+	book-blfs-scripts
+	select-installed-packages
+	setup-patch-work
+

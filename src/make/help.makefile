@@ -25,6 +25,7 @@ AUDIT_HELP = $(DOC_TEXT)/audit.help
 BUILD_BLFS_HELP = $(DOC_TEXT)/build-blfs.help
 BUILD_BOOTSTRAP_HELP = $(DOC_TEXT)/build-bootstrap.help
 BUILD_LFS_HELP = $(DOC_TEXT)/build-lfs.help
+BUILD_PATCH_HELP = $(DOC_TEXT)/build-patch.help
 CREATE_LIST_DIR_HELP = $(DOC_TEXT)/create-list-dir.help
 CREATE_LIST_DEPS_HELP = $(DOC_TEXT)/create-list-deps.help
 INSTALL_LIST_HELP = $(DOC_TEXT)/install-list.help
@@ -74,6 +75,13 @@ help-build-lfs:
 	@cat $(BUILD_LFS_HELP)
 
 .PHONY: help-build-lfs
+
+
+#------------------------------------------------------------------#
+help-build-patch:
+	@cat $(BUILD_PATCH_HELP)
+
+.PHONY: help-build-patch
 
 
 #------------------------------------------------------------------#
