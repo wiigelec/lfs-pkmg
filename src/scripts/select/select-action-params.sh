@@ -50,8 +50,10 @@ sed -i 's/"//g' $CURRENT_CONFIG
 ### SET BUILD DIR ###
 
 rev=$(grep "^CONFIG_REV" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//')
+lfsbranch=$(grep "^CONFIG_LFSBRANCH" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//')
 blfsbranch=$(grep "^CONFIG_BLFSBRANCH" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//')
 
+[[ ! -z $lfsbranch ]] && branch=$lfsbranch && builddir=$BLD_DIR/$lfsbranch-$rev
 [[ ! -z $blfsbranch ]] && branch=$blfsbranch && builddir=$BLD_DIR/$blfsbranch-$rev
 [[ ! -z $builddir ]] && echo "BUILD_DIR=$builddir" >> $CURRENT_CONFIG
 
@@ -59,9 +61,6 @@ blfsbranch=$(grep "^CONFIG_BLFSBRANCH" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e
 #------------------------------------------------------------------#
 # CHECKOUT LPM BRANCH
 #------------------------------------------------------------------#
-
-
-lfsbranch=$(grep "^CONFIG_LFSBRANCH" $ACTION_CONFIG_OUT | sed -e 's/.*__//' -e 's/=y//')
 
 [[ ! -z $lfsbranch ]] && lpmbranch=$lfsbranch
 [[ ! -z $blfsbranch ]] && lpmbranch=$blfsbranch
