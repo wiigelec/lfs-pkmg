@@ -19,7 +19,7 @@ cat << EOF
 choice
         prompt "Action Group"
 
-	default ACTIONGROUP__DOCS
+#        default ACTIONGROUP__DOCS
 #        config    ACTIONGROUP__AUDIT
 #            bool "Audit"
 #            help
