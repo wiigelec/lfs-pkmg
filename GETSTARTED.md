@@ -119,5 +119,5 @@ This final workflow installs the packages from your server onto your clean targe
 
 **What's Next?**
 
-Now that you've (hopefully) built an installed an LFS base installation from an HTTP server, give 'make auto' a shot and see what it can do.
+Now that you've (hopefully) built and installed an LFS base installation from an HTTP server, give 'make auto' a shot and see what it can do.
 
