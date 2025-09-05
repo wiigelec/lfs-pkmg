@@ -27,7 +27,6 @@ libxml2
 libxslt
 DocBook
 docbook-xsl
-postlfs-config-profile
 lynx
 
 See the [GETSTARTED.md](./GETSTARTED.md) for a crash course in using LPM.
