@@ -1,4 +1,4 @@
-
+NOTE: CURRENTLY ONLY BOOK VERSION 12.3 IS SUPPORTED
 
 ### **Quick Start Guide for lfs-pkmg**
 
