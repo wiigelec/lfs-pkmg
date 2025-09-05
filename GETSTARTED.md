@@ -98,7 +98,7 @@ Create the custom hook script inside your local lfs-pkmg project directory on th
 
 ### **Step 5: Install the System (Target Partition)**
 
-This final workflow, run from the build machine, installs the packages from your server onto your clean target partition.
+This final workflow installs the packages from your server onto your clean target partition.
 
 1. **Configure Installation**: Launch the menu to configure the installation.  
    Bash  
@@ -115,3 +115,9 @@ This final workflow, run from the build machine, installs the packages from your
 3. **Execute Installation**: This target reads the configurations from the previous two steps and automatically installs every package. After the final package is installed, your custom/list/lfs-base.list.post hook will execute, launching your interactive configuration menu.  
    Bash  
    make list-install  
+
+
+**What's Next?**
+
+Now that you've (hopefully) built an installed an LFS base installation from an HTTP server, give 'make auto' a shot and see what it can do.
+
