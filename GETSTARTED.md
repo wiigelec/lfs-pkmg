@@ -91,7 +91,7 @@ Create the custom hook script inside your local lfs-pkmg project directory on th
 
 2. **Create the hook script file**: Create a file named after the list from Step 3 and make it executable.  
    * **File Path**: custom/list/lfs-base.list.post  
-   * **Content**: Your interactive setup script.  
+   * **Content**: See here for an example of a post install configuration script https://github.com/wiigelec/lpm-custom/blob/main/list/LPM-BASE.list.post-install
    * Make it executable: chmod \+x custom/list/lfs-base.list.post
 
 ---
